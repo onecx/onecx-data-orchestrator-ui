@@ -26,7 +26,7 @@ const PROXY_CONFIG = {
     },
     changeOrigin: true,
     logLevel: 'debug',
-    onProxyRes: onProxyRes,
+    onProxyRes: onProxyRes
   }
 }
 
