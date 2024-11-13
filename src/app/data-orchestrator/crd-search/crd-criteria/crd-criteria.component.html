@@ -1,0 +1,38 @@
+<ocx-search-header
+  [header]="'DIALOG.SEARCH.HEADER' | translate"
+  [subheader]="'DIALOG.SEARCH.SUBHEADER' | translate"
+  (searched)="submitCriteria()"
+  (resetted)="resetCriteria()"
+  [manualBreadcrumbs]="false"
+  [actions]="actions"
+>
+  <div [formGroup]="crdCriteria" class="flex flex-wrap gap-3">
+    <span class="p-float-label">
+      <input
+        id="am_crd_search_criteria_name"
+        pInputText
+        type="text"
+        formControlName="name"
+        class="w-9rem sm:w-13rem"
+        [pTooltip]="'CRD.TOOLTIPS.NAME.CRITERIA' | translate"
+        tooltipPosition="top"
+        tooltipEvent="hover"
+      />
+      <label for="am_crd_search_criteria_title">{{ 'CRD.NAME' | translate }}</label>
+    </span>
+    <span class="p-float-label">
+      <p-multiSelect
+        id="am_crd_search_criteria_type"
+        [options]="(type$ | async) ?? []"
+        formControlName="type"
+        appendTo="body"
+        [filter]="false"
+        [pTooltip]="'CRD.TOOLTIPS.TYPE' | translate"
+        tooltipPosition="top"
+        tooltipEvent="hover"
+      >
+      </p-multiSelect>
+      <label for="type">{{ 'CRD.TYPE' | translate }}</label>
+    </span>
+  </div>
+</ocx-search-header>

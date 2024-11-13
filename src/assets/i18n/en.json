@@ -1,0 +1,140 @@
+{
+  "ACTIONS": {
+    "CONFIRMATION": {
+      "NO": "No",
+      "YES": "Yes",
+      "NO.TOOLTIP": "Cancel the action",
+      "YES.TOOLTIP": "Proceed with the action"
+    },
+    "EDIT": {
+      "LABEL": "Edit",
+      "CRD": "Edit Custom Resource",
+      "CRD.TOOLTIP": "Edit the custom resource properties",
+      "MESSAGE": {
+        "OK": "The Custom Resource was saved successfully",
+        "NOK": "An error has occurred. The Custom Resource was not saved."
+      }
+    },
+    "SEARCH": {
+      "ACTIONS": "Actions",
+      "LABEL": "Search",
+      "LABEL.TOOLTIP": "Start Searching",
+      "RESET": "Reset",
+      "RESET_TOOLTIP": "Clear given criteria",
+      "NO_DATA": "No data",
+      "NO_RESULTS": "Search returned no results",
+      "IN_PROGRESS": "Searching...",
+      "SEARCH_FAILED": "Search failed",
+      "NOT_FOUND": "No data found",
+      "OF": "of",
+      "DIAGRAM_SUM": "Total: ",
+      "SHOW_DIAGRAM": "Show overview"
+    },
+    "VIEW": {
+      "LABEL": "Show Details",
+      "CRD": "Custom Resource Details",
+      "CRD.TOOLTIP": "Show the details of the Announcement"
+    },
+    "CANCEL": "Cancel",
+    "CHOOSE": "Choose",
+    "CLOSE": "Close",
+    "CONFIRM": "Confirm",
+    "RELOAD": "Reload",
+    "SAVE": "Save",
+    "SAVE_AS": "Save as ...",
+    "UPLOAD": "Upload",
+    "TOOLTIPS": {
+      "CANCEL": "Cancel action",
+      "CANCEL_AND_CLOSE": "Cancel and close dialog",
+      "CANCEL_WITHOUT_SAVE": "Cancel action without saving",
+      "CLOSE": "Close dialog",
+      "SAVE": "Save changes",
+      "SAVE_AS": "Save as new {{TYPE}}"
+    }
+  },
+  "DIALOG": {
+    "SEARCH.HEADER": "Custom Resources",
+    "SEARCH.SUBHEADER": "Searching and managing of k8s custom resources"
+  },
+  "CRD": {
+    "ID": "Id",
+    "NAME": "Name",
+    "TYPE": "Type",
+    "STATUS": "Status",
+    "RESOURCE_VERSION": "Resource Version",
+    "VERSION": "Version",
+    "CREATION_DATE": "Creation Date",
+    "TOOLTIPS": {
+      "NAME": "Name of the Custom Resource",
+      "NAME.CRITERIA": "Name of the Custom Resource",
+      "TYPE": "Type of the Custom Resource",
+      "STATUS": "Status of the Custom Resource",
+      "CREATION_DATE": "Date and Time on which the Custom Resource was created",
+      "RESOURCE_VERSION": "Version of the Custom Resource",
+      "VERSION": "Release version of the Custom Resource"
+    }
+  },
+  "ENUMS": {
+    "CRD_TYPE": {
+      "Data": "Data",
+      "Database": "Database",
+      "KeycloakClient": "Keycloak client",
+      "Microfrontend": "Microfrontend",
+      "Microservice": "Microservice",
+      "Permission": "Permission",
+      "Product": "Product",
+      "Slot": "Slot"
+    },
+    "CRD_STATUS": {
+      "ERROR": "Error",
+      "Created": "Created",
+      "Updated": "Updated",
+      "null": "Not processed"
+    }
+  },
+  "VALIDATION": {
+    "HINTS": {
+      "FORMAT_URL": "Format: "
+    },
+    "ERRORS": {
+      "INTERNAL_ERROR": "Internal error",
+      "INVALID_DATE_RANGE": "The start date is after the end date. It must be before that.",
+      "EMPTY_REQUIRED_FIELD": "This field is required.",
+      "MAXIMUM_LENGTH": "Only {{chars}} characters are allowed.",
+      "MINIMUM_LENGTH": "At least {{chars}} characters are required.",
+      "PATTERN_ERROR": "Your input does not match the required pattern"
+    }
+  },
+  "EXCEPTIONS": {
+    "HTTP_STATUS_0": {
+      "ANNOUNCEMENTS": "Unknown problem retrieving Announcement data - please try again.",
+      "ASSIGNMENTS": "Unknown problem retrieving Workspaces and Applications with assigned Announcements - please try again.",
+      "WORKSPACES": "Unknown problem retrieving Workspace data - please try again.",
+      "PRODUCTS": "Unknown problem retrieving Application data - please try again."
+    },
+    "HTTP_STATUS_401": {
+      "ANNOUNCEMENTS": "You are not authorized to see Announcements.",
+      "ASSIGNMENTS": "You are not authorized to see Workspaces and Applications with assigned Announcements.",
+      "WORKSPACES": "You are not authorized to see Workspaces.",
+      "PRODUCTS": "You are not authorized to see Applications."
+    },
+    "HTTP_STATUS_403": {
+      "ANNOUNCEMENTS": "You have no permissions to see Announcements.",
+      "ASSIGNMENTS": "You have no permissions to see Workspaces and Applications with assigned Announcements.",
+      "WORKSPACES": "You have no permissions to see Workspaces.",
+      "PRODUCTS": "You have no permissions to see Applications."
+    },
+    "HTTP_STATUS_404": {
+      "ANNOUNCEMENTS": "No Announcements could be loaded.",
+      "ASSIGNMENTS": "No Workspaces and Applications with assigned Announcements could be loaded.",
+      "WORKSPACES": "No Workspaces could be loaded.",
+      "PRODUCTS": "No Applications could be loaded."
+    },
+    "HTTP_STATUS_500": {
+      "ANNOUNCEMENTS": "Unknown server problem retrieving Announcement data - please try again.",
+      "ASSIGNMENTS": "Unknown server problem retrieving Workspaces and Applications with assigned Announcements - please try again.",
+      "WORKSPACES": "Unknown server problem retrieving Workspace data - please try again.",
+      "PRODUCTS": "Unknown server problem retrieving Application data - please try again."
+    }
+  }
+}

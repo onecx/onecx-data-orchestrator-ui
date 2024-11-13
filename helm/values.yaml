@@ -1,0 +1,32 @@
+app:
+  name: ui
+  image:
+    repository: 'onecx/onecx-data-orchestrator-ui'
+  routing:
+    enabled: true
+    path: /mfe/data-orchestrator/
+  
+  operator:
+    # Microfrontend
+    microfrontend:
+      enabled: true
+      specs:
+        main:
+          exposedModule: "./OneCXDataOrchestratorModule"
+          description: "OneCX Data Orchestrator UI"
+          note: "OneCX Data Orchestrator UI auto import via MF operator"
+          type: MODULE
+          technology: WEBCOMPONENTMODULE
+          remoteName: onecx-data-orchestrator
+          tagName: ocx-data-orchestrator-component
+    # Permission
+    permission:
+      enabled: true
+      spec:
+        permissions:
+          crd:
+            EDIT: Edit custom resources
+            SEARCH: Search custom resources
+            VIEW: View custom resources
+            
+# PIPE Config

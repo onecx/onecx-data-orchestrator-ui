@@ -1,0 +1,17 @@
+apiVersion: v2
+name: onecx-data-orchestrator-ui
+version: 0.0.0
+description: OneCX Data Orchestrator UI.
+home: https://github.com/onecx/onecx-data-orchestrator-ui
+keywords:
+  - data-orchestrator
+sources:
+  - https://github.com/onecx/onecx-data-orchestrator-ui
+maintainers:
+  - name: OneCX Developer Team
+    email: tkit_dev@1000kit.org
+dependencies:
+  - name: helm-angular-app
+    version: ^0
+    repository: oci://ghcr.io/onecx/charts
+    alias: app
