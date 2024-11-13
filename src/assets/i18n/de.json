@@ -1,0 +1,138 @@
+{
+  "ACTIONS": {
+    "CONFIRMATION": {
+      "NO": "Nein",
+      "YES": "Ja",
+      "NO.TOOLTIP": "Abbruch der Aktion",
+      "YES.TOOLTIP": "Fortfahren mit der Aktion"
+    },
+    "EDIT": {
+      "LABEL": "Bearbeiten",
+      "ANNOUNCEMENT": "Custom Resource bearbeiten",
+      "ANNOUNCEMENT.TOOLTIP": "Die Custom Resource bearbeiten",
+      "MESSAGE": {
+        "OK": "Die Custom Resource wurde erfolgreich gespeichert",
+        "NOK": "Ein Fehler ist aufgetreten. Die Custom Resource wurde nicht gespeichert."
+      }
+    },
+    "SEARCH": {
+      "ACTIONS": "Aktionen",
+      "LABEL": "Suchen",
+      "LABEL.TOOLTIP": "Suche starten",
+      "RESET": "Zurücksetzen",
+      "RESET_TOOLTIP": "Suchkriterien löschen",
+      "NO_DATA": "Keine Ergebnisse",
+      "NO_RESULTS": "Die Suche ergab keine Ergebnisse",
+      "IN_PROGRESS": "Suche...",
+      "SEARCH_FAILED": "Die Suche ist fehlgeschlagen",
+      "NOT_FOUND": "Keine Daten gefunden",
+      "OF": "von"
+    },
+    "VIEW": {
+      "LABEL": "Details anzeigen",
+      "CRD": "Custom Resource Details",
+      "CRD.TOOLTIP": "Die Details der Custom Resource anzeigen"
+    },
+    "CANCEL": "Abbrechen",
+    "CHOOSE": "Auswählen",
+    "CLOSE": "Schließen",
+    "CONFIRM": "Bestätigen",
+    "RELOAD": "Neuladen",
+    "SAVE": "Speichern",
+    "SAVE_AS": "Speichern als ...",
+    "UPLOAD": "Hochladen",
+    "TOOLTIPS": {
+      "CANCEL": "Die Aktion abbrechen",
+      "CANCEL_AND_CLOSE": "Abbrechen und Dialog schließen",
+      "CANCEL_WITHOUT_SAVE": "Die Aktion ohne Speichern abbrechen",
+      "CLOSE": "Dialog schließen",
+      "SAVE": "Die Änderungen speichern",
+      "SAVE_AS": "Speichern als neues {{TYPE}}"
+    }
+  },
+  "DIALOG": {
+    "SEARCH.HEADER": "Custom Resourcen",
+    "SEARCH.SUBHEADER": "Suchen und Verwalten von K8s Custom Resourcen"
+  },
+  "CRD": {
+    "ID": "Id",
+    "NAME": "Name",
+    "TYPE": "Typ",
+    "STATUS": "Status",
+    "RESOURCE_VERSION": "Resource Version",
+    "VERSION": "Version",
+    "CREATION_DATE": "Erstellungsdatum",
+    "TOOLTIPS": {
+      "NAME": "Name der Custom Resource",
+      "NAME.CRITERIA": "Name der Custom Resource",
+      "TYPE": "Typ der Custom Resource",
+      "STATUS": "Status der Custom Resource",
+      "CREATION_DATE": "Datum und Zeit der Erstellung der Custom Resource",
+      "RESOURCE_VERSION": "Version der Custom Resource",
+      "VERSION": "Release version der Custom Resource"
+    }
+  },
+  "ENUMS": {
+    "CRD_TYPE": {
+      "Data": "Data",
+      "Database": "Database",
+      "KeycloakClient": "Keycloak client",
+      "Microfrontend": "Microfrontend",
+      "Microservice": "Microservice",
+      "Permission": "Permission",
+      "Product": "Product",
+      "Slot": "Slot"
+    },
+    "CRD_STATUS": {
+      "ERROR": "Fehler",
+      "Created": "Erstellt",
+      "Updated": "Aktualisiert",
+      "null": "Nicht verarbeitet"
+    }
+  },
+  "VALIDATION": {
+    "HINTS": {
+      "FORMAT_URL": "Format: "
+    },
+    "ERRORS": {
+      "INTERNAL_ERROR": "Interner Fehler",
+      "INVALID_DATE_RANGE": "Das Startdatum liegt nach dem Enddatum. Es muss davor liegen.",
+      "EMPTY_REQUIRED_FIELD": "Dieses Feld ist ein Pflichtfeld.",
+      "MAXIMUM_LENGTH": "Es sind nur {{chars}} Zeichen erlaubt.",
+      "MINIMUM_LENGTH": "Es sind mindestens {{chars}} Zeichen erforderlich.",
+      "PATTERN_ERROR": "Ihre Eingabe entspricht nicht dem benötigten Format."
+    }
+  },
+  "EXCEPTIONS": {
+    "HTTP_STATUS_0": {
+      "ANNOUNCEMENTS": "Unbekanntes Problem beim Abrufen von Neuigkeiten - bitte versuchen Sie es noch einmal.",
+      "ASSIGNMENTS": "Unbekanntes Problem beim Abrufen von Workspaces und Applikationen die Neuigkeiten zugeordnet sind - bitte versuchen Sie es noch einmal.",
+      "WORKSPACES": "Unbekanntes Problem beim Abrufen von Workspaces - bitte versuchen Sie es noch einmal.",
+      "PRODUCTS": "Unbekanntes Problem beim Abrufen von Applikationen - bitte versuchen Sie es noch einmal."
+    },
+    "HTTP_STATUS_401": {
+      "ANNOUNCEMENTS": "Sie sind nicht autorisiert, um Neuigkeiten zu sehen.",
+      "ASSIGNMENTS": "Sie sind nicht autorisiert, um Workspaces und Applikationen zu sehen, die Neuigkeiten zugeordnet sind.",
+      "WORKSPACES": "Sie sind nicht autorisiert, um Workspaces zu sehen.",
+      "PRODUCTS": "Sie sind nicht autorisiert, um Applikationen zu sehen."
+    },
+    "HTTP_STATUS_403": {
+      "ANNOUNCEMENTS": "Sie haben keine Rechte, um Neuigkeiten zu sehen.",
+      "ASSIGNMENTS": "Sie haben keine Rechte, um Workspaces und Applikationen zu sehen, die Neuigkeiten zugeordnet sind.",
+      "WORKSPACES": "Sie haben keine Rechte, um Workspaces zu sehen.",
+      "PRODUCTS": "Sie haben keine Rechte, um Applikationen zu sehen."
+    },
+    "HTTP_STATUS_404": {
+      "ANNOUNCEMENTS": "Es konnten keine Neuigkeiten gefunden werden.",
+      "ASSIGNMENTS": "Es konnten keine Workspaces und Applikationen gefunden werden, die Neuigkeiten zugeordnet sind.",
+      "WORKSPACES": "Es konnten keine Workspaces gefunden werden.",
+      "PRODUCTS": "Es konnten keine Applikationen geladen werden."
+    },
+    "HTTP_STATUS_500": {
+      "ANNOUNCEMENTS": "Unbekanntes Server-Problem beim Abrufen von Neuigkeitsdaten - bitte versuchen Sie es noch einmal.",
+      "ASSIGNMENTS": "Unbekanntes Server-Problem beim Abrufen von Workspaces und Applikationen - bitte versuchen Sie es noch einmal.",
+      "WORKSPACES": "Unbekanntes Server-Problem beim Abrufen von Workspace-Daten - bitte versuchen Sie es noch einmal.",
+      "PRODUCTS": "Unbekanntes Server-Problem beim Abrufen von Applikationdaten - bitte versuchen Sie es noch einmal."
+    }
+  }
+}
