@@ -1,17 +1,17 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing'
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
-import { of, throwError } from 'rxjs'
+// import { NO_ERRORS_SCHEMA } from '@angular/core'
+// import { HttpClient } from '@angular/common/http'
+// import { HttpClientTestingModule } from '@angular/common/http/testing'
+// import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing'
+// import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+// import { of, throwError } from 'rxjs'
 
-import {
-  AppStateService,
-  createTranslateLoader,
-  Column,
-  PortalMessageService,
-  UserService
-} from '@onecx/portal-integration-angular'
+// import {
+//   AppStateService,
+//   createTranslateLoader,
+//   Column,
+//   PortalMessageService,
+//   UserService
+// } from '@onecx/portal-integration-angular'
 
 // const announcementData: any = [
 //   {

@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
-import { catchError, combineLatest, finalize, map, Observable, of } from 'rxjs'
+import { catchError, finalize, map, Observable, of } from 'rxjs'
 import { Table } from 'primeng/table'
 import { PrimeIcons, SelectItem } from 'primeng/api'
 
@@ -8,16 +8,14 @@ import {
   Action,
   Column,
   ColumnType,
-  DataTableColumn,
   DiagramColumn,
   PortalMessageService,
   UserService
 } from '@onecx/portal-integration-angular'
 
-import { limitText, dropDownSortItemsByLabel } from 'src/app/shared/utils'
+import { limitText } from 'src/app/shared/utils'
 import {
   CrdResponse,
-  CustomResourceData,
   DataAPIService,
   GenericCrd,
   GetCustomResourcesByCriteriaRequestParams
