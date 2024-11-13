@@ -1,22 +1,23 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core'
-import { FormBuilder, FormControl, FormGroup, Validators, ValidationErrors, ValidatorFn } from '@angular/forms'
-import { TranslateService } from '@ngx-translate/core'
-import { finalize, Observable, map, of } from 'rxjs'
-import { SelectItem } from 'primeng/api'
+import { Component } from '@angular/core'
+// import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core'
+// import { FormBuilder, FormControl, FormGroup, Validators, ValidationErrors, ValidatorFn } from '@angular/forms'
+// import { TranslateService } from '@ngx-translate/core'
+// import { finalize, Observable, map, of } from 'rxjs'
+// import { SelectItem } from 'primeng/api'
 
-import { PortalMessageService, UserService } from '@onecx/portal-integration-angular'
+// import { PortalMessageService, UserService } from '@onecx/portal-integration-angular'
 
-export function dateRangeValidator(fg: FormGroup): ValidatorFn {
-  return (): ValidationErrors | null => {
-    const startDate = fg.controls['startDate']?.value
-    const endDate = fg.controls['endDate']?.value
-    if (startDate && endDate) {
-      const start = new Date(startDate)
-      const end = new Date(endDate)
-      return start >= end ? { invalidDateRange: true } : null
-    } else return null
-  }
-}
+// export function dateRangeValidator(fg: FormGroup): ValidatorFn {
+//   return (): ValidationErrors | null => {
+//     const startDate = fg.controls['startDate']?.value
+//     const endDate = fg.controls['endDate']?.value
+//     if (startDate && endDate) {
+//       const start = new Date(startDate)
+//       const end = new Date(endDate)
+//       return start >= end ? { invalidDateRange: true } : null
+//     } else return null
+//   }
+// }
 
 @Component({
   selector: 'app-crd-detail',

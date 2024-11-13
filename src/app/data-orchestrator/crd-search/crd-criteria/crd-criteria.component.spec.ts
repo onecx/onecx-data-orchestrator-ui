@@ -1,12 +1,12 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core'
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { HttpClient } from '@angular/common/http'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { FormControl, FormGroup } from '@angular/forms'
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
-import { SelectItem } from 'primeng/api'
+// import { NO_ERRORS_SCHEMA } from '@angular/core'
+// import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+// import { HttpClient } from '@angular/common/http'
+// import { HttpClientTestingModule } from '@angular/common/http/testing'
+// import { FormControl, FormGroup } from '@angular/forms'
+// import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+// import { SelectItem } from 'primeng/api'
 
-import { AppStateService, UserService, createTranslateLoader } from '@onecx/portal-integration-angular'
+// import { AppStateService, UserService, createTranslateLoader } from '@onecx/portal-integration-angular'
 
 // const filledCriteria = new FormGroup<AnnouncementCriteriaForm>({
 //   title: new FormControl<string | null>('title'),

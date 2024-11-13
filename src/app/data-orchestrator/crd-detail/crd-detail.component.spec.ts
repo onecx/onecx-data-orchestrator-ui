@@ -1,18 +1,18 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core'
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { HttpClient } from '@angular/common/http'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
-import { of, throwError } from 'rxjs'
-import { FormControl, FormGroup } from '@angular/forms'
+// import { NO_ERRORS_SCHEMA } from '@angular/core'
+// import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+// import { HttpClient } from '@angular/common/http'
+// import { HttpClientTestingModule } from '@angular/common/http/testing'
+// import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+// import { of, throwError } from 'rxjs'
+// import { FormControl, FormGroup } from '@angular/forms'
 
-import {
-  AppStateService,
-  createTranslateLoader,
-  PortalMessageService,
-  UserService
-} from '@onecx/portal-integration-angular'
-import { dateRangeValidator } from './crd-detail.component'
+// import {
+//   AppStateService,
+//   createTranslateLoader,
+//   PortalMessageService,
+//   UserService
+// } from '@onecx/portal-integration-angular'
+// import { dateRangeValidator } from './crd-detail.component'
 
 // const workspaceName = 'w1'
 // const productName = 'app1'

@@ -1,6 +1,6 @@
 const { ModifyEntryPlugin } = require('@angular-architects/module-federation/src/utils/modify-entry-plugin')
 const { share, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack')
- 
+
 const config = withModuleFederationPlugin({
   name: 'onecx-data-orchestrator-ui',
   filename: 'remoteEntry.js',
