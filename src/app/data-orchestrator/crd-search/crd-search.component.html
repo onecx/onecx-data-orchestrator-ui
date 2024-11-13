@@ -5,15 +5,17 @@
     [actions]="(actions$ | async) ?? []"
     (criteriaEmitter)="onSearch($event)"
     (resetSearchEmitter)="onCriteriaReset()"
+    [actions]="(actions$ | async) ?? []"
   ></app-crd-criteria>
 
-  <ocx-page-content *ngIf="crds$ | async as crds" styleClass="px-3 pb-2">
+    <ocx-content-container layout="horizontal" *ngIf="crds$ | async as crds" styleClass="px-3 pb-2">
     <p-message
       *ngIf="searchInProgress"
       severity="info"
       styleClass="my-3 p-2"
       [text]="'ACTIONS.SEARCH.IN_PROGRESS' | translate"
     ></p-message>
+        <ocx-content class="w-full no-card-padding">
     <p-table
       *ngIf="!searchInProgress"
       #crdTable
@@ -122,7 +124,16 @@
         </tr>
       </ng-template>
     </p-table>
-  </ocx-page-content>
+    </ocx-content>
+    <ocx-content class="w-full lg:w-3" *ngIf="crds.length > 0 && chartVisible && diagramColumn !== undefined">
+        <ocx-group-by-count-diagram
+          *ngIf="diagramColumn as diagramColumn"
+          [data]="crds"
+          [column]="diagramColumn"
+          sumKey="ACTIONS.SEARCH.DIAGRAM_SUM"
+        ></ocx-group-by-count-diagram>
+    </ocx-content>
+    </ocx-content-container>
 </ocx-portal-page>
 
 

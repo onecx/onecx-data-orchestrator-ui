@@ -26,7 +26,9 @@
       "IN_PROGRESS": "Suche...",
       "SEARCH_FAILED": "Die Suche ist fehlgeschlagen",
       "NOT_FOUND": "Keine Daten gefunden",
-      "OF": "von"
+      "OF": "von",
+      "DIAGRAM_SUM": "Total: ",
+      "SHOW_DIAGRAM": "Übersicht anzeigen"
     },
     "VIEW": {
       "LABEL": "Details anzeigen",

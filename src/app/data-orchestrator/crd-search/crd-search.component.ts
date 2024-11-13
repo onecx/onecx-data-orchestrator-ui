@@ -2,9 +2,17 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { catchError, combineLatest, finalize, map, Observable, of } from 'rxjs'
 import { Table } from 'primeng/table'
-import { SelectItem } from 'primeng/api'
+import { PrimeIcons, SelectItem } from 'primeng/api'
 
-import { Action, Column, PortalMessageService, UserService } from '@onecx/portal-integration-angular'
+import {
+  Action,
+  Column,
+  ColumnType,
+  DataTableColumn,
+  DiagramColumn,
+  PortalMessageService,
+  UserService
+} from '@onecx/portal-integration-angular'
 
 import { limitText, dropDownSortItemsByLabel } from 'src/app/shared/utils'
 import {
@@ -36,7 +44,7 @@ export class CrdSearchComponent implements OnInit {
 
   public changeMode: ChangeMode = 'NEW'
   public actions$: Observable<Action[]> | undefined
-  public crd: GenericCrd | undefined //just crd data type for now
+  public crd: GenericCrd | undefined
   public crds$: Observable<GenericCrd[]> | undefined
   public displayDeleteDialog = false
   public displayDetailDialog = false
@@ -101,22 +109,42 @@ export class CrdSearchComponent implements OnInit {
     }
   ]
 
+  diagramColumnId = 'status'
+  diagramColumn: DiagramColumn = { columnType: ColumnType.STRING, id: 'status' }
+  chartVisible = false
   constructor(
     private readonly user: UserService,
     private readonly dataOrchestratorApi: DataAPIService,
     private readonly msgService: PortalMessageService,
-    private readonly translate: TranslateService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly translate: TranslateService
   ) {
     this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.MM.yyyy HH:mm' : 'M/d/yy, h:mm a'
   }
 
   ngOnInit(): void {
+    this.prepareActionButtons()
     this.filteredColumns = this.columns.filter((a) => {
       return a.active === true
     })
   }
+  private prepareActionButtons(): void {
+    this.actions$ = this.translate.get(['ACTIONS.SEARCH.SHOW_DIAGRAM']).pipe(
+      map((data) => {
+        return [
+          {
+            label: data['ACTIONS.SEARCH.SHOW_DIAGRAM'],
+            actionCallback: () => this.toggleChartVisibility(),
+            icon: PrimeIcons.EYE,
+            show: 'asOverflow'
+          }
+        ]
+      })
+    )
+  }
 
+  private toggleChartVisibility() {
+    this.chartVisible = !this.chartVisible
+  }
   /****************************************************************************
    *  SEARCH announcements
    */
