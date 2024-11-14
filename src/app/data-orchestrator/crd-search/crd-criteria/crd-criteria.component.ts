@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { TranslateService } from '@ngx-translate/core'
 import { SelectItem } from 'primeng/api'
 import { Observable, map, of } from 'rxjs'
@@ -40,7 +40,7 @@ export class CrdCriteriaComponent implements OnInit {
   ngOnInit(): void {
     this.crdCriteria = new FormGroup<CrdCriteriaForm>({
       name: new FormControl<string | null>(null),
-      type: new FormControl<ContextKind[] | null>(null)
+      type: new FormControl<ContextKind[] | null>({ value: null, disabled: false }, { validators: Validators.required })
     })
     this.type$ = this.translate
       .get([

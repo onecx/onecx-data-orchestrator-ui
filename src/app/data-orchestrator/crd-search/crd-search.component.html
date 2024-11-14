@@ -5,15 +5,26 @@
     (resetSearchEmitter)="onCriteriaReset()"
     [actions]="(actions$ | async) ?? []"
   ></app-crd-criteria>
-
-  <ocx-content-container layout="horizontal" *ngIf="crds$ | async as crds" styleClass="px-3 pb-2">
     <p-message
+      *ngIf="exceptionKey"
+      severity="info"
+      styleClass="m-3 p-2"
+      [text]="exceptionKey | translate"
+    ></p-message>
+  <ocx-content-container layout="horizontal" *ngIf="crds$ | async as crds" styleClass="px-3 pb-2">
+    <ocx-content class="w-full no-card-padding">
+      <p-message
       *ngIf="searchInProgress"
       severity="info"
       styleClass="my-3 p-2"
       [text]="'ACTIONS.SEARCH.IN_PROGRESS' | translate"
     ></p-message>
-    <ocx-content class="w-full no-card-padding">
+    <p-message
+      *ngIf="exceptionKey"
+      severity="error"
+      styleClass="m-3 p-2"
+      [text]="exceptionKey | translate"
+    ></p-message>
       <p-table
         *ngIf="!searchInProgress"
         #crdTable
@@ -98,19 +109,32 @@
               >
                 <span class="text-primary font-medium p-button-icon pi pi-pencil"></span>
               </button>
+               <button
+                pbutton
+                class="p-button-rounded font-medium p-button-text p-button p-component p-button-icon-only"
+                [id]="'crd_search_table_row_' + row + '_touch_action'"
+                (click)="onTouch(rowData)"
+                [aria-label]="'ACTIONS.TOUCH.LABEL' | translate"
+                [pTooltip]="'ACTIONS.TOUCH.CRD.TOOLTIP' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              >
+                <span class="text-primary font-medium p-button-icon pi pi-refresh"></span>
+              </button>
             </td>
             <td *ngFor="let col of columns" [class]="col.css" id="am_crd_type">
               <ng-container *ngIf="col.limit"> {{ limitText(rowData[col.field], 50) }} </ng-container>
               <ng-container *ngIf="col.isDropdown">
                 {{ 'ENUMS.CRD_' + col.header + '.' + rowData[col.field] | translate }}
               </ng-container>
+              <ng-container *ngIf="col.isDate"> {{ rowData[col.field] | date: dateFormat }} </ng-container>
               <ng-container *ngIf="col.field === 'status'">
                 <span
-                  class="pi text-xl pi-circle-fill"
-                  [class.status-error]="rowData[col.field] === 'ERROR'"
-                  [class.status-created]="rowData[col.field] === 'CREATED'"
-                  [class.status-undefined]="rowData[col.field] === 'UNDEFINED' || rowData[col.field] === null"
-                  [class.status-updated]="rowData[col.field] === 'UPDATED'"
+                  class="pi pi-circle-on"
+                  [class.text-red-600]="rowData[col.field] === 'ERROR'"
+                  [class.text-green-600]="rowData[col.field] === 'CREATED'"
+                  [class.text-yellow-600]="rowData[col.field] === 'UNDEFINED' || rowData[col.field] === null"
+                  [class.text-green-600]="rowData[col.field] === 'UPDATED'"
                   [aria-label]="'ENUMS.CRD_STATUS.' + rowData[col.field] | translate"
                   [pTooltip]="
                     rowData[col.field] === 'ERROR'
@@ -138,11 +162,9 @@
 </ocx-portal-page>
 
 <!-- DETAIL -->
-<!-- <app-crd-detail
+<app-crd-detail
   [displayDetailDialog]="displayDetailDialog"
   (hideDialogAndChanged)="onCloseDetail($event)"
-  [crd]="crd"
-  [allWorkspaces]="allWorkspaces"
-  [allProducts]="allProducts"
+  [crdName]="crd?.name"
   [changeMode]="changeMode"
-></app-crd-detail> -->
+></app-crd-detail>
