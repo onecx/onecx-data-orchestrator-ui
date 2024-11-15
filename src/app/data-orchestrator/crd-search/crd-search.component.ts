@@ -103,7 +103,7 @@ export class CrdSearchComponent implements OnInit {
       active: true,
       translationPrefix: 'CRD',
       css: 'text-center ',
-      limit: true
+      isDate: true
     }
   ]
 
@@ -147,23 +147,30 @@ export class CrdSearchComponent implements OnInit {
    *  SEARCH announcements
    */
   public onSearch(criteria: GetCustomResourcesByCriteriaRequestParams, reuseCriteria = false): void {
+    this.exceptionKey = undefined
     if (!reuseCriteria) {
       if (criteria?.crdSearchCriteria?.name === '') criteria.crdSearchCriteria.name = undefined
     }
     this.searchInProgress = true
     this.crds$ = this.dataOrchestratorApi.getCustomResourcesByCriteria(criteria).pipe(
       catchError((err) => {
-        this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.ANNOUNCEMENTS'
-        console.error('searchHelps():', err)
+        this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
         this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.MSG_SEARCH_FAILED' })
         return of({ stream: [] } as CrdResponse)
       }),
-      map((data: CrdResponse) => data.customResources ?? []),
+      map((data: CrdResponse) => {
+        if (!data) {
+          this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_204.CRDS'
+        }
+        return data.customResources ?? []
+      }),
       finalize(() => (this.searchInProgress = false))
     )
   }
 
-  public onCriteriaReset(): void {}
+  public onCriteriaReset(): void {
+    this.exceptionKey = undefined
+  }
 
   public onColumnsChange(activeIds: string[]) {
     this.filteredColumns = activeIds.map((id) => this.columns.find((col) => col.field === id)) as Column[]
@@ -185,5 +192,16 @@ export class CrdSearchComponent implements OnInit {
     this.changeMode = mode
     this.crd = item
     this.displayDetailDialog = true
+  }
+
+  public onTouch(item: GenericCrd): void {
+    if (item.kind && item.name) {
+      this.dataOrchestratorApi.touchCrdByNameAndType({ name: item.name, type: item.kind }).subscribe({
+        next: () => {
+          this.msgService.success({ summaryKey: 'ACTIONS.TOUCH.MESSAGE.OK' })
+        },
+        error: () => this.msgService.error({ summaryKey: 'ACTIONS.TOUCH.MESSAGE.NOK' })
+      })
+    }
   }
 }

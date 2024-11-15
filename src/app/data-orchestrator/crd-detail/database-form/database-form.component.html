@@ -1,0 +1,164 @@
+<form [formGroup]="formGroup" errorTailor>
+  <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="database_detail_api_version"
+          type="text"
+          formControlName="apiVersion"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.DATABASE.TOOLTIPS.API_VERSION' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="database_detail_api_version"> {{ 'CRD.DATABASE.API_VERSION' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="database_detail_name"
+          type="text"
+          formControlName="metadataName"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.DATABASE.TOOLTIPS.NAME' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="database_detail_name"> {{ 'CRD.DATABASE.NAME' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="database_detail_kind"
+          type="text"
+          formControlName="kind"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.DATABASE.TOOLTIPS.KIND' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="database_detail_kind"> {{ 'CRD.DATABASE.KIND' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="database_detail_host"
+          type="text"
+          formControlName="host"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.DATABASE.TOOLTIPS.HOST' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="database_detail_host"> {{ 'CRD.DATABASE.HOST' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="database_detail_db_name"
+          type="text"
+          formControlName="specName"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.DATABASE.TOOLTIPS.DB_NAME' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="database_detail_db_name"> {{ 'CRD.DATABASE.DB_NAME' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="database_detail_password_key"
+          type="text"
+          formControlName="passwordKey"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.DATABASE.TOOLTIPS.PASSWORD_KEY' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="database_detail_password_key"> {{ 'CRD.DATABASE.PASSWORD_KEY' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="database_detail_password_secrets"
+          type="text"
+          formControlName="passwordSecrets"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.DATABASE.TOOLTIPS.PASSWORD_SECRETS' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="database_detail_password_secrets"> {{ 'CRD.DATABASE.PASSWORD_SECRETS' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="database_detail_schema"
+          type="text"
+          formControlName="schema"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.DATABASE.TOOLTIPS.SCHEMA' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="database_detail_schema"> {{ 'CRD.DATABASE.SCHEMA' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="database_detail_user"
+          type="text"
+          formControlName="user"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.DATABASE.TOOLTIPS.USER' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="database_detail_user"> {{ 'CRD.DATABASE.USER' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="database_detail_user_search_path"
+          type="text"
+          formControlName="user_search_path"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.DATABASE.TOOLTIPS.USER_SEARCH_PATH' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="database_detail_user_search_path"> {{ 'CRD.DATABASE.USER_SEARCH_PATH' | translate }}</label>
+      </span>
+    </div>
+  </div>
+</form>

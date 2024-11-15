@@ -8,6 +8,15 @@ import { InitializeModuleGuard, addInitializeModuleGuard } from '@onecx/angular-
 import { SharedModule } from '../shared/shared.module'
 import { CrdSearchComponent } from './crd-search/crd-search.component'
 import { CrdCriteriaComponent } from './crd-search/crd-criteria/crd-criteria.component'
+import { CrdDetailComponent } from './crd-detail/crd-detail.component'
+import { DataFormComponent } from './crd-detail/data-form/data-form.component'
+import { DatabaseFormComponent } from './crd-detail/database-form/database-form.component'
+import { ProductFormComponent } from './crd-detail/product-form/product-form.component'
+import { PermissionFormComponent } from './crd-detail/permission-form/permission-form.component'
+import { KeycloakFormComponent } from './crd-detail/keycloak-form/keycloak-form.component'
+import { MicrofrontendFormComponent } from './crd-detail/microfrontend-form/microfrontend-form.component'
+import { MicroserviceFormComponent } from './crd-detail/microservice-form/microservice-form.component'
+import { SlotFormComponent } from './crd-detail/slot-form/slot-form.component'
 
 const routes: Routes = [
   {
@@ -17,7 +26,19 @@ const routes: Routes = [
   }
 ]
 @NgModule({
-  declarations: [CrdSearchComponent, CrdCriteriaComponent],
+  declarations: [
+    CrdSearchComponent,
+    CrdCriteriaComponent,
+    CrdDetailComponent,
+    DataFormComponent,
+    DatabaseFormComponent,
+    ProductFormComponent,
+    SlotFormComponent,
+    PermissionFormComponent,
+    KeycloakFormComponent,
+    MicrofrontendFormComponent,
+    MicroserviceFormComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,

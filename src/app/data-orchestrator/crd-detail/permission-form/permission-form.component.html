@@ -1,0 +1,100 @@
+<form [formGroup]="formGroup" errorTailor>
+  <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="permission_detail_api_version"
+          type="text"
+          formControlName="apiVersion"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.PERMISSION.TOOLTIPS.API_VERSION' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="permission_detail_api_version"> {{ 'CRD.PERMISSION.API_VERSION' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="permission_detail_name"
+          type="text"
+          formControlName="metadataName"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.PERMISSION.TOOLTIPS.NAME' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="permission_detail_name"> {{ 'CRD.PERMISSION.NAME' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="permission_detail_kind"
+          type="text"
+          formControlName="kind"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.PERMISSION.TOOLTIPS.KIND' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="permission_detail_kind"> {{ 'CRD.PERMISSION.KIND' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="permission_detail_app_id"
+          type="text"
+          formControlName="appId"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.PERMISSION.TOOLTIPS.APP_ID' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="permission_detail_app_id"> {{ 'CRD.PERMISSION.APP_ID' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="permission_detail_description"
+          type="text"
+          formControlName="description"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.PERMISSION.TOOLTIPS.DESCRIPTION' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="permission_detail_description"> {{ 'CRD.PERMISSION.DESCRIPTION' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="permission_detail_permission_name"
+          type="text"
+          formControlName="productName"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.PERMISSION.TOOLTIPS.permission_NAME' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="permission_detail_permission_name"> {{ 'CRD.PERMISSION.permission_NAME' | translate }}</label>
+      </span>
+    </div>
+  </div>
+</form>

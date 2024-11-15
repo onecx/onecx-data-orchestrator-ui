@@ -1,0 +1,150 @@
+<form [formGroup]="formGroup" errorTailor>
+  <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="microservice_detail_api_version"
+          type="text"
+          formControlName="apiVersion"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.API_VERSION' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="microservice_detail_api_version"> {{ 'CRD.MICROSERVICE.API_VERSION' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="microservice_detail_name"
+          type="text"
+          formControlName="metadataName"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.NAME' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="microservice_detail_name"> {{ 'CRD.MICROSERVICE.NAME' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="microservice_detail_kind"
+          type="text"
+          formControlName="kind"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.KIND' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="microservice_detail_kind"> {{ 'CRD.MICROSERVICE.KIND' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="microservice_detail_appId"
+          type="text"
+          formControlName="appId"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.APP_ID' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="microservice_detail_appId"> {{ 'CRD.MICROSERVICE.APP_ID' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="microservice_detail_description"
+          type="text"
+          formControlName="description"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.DESCRIPTION' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="microservice_detail_description"> {{ 'CRD.MICROSERVICE.DESCRIPTION' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="microservice_detail_microservice_name"
+          type="text"
+          formControlName="specName"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.MICROSERVICE_NAME' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="microservice_detail_microservice_name">
+          {{ 'CRD.MICROSERVICE.MICROSERVICE_NAME' | translate }}</label
+        >
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="microservice_detail_product_name"
+          type="text"
+          formControlName="productName"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.PRODUCT_NAME' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="microservice_detail_product_name"> {{ 'CRD.MICROSERVICE.PRODUCT_NAME' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="microservice_detail_version"
+          type="text"
+          formControlName="version"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.VERSION' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="microservice_detail_version"> {{ 'CRD.MICROSERVICE.VERSION' | translate }}</label>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label" controlErrorAnchor>
+        <input
+          pInputText
+          inputId="microservice_detail_type"
+          type="text"
+          formControlName="type"
+          styleClass="w-15rem"
+          appendTo="body"
+          [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.TYPE' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        />
+        <label for="microservice_detail_type"> {{ 'CRD.MICROSERVICE.TYPE' | translate }}</label>
+      </span>
+    </div>
+  </div>
+</form>

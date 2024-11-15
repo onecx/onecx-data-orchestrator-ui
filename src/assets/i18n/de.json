@@ -87,8 +87,8 @@
     },
     "CRD_STATUS": {
       "ERROR": "Fehler",
-      "Created": "Erstellt",
-      "Updated": "Aktualisiert",
+      "CREATED": "Erstellt",
+      "UPDATED": "Aktualisiert",
       "null": "Nicht verarbeitet"
     }
   },

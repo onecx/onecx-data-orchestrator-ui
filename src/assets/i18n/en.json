@@ -15,6 +15,15 @@
         "NOK": "An error has occurred. The Custom Resource was not saved."
       }
     },
+    "TOUCH": {
+      "LABEL": "Touch",
+      "CRD": "Touch Custom Resource",
+      "CRD.TOOLTIP": "Touch Custom Resource to trigger reload in k8s",
+      "MESSAGE": {
+        "OK": "The Custom Resource was updated successfully",
+        "NOK": "An error has occurred. The Custom Resource was updated."
+      }
+    },
     "SEARCH": {
       "ACTIONS": "Actions",
       "LABEL": "Search",
@@ -72,6 +81,222 @@
       "CREATION_DATE": "Date and Time on which the Custom Resource was created",
       "RESOURCE_VERSION": "Version of the Custom Resource",
       "VERSION": "Release version of the Custom Resource"
+    },
+    "DATA": {
+      "NAME": "Name",
+      "API_VERSION": "Api version",
+      "KIND": "Type",
+      "APP_ID": "App Id",
+      "DESCRIPTION": "Description",
+      "KEY": "Key",
+      "ORG_ID": "Organization Id",
+      "PRODUCT_NAME": "Product name",
+      "DATA": "Data",
+      "TOOLTIPS": {
+        "NAME": "Name",
+        "API_VERSION": "Api version",
+        "KIND": "Type",
+        "APP_ID": "App Id",
+        "DESCRIPTION": "Description",
+        "KEY": "Key",
+        "ORG_ID": "Organization Id",
+        "PRODUCT_NAME": "Product name",
+        "DATA": "Data"
+      }
+    },
+    "DATABASE": {
+      "NAME": "Name",
+      "API_VERSION": "Api version",
+      "KIND": "Type",
+      "HOST": "Host",
+      "DATABASE_NAME": "Database name",
+      "PASSWORD_KEY": "Password key",
+      "PASSWORD_SECRETS": "Password secrets",
+      "SCHEMA": "Schema",
+      "USER": "User",
+      "USER_SEARCH_PATH": "User search path",
+      "TOOLTIPS": {
+        "NAME": "Name",
+        "API_VERSION": "Api version",
+        "KIND": "Type",
+        "HOST": "Host",
+        "DATABASE_NAME": "Database name",
+        "PASSWORD_KEY": "Password key",
+        "PASSWORD_SECRETS": "Password secrets",
+        "SCHEMA": "Schema",
+        "USER": "User",
+        "USER_SEARCH_PATH": "User search path"
+      }
+    },
+    "PRODUCT": {
+      "NAME": "Name",
+      "API_VERSION": "Api version",
+      "KIND": "Type",
+      "BASE_PATH": "Base path",
+      "DESCRIPTION": "Description",
+      "DISPLAY_NAME": "Display name",
+      "ICON_NAME": "Icon name",
+      "IMAGE_URL": "Image url",
+      "PRODUCT_NAME": "Product name",
+      "PROVIDER": "Provider",
+      "VERSION": "Version",
+      "TOOLTIPS": {
+        "NAME": "Name",
+        "API_VERSION": "Api version",
+        "KIND": "Type",
+        "BASE_PATH": "Base path of the product",
+        "DESCRIPTION": "Description",
+        "DISPLAY_NAME": "Display name",
+        "ICON_NAME": "Icon name",
+        "IMAGE_URL": "Image url",
+        "PRODUCT_NAME": "Product name",
+        "PROVIDER": "Provider",
+        "VERSION": "Version"
+      }
+    },
+    "SLOT": {
+      "NAME": "Name",
+      "API_VERSION": "Api version",
+      "KIND": "Type",
+      "APP_ID": "App Id",
+      "DESCRIPTION": "Description",
+      "PRODUCT_NAME": "Product name",
+      "SLOT_NAME": "Slot name",
+      "DEPRECATED": "Deprecated?",
+      "TOOLTIPS": {
+        "NAME": "Name",
+        "API_VERSION": "Api version",
+        "KIND": "Type",
+        "APP_ID": "App Id",
+        "DESCRIPTION": "Description",
+        "PRODUCT_NAME": "Product name",
+        "SLOT_NAME": "Slot name",
+        "DEPRECATED": "Deprecated?"
+      }
+    },
+    "PERMISSION": {
+      "NAME": "Name",
+      "API_VERSION": "Api version",
+      "KIND": "Type",
+      "APP_ID": "App Id",
+      "DESCRIPTION": "Description",
+      "PRODUCT_NAME": "Product name",
+      "TOOLTIPS": {
+        "NAME": "Name",
+        "API_VERSION": "Api version",
+        "KIND": "Type",
+        "APP_ID": "App Id",
+        "DESCRIPTION": "Description",
+        "PRODUCT_NAME": "Product name"
+      }
+    },
+    "KEYCLOAK": {
+      "NAME": "Name",
+      "API_VERSION": "Api version",
+      "KIND": "Type",
+      "BASE_PATH": "Base path",
+      "DESCRIPTION": "Description",
+      "PASSWORD_KEY": "Password key",
+      "PASSWORD_SECRETS": "Password secrets",
+      "REALM": "Realm",
+      "TYPE": "Type",
+      "BEARER_ONLY": "Bearer only?",
+      "CLIENT_AUTHENTICATOR_TYPE": "Client authenticator type",
+      "CLIENT_ID": "Client Id",
+      "DIRECT_ACCESS_GRANTS_ENABLED": "Direct access grants enabled?",
+      "ENABLED": "Enabled?",
+      "IMPLICIT_FLOW_ENABLED": "Implicit flow enabled?",
+      "PASSWORD": "Password",
+      "PROTOCOL": "Protocol",
+      "PUBLIC_CLIENT": "Public client",
+      "SERVICE_ACCOUNTS_ENABLED": "Service accounts enabled?",
+      "STANDARD_FLOW_ENABLED": "Standard flow enabled?",
+      "TOOLTIPS": {
+        "NAME": "Name",
+        "API_VERSION": "Api version",
+        "KIND": "Type",
+        "BASE_PATH": "Base path",
+        "DESCRIPTION": "Description",
+        "PASSWORD_KEY": "Password key",
+        "PASSWORD_SECRETS": "Password secrets",
+        "REALM": "Realm",
+        "TYPE": "Type",
+        "BEARER_ONLY": "Bearer only?",
+        "CLIENT_AUTHENTICATOR_TYPE": "Client authenticator type",
+        "CLIENT_ID": "Client Id",
+        "DIRECT_ACCESS_GRANTS_ENABLED": "Direct access grants enabled?",
+        "ENABLED": "Enabled?",
+        "IMPLICIT_FLOW_ENABLED": "Implicit flow enabled?",
+        "PASSWORD": "Password",
+        "PROTOCOL": "Protocol",
+        "PUBLIC_CLIENT": "Public client",
+        "SERVICE_ACCOUNTS_ENABLED": "Service accounts enabled?",
+        "STANDARD_FLOW_ENABLED": "Standard flow enabled?"
+      }
+    },
+    "MICROFRONTEND": {
+      "NAME": "Name",
+      "API_VERSION": "Api version",
+      "KIND": "Type",
+      "APP_ID": "App ID",
+      "APP_NAME": "App Name",
+      "APP_VERSION": "App Version",
+      "CONTACT": "Contact",
+      "DEPRECATED": "Deprecated",
+      "DESCRIPTION": "Description",
+      "EXPOSED_MODULE": "Exposed Module",
+      "ICON_NAME": "Icon Name",
+      "NOTE": "Note",
+      "PRODUCT_NAME": "Product Name",
+      "REMOTE_BASE_URL": "Remote Base URL",
+      "REMOTE_ENTRY": "Remote Entry",
+      "REMOTE_NAME": "Remote Name",
+      "TAG_NAME": "Tag Name",
+      "TECHNOLOGY": "Technology",
+      "TYPE": "Type",
+      "TOOLTIPS": {
+        "NAME": "Name",
+        "API_VERSION": "Api version",
+        "KIND": "Type",
+        "APP_ID": "App ID",
+        "APP_NAME": "App Name",
+        "APP_VERSION": "App Version",
+        "CONTACT": "Contact",
+        "DEPRECATED": "Deprecated",
+        "DESCRIPTION": "Description",
+        "EXPOSED_MODULE": "Exposed Module",
+        "ICON_NAME": "Icon Name",
+        "NOTE": "Note",
+        "PRODUCT_NAME": "Product Name",
+        "REMOTE_BASE_URL": "Remote Base URL",
+        "REMOTE_ENTRY": "Remote Entry",
+        "REMOTE_NAME": "Remote Name",
+        "TAG_NAME": "Tag Name",
+        "TECHNOLOGY": "Technology",
+        "TYPE": "Type"
+      }
+    },
+    "MICROSERVICE": {
+      "NAME": "Name",
+      "API_VERSION": "Api version",
+      "KIND": "Type",
+      "APP_ID": "App ID",
+      "DESCRIPTION": "Description",
+      "MICROSERVICE_NAME": "Microservice Name",
+      "VERSION": "Version",
+      "PRODUCT_NAME": "Product Name",
+      "TYPE": "Type",
+      "TOOLTIPS": {
+        "NAME": "Name",
+        "API_VERSION": "Api version",
+        "KIND": "Type",
+        "APP_ID": "App ID",
+        "DESCRIPTION": "Description",
+        "MICROSERVICE_NAME": "Microservice Name",
+        "VERSION": "Version",
+        "PRODUCT_NAME": "Product Name",
+        "TYPE": "Type"
+      }
     }
   },
   "ENUMS": {
@@ -87,8 +312,8 @@
     },
     "CRD_STATUS": {
       "ERROR": "Error",
-      "Created": "Created",
-      "Updated": "Updated",
+      "CREATED": "Created",
+      "UPDATED": "Updated",
       "null": "Not processed"
     }
   },
@@ -107,34 +332,22 @@
   },
   "EXCEPTIONS": {
     "HTTP_STATUS_0": {
-      "ANNOUNCEMENTS": "Unknown problem retrieving Announcement data - please try again.",
-      "ASSIGNMENTS": "Unknown problem retrieving Workspaces and Applications with assigned Announcements - please try again.",
-      "WORKSPACES": "Unknown problem retrieving Workspace data - please try again.",
-      "PRODUCTS": "Unknown problem retrieving Application data - please try again."
+      "CRDS": "Unknown problem retrieving Announcement data - please try again."
     },
     "HTTP_STATUS_401": {
-      "ANNOUNCEMENTS": "You are not authorized to see Announcements.",
-      "ASSIGNMENTS": "You are not authorized to see Workspaces and Applications with assigned Announcements.",
-      "WORKSPACES": "You are not authorized to see Workspaces.",
-      "PRODUCTS": "You are not authorized to see Applications."
+      "CRDS": "You are not authorized to see Custom Resources."
     },
     "HTTP_STATUS_403": {
-      "ANNOUNCEMENTS": "You have no permissions to see Announcements.",
-      "ASSIGNMENTS": "You have no permissions to see Workspaces and Applications with assigned Announcements.",
-      "WORKSPACES": "You have no permissions to see Workspaces.",
-      "PRODUCTS": "You have no permissions to see Applications."
+      "CRDS": "You have no permissions to see Custom Resources."
+    },
+    "HTTP_STATUS_204": {
+      "CRDS": "No Custom Resources found matching the search criterias."
     },
     "HTTP_STATUS_404": {
-      "ANNOUNCEMENTS": "No Announcements could be loaded.",
-      "ASSIGNMENTS": "No Workspaces and Applications with assigned Announcements could be loaded.",
-      "WORKSPACES": "No Workspaces could be loaded.",
-      "PRODUCTS": "No Applications could be loaded."
+      "CRDS": "No Custom Resource could be loaded."
     },
     "HTTP_STATUS_500": {
-      "ANNOUNCEMENTS": "Unknown server problem retrieving Announcement data - please try again.",
-      "ASSIGNMENTS": "Unknown server problem retrieving Workspaces and Applications with assigned Announcements - please try again.",
-      "WORKSPACES": "Unknown server problem retrieving Workspace data - please try again.",
-      "PRODUCTS": "Unknown server problem retrieving Application data - please try again."
+      "CRDS": "Unknown server problem retrieving Custom Resources - please try again."
     }
   }
 }

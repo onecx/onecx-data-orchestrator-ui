@@ -1,209 +1,193 @@
-import { Component } from '@angular/core'
-// import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core'
-// import { FormBuilder, FormControl, FormGroup, Validators, ValidationErrors, ValidatorFn } from '@angular/forms'
-// import { TranslateService } from '@ngx-translate/core'
-// import { finalize, Observable, map, of } from 'rxjs'
-// import { SelectItem } from 'primeng/api'
+import { Component, EventEmitter, Input, OnChanges, Output, QueryList, ViewChildren } from '@angular/core'
+import { FormBuilder } from '@angular/forms'
+import { finalize } from 'rxjs'
 
-// import { PortalMessageService, UserService } from '@onecx/portal-integration-angular'
-
-// export function dateRangeValidator(fg: FormGroup): ValidatorFn {
-//   return (): ValidationErrors | null => {
-//     const startDate = fg.controls['startDate']?.value
-//     const endDate = fg.controls['endDate']?.value
-//     if (startDate && endDate) {
-//       const start = new Date(startDate)
-//       const end = new Date(endDate)
-//       return start >= end ? { invalidDateRange: true } : null
-//     } else return null
-//   }
-// }
+import { PortalMessageService, UserService } from '@onecx/portal-integration-angular'
+import {
+  ContextKind,
+  CustomResourceData,
+  CustomResourceDatabase,
+  CustomResourceKeycloakClient,
+  CustomResourceMicrofrontend,
+  CustomResourceMicroservice,
+  CustomResourcePermission,
+  CustomResourceProduct,
+  CustomResourceSlot,
+  DataAPIService,
+  EditResourceRequest
+} from 'src/app/shared/generated'
+import { DataFormComponent } from './data-form/data-form.component'
+import { DatabaseFormComponent } from './database-form/database-form.component'
+import { ProductFormComponent } from './product-form/product-form.component'
+import { PermissionFormComponent } from './permission-form/permission-form.component'
+import { KeycloakFormComponent } from './keycloak-form/keycloak-form.component'
+import { SlotFormComponent } from './slot-form/slot-form.component'
+import { MicrofrontendFormComponent } from './microfrontend-form/microfrontend-form.component'
+import { MicroserviceFormComponent } from './microservice-form/microservice-form.component'
 
 @Component({
   selector: 'app-crd-detail',
   templateUrl: './crd-detail.component.html',
   styleUrls: ['./crd-detail.component.scss']
 })
-export class CrdDetailComponent {
-  //   @Input() public changeMode = 'NEW'
-  //   @Input() public displayDetailDialog = false
-  //   @Input() public announcement: Announcement | undefined
-  //   @Input() public allWorkspaces: SelectItem[] = []
-  //   @Input() public allProducts: SelectItem[] = []
-  //   @Output() public hideDialogAndChanged = new EventEmitter<boolean>()
-  //   announcementId: string | undefined
-  //   announcementDeleteVisible = false
-  //   public dateFormat: string
-  //   public timeFormat: string
-  //   public isLoading = false
-  //   public displayDateRangeError = false
-  //   // form
-  //   formGroup: FormGroup
-  //   public typeOptions$: Observable<SelectItem[]> = of([])
-  //   public statusOptions$: Observable<SelectItem[]> = of([])
-  //   public priorityOptions$: Observable<SelectItem[]> = of([])
-  //   constructor(
-  //     private readonly user: UserService,
-  //     private readonly announcementApi: AnnouncementInternalAPIService,
-  //     private readonly fb: FormBuilder,
-  //     private readonly translate: TranslateService,
-  //     private readonly msgService: PortalMessageService
-  //   ) {
-  //     this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'mm/dd/yy'
-  //     this.timeFormat = this.user.lang$.getValue() === 'de' ? '24' : '12'
-  //     this.prepareDropDownOptions()
-  //     this.formGroup = fb.nonNullable.group({
-  //       id: new FormControl(null),
-  //       modificationCount: new FormControl(null),
-  //       title: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]),
-  //       content: new FormControl(null, [Validators.maxLength(1000)]),
-  //       appId: new FormControl(null),
-  //       workspaceName: new FormControl(null),
-  //       productName: new FormControl(null),
-  //       type: new FormControl(null),
-  //       priority: new FormControl(null),
-  //       status: new FormControl(null),
-  //       startDate: new FormControl(null, [Validators.required]),
-  //       endDate: new FormControl(null)
-  //     })
-  //     this.formGroup.controls['startDate'].addValidators([Validators.required, dateRangeValidator(this.formGroup)])
-  //     this.formGroup.controls['endDate'].addValidators([dateRangeValidator(this.formGroup)])
-  //   }
-  //   ngOnChanges() {
-  //     this.displayDateRangeError = false
-  //     if (this.changeMode === 'EDIT' || this.changeMode === 'VIEW') {
-  //       this.announcementId = this.announcement?.id
-  //       this.getAnnouncement()
-  //       if (this.changeMode === 'VIEW') this.formGroup.disable()
-  //     }
-  //     if (this.changeMode === 'NEW') {
-  //       this.announcementId = undefined
-  //       if (this.announcement) {
-  //         this.fillForm() // on COPY
-  //       } else {
-  //         this.formGroup.reset()
-  //         this.formGroup.controls['type'].setValue(AnnouncementType.Info)
-  //         this.formGroup.controls['status'].setValue(AnnouncementStatus.Inactive)
-  //         this.formGroup.controls['priority'].setValue(AnnouncementPriorityType.Normal)
-  //       }
-  //     }
-  //   }
-  //   public onDialogHide() {
-  //     this.displayDetailDialog = false
-  //     this.hideDialogAndChanged.emit(false)
-  //   }
-  //   /**
-  //    * READING data
-  //    */
-  //   private getAnnouncement(): void {
-  //     if (this.announcementId) {
-  //       this.isLoading = true
-  //       this.announcement = undefined
-  //       this.announcementApi
-  //         .getAnnouncementById({ id: this.announcementId })
-  //         .pipe(finalize(() => (this.isLoading = false)))
-  //         .subscribe({
-  //           next: (item) => {
-  //             this.announcement = item
-  //             this.fillForm()
-  //           },
-  //           error: () => this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
-  //         })
-  //     }
-  //   }
-  //   private fillForm(): void {
-  //     this.formGroup.patchValue({
-  //       ...this.announcement,
-  //       startDate: this.announcement?.startDate ? new Date(this.announcement.startDate) : null,
-  //       endDate: this.announcement?.endDate ? new Date(this.announcement.endDate) : null
-  //     })
-  //   }
-  //   /**
-  //    * SAVING => create or update
-  //    */
-  //   public onSave(): void {
-  //     if (this.formGroup.errors?.['dateRange']) {
-  //       this.msgService.warning({
-  //         summaryKey: 'VALIDATION.ERRORS.INVALID_DATE_RANGE'
-  //       })
-  //     } else if (this.formGroup.valid) {
-  //       if (this.changeMode === 'EDIT' && this.announcementId) {
-  //         this.announcementApi
-  //           .updateAnnouncementById({
-  //             id: this.announcementId,
-  //             updateAnnouncementRequest: this.submitFormValues() as UpdateAnnouncementRequest
-  //           })
-  //           .subscribe({
-  //             next: () => {
-  //               this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
-  //               this.hideDialogAndChanged.emit(true)
-  //             },
-  //             error: () => this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
-  //           })
-  //       } else if (this.changeMode === 'NEW') {
-  //         this.announcementApi
-  //           .createAnnouncement({
-  //             createAnnouncementRequest: this.submitFormValues() as CreateAnnouncementRequest
-  //           })
-  //           .subscribe({
-  //             next: () => {
-  //               this.msgService.success({ summaryKey: 'ACTIONS.CREATE.MESSAGE.OK' })
-  //               this.hideDialogAndChanged.emit(true)
-  //             },
-  //             error: () => this.msgService.error({ summaryKey: 'ACTIONS.CREATE.MESSAGE.NOK' })
-  //           })
-  //       }
-  //     }
-  //   }
-  //   private submitFormValues(): any {
-  //     const announcement: Announcement = { ...this.formGroup.value }
-  //     return announcement
-  //   }
-  //   /****************************************************************************
-  //    *  SERVER responses & internal
-  //    */
-  //   private prepareDropDownOptions() {
-  //     this.typeOptions$ = this.translate
-  //       .get([
-  //         'ENUMS.ANNOUNCEMENT_TYPE.' + AnnouncementType.Event,
-  //         'ENUMS.ANNOUNCEMENT_TYPE.' + AnnouncementType.Info,
-  //         'ENUMS.ANNOUNCEMENT_TYPE.' + AnnouncementType.SystemMaintenance
-  //       ])
-  //       .pipe(
-  //         map((data) => {
-  //           return [
-  //             { label: data['ENUMS.ANNOUNCEMENT_TYPE.' + AnnouncementType.Event], value: AnnouncementType.Event },
-  //             { label: data['ENUMS.ANNOUNCEMENT_TYPE.' + AnnouncementType.Info], value: AnnouncementType.Info },
-  //             {
-  //               label: data['ENUMS.ANNOUNCEMENT_TYPE.' + AnnouncementType.SystemMaintenance],
-  //               value: AnnouncementType.SystemMaintenance
-  //             }
-  //           ]
-  //         })
-  //       )
-  //     this.priorityOptions$ = this.translate
-  //       .get([
-  //         'ENUMS.ANNOUNCEMENT_PRIORITY.' + AnnouncementPriorityType.Important,
-  //         'ENUMS.ANNOUNCEMENT_PRIORITY.' + AnnouncementPriorityType.Low,
-  //         'ENUMS.ANNOUNCEMENT_PRIORITY.' + AnnouncementPriorityType.Normal
-  //       ])
-  //       .pipe(
-  //         map((data) => {
-  //           return [
-  //             {
-  //               label: data['ENUMS.ANNOUNCEMENT_PRIORITY.' + AnnouncementPriorityType.Important],
-  //               value: AnnouncementPriorityType.Important
-  //             },
-  //             {
-  //               label: data['ENUMS.ANNOUNCEMENT_PRIORITY.' + AnnouncementPriorityType.Normal],
-  //               value: AnnouncementPriorityType.Normal
-  //             },
-  //             {
-  //               label: data['ENUMS.ANNOUNCEMENT_PRIORITY.' + AnnouncementPriorityType.Low],
-  //               value: AnnouncementPriorityType.Low
-  //             }
-  //           ]
-  //         })
-  //       )
-  //   }
+export class CrdDetailComponent implements OnChanges {
+  @ViewChildren(DataFormComponent, { read: DataFormComponent }) dataFormComponent!: QueryList<DataFormComponent>
+  @ViewChildren(DatabaseFormComponent, { read: DatabaseFormComponent })
+  databaseFormComponent!: QueryList<DatabaseFormComponent>
+  @ViewChildren(ProductFormComponent, { read: ProductFormComponent })
+  productFormComponent!: QueryList<ProductFormComponent>
+  @ViewChildren(PermissionFormComponent, { read: PermissionFormComponent })
+  permissionFormComponent!: QueryList<PermissionFormComponent>
+  @ViewChildren(KeycloakFormComponent, { read: KeycloakFormComponent })
+  keycloakFormComponent!: QueryList<KeycloakFormComponent>
+  @ViewChildren(SlotFormComponent, { read: SlotFormComponent }) slotFormComponent!: QueryList<SlotFormComponent>
+  @ViewChildren(MicrofrontendFormComponent, { read: MicrofrontendFormComponent })
+  microfrontendFormComponent!: QueryList<MicrofrontendFormComponent>
+  @ViewChildren(MicroserviceFormComponent, { read: MicroserviceFormComponent })
+  microserviceFormComponent!: QueryList<MicroserviceFormComponent>
+
+  @Input() public changeMode = 'VIEW'
+  @Input() public displayDetailDialog = false
+  @Input() public crdName: string | undefined = ''
+  @Input() public crdType: string | undefined = ''
+  @Output() public hideDialogAndChanged = new EventEmitter<boolean>()
+  public isLoading = false
+  public displayDateRangeError = false
+  public crd: any
+
+  constructor(
+    private readonly user: UserService,
+    private readonly dataOrchestratorApi: DataAPIService,
+    private readonly fb: FormBuilder,
+    private readonly msgService: PortalMessageService
+  ) {}
+  ngOnChanges(): void {
+    this.getCrd()
+  }
+  public onDialogHide() {
+    this.displayDetailDialog = false
+    this.changeMode = ''
+    this.hideDialogAndChanged.emit(false)
+  }
+
+  private getCrd(): void {
+    if (this.crdName && this.crdType) {
+      this.isLoading = true
+      this.crd = undefined
+      this.dataOrchestratorApi
+        .getCrdByTypeAndName({ type: this.crdType as ContextKind, name: this.crdName })
+        .pipe(finalize(() => (this.isLoading = false)))
+        .subscribe({
+          next: (item) => {
+            this.crd = item.crd
+          },
+          error: () => this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
+        })
+    }
+  }
+
+  /**
+   * SAVING
+   */
+  public onSave(): void {
+    if (this.changeMode === 'EDIT' && this.crdName && this.crdType) {
+      const formValuesOfChild = this.getFormValuesOfActiveChild()
+      const editResourceRequest: EditResourceRequest = this.prepareUpdateData(
+        this.crdType,
+        this.submitFormValues(formValuesOfChild)
+      )
+      this.dataOrchestratorApi
+        .editCrd({
+          editResourceRequest
+        })
+        .subscribe({
+          next: () => {
+            this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
+            this.hideDialogAndChanged.emit(true)
+          },
+          error: () => this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
+        })
+    }
+  }
+  private getFormValuesOfActiveChild(): any {
+    if (this.crdType === 'Data' && this.dataFormComponent) {
+      return this.dataFormComponent.first.formGroup.value
+    }
+    if (this.crdType === 'Database' && this.databaseFormComponent) {
+      return this.databaseFormComponent.first.formGroup.value
+    }
+    if (this.crdType === 'Product' && this.productFormComponent) {
+      return this.productFormComponent.first.formGroup.value
+    }
+    if (this.crdType === 'Permission' && this.permissionFormComponent) {
+      return this.permissionFormComponent.first.formGroup.value
+    }
+    if (this.crdType === 'KeycloakClient' && this.keycloakFormComponent) {
+      return this.keycloakFormComponent.first.formGroup.value
+    }
+    if (this.crdType === 'Slot' && this.slotFormComponent) {
+      return this.slotFormComponent.first.formGroup.value
+    }
+    if (this.crdType === 'Microfrontend' && this.microfrontendFormComponent) {
+      return this.microfrontendFormComponent.first.formGroup.value
+    }
+    if (this.crdType === 'Microservice' && this.microserviceFormComponent) {
+      return this.microserviceFormComponent.first.formGroup.value
+    }
+  }
+  private prepareUpdateData(type: string, crd: any): EditResourceRequest {
+    let editResourceRequest: EditResourceRequest = {}
+    if (type === ContextKind.Data) {
+      editResourceRequest = { CrdData: crd as CustomResourceData }
+    } else if (type === ContextKind.Database) {
+      editResourceRequest = { CrdDatabase: crd as CustomResourceDatabase }
+    } else if (type === ContextKind.Product) {
+      editResourceRequest = { CrdProduct: crd as CustomResourceProduct }
+    } else if (type === ContextKind.Permission) {
+      editResourceRequest = { CrdPermission: crd as CustomResourcePermission }
+    } else if (type === ContextKind.KeycloakClient) {
+      editResourceRequest = { CrdKeycloakClient: crd as CustomResourceKeycloakClient }
+    } else if (type === ContextKind.Slot) {
+      editResourceRequest = { CrdSlot: crd as CustomResourceSlot }
+    } else if (type === ContextKind.Microfrontend) {
+      editResourceRequest = { CrdMicrofrontend: crd as CustomResourceMicrofrontend }
+    } else if (type === ContextKind.Microservice) {
+      editResourceRequest = { CrdMicroservice: crd as CustomResourceMicroservice }
+    }
+    return editResourceRequest
+  }
+
+  private submitFormValues(formValues: any): any {
+    if (this.crd) {
+      const crd: any = this.updateFields(this.crd, { ...formValues })
+      return crd
+    }
+  }
+
+  private updateFields(base: any, update: { [key: string]: any }): any {
+    for (const key in update) {
+      if (update.hasOwnProperty(key)) {
+        const contextMatch = key.match(/^(spec|metadata)([A-Z].*)$/)
+        if (contextMatch) {
+          const context = contextMatch[1]
+          const field = contextMatch[2].charAt(0).toLowerCase() + contextMatch[2].slice(1)
+
+          if (context === 'spec' && base.spec) {
+            ;(base.spec as any)[field] = update[key]
+          } else if (context === 'metadata' && base.metadata) {
+            ;(base.metadata as any)[field] = update[key]
+          }
+        } else {
+          if (key in base) {
+            ;(base as any)[key] = update[key]
+          } else if (base.spec && key in base.spec) {
+            ;(base.spec as any)[key] = update[key]
+          } else if (base.metadata && key in base.metadata) {
+            ;(base.metadata as any)[key] = update[key]
+          }
+        }
+      }
+    }
+    return base
+  }
 }
