@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
-import { catchError, finalize, map, Observable, of, tap } from 'rxjs'
+import { catchError, finalize, map, Observable, of } from 'rxjs'
 import { Table } from 'primeng/table'
 import { PrimeIcons, SelectItem } from 'primeng/api'
 
@@ -15,13 +15,11 @@ import {
 
 import { limitText } from 'src/app/shared/utils'
 import {
-  ContextKind,
   CrdResponse,
   DataAPIService,
   GenericCrd,
   GetCustomResourcesByCriteriaRequestParams
 } from 'src/app/shared/generated'
-import { HttpResponse } from '@angular/common/http'
 
 type ExtendedColumn = Column & {
   hasFilter?: boolean
