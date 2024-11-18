@@ -3,8 +3,8 @@
   [(visible)]="displayDetailDialog"
   (onHide)="onDialogHide()"
   [baseZIndex]="10000"
-  [draggable]="true"
-  [resizable]="true"
+  [draggable]="false"
+  [resizable]="false"
   [closable]="true"
   [modal]="true"
   [style]="{ width: '600px' }"
@@ -15,33 +15,53 @@
     '630px': '100vw'
   }"
 >
-  <app-data-form *ngIf="crdType && crdType.toString() === 'Data'" [changeMode]="changeMode" [dataCrd]="crd" />
+  <app-data-form
+    *ngIf="crdType && crdType.toString() === 'Data'"
+    [changeMode]="changeMode"
+    [dataCrd]="crd"
+    [updateHistory]="updateHistory"
+  />
   <app-database-form
     *ngIf="crdType && crdType.toString() === 'Database'"
     [changeMode]="changeMode"
     [databaseCrd]="crd"
+    [updateHistory]="updateHistory"
   />
-  <app-product-form *ngIf="crdType && crdType.toString() === 'Product'" [changeMode]="changeMode" [productCrd]="crd" />
+  <app-product-form
+    *ngIf="crdType && crdType.toString() === 'Product'"
+    [changeMode]="changeMode"
+    [productCrd]="crd"
+    [updateHistory]="updateHistory"
+  />
   <app-permission-form
     *ngIf="crdType && crdType.toString() === 'Permission'"
     [changeMode]="changeMode"
     [permissionCrd]="crd"
+    [updateHistory]="updateHistory"
   />
   <app-keycloak-form
     *ngIf="crdType && crdType.toString() === 'KeycloakClient'"
     [changeMode]="changeMode"
     [keycloakClientCrd]="crd"
+    [updateHistory]="updateHistory"
   />
-  <app-slot-form *ngIf="crdType && crdType.toString() === 'Slot'" [changeMode]="changeMode" [slotCrd]="crd" />
+  <app-slot-form
+    *ngIf="crdType && crdType.toString() === 'Slot'"
+    [changeMode]="changeMode"
+    [slotCrd]="crd"
+    [updateHistory]="updateHistory"
+  />
   <app-microfrontend-form
     *ngIf="crdType && crdType.toString() === 'Microfrontend'"
     [changeMode]="changeMode"
     [microfrontendCrd]="crd"
+    [updateHistory]="updateHistory"
   />
   <app-microservice-form
     *ngIf="crdType && crdType.toString() === 'Microservice'"
     [changeMode]="changeMode"
     [microserviceCrd]="crd"
+    [updateHistory]="updateHistory"
   />
 
   <ng-template pTemplate="footer">

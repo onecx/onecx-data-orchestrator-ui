@@ -1,151 +1,145 @@
-<form [formGroup]="formGroup" errorTailor>
-  <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="data_detail_api_version"
-          type="text"
-          formControlName="apiVersion"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.DATA.TOOLTIPS.API_VERSION' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="data_detail_api_version"> {{ 'CRD.DATA.API_VERSION' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="data_detail_name"
-          type="text"
-          formControlName="name"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.DATA.TOOLTIPS.NAME' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="data_detail_name"> {{ 'CRD.DATA.NAME' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="data_detail_kind"
-          type="text"
-          formControlName="kind"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.DATA.TOOLTIPS.KIND' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="data_detail_kind"> {{ 'CRD.DATA.KIND' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="data_detail_app_id"
-          type="text"
-          formControlName="appId"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.DATA.TOOLTIPS.APP_ID' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="data_detail_app_id"> {{ 'CRD.DATA.APP_ID' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="data_detail_description"
-          type="text"
-          formControlName="description"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.DATA.TOOLTIPS.DESCRIPTION' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="data_detail_description"> {{ 'CRD.DATA.DESCRIPTION' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="data_detail_key"
-          type="text"
-          formControlName="key"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.DATA.TOOLTIPS.KEY' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="data_detail_key"> {{ 'CRD.DATA.KEY' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="data_detail_org_id"
-          type="text"
-          formControlName="orgId"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.DATA.TOOLTIPS.ORG_ID' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="data_detail_org_id"> {{ 'CRD.DATA.ORG_ID' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="data_detail_product_name"
-          type="text"
-          formControlName="productName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.DATA.TOOLTIPS.PRODUCT_NAME' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="data_detail_product_name"> {{ 'CRD.DATA.PRODUCT_NAME' | translate }}</label>
-      </span>
-    </div>
-    <div class="w-full relative">
-      <span class="p-float-label" controlErrorAnchor>
-        <textarea
-          pInputTextarea
-          id="data_detail_form_data"
-          type="text"
-          style="min-height: 2.5rem"
-          class="w-full textarea-sm"
-          formControlName="data"
-          rows="1"
-          [autoResize]="true"
-          appendTo="body"
-          [pTooltip]="'CRD.DATA.DATA' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></textarea>
-        <label for="data_detail_form_data"> {{ 'CRD.DATA.DATA' | translate }} </label>
-      </span>
-    </div>
-  </div>
-</form>
+<p-tabView>
+  <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
+    <form [formGroup]="formGroup" errorTailor>
+      <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="data_detail_name"
+              type="text"
+              formControlName="name"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.DATA.TOOLTIPS.NAME' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="data_detail_name"> {{ 'CRD.DATA.NAME' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="data_detail_kind"
+              type="text"
+              formControlName="kind"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.DATA.TOOLTIPS.KIND' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="data_detail_kind"> {{ 'CRD.DATA.KIND' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="data_detail_app_id"
+              type="text"
+              formControlName="appId"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.DATA.TOOLTIPS.APP_ID' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="data_detail_app_id"> {{ 'CRD.DATA.APP_ID' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="data_detail_description"
+              type="text"
+              formControlName="description"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.DATA.TOOLTIPS.DESCRIPTION' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="data_detail_description"> {{ 'CRD.DATA.DESCRIPTION' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="data_detail_key"
+              type="text"
+              formControlName="key"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.DATA.TOOLTIPS.KEY' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="data_detail_key"> {{ 'CRD.DATA.KEY' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="data_detail_org_id"
+              type="text"
+              formControlName="orgId"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.DATA.TOOLTIPS.ORG_ID' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="data_detail_org_id"> {{ 'CRD.DATA.ORG_ID' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="data_detail_product_name"
+              type="text"
+              formControlName="productName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.DATA.TOOLTIPS.PRODUCT_NAME' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="data_detail_product_name"> {{ 'CRD.DATA.PRODUCT_NAME' | translate }}</label>
+          </span>
+        </div>
+        <div class="w-full relative">
+          <span class="p-float-label" controlErrorAnchor>
+            <textarea
+              pInputTextarea
+              id="data_detail_form_data"
+              type="text"
+              style="min-height: 2.5rem"
+              class="w-full textarea-sm"
+              formControlName="data"
+              rows="1"
+              [autoResize]="true"
+              appendTo="body"
+              [pTooltip]="'CRD.DATA.DATA' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            ></textarea>
+            <label for="data_detail_form_data"> {{ 'CRD.DATA.DATA' | translate }} </label>
+          </span>
+        </div>
+      </div>
+    </form>
+  </p-tabPanel>
+  <p-tabPanel
+    [header]="'DIALOG.HISTORY_TAB' | translate"
+    *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
+  >
+    <app-update-history [updateHistory]="updateHistory" />
+  </p-tabPanel>
+</p-tabView>

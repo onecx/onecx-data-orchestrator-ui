@@ -63,7 +63,9 @@
   },
   "DIALOG": {
     "SEARCH.HEADER": "Custom Resources",
-    "SEARCH.SUBHEADER": "Searching and managing of k8s custom resources"
+    "SEARCH.SUBHEADER": "Searching and managing of k8s custom resources",
+    "DETAILS_TAB": "Details",
+    "HISTORY_TAB": "History"
   },
   "CRD": {
     "ID": "Id",

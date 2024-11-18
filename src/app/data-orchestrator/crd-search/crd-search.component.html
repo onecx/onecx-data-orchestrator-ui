@@ -5,21 +5,15 @@
     (resetSearchEmitter)="onCriteriaReset()"
     [actions]="(actions$ | async) ?? []"
   ></app-crd-criteria>
-  <p-message *ngIf="exceptionKey" severity="info" styleClass="m-3 p-2" [text]="exceptionKey | translate"></p-message>
+  <p-message *ngIf="exceptionKey" severity="error" styleClass="m-3 p-2" [text]="exceptionKey | translate"></p-message>
+  <p-message
+    *ngIf="searchInProgress"
+    severity="info"
+    styleClass="my-3 p-2"
+    [text]="'ACTIONS.SEARCH.IN_PROGRESS' | translate"
+  ></p-message>
   <ocx-content-container layout="horizontal" *ngIf="crds$ | async as crds" styleClass="px-3 pb-2">
     <ocx-content class="w-full no-card-padding">
-      <p-message
-        *ngIf="searchInProgress"
-        severity="info"
-        styleClass="my-3 p-2"
-        [text]="'ACTIONS.SEARCH.IN_PROGRESS' | translate"
-      ></p-message>
-      <p-message
-        *ngIf="exceptionKey"
-        severity="error"
-        styleClass="m-3 p-2"
-        [text]="exceptionKey | translate"
-      ></p-message>
       <p-table
         *ngIf="!searchInProgress"
         #crdTable
@@ -48,9 +42,7 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td id="am_crd_search_table_emptymessage" colspan="16">
-              {{ 'ACTIONS.SEARCH.NO_DATA' | translate }}
-            </td>
+            <td id="am_crd_search_table_emptymessage" colspan="16">{{ 'ACTIONS.SEARCH.NO_DATA' | translate }}</td>
           </tr>
         </ng-template>
 
