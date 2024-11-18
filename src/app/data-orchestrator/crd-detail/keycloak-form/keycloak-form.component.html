@@ -1,334 +1,260 @@
-<form [formGroup]="formGroup" errorTailor>
-  <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_api_version"
-          type="text"
-          formControlName="apiVersion"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.API_VERSION' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_api_version"> {{ 'CRD.KEYCLOAK.API_VERSION' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_name"
-          type="text"
-          formControlName="name"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.NAME' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_name"> {{ 'CRD.KEYCLOAK.NAME' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_kind"
-          type="text"
-          formControlName="kind"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.KIND' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_kind"> {{ 'CRD.KEYCLOAK.KIND' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_basePath"
-          type="text"
-          formControlName="basePath"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.BASE_PATH' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_basePath"> {{ 'CRD.KEYCLOAK.BASE_PATH' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_description"
-          type="text"
-          formControlName="description"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.DESCRIPTION' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_description"> {{ 'CRD.KEYCLOAK.DESCRIPTION' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_password_key"
-          type="text"
-          formControlName="passwordKey"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.PASSWORD_KEY.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_password_key"> {{ 'CRD.KEYCLOAK.PASSWORD_KEY' | translate }} </label>
-      </span>
-    </div>
+<p-tabView>
+  <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
+    <form [formGroup]="formGroup" errorTailor>
+      <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="keycloak_detail_name"
+              type="text"
+              formControlName="name"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.NAME' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="keycloak_detail_name"> {{ 'CRD.KEYCLOAK.NAME' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="keycloak_detail_kind"
+              type="text"
+              formControlName="kind"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.KIND' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="keycloak_detail_kind"> {{ 'CRD.KEYCLOAK.KIND' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="keycloak_detail_basePath"
+              type="text"
+              formControlName="basePath"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.BASE_PATH' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="keycloak_detail_basePath"> {{ 'CRD.KEYCLOAK.BASE_PATH' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="keycloak_detail_description"
+              type="text"
+              formControlName="description"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.DESCRIPTION' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="keycloak_detail_description"> {{ 'CRD.KEYCLOAK.DESCRIPTION' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="keycloak_detail_realm"
+              type="text"
+              formControlName="realm"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.REALM.KEYCLOAK.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="keycloak_detail_realm"> {{ 'CRD.KEYCLOAK.REALM' | translate }} </label>
+          </span>
+        </div>
 
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_password_secrets"
-          type="text"
-          formControlName="passwordSecrets"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.PASSWORD_SECRETS.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_password_secrets"> {{ 'CRD.KEYCLOAK.PASSWORD_SECRETS' | translate }} </label>
-      </span>
-    </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="keycloak_detail_type"
+              type="text"
+              formControlName="type"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.TYPE.KEYCLOAK.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="keycloak_detail_type"> {{ 'CRD.KEYCLOAK.TYPE' | translate }} </label>
+          </span>
+        </div>
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            [styleClass]="'cursor-auto shadow-none '"
+            inputId="keycloak_detail_bearer_only"
+            formControlName="bearerOnly"
+            appendTo="body"
+            [pTooltip]="'CRD.KEYCLOAK.BEARER_ONLY.TOOLTIPS' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+            [label]="'CRD.KEYCLOAK.BEARER_ONLY' | translate"
+          ></p-checkbox>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="keycloak_detail_client_authenticator_type"
+              type="text"
+              formControlName="clientAuthenticatorType"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.KEYCLOAK.CLIENT_AUTHENTICATOR_TYPE.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="keycloak_detail_client_authenticator_type">
+              {{ 'CRD.KEYCLOAK.CLIENT_AUTHENTICATOR_TYPE' | translate }}
+            </label>
+          </span>
+        </div>
 
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_realm"
-          type="text"
-          formControlName="realm"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.REALM.KEYCLOAK.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_realm"> {{ 'CRD.KEYCLOAK.REALM' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_type"
-          type="text"
-          formControlName="type"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.TYPE.KEYCLOAK.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_type"> {{ 'CRD.KEYCLOAK.TYPE' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <p-inputSwitch
-          inputId="keycloak_detail_bearer_only"
-          formControlName="bearerOnly"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.BEARER_ONLY.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-inputSwitch>
-        <label for="keycloak_detail_bearer_only"> {{ 'CRD.KEYCLOAK.BEARER_ONLY' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_client_authenticator_type"
-          type="text"
-          formControlName="clientAuthenticatorType"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.CLIENT_AUTHENTICATOR_TYPE.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_client_authenticator_type">
-          {{ 'CRD.KEYCLOAK.CLIENT_AUTHENTICATOR_TYPE' | translate }}
-        </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="keycloak_detail_client_id"
-          type="text"
-          formControlName="clientId"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.CLIENT_ID.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_client_id"> {{ 'CRD.KEYCLOAK.CLIENT_ID' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <p-inputSwitch
-          inputId="keycloak_detail_direct_access_grants_enabled"
-          formControlName="directAccessGrantsEnabled"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.DIRECT_ACCESS_GRANTS_ENABLED.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-inputSwitch>
-        <label for="keycloak_detail_direct_access_grants_enabled">
-          {{ 'CRD.KEYCLOAK.DIRECT_ACCESS_GRANTS_ENABLED' | translate }}
-        </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <p-inputSwitch
-          inputId="keycloak_detail_enabled"
-          formControlName="enabled"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.ENABLED.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-inputSwitch>
-        <label for="keycloak_detail_enabled"> {{ 'CRD.KEYCLOAK.ENABLED' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <p-inputSwitch
-          inputId="keycloak_detail_implicit_flow_enabled"
-          formControlName="implicitFlowEnabled"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.IMPLICIT_FLOW_ENABLED.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-inputSwitch>
-        <label for="keycloak_detail_implicit_flow_enabled">
-          {{ 'CRD.KEYCLOAK.IMPLICIT_FLOW_ENABLED' | translate }}
-        </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="keycloak_detail_p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="password"
-          type="password"
-          formControlName="password"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.PASSWORD.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_password"> {{ 'CRD.KEYCLOAK.PASSWORD' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="keycloak_detail_p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="protocol"
-          type="text"
-          formControlName="protocol"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.PROTOCOL.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="keycloak_detail_protocol"> {{ 'CRD.KEYCLOAK.PROTOCOL' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <p-inputSwitch
-          inputId="keycloak_detail_public_client"
-          formControlName="publicClient"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.PUBLIC_CLIENT.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-inputSwitch>
-        <label for="keycloak_detail_public_client"> {{ 'CRD.KEYCLOAK.PUBLIC_CLIENT' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <p-inputSwitch
-          inputId="keycloak_detail_service_accounts_enabled"
-          formControlName="serviceAccountsEnabled"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.SERVICE_ACCOUNTS_ENABLED.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-inputSwitch>
-        <label for="keycloak_detail_service_accounts_enabled">
-          {{ 'CRD.KEYCLOAK.SERVICE_ACCOUNTS_ENABLED' | translate }}
-        </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <p-inputSwitch
-          inputId="keycloak_detail_standard_flow_enabled"
-          formControlName="standardFlowEnabled"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.KEYCLOAK.STANDARD_FLOW_ENABLED.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-inputSwitch>
-        <label for="keycloak_detail_standard_flow_enabled">
-          {{ 'CRD.KEYCLOAK.STANDARD_FLOW_ENABLED' | translate }}
-        </label>
-      </span>
-    </div>
-  </div>
-</form>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="keycloak_detail_client_id"
+              type="text"
+              formControlName="clientId"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.KEYCLOAK.CLIENT_ID.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="keycloak_detail_client_id"> {{ 'CRD.KEYCLOAK.CLIENT_ID' | translate }} </label>
+          </span>
+        </div>
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            [styleClass]="'cursor-auto shadow-none '"
+            inputId="keycloak_detail_direct_access_grants_enabled"
+            formControlName="directAccessGrantsEnabled"
+            appendTo="body"
+            [pTooltip]="'CRD.KEYCLOAK.DIRECT_ACCESS_GRANTS_ENABLED.TOOLTIPS' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+            [label]="'CRD.KEYCLOAK.DIRECT_ACCESS_GRANTS_ENABLED' | translate"
+          ></p-checkbox>
+        </div>
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            [styleClass]="'cursor-auto shadow-none '"
+            inputId="keycloak_detail_enabled"
+            formControlName="enabled"
+            appendTo="body"
+            [pTooltip]="'CRD.KEYCLOAK.ENABLED.TOOLTIPS' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+            [label]="'CRD.KEYCLOAK.ENABLED' | translate"
+          ></p-checkbox>
+        </div>
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            [styleClass]="'cursor-auto shadow-none '"
+            inputId="keycloak_detail_implicit_flow_enabled"
+            formControlName="implicitFlowEnabled"
+            appendTo="body"
+            [pTooltip]="'CRD.KEYCLOAK.IMPLICIT_FLOW_ENABLED.TOOLTIPS' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+            [label]="'CRD.KEYCLOAK.IMPLICIT_FLOW_ENABLED' | translate"
+          ></p-checkbox>
+        </div>
+        <div>
+          <span class="keycloak_detail_p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="protocol"
+              type="text"
+              formControlName="protocol"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.KEYCLOAK.PROTOCOL.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="keycloak_detail_protocol"> {{ 'CRD.KEYCLOAK.PROTOCOL' | translate }} </label>
+          </span>
+        </div>
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            [styleClass]="'cursor-auto shadow-none '"
+            inputId="keycloak_detail_public_client"
+            formControlName="publicClient"
+            appendTo="body"
+            [pTooltip]="'CRD.KEYCLOAK.PUBLIC_CLIENT.TOOLTIPS' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+            [label]="'CRD.KEYCLOAK.PUBLIC_CLIENT' | translate"
+          ></p-checkbox>
+        </div>
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            [styleClass]="'cursor-auto shadow-none '"
+            inputId="keycloak_detail_service_accounts_enabled"
+            formControlName="serviceAccountsEnabled"
+            appendTo="body"
+            [pTooltip]="'CRD.KEYCLOAK.SERVICE_ACCOUNTS_ENABLED.TOOLTIPS' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+            [label]="'CRD.KEYCLOAK.SERVICE_ACCOUNTS_ENABLED' | translate"
+          ></p-checkbox>
+        </div>
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            [styleClass]="'cursor-auto shadow-none '"
+            inputId="keycloak_detail_standard_flow_enabled"
+            formControlName="standardFlowEnabled"
+            appendTo="body"
+            [pTooltip]="'CRD.KEYCLOAK.STANDARD_FLOW_ENABLED.TOOLTIPS' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+            [label]="'CRD.KEYCLOAK.STANDARD_FLOW_ENABLED' | translate"
+          ></p-checkbox>
+        </div>
+      </div>
+    </form>
+  </p-tabPanel>
+  <p-tabPanel
+    [header]="'DIALOG.HISTORY_TAB' | translate"
+    *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
+  >
+    <app-update-history [updateHistory]="updateHistory" />
+  </p-tabPanel>
+</p-tabView>

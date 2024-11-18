@@ -25,6 +25,21 @@ import { SlotFormComponent } from './slot-form/slot-form.component'
 import { MicrofrontendFormComponent } from './microfrontend-form/microfrontend-form.component'
 import { MicroserviceFormComponent } from './microservice-form/microservice-form.component'
 
+interface ManagedField {
+  apiVersion: string
+  fieldsType: string
+  fieldsV1: Record<string, any>
+  manager: string
+  operation: string
+  time: string
+  subresource?: string
+}
+
+export interface Update {
+  date: string
+  fields: Record<string, string[]>
+}
+
 @Component({
   selector: 'app-crd-detail',
   templateUrl: './crd-detail.component.html',
@@ -54,6 +69,7 @@ export class CrdDetailComponent implements OnChanges {
   public isLoading = false
   public displayDateRangeError = false
   public crd: any
+  public updateHistory: Update[] = []
 
   constructor(
     private readonly user: UserService,
@@ -66,7 +82,6 @@ export class CrdDetailComponent implements OnChanges {
   }
   public onDialogHide() {
     this.displayDetailDialog = false
-    this.changeMode = ''
     this.hideDialogAndChanged.emit(false)
   }
 
@@ -80,6 +95,7 @@ export class CrdDetailComponent implements OnChanges {
         .subscribe({
           next: (item) => {
             this.crd = item.crd
+            this.updateHistory = this.prepareHistory()
           },
           error: () => this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
         })
@@ -164,6 +180,17 @@ export class CrdDetailComponent implements OnChanges {
     }
   }
 
+  /**
+   *
+   * @param base generic custom resource which we want to update
+   * @param update form values of one of the sub-form-components which changes should be applied to the base custom resource
+   * this function iterates through a custom resource object and finds all matching keys of the submitted
+   * form values to update those field in the initial base object.
+   *
+   * When adding a prefix to a form field e.g. "spec" as "specName", this method will exclusivly search the key "name" inside
+   * of the nested "spec" object. This is helpful if the initial custom resource objects contains a key multiple times in
+   * different sub-objects.
+   */
   private updateFields(base: any, update: { [key: string]: any }): any {
     for (const key in update) {
       if (update.hasOwnProperty(key)) {
@@ -189,5 +216,40 @@ export class CrdDetailComponent implements OnChanges {
       }
     }
     return base
+  }
+
+  /**
+   * This method extracts all past updates from the managedFields sub-object and groups them by date on top-level
+   * and all updated fields by its parent-object name underneath.
+   */
+  prepareHistory(): Update[] {
+    const managedFields: ManagedField[] = this.crd.metadata.managedFields
+    return managedFields.map((field) => {
+      const fields: Record<string, string[]> = {}
+
+      function extractFields(obj: Record<string, any>, prefix: string = '') {
+        for (const key in obj) {
+          if (key === '.') continue
+          const newKey = prefix ? `${prefix}.${key}` : key
+          if (Object.keys(obj[key]).length === 0) {
+            const topLevelKey = newKey.split('.')[0].replace(/f:/g, '')
+            const fieldKey = newKey.split('.').slice(1).join('.').replace(/f:/g, '')
+            if (!fields[topLevelKey]) {
+              fields[topLevelKey] = []
+            }
+            fields[topLevelKey].push(fieldKey)
+          } else {
+            extractFields(obj[key], newKey)
+          }
+        }
+      }
+
+      extractFields(field.fieldsV1)
+
+      return {
+        date: field.time,
+        fields: fields
+      }
+    })
   }
 }

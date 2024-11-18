@@ -17,6 +17,9 @@ import { KeycloakFormComponent } from './crd-detail/keycloak-form/keycloak-form.
 import { MicrofrontendFormComponent } from './crd-detail/microfrontend-form/microfrontend-form.component'
 import { MicroserviceFormComponent } from './crd-detail/microservice-form/microservice-form.component'
 import { SlotFormComponent } from './crd-detail/slot-form/slot-form.component'
+import { TabViewModule } from 'primeng/tabview'
+import { CheckboxModule } from 'primeng/checkbox'
+import { UpdateHistoryComponent } from './crd-detail/update-history/update-history.component'
 
 const routes: Routes = [
   {
@@ -37,10 +40,13 @@ const routes: Routes = [
     PermissionFormComponent,
     KeycloakFormComponent,
     MicrofrontendFormComponent,
-    MicroserviceFormComponent
+    MicroserviceFormComponent,
+    UpdateHistoryComponent
   ],
   imports: [
     CommonModule,
+    TabViewModule,
+    CheckboxModule,
     FormsModule,
     PortalCoreModule.forMicroFrontend(),
     [RouterModule.forChild(addInitializeModuleGuard(routes))],

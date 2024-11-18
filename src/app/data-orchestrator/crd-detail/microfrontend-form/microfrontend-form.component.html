@@ -1,320 +1,303 @@
-<form [formGroup]="formGroup" errorTailor>
-  <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_api_version"
-          type="text"
-          formControlName="apiVersion"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.API_VERSION' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_api_version"> {{ 'CRD.MICROFRONTEND.API_VERSION' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_name"
-          type="text"
-          formControlName="metadataName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.NAME' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_name"> {{ 'CRD.MICROFRONTEND.NAME' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_kind"
-          type="text"
-          formControlName="kind"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.KIND' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_kind"> {{ 'CRD.MICROFRONTEND.KIND' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_app_id"
-          type="text"
-          formControlName="appId"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.APP_ID.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_app_id"> {{ 'CRD.MICROFRONTEND.APP_ID' | translate }} </label>
-      </span>
-    </div>
+<p-tabView>
+  <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
+    <form [formGroup]="formGroup" errorTailor>
+      <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_name"
+              type="text"
+              formControlName="metadataName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.NAME' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_name"> {{ 'CRD.MICROFRONTEND.NAME' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_kind"
+              type="text"
+              formControlName="kind"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.KIND' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_kind"> {{ 'CRD.MICROFRONTEND.KIND' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_product_name"
+              type="text"
+              formControlName="productName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.PRODUCT_NAME.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_product_name"> {{ 'CRD.MICROFRONTEND.PRODUCT_NAME' | translate }} </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_app_name"
+              type="text"
+              formControlName="appName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.APP_NAME.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_app_name"> {{ 'CRD.MICROFRONTEND.APP_NAME' | translate }} </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_app_id"
+              type="text"
+              formControlName="appId"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.APP_ID.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_app_id"> {{ 'CRD.MICROFRONTEND.APP_ID' | translate }} </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_app_version"
+              type="text"
+              formControlName="appVersion"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.APP_VERSION.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_app_version"> {{ 'CRD.MICROFRONTEND.APP_VERSION' | translate }} </label>
+          </span>
+        </div>
 
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_app_name"
-          type="text"
-          formControlName="appName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.APP_NAME.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_app_name"> {{ 'CRD.MICROFRONTEND.APP_NAME' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_app_version"
-          type="text"
-          formControlName="appVersion"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.APP_VERSION.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_app_version"> {{ 'CRD.MICROFRONTEND.APP_VERSION' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_contact"
-          type="text"
-          formControlName="contact"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.CONTACT.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_contact"> {{ 'CRD.MICROFRONTEND.CONTACT' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <p-inputSwitch
-          inputId="microfrontend_detail_deprecated"
-          formControlName="deprecated"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.DEPRECATED.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-inputSwitch>
-        <label for="microfrontend_detail_deprecated"> {{ 'CRD.MICROFRONTEND.DEPRECATED' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_description"
-          type="text"
-          formControlName="description"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.DESCRIPTION.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_description"> {{ 'CRD.MICROFRONTEND.DESCRIPTION' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_exposed_module"
-          type="text"
-          formControlName="exposedModule"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.EXPOSED_MODULE.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_exposed_module"> {{ 'CRD.MICROFRONTEND.EXPOSED_MODULE' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_icon_name"
-          type="text"
-          formControlName="iconName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.ICON_NAME.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_icon_name"> {{ 'CRD.MICROFRONTEND.ICON_NAME' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_note"
-          type="text"
-          formControlName="note"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.NOTE.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_note"> {{ 'CRD.MICROFRONTEND.NOTE' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_product_name"
-          type="text"
-          formControlName="productName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.PRODUCT_NAME.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_product_name"> {{ 'CRD.MICROFRONTEND.PRODUCT_NAME' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_remote_base_url"
-          type="text"
-          formControlName="remoteBaseUrl"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.REMOTE_BASE_URL.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_remote_base_url">
-          {{ 'CRD.MICROFRONTEND.REMOTE_BASE_URL' | translate }}
-        </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_remote_entry"
-          type="text"
-          formControlName="remoteEntry"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.REMOTE_ENTRY.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_remote_entry"> {{ 'CRD.MICROFRONTEND.REMOTE_ENTRY' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_remote_name"
-          type="text"
-          formControlName="remoteName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.REMOTE_NAME.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_remote_name"> {{ 'CRD.MICROFRONTEND.REMOTE_NAME' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_tag_name"
-          type="text"
-          formControlName="tagName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.TAG_NAME.TOOLTIPS' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="microfrontend_detail_tag_name"> {{ 'CRD.MICROFRONTEND.TAG_NAME' | translate }} </label>
-      </span>
-    </div>
-
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_technology"
-          type="text"
-          formControlName="technology"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.TECHNOLOGY.TOOLTIPS' | translate"
-          tooltipPosition="top"
-        />
-        <label for="microfrontend_detail_technology"> {{ 'CRD.MICROFRONTEND.TECHNOLOGY' | translate }} </label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="microfrontend_detail_type"
-          type="text"
-          formControlName="type"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.MICROFRONTEND.TYPE.TOOLTIPS' | translate"
-          tooltipPosition="top"
-        />
-        <label for="microfrontend_detail_type"> {{ 'CRD.MICROFRONTEND.TYPE' | translate }} </label>
-      </span>
-    </div>
-  </div>
-</form>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_contact"
+              type="text"
+              formControlName="contact"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.CONTACT.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_contact"> {{ 'CRD.MICROFRONTEND.CONTACT' | translate }} </label>
+          </span>
+        </div>
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            [styleClass]="'cursor-auto shadow-none '"
+            inputId="microfrontend_detail_deprecated"
+            formControlName="deprecated"
+            appendTo="body"
+            [pTooltip]="'CRD.MICROFRONTEND.DEPRECATED.TOOLTIPS' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+            [label]="'CRD.MICROFRONTEND.DEPRECATED' | translate"
+          ></p-checkbox>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_exposed_module"
+              type="text"
+              formControlName="exposedModule"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.EXPOSED_MODULE.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_exposed_module">
+              {{ 'CRD.MICROFRONTEND.EXPOSED_MODULE' | translate }}
+            </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_icon_name"
+              type="text"
+              formControlName="iconName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.ICON_NAME.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_icon_name"> {{ 'CRD.MICROFRONTEND.ICON_NAME' | translate }} </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_note"
+              type="text"
+              formControlName="note"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.NOTE.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_note"> {{ 'CRD.MICROFRONTEND.NOTE' | translate }} </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_remote_base_url"
+              type="text"
+              formControlName="remoteBaseUrl"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.REMOTE_BASE_URL.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_remote_base_url">
+              {{ 'CRD.MICROFRONTEND.REMOTE_BASE_URL' | translate }}
+            </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_remote_entry"
+              type="text"
+              formControlName="remoteEntry"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.REMOTE_ENTRY.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_remote_entry"> {{ 'CRD.MICROFRONTEND.REMOTE_ENTRY' | translate }} </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_remote_name"
+              type="text"
+              formControlName="remoteName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.REMOTE_NAME.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_remote_name"> {{ 'CRD.MICROFRONTEND.REMOTE_NAME' | translate }} </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_tag_name"
+              type="text"
+              formControlName="tagName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.TAG_NAME.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_tag_name"> {{ 'CRD.MICROFRONTEND.TAG_NAME' | translate }} </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_technology"
+              type="text"
+              formControlName="technology"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.TECHNOLOGY.TOOLTIPS' | translate"
+              tooltipPosition="top"
+            />
+            <label for="microfrontend_detail_technology"> {{ 'CRD.MICROFRONTEND.TECHNOLOGY' | translate }} </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_type"
+              type="text"
+              formControlName="type"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.TYPE.TOOLTIPS' | translate"
+              tooltipPosition="top"
+            />
+            <label for="microfrontend_detail_type"> {{ 'CRD.MICROFRONTEND.TYPE' | translate }} </label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="microfrontend_detail_description"
+              type="text"
+              formControlName="description"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.MICROFRONTEND.DESCRIPTION.TOOLTIPS' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="microfrontend_detail_description"> {{ 'CRD.MICROFRONTEND.DESCRIPTION' | translate }} </label>
+          </span>
+        </div>
+      </div>
+    </form>
+  </p-tabPanel>
+  <p-tabPanel
+    [header]="'DIALOG.HISTORY_TAB' | translate"
+    *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
+  >
+    <app-update-history [updateHistory]="updateHistory" />
+  </p-tabPanel>
+</p-tabView>

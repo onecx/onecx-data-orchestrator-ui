@@ -2,6 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { UserService } from '@onecx/angular-integration-interface'
 import { CustomResourceProduct } from 'src/app/shared/generated'
+import { Update } from '../crd-detail.component'
 
 @Component({
   selector: 'app-product-form',
@@ -11,6 +12,7 @@ import { CustomResourceProduct } from 'src/app/shared/generated'
 export class ProductFormComponent implements OnChanges {
   @Input() public changeMode = 'VIEW'
   @Input() public productCrd: CustomResourceProduct | undefined
+  @Input() public updateHistory: Update[] | undefined
 
   public formGroup: FormGroup
   public dateFormat: string
@@ -21,8 +23,7 @@ export class ProductFormComponent implements OnChanges {
   ) {
     this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'mm/dd/yy'
     this.timeFormat = this.user.lang$.getValue() === 'de' ? '24' : '12'
-    this.formGroup = fb.nonNullable.group({
-      apiVersion: new FormControl({ value: null, disabled: true }),
+    this.formGroup = new FormGroup({
       metadataName: new FormControl({ value: null, disabled: true }),
       kind: new FormControl({ value: null, disabled: true }),
       basePath: new FormControl(null),
@@ -41,9 +42,9 @@ export class ProductFormComponent implements OnChanges {
     if (this.changeMode === 'VIEW') this.formGroup.disable()
     if (this.changeMode === 'EDIT') {
       this.formGroup.enable()
-      this.formGroup.controls['apiVersion'].disable()
       this.formGroup.controls['metadataName'].disable()
       this.formGroup.controls['kind'].disable()
+      this.formGroup.controls['version'].disable()
     }
   }
 

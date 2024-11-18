@@ -1,180 +1,174 @@
-<form [formGroup]="formGroup" errorTailor>
-  <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_api_version"
-          type="text"
-          formControlName="apiVersion"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.API_VERSION' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_api_version"> {{ 'CRD.PRODUCT.API_VERSION' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_name"
-          type="text"
-          formControlName="metadataName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.NAME' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_name"> {{ 'CRD.PRODUCT.NAME' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_kind"
-          type="text"
-          formControlName="kind"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.KIND' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_kind"> {{ 'CRD.PRODUCT.KIND' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_basePath"
-          type="text"
-          formControlName="basePath"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.BASE_PATH' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_basePath"> {{ 'CRD.PRODUCT.BASE_PATH' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_description"
-          type="text"
-          formControlName="description"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.DESCRIPTION' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_description"> {{ 'CRD.PRODUCT.DESCRIPTION' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_display_name"
-          type="text"
-          formControlName="displayName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.DISPLAY_NAME' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_display_name"> {{ 'CRD.PRODUCT.DISPLAY_NAME' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_iconName"
-          type="text"
-          formControlName="iconName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.ICON_NAME' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_iconName"> {{ 'CRD.PRODUCT.ICON_NAME' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_image_url"
-          type="text"
-          formControlName="imageUrl"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.IMAGE_URL' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_image_url"> {{ 'CRD.PRODUCT.IMAGE_URL' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_product_name"
-          type="text"
-          formControlName="specName"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.PRODUCT_NAME' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_product_name"> {{ 'CRD.PRODUCT.PRODUCT_NAME' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_provider"
-          type="text"
-          formControlName="provider"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.PROVIDER' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_provider"> {{ 'CRD.PRODUCT.PROVIDER' | translate }}</label>
-      </span>
-    </div>
-    <div>
-      <span class="p-float-label" controlErrorAnchor>
-        <input
-          pInputText
-          inputId="product_detail_version"
-          type="text"
-          formControlName="version"
-          styleClass="w-15rem"
-          appendTo="body"
-          [pTooltip]="'CRD.PRODUCT.TOOLTIPS.VERSION' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        />
-        <label for="product_detail_version"> {{ 'CRD.PRODUCT.VERSION' | translate }}</label>
-      </span>
-    </div>
-  </div>
-</form>
+<p-tabView>
+  <p-tabPanel header="{{ 'DIALOG.DETAILS_TAB' | translate }}">
+    <form [formGroup]="formGroup" errorTailor>
+      <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="product_detail_name"
+              type="text"
+              formControlName="metadataName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.NAME' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="product_detail_name"> {{ 'CRD.PRODUCT.NAME' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="product_detail_kind"
+              type="text"
+              formControlName="kind"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.KIND' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="product_detail_kind"> {{ 'CRD.PRODUCT.KIND' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="product_detail_product_name"
+              type="text"
+              formControlName="specName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.PRODUCT_NAME' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="product_detail_product_name"> {{ 'CRD.PRODUCT.PRODUCT_NAME' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="product_detail_display_name"
+              type="text"
+              formControlName="displayName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.DISPLAY_NAME' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="product_detail_display_name"> {{ 'CRD.PRODUCT.DISPLAY_NAME' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="product_detail_version"
+              type="text"
+              formControlName="version"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.VERSION' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="product_detail_version"> {{ 'CRD.PRODUCT.VERSION' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="product_detail_basePath"
+              type="text"
+              formControlName="basePath"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.BASE_PATH' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="product_detail_basePath"> {{ 'CRD.PRODUCT.BASE_PATH' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="product_detail_iconName"
+              type="text"
+              formControlName="iconName"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.ICON_NAME' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="product_detail_iconName"> {{ 'CRD.PRODUCT.ICON_NAME' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="product_detail_image_url"
+              type="text"
+              formControlName="imageUrl"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.IMAGE_URL' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="product_detail_image_url"> {{ 'CRD.PRODUCT.IMAGE_URL' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="product_detail_provider"
+              type="text"
+              formControlName="provider"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.PROVIDER' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="product_detail_provider"> {{ 'CRD.PRODUCT.PROVIDER' | translate }}</label>
+          </span>
+        </div>
+        <div>
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="product_detail_description"
+              type="text"
+              formControlName="description"
+              styleClass="w-15rem"
+              appendTo="body"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.DESCRIPTION' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="product_detail_description"> {{ 'CRD.PRODUCT.DESCRIPTION' | translate }}</label>
+          </span>
+        </div>
+      </div>
+    </form>
+  </p-tabPanel>
+  <p-tabPanel
+    header="{{ 'DIALOG.HISTORY_TAB' | translate }}"
+    *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
+  >
+    <app-update-history [updateHistory]="updateHistory" />
+  </p-tabPanel>
+</p-tabView>
