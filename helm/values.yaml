@@ -24,7 +24,7 @@ app:
       enabled: true
       spec:
         permissions:
-          crd:
+          CRD:
             EDIT: Edit custom resources
             SEARCH: Search custom resources
             VIEW: View custom resources
