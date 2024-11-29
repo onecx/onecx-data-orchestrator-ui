@@ -36,8 +36,12 @@
       "SEARCH_FAILED": "Search failed",
       "NOT_FOUND": "No data found",
       "OF": "of",
-      "DIAGRAM_SUM": "Total: ",
-      "SHOW_DIAGRAM": "Show overview"
+      "DIAGRAM_SUM": "Total",
+      "SHOW_DIAGRAM": "Show overview",
+      "PREDEFINED_GROUP": {
+        "DEFAULT": "Default",
+        "ALL": "All"
+      }
     },
     "VIEW": {
       "LABEL": "Show Details",
@@ -75,6 +79,7 @@
     "RESOURCE_VERSION": "Resource Version",
     "VERSION": "Version",
     "CREATION_DATE": "Creation Date",
+    "LAST_MODIFIED_DATE": "Last modified",
     "TOOLTIPS": {
       "NAME": "Name of the Custom Resource",
       "NAME.CRITERIA": "Name of the Custom Resource",
@@ -316,7 +321,7 @@
       "ERROR": "Error",
       "CREATED": "Created",
       "UPDATED": "Updated",
-      "null": "Not processed"
+      "UNDEFINED": "Not processed"
     }
   },
   "VALIDATION": {

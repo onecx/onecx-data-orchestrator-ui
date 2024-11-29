@@ -28,5 +28,6 @@ app:
             EDIT: Edit custom resources
             SEARCH: Search custom resources
             VIEW: View custom resources
+            TOUCH: Touch custom resources
             
 # PIPE Config

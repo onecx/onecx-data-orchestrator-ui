@@ -38,6 +38,7 @@ interface ManagedField {
 export interface Update {
   date: string
   fields: Record<string, string[]>
+  operation: string
 }
 
 @Component({
@@ -95,7 +96,7 @@ export class CrdDetailComponent implements OnChanges {
         .subscribe({
           next: (item) => {
             this.crd = item.crd
-            this.updateHistory = this.prepareHistory()
+            this.updateHistory = this.prepareHistory().reverse()
           },
           error: () => this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
         })
@@ -245,10 +246,10 @@ export class CrdDetailComponent implements OnChanges {
       }
 
       extractFields(field.fieldsV1)
-
       return {
         date: field.time,
-        fields: fields
+        fields: fields,
+        operation: field.operation
       }
     })
   }
