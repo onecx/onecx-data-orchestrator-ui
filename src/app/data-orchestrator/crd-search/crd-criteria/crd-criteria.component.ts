@@ -70,6 +70,7 @@ export class CrdCriteriaComponent implements OnInit {
           ]
         })
       )
+    this.crdCriteria.get('type')?.markAsDirty()
   }
 
   public submitCriteria(): void {

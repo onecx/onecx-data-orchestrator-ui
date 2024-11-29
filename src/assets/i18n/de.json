@@ -36,8 +36,12 @@
       "SEARCH_FAILED": "Die Suche ist fehlgeschlagen",
       "NOT_FOUND": "Keine Daten gefunden",
       "OF": "von",
-      "DIAGRAM_SUM": "Total: ",
-      "SHOW_DIAGRAM": "Übersicht anzeigen"
+      "DIAGRAM_SUM": "Total",
+      "SHOW_DIAGRAM": "Übersicht anzeigen",
+      "PREDEFINED_GROUP": {
+        "DEFAULT": "Default",
+        "ALL": "Alle"
+      }
     },
     "VIEW": {
       "LABEL": "Details anzeigen",
@@ -75,6 +79,7 @@
     "RESOURCE_VERSION": "Resource Version",
     "VERSION": "Version",
     "CREATION_DATE": "Erstellungsdatum",
+    "Zuletzt aktualisiert": "Last modified",
     "TOOLTIPS": {
       "NAME": "Name der Custom Resource",
       "NAME.CRITERIA": "Name der Custom Resource",
@@ -316,7 +321,7 @@
       "ERROR": "Fehler",
       "CREATED": "Erstellt",
       "UPDATED": "Aktualisiert",
-      "null": "Nicht verarbeitet"
+      "UNDEFINED": "Nicht verarbeitet"
     }
   },
   "VALIDATION": {

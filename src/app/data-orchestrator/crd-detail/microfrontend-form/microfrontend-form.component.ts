@@ -21,7 +21,7 @@ export class MicrofrontendFormComponent implements OnChanges {
     this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'mm/dd/yy'
     this.timeFormat = this.user.lang$.getValue() === 'de' ? '24' : '12'
     this.formGroup = new FormGroup({
-      metadataName: new FormControl({ value: null, disabled: true }),
+      name: new FormControl({ value: null, disabled: true }),
       kind: new FormControl({ value: null, disabled: true }),
       appId: new FormControl(null),
       appName: new FormControl(null),

@@ -1,15 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
-import { catchError, finalize, map, Observable, of } from 'rxjs'
+import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs'
 import { Table } from 'primeng/table'
 import { PrimeIcons, SelectItem } from 'primeng/api'
 
 import {
   Action,
-  Column,
   ColumnType,
+  DataAction,
+  DataTableColumn,
   DiagramColumn,
   PortalMessageService,
+  RowListGridData,
   UserService
 } from '@onecx/portal-integration-angular'
 
@@ -18,17 +20,10 @@ import {
   CrdResponse,
   DataAPIService,
   GenericCrd,
+  GenericCrdStatusEnum,
   GetCustomResourcesByCriteriaRequestParams
 } from 'src/app/shared/generated'
 
-type ExtendedColumn = Column & {
-  hasFilter?: boolean
-  isDate?: boolean
-  isDropdown?: true
-  css?: string
-  limit?: boolean
-  needsDisplayName?: boolean
-}
 type ChangeMode = 'VIEW' | 'NEW' | 'EDIT'
 type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
 
@@ -42,6 +37,7 @@ export class CrdSearchComponent implements OnInit {
 
   public changeMode: ChangeMode = 'NEW'
   public actions$: Observable<Action[]> | undefined
+  public additionalActions!: DataAction[]
   public crd: GenericCrd | undefined
   public crds$: Observable<GenericCrd[]> | undefined
   public displayDeleteDialog = false
@@ -51,59 +47,58 @@ export class CrdSearchComponent implements OnInit {
   public dateFormat: string
   public allCriteriaLists$: Observable<allCriteriaLists> | undefined
   public allItem: SelectItem | undefined
+  private filterData = ''
 
   public allMetaData$!: Observable<string>
-  public filteredColumns: Column[] = []
+  public filteredData$ = new BehaviorSubject<RowListGridData[]>([])
+  public resultData$ = new BehaviorSubject<RowListGridData[]>([])
 
   public limitText = limitText
 
-  public columns: ExtendedColumn[] = [
+  public columns: DataTableColumn[] = [
     {
-      field: 'status',
-      header: 'STATUS',
-      active: true,
-      translationPrefix: 'CRD',
-      css: 'text-center'
+      id: 'status',
+      nameKey: 'CRD.STATUS',
+      columnType: ColumnType.STRING,
+      predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
+      sortable: true,
+      filterable: true
     },
     {
-      field: 'name',
-      header: 'NAME',
-      active: true,
-      translationPrefix: 'CRD',
-      limit: true,
-      css: 'text-center'
+      id: 'name',
+      nameKey: 'CRD.NAME',
+      columnType: ColumnType.STRING,
+      predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
+      sortable: true
     },
     {
-      field: 'kind',
-      header: 'TYPE',
-      active: true,
-      translationPrefix: 'CRD',
-      css: 'text-center hidden xl:table-cell',
-      isDropdown: true
+      id: 'kind',
+      nameKey: 'CRD.TYPE',
+      columnType: ColumnType.STRING,
+      predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
+      sortable: true,
+      filterable: true
     },
     {
-      field: 'version',
-      header: 'VERSION',
-      active: true,
-      translationPrefix: 'CRD',
-      css: 'text-center ',
-      limit: true
+      id: 'version',
+      nameKey: 'CRD.VERSION',
+      columnType: ColumnType.STRING,
+      predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
+      sortable: true
     },
     {
-      field: 'resourceVersion',
-      header: 'RESOURCE_VERSION',
-      active: true,
-      translationPrefix: 'CRD',
-      css: 'text-center ',
-      limit: true
+      id: 'lastModified',
+      nameKey: 'CRD.LAST_MODIFIED_DATE',
+      columnType: ColumnType.DATE,
+      predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
+      sortable: true
     },
     {
-      field: 'creationTimestamp',
-      header: 'CREATION_DATE',
-      active: true,
-      translationPrefix: 'CRD',
-      css: 'text-center ',
-      isDate: true
+      id: 'creationTimestamp',
+      nameKey: 'CRD.CREATION_DATE',
+      columnType: ColumnType.DATE,
+      predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
+      sortable: true
     }
   ]
 
@@ -121,10 +116,33 @@ export class CrdSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.prepareActionButtons()
-    this.filteredColumns = this.columns.filter((a) => {
-      return a.active === true
-    })
+    this.initFilter()
   }
+
+  initFilter() {
+    this.resultData$
+      .pipe(
+        map((array) => {
+          if (this.filterData.trim()) {
+            const lowerCaseFilter = this.filterData.toLowerCase()
+            return array.filter((item) => {
+              return ['kind', 'name', 'status'].some((key) => {
+                const value = item[key]
+                return value?.toString().toLowerCase().includes(lowerCaseFilter)
+              })
+            })
+          } else {
+            return array
+          }
+        })
+      )
+      .subscribe({
+        next: (filteredData) => {
+          this.filteredData$.next(filteredData)
+        }
+      })
+  }
+
   private prepareActionButtons(): void {
     this.actions$ = this.translate.get(['ACTIONS.SEARCH.SHOW_DIAGRAM']).pipe(
       map((data) => {
@@ -138,6 +156,29 @@ export class CrdSearchComponent implements OnInit {
         ]
       })
     )
+    this.additionalActions = [
+      {
+        id: 'view',
+        labelKey: 'ACTIONS.VIEW.LABEL',
+        icon: 'pi pi-eye',
+        permission: 'CRD#VIEW',
+        callback: (event: any) => this.onDetail(event, 'VIEW')
+      },
+      {
+        id: 'edit',
+        labelKey: 'ACTIONS.EDIT.LABEL',
+        icon: 'pi pi-pencil',
+        permission: 'CRD#EDIT',
+        callback: (event) => this.onDetail(event, 'EDIT')
+      },
+      {
+        id: 'touch',
+        labelKey: 'ACTIONS.DELETE.USER.TOOLTIP',
+        icon: 'pi pi-refresh',
+        permission: 'CRD#TOUCH',
+        callback: (event) => this.onTouch(event)
+      }
+    ]
   }
 
   private toggleChartVisibility() {
@@ -162,6 +203,25 @@ export class CrdSearchComponent implements OnInit {
         if (!data) {
           this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_204.CRDS'
         }
+        const modifiedData = data.customResources?.map((c) => {
+          if (c.status === undefined || c.status === null) {
+            c.status = GenericCrdStatusEnum.Undefined
+          }
+          return c
+        })
+        modifiedData?.sort((a, b) => {
+          if (a.status === GenericCrdStatusEnum.Error && b.status !== GenericCrdStatusEnum.Error) {
+            return -1
+          }
+          if (a.status !== GenericCrdStatusEnum.Error && b.status === GenericCrdStatusEnum.Error) {
+            return 1
+          }
+          const dateA = new Date(a.lastModified!).getTime()
+          const dateB = new Date(b.lastModified!).getTime()
+          return dateB - dateA
+        })
+        this.resultData$.next(modifiedData as any)
+        this.filteredData$.next(modifiedData as any)
         return data.customResources ?? []
       }),
       finalize(() => (this.searchInProgress = false))
@@ -172,11 +232,12 @@ export class CrdSearchComponent implements OnInit {
     this.exceptionKey = undefined
   }
 
-  public onColumnsChange(activeIds: string[]) {
-    this.filteredColumns = activeIds.map((id) => this.columns.find((col) => col.field === id)) as Column[]
-  }
-  public onFilterChange(event: string): void {
-    this.crdTable?.filterGlobal(event, 'contains')
+  //   public onColumnsChange(activeIds: string[]) {
+  //     this.filteredColumns = activeIds.map((id) => this.columns.find((col) => col.field === id)) as Column[]
+  //   }
+  public onFilterChange(filter: string): void {
+    this.filterData = filter
+    this.resultData$.next(this.resultData$.value)
   }
 
   /****************************************************************************
@@ -187,10 +248,10 @@ export class CrdSearchComponent implements OnInit {
     this.crd = undefined
   }
 
-  public onDetail(ev: MouseEvent, item: GenericCrd, mode: ChangeMode): void {
-    ev.stopPropagation()
+  public onDetail(ev: RowListGridData, mode: ChangeMode): void {
+    //ev.stopPropagation()
     this.changeMode = mode
-    this.crd = item
+    this.crd = ev as GenericCrd
     this.displayDetailDialog = true
   }
 

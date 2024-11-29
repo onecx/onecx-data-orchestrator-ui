@@ -12,6 +12,6 @@ export class UpdateHistoryComponent {
   objectKeys = Object.keys
 
   constructor(private readonly user: UserService) {
-    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'mm/dd/yy'
+    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.MM.yy HH:mm:ss' : 'MM/dd/yy HH:mm:ss'
   }
 }

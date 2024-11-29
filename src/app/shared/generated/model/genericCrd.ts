@@ -16,6 +16,7 @@ export interface GenericCrd {
     resourceVersion?: string;
     version?: string;
     creationTimestamp?: string;
+    lastModified?: string;
     name?: string;
     message?: string;
     responseCode?: number;
