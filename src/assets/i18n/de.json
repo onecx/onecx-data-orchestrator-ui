@@ -69,13 +69,15 @@
     "SEARCH.HEADER": "Custom Resourcen",
     "SEARCH.SUBHEADER": "Suchen und Verwalten von K8s Custom Resourcen",
     "DETAILS_TAB": "Details",
-    "HISTORY_TAB": "Verlauf"
+    "HISTORY_TAB": "Verlauf",
+    "STATUS_TAB": "Status"
   },
   "CRD": {
     "ID": "Id",
     "NAME": "Name",
     "TYPE": "Typ",
     "STATUS": "Status",
+    "STATUS_MESSAGE": "Meldung",
     "RESOURCE_VERSION": "Resource Version",
     "VERSION": "Version",
     "CREATION_DATE": "Erstellungsdatum",

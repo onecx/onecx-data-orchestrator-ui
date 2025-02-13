@@ -1,9 +1,7 @@
-<div *ngFor="let update of updateHistory" class="mb-2 p-1 border-solid border-1 border-300 border-round-lg">
+<div *ngFor="let update of updateHistory" class="mb-2 p-1 pl-2 surface-50">
   <p class="text-xl font-medium">{{ update.operation }}: {{ update.date | date: dateFormat }}</p>
-  <div *ngFor="let key of objectKeys(update.fields)">
-    <p class="text-lg font-medium">{{ key }}:</p>
-    <ul class="pl-0 list-none">
-      <li class="mb-1 p-2 border-round-sm surface-100" *ngFor="let field of update.fields[key]">{{ field }}</li>
-    </ul>
+  <div class="mb-2" *ngFor="let key of objectKeys(update.fields)">
+    <p class="text-lg font-medium mb-0">{{ key }}:</p>
+    <p>{{ update.fields[key].join(', ') }}</p>
   </div>
 </div>

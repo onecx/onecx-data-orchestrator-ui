@@ -20,6 +20,7 @@ import { SlotFormComponent } from './crd-detail/slot-form/slot-form.component'
 import { TabViewModule } from 'primeng/tabview'
 import { CheckboxModule } from 'primeng/checkbox'
 import { UpdateHistoryComponent } from './crd-detail/update-history/update-history.component'
+import { StatusTabComponent } from './crd-detail/status-tab/status-tab.component'
 
 const routes: Routes = [
   {
@@ -41,7 +42,8 @@ const routes: Routes = [
     KeycloakFormComponent,
     MicrofrontendFormComponent,
     MicroserviceFormComponent,
-    UpdateHistoryComponent
+    UpdateHistoryComponent,
+    StatusTabComponent
   ],
   imports: [
     CommonModule,
