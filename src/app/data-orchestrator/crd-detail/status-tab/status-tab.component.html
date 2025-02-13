@@ -3,7 +3,7 @@
     <span class="font-medium">{{ 'CRD.STATUS' | translate }}:</span>
     {{ 'ENUMS.CRD_STATUS.' + status?.status | translate }}
   </p>
-  <p *ngIf="status?.message">
+  <p *ngIf="status?.message" class="break-words">
     <span class="font-medium">{{ 'CRD.STATUS_MESSAGE' | translate }}:</span><br />
     {{ status?.message }}
   </p>
