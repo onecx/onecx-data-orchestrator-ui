@@ -42,11 +42,7 @@
             [class.text-yellow-600]="item.status === 'UNDEFINED'"
             [class.text-green-600]="item.status === 'UPDATED' || item.status === 'CREATED'"
             [aria-label]="'ENUMS.CRD_STATUS.' + item.status | translate"
-            [pTooltip]="
-              item.status === 'ERROR'
-                ? ('ENUMS.CRD_STATUS.' + item.status | translate) + ': ' + item.message
-                : ('ENUMS.CRD_STATUS.' + item.status | translate)
-            "
+            [pTooltip]="'ENUMS.CRD_STATUS.' + item.status | translate"
             tooltipPosition="top"
             tooltipEvent="hover"
           ></span>

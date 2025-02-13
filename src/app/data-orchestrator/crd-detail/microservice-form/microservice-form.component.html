@@ -141,4 +141,7 @@
   >
     <app-update-history [updateHistory]="updateHistory" />
   </p-tabPanel>
+  <p-tabPanel [header]="'DIALOG.STATUS_TAB' | translate" *ngIf="microserviceCrd?.status">
+    <app-status-tab [status]="microserviceCrd?.status" />
+  </p-tabPanel>
 </p-tabView>

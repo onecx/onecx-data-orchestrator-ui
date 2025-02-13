@@ -91,4 +91,7 @@
   >
     <app-update-history [updateHistory]="updateHistory" />
   </p-tabPanel>
+  <p-tabPanel [header]="'DIALOG.STATUS_TAB' | translate" *ngIf="permissionCrd?.status">
+    <app-status-tab [status]="permissionCrd?.status" />
+  </p-tabPanel>
 </p-tabView>

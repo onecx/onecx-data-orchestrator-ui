@@ -142,4 +142,7 @@
   >
     <app-update-history [updateHistory]="updateHistory" />
   </p-tabPanel>
+  <p-tabPanel [header]="'DIALOG.STATUS_TAB' | translate" *ngIf="dataCrd?.status">
+    <app-status-tab [status]="dataCrd?.status" />
+  </p-tabPanel>
 </p-tabView>

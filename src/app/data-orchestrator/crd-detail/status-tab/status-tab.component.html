@@ -1,0 +1,10 @@
+<div class="p-1">
+  <p>
+    <span class="font-medium">{{ 'CRD.STATUS' | translate }}:</span>
+    {{ 'ENUMS.CRD_STATUS.' + status?.status | translate }}
+  </p>
+  <p *ngIf="status?.message">
+    <span class="font-medium">{{ 'CRD.STATUS_MESSAGE' | translate }}:</span><br />
+    {{ status?.message }}
+  </p>
+</div>
