@@ -114,5 +114,8 @@ describe('util functions', () => {
 
       expect(convertLineBreaks(text)).toEqual('123<br/>456')
     })
+    it('should return empty string if input is undefined', () => {
+      expect(convertLineBreaks(undefined)).toEqual('')
+    })
   })
 })

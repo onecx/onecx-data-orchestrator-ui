@@ -1,294 +1,367 @@
-// import { NO_ERRORS_SCHEMA } from '@angular/core'
-// import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-// import { HttpClient } from '@angular/common/http'
-// import { HttpClientTestingModule } from '@angular/common/http/testing'
-// import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
-// import { of, throwError } from 'rxjs'
-// import { FormControl, FormGroup } from '@angular/forms'
+import { NO_ERRORS_SCHEMA, QueryList } from '@angular/core'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { HttpClient } from '@angular/common/http'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import { of, throwError } from 'rxjs'
+import { CrdDetailComponent, Update } from '../crd-detail/crd-detail.component'
 
-// import {
-//   AppStateService,
-//   createTranslateLoader,
-//   PortalMessageService,
-//   UserService
-// } from '@onecx/portal-integration-angular'
-// import { dateRangeValidator } from './crd-detail.component'
+import {
+  AppStateService,
+  createTranslateLoader,
+  PortalMessageService,
+  UserService
+} from '@onecx/portal-integration-angular'
+import { ContextKind, DataAPIService } from 'src/app/shared/generated'
+import { DataFormComponent } from './data-form/data-form.component'
+import { DatabaseFormComponent } from './database-form/database-form.component'
+import { ProductFormComponent } from './product-form/product-form.component'
+import { MicrofrontendFormComponent } from './microfrontend-form/microfrontend-form.component'
+import { MicroserviceFormComponent } from './microservice-form/microservice-form.component'
+import { PermissionFormComponent } from './permission-form/permission-form.component'
+import { SlotFormComponent } from './slot-form/slot-form.component'
+import { KeycloakFormComponent } from './keycloak-form/keycloak-form.component'
 
-// const workspaceName = 'w1'
-// const productName = 'app1'
+describe('CrdDetailComponent', () => {
+  let component: CrdDetailComponent
+  let fixture: ComponentFixture<CrdDetailComponent>
 
-// const announcement: Announcement = {
-//   id: 'id',
-//   title: 'title',
-//   productName: productName,
-//   workspaceName: workspaceName,
-//   startDate: '2023-01-02',
-//   endDate: '2023-01-03'
-// }
+  const msgServiceSpy = jasmine.createSpyObj<PortalMessageService>('PortalMessageService', [
+    'success',
+    'error',
+    'info',
+    'warning'
+  ])
+  const apiServiceSpy = {
+    getCrdByTypeAndName: jasmine.createSpy('getCrdByTypeAndName').and.returnValue(of({})),
+    editCrd: jasmine.createSpy('editCrd').and.returnValue(of({}))
+  }
 
-// describe('AnnouncementDetailComponent', () => {
-//   let component: AnnouncementDetailComponent
-//   let fixture: ComponentFixture<AnnouncementDetailComponent>
+  const mockUserService = {
+    lang$: {
+      getValue: jasmine.createSpy('getValue')
+    }
+  }
 
-//   const msgServiceSpy = jasmine.createSpyObj<PortalMessageService>('PortalMessageService', [
-//     'success',
-//     'error',
-//     'info',
-//     'warning'
-//   ])
-//   const apiServiceSpy = {
-//     getAnnouncementById: jasmine.createSpy('getAnnouncementById').and.returnValue(of({})),
-//     createAnnouncement: jasmine.createSpy('createAnnouncement').and.returnValue(of({})),
-//     updateAnnouncementById: jasmine.createSpy('updateAnnouncementById').and.returnValue(of({})),
-//     getAllWorkspaceNames: jasmine.createSpy('getAllWorkspaceNames').and.returnValue(of([])),
-//     searchProductsByCriteria: jasmine.createSpy('searchProductsByCriteria').and.returnValue(of([]))
-//   }
-//   const formGroup = new FormGroup({
-//     id: new FormControl('id'),
-//     title: new FormControl('title'),
-//     workspaceName: new FormControl('workspace name'),
-//     productName: new FormControl('prod name')
-//   })
-//   const mockUserService = {
-//     lang$: {
-//       getValue: jasmine.createSpy('getValue')
-//     }
-//   }
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [CrdDetailComponent],
+      imports: [
+        HttpClientTestingModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: createTranslateLoader,
+            deps: [HttpClient, AppStateService]
+          }
+        })
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        { provide: PortalMessageService, useValue: msgServiceSpy },
+        { provide: DataAPIService, useValue: apiServiceSpy },
+        { provide: UserService, useValue: mockUserService }
+      ]
+    }).compileComponents()
+    msgServiceSpy.success.calls.reset()
+    msgServiceSpy.error.calls.reset()
+    msgServiceSpy.info.calls.reset()
+    msgServiceSpy.warning.calls.reset()
+    apiServiceSpy.getCrdByTypeAndName.calls.reset()
+    apiServiceSpy.editCrd.calls.reset()
+    mockUserService.lang$.getValue.and.returnValue('de')
+  }))
 
-//   beforeEach(waitForAsync(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [AnnouncementDetailComponent],
-//       imports: [
-//         HttpClientTestingModule,
-//         TranslateModule.forRoot({
-//           loader: {
-//             provide: TranslateLoader,
-//             useFactory: createTranslateLoader,
-//             deps: [HttpClient, AppStateService]
-//           }
-//         })
-//       ],
-//       schemas: [NO_ERRORS_SCHEMA],
-//       providers: [
-//         { provide: PortalMessageService, useValue: msgServiceSpy },
-//         { provide: AnnouncementInternalAPIService, useValue: apiServiceSpy },
-//         { provide: UserService, useValue: mockUserService }
-//       ]
-//     }).compileComponents()
-//     msgServiceSpy.success.calls.reset()
-//     msgServiceSpy.error.calls.reset()
-//     msgServiceSpy.info.calls.reset()
-//     msgServiceSpy.warning.calls.reset()
-//     apiServiceSpy.getAnnouncementById.calls.reset()
-//     apiServiceSpy.createAnnouncement.calls.reset()
-//     apiServiceSpy.updateAnnouncementById.calls.reset()
-//     apiServiceSpy.getAllWorkspaceNames.calls.reset()
-//     apiServiceSpy.searchProductsByCriteria.calls.reset()
-//     mockUserService.lang$.getValue.and.returnValue('de')
-//   }))
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CrdDetailComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(AnnouncementDetailComponent)
-//     component = fixture.componentInstance
-//     fixture.detectChanges()
-//   })
+  it('should create', () => {
+    expect(component).toBeTruthy()
+  })
 
-//   afterEach(() => {
-//     component.formGroup.reset()
-//   })
+  it('should call getCrd when ngOnChanges is called', () => {
+    const getCrdSpy = spyOn<any>(component, 'getCrd')
+    component.ngOnChanges()
+    expect(getCrdSpy).toHaveBeenCalled()
+  })
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy()
-//   })
+  it('should load crd data and update updateHistory when getCrd is called', () => {
+    const mockCrd = { crd: { name: 'testCrd' } }
+    const mockUpdateHistory = [{ date: '2023-01-01', fields: {} }] as Update[]
+    apiServiceSpy.getCrdByTypeAndName.and.returnValue(of(mockCrd))
+    spyOn(component, 'prepareHistory').and.returnValue(mockUpdateHistory)
 
-//   describe('ngOnChange, i.e. opening detail dialog', () => {
-//     it('should prepare editing an announcement', () => {
-//       component.changeMode = 'EDIT'
-//       component.announcement = announcement
+    component.crdName = 'testCrd'
+    component.crdType = ContextKind.Data
+    ;(component as any).getCrd()
 
-//       component.ngOnChanges()
+    expect(component.isLoading).toBeFalse()
+    expect(component.crd).toEqual(mockCrd.crd)
+    expect(component.updateHistory).toEqual(mockUpdateHistory.reverse())
+  })
 
-//       expect(component.displayDateRangeError).toBeFalse()
-//       expect(component.announcementId).toEqual(announcement.id)
+  it('should show error message when getCrd fails', () => {
+    apiServiceSpy.getCrdByTypeAndName.and.returnValue(throwError(() => new Error('Error')))
+    component.crdName = 'testCrd'
+    component.crdType = 'Data'
+    ;(component as any).getCrd()
 
-//       component.changeMode = 'VIEW'
-//       component.announcement = announcement
+    expect(component.isLoading).toBeFalse()
+    expect(msgServiceSpy.error).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
+  })
 
-//       component.ngOnChanges()
+  it('should save crd data and emit hideDialogAndChanged with true when onSave is called', () => {
+    const mockFormValues = { name: 'testCrd' }
+    const mockEditResourceRequest = { CrdData: mockFormValues }
+    spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
+    spyOn<any>(component, 'prepareUpdateData').and.returnValue(mockEditResourceRequest)
+    apiServiceSpy.editCrd.and.returnValue(of({}))
+    const emitSpy = spyOn(component.hideDialogAndChanged, 'emit')
 
-//       expect(component.formGroup.disabled).toBeTrue()
-//     })
+    component.changeMode = 'EDIT'
+    component.crdName = 'testCrd'
+    component.crdType = 'Data'
+    component.onSave()
 
-//     it('should prepare copying an announcement', () => {
-//       component.changeMode = 'NEW'
-//       component.announcement = announcement
-//       component.ngOnChanges()
+    expect(apiServiceSpy.editCrd).toHaveBeenCalledWith({ editResourceRequest: mockEditResourceRequest })
+    expect(emitSpy).toHaveBeenCalledWith(true)
+  })
 
-//       expect(component.announcementId).toBeUndefined()
-//     })
+  it('should show error message when onSave fails', () => {
+    const mockFormValues = { name: 'testCrd' }
+    const mockEditResourceRequest = { CrdData: mockFormValues }
+    spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
+    spyOn<any>(component, 'prepareUpdateData').and.returnValue(mockEditResourceRequest)
+    apiServiceSpy.editCrd.and.returnValue(throwError(() => new Error('Error')))
 
-//     it('should prepare creating an announcement', () => {
-//       component.changeMode = 'NEW'
-//       spyOn(component.formGroup, 'reset')
+    component.changeMode = 'EDIT'
+    component.crdName = 'testCrd'
+    component.crdType = 'Data'
+    component.onSave()
 
-//       component.ngOnChanges()
+    expect(msgServiceSpy.error).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
+  })
 
-//       expect(component.formGroup.reset).toHaveBeenCalled()
-//     })
+  it('should return form values of the active child component based on crdType', () => {
+    const mockFormGroup = { value: { name: 'testCrd' } }
+    //Data
+    component.dataFormComponent = new QueryList<DataFormComponent>()
+    component.dataFormComponent.reset([{ formGroup: mockFormGroup } as DataFormComponent])
 
-//     it('should display the current announcement', () => {
-//       apiServiceSpy.getAnnouncementById.and.returnValue(of(announcement))
-//       component.changeMode = 'EDIT'
-//       component.announcement = announcement
+    component.crdType = 'Data'
+    let formValues = (component as any).getFormValuesOfActiveChild()
 
-//       component.ngOnChanges()
+    expect(formValues).toEqual(mockFormGroup.value)
+    //Database
+    component.databaseFormComponent = new QueryList<DatabaseFormComponent>()
+    component.databaseFormComponent.reset([{ formGroup: mockFormGroup } as DatabaseFormComponent])
 
-//       expect(component.announcement).toEqual(announcement)
-//     })
+    component.crdType = 'Database'
+    formValues = (component as any).getFormValuesOfActiveChild()
 
-//     it('should display error if getting the anncmt fails', () => {
-//       apiServiceSpy.getAnnouncementById.and.returnValue(throwError(() => new Error()))
-//       component.changeMode = 'EDIT'
-//       component.announcement = announcement
+    expect(formValues).toEqual(mockFormGroup.value)
 
-//       component.ngOnChanges()
+    //Product
+    component.productFormComponent = new QueryList<ProductFormComponent>()
+    component.productFormComponent.reset([{ formGroup: mockFormGroup } as ProductFormComponent])
 
-//       expect(msgServiceSpy.error).toHaveBeenCalledWith({
-//         summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED'
-//       })
-//     })
-//   })
+    component.crdType = 'Product'
+    formValues = (component as any).getFormValuesOfActiveChild()
 
-//   describe('onSave - creating and updating an announcement', () => {
-//     it('should create an announcement', () => {
-//       apiServiceSpy.createAnnouncement.and.returnValue(of({}))
-//       component.changeMode = 'NEW'
-//       spyOn(component.hideDialogAndChanged, 'emit')
-//       component.formGroup = formGroup
+    expect(formValues).toEqual(mockFormGroup.value)
 
-//       component.onSave()
+    //Permission
+    component.permissionFormComponent = new QueryList<PermissionFormComponent>()
+    component.permissionFormComponent.reset([{ formGroup: mockFormGroup } as PermissionFormComponent])
 
-//       expect(msgServiceSpy.success).toHaveBeenCalledWith({
-//         summaryKey: 'ACTIONS.CREATE.MESSAGE.OK'
-//       })
-//       expect(component.hideDialogAndChanged.emit).toHaveBeenCalledWith(true)
-//     })
+    component.crdType = 'Permission'
+    formValues = (component as any).getFormValuesOfActiveChild()
 
-//     it('should display error if creation fails', () => {
-//       apiServiceSpy.createAnnouncement.and.returnValue(throwError(() => new Error()))
-//       component.changeMode = 'NEW'
-//       component.formGroup = formGroup
+    expect(formValues).toEqual(mockFormGroup.value)
 
-//       component.onSave()
+    //KeycloakClient
+    component.keycloakFormComponent = new QueryList<KeycloakFormComponent>()
+    component.keycloakFormComponent.reset([{ formGroup: mockFormGroup } as KeycloakFormComponent])
 
-//       expect(component.formGroup.valid).toBeTrue()
-//       expect(msgServiceSpy.error).toHaveBeenCalledWith({
-//         summaryKey: 'ACTIONS.CREATE.MESSAGE.NOK'
-//       })
-//     })
+    component.crdType = 'KeycloakClient'
+    formValues = (component as any).getFormValuesOfActiveChild()
 
-//     it('should update an announcement', () => {
-//       apiServiceSpy.updateAnnouncementById.and.returnValue(of({}))
-//       component.changeMode = 'EDIT'
-//       spyOn(component.hideDialogAndChanged, 'emit')
-//       component.announcementId = 'id'
-//       component.formGroup = formGroup
+    expect(formValues).toEqual(mockFormGroup.value)
 
-//       component.onSave()
+    //Slot
+    component.slotFormComponent = new QueryList<SlotFormComponent>()
+    component.slotFormComponent.reset([{ formGroup: mockFormGroup } as SlotFormComponent])
 
-//       expect(msgServiceSpy.success).toHaveBeenCalledWith({
-//         summaryKey: 'ACTIONS.EDIT.MESSAGE.OK'
-//       })
-//       expect(component.hideDialogAndChanged.emit).toHaveBeenCalledWith(true)
-//     })
+    component.crdType = 'Slot'
+    formValues = (component as any).getFormValuesOfActiveChild()
 
-//     it('should display error if update fails', () => {
-//       apiServiceSpy.updateAnnouncementById.and.returnValue(throwError(() => new Error()))
-//       component.changeMode = 'EDIT'
-//       component.announcementId = 'id'
-//       component.formGroup = formGroup
+    expect(formValues).toEqual(mockFormGroup.value)
 
-//       component.onSave()
+    //Microfrontend
+    component.microfrontendFormComponent = new QueryList<MicrofrontendFormComponent>()
+    component.microfrontendFormComponent.reset([{ formGroup: mockFormGroup } as MicrofrontendFormComponent])
 
-//       expect(msgServiceSpy.error).toHaveBeenCalledWith({
-//         summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK'
-//       })
-//     })
+    component.crdType = 'Microfrontend'
+    formValues = (component as any).getFormValuesOfActiveChild()
 
-//     it('should display warning when trying to save an anncmt with invalid dateRange', () => {
-//       component.formGroup = formGroup
-//       component.formGroup.setErrors({ dateRange: true })
+    expect(formValues).toEqual(mockFormGroup.value)
 
-//       component.onSave()
+    //Microservice
+    component.microserviceFormComponent = new QueryList<MicroserviceFormComponent>()
+    component.microserviceFormComponent.reset([{ formGroup: mockFormGroup } as MicroserviceFormComponent])
 
-//       expect(msgServiceSpy.warning).toHaveBeenCalledWith({
-//         summaryKey: 'VALIDATION.ERRORS.INVALID_DATE_RANGE'
-//       })
-//     })
-//   })
+    component.crdType = 'Microservice'
+    formValues = (component as any).getFormValuesOfActiveChild()
 
-//   describe('dateFormGroup', () => {
-//     it('should correct dateRange using validator fn', () => {
-//       const dateFormGroup = new FormGroup({
-//         startDate: new FormControl('2023-01-01'),
-//         endDate: new FormControl('2023-01-02')
-//       })
+    expect(formValues).toEqual(mockFormGroup.value)
+  })
 
-//       dateFormGroup.setValidators(dateRangeValidator(dateFormGroup))
-//       dateFormGroup.updateValueAndValidity()
+  it('should prepare update data based on crdType', () => {
+    const mockCrd = { name: 'testCrd' }
 
-//       expect(dateFormGroup.valid).toBeTrue()
-//       expect(dateFormGroup.errors).toBeNull()
-//     })
+    // Data
+    let expectedRequest: any = { CrdData: mockCrd }
+    let result = (component as any).prepareUpdateData('Data', mockCrd)
+    expect(result).toEqual(expectedRequest)
 
-//     it('should catch dateRange error using validator fn', () => {
-//       const dateFormGroup = new FormGroup({
-//         startDate: new FormControl('2023-01-02'),
-//         endDate: new FormControl('2023-01-01')
-//       })
+    // Database
+    expectedRequest = { CrdDatabase: mockCrd }
+    result = (component as any).prepareUpdateData('Database', mockCrd)
+    expect(result).toEqual(expectedRequest)
 
-//       dateFormGroup.setValidators(dateRangeValidator(dateFormGroup))
-//       dateFormGroup.updateValueAndValidity()
+    // Product
+    expectedRequest = { CrdProduct: mockCrd }
+    result = (component as any).prepareUpdateData('Product', mockCrd)
+    expect(result).toEqual(expectedRequest)
 
-//       expect(dateFormGroup.valid).toBeFalse()
-//       expect(dateFormGroup.errors).toEqual({ invalidDateRange: true })
-//     })
+    // Permission
+    expectedRequest = { CrdPermission: mockCrd }
+    result = (component as any).prepareUpdateData('Permission', mockCrd)
+    expect(result).toEqual(expectedRequest)
 
-//     it('should return null from validator fn if no endDate is present', () => {
-//       const dateFormGroup = new FormGroup({
-//         startDate: new FormControl('2023-01-02')
-//       })
+    // KeycloakClient
+    expectedRequest = { CrdKeycloakClient: mockCrd }
+    result = (component as any).prepareUpdateData('KeycloakClient', mockCrd)
+    expect(result).toEqual(expectedRequest)
 
-//       dateFormGroup.setValidators(dateRangeValidator(dateFormGroup))
-//       dateFormGroup.updateValueAndValidity()
+    // Slot
+    expectedRequest = { CrdSlot: mockCrd }
+    result = (component as any).prepareUpdateData('Slot', mockCrd)
+    expect(result).toEqual(expectedRequest)
 
-//       expect(dateFormGroup.errors).toEqual(null)
-//     })
-//   })
+    // Microfrontend
+    expectedRequest = { CrdMicrofrontend: mockCrd }
+    result = (component as any).prepareUpdateData('Microfrontend', mockCrd)
+    expect(result).toEqual(expectedRequest)
 
-//   /*
-//    * UI ACTIONS
-//    */
-//   it('should close the dialog', () => {
-//     spyOn(component.hideDialogAndChanged, 'emit')
-//     component.onDialogHide()
+    // Microservice
+    expectedRequest = { CrdMicroservice: mockCrd }
+    result = (component as any).prepareUpdateData('Microservice', mockCrd)
+    expect(result).toEqual(expectedRequest)
+  })
 
-//     expect(component.displayDetailDialog).toBeFalse()
-//     expect(component.hideDialogAndChanged.emit).toHaveBeenCalledWith(false)
-//   })
+  it('should update crd data with form values when submitFormValues is called', () => {
+    const mockCrd = { name: 'testCrd' }
+    const mockFormValues = { name: 'updatedCrd' }
+    spyOn<any>(component, 'updateFields').and.returnValue(mockFormValues)
 
-//   /**
-//    * Language tests
-//    */
-//   it('should set a German date format', () => {
-//     expect(component.dateFormat).toEqual('dd.mm.yy')
-//   })
+    component.crd = mockCrd
+    const result = (component as any).submitFormValues(mockFormValues)
 
-//   it('should set default date format', () => {
-//     mockUserService.lang$.getValue.and.returnValue('en')
-//     fixture = TestBed.createComponent(AnnouncementDetailComponent)
-//     component = fixture.componentInstance
-//     fixture.detectChanges()
-//     expect(component.dateFormat).toEqual('mm/dd/yy')
-//   })
-// })
+    expect(result).toEqual(mockFormValues)
+  })
+
+  it('should update crd fields with form values when updateFields is called', () => {
+    const base = { name: 'testCrd', spec: { description: 'old' }, metadata: { labels: 'old' } }
+    const update = { name: 'updatedCrd', specDescription: 'new', metadataLabels: 'new' }
+
+    const result = (component as any).updateFields(base, update)
+
+    expect(result.name).toEqual('updatedCrd')
+    expect(result.spec.description).toEqual('new')
+    expect(result.metadata.labels).toEqual('new')
+  })
+
+  it('should update fields directly inside spec or metadata if they exist', () => {
+    const base = {
+      name: 'testCrd',
+      spec: { description: 'old', version: 'v1' },
+      metadata: { labels: 'old', annotations: 'oldAnnotation' }
+    }
+    const update = { version: 'v2', annotations: 'newAnnotation' }
+
+    const result = (component as any).updateFields(base, update)
+
+    expect(result.spec.version).toEqual('v2')
+    expect(result.metadata.annotations).toEqual('newAnnotation')
+  })
+
+  it('should prepare history from managedFields and skip keys with "."', () => {
+    const mockManagedFields = [
+      {
+        time: '2023-01-01T00:00:00Z',
+        fieldsV1: {
+          'f:spec': {
+            'f:name': {},
+            'f:description': {},
+            '.': {} // This key should be skipped
+          },
+          'f:metadata': {
+            'f:labels': {}
+          }
+        },
+        operation: 'Update'
+      },
+      {
+        time: '2023-01-02T00:00:00Z',
+        fieldsV1: {
+          'f:spec': {
+            'f:version': {}
+          }
+        },
+        operation: 'Update'
+      }
+    ]
+
+    component.crd = {
+      metadata: {
+        managedFields: mockManagedFields
+      }
+    }
+
+    const expectedHistory: Update[] = [
+      {
+        date: '2023-01-01T00:00:00Z',
+        fields: {
+          spec: ['name', 'description'],
+          metadata: ['labels']
+        },
+        operation: 'Update'
+      },
+      {
+        date: '2023-01-02T00:00:00Z',
+        fields: {
+          spec: ['version']
+        },
+        operation: 'Update'
+      }
+    ]
+
+    const history = component.prepareHistory()
+
+    expect(history).toEqual(expectedHistory)
+  })
+  /*
+   * UI ACTIONS
+   */
+  it('should close the dialog', () => {
+    spyOn(component.hideDialogAndChanged, 'emit')
+    component.onDialogHide()
+
+    expect(component.displayDetailDialog).toBeFalse()
+    expect(component.hideDialogAndChanged.emit).toHaveBeenCalledWith(false)
+  })
+})
