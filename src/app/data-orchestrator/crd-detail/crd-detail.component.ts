@@ -201,9 +201,9 @@ export class CrdDetailComponent implements OnChanges {
           const field = contextMatch[2].charAt(0).toLowerCase() + contextMatch[2].slice(1)
 
           if (context === 'spec' && base.spec) {
-            base[field] = update[key]
+            base.spec[field] = update[key]
           } else if (context === 'metadata' && base.metadata) {
-            base[field] = update[key]
+            base.metadata[field] = update[key]
           }
         } else if (key in base) {
           base[key] = update[key]
