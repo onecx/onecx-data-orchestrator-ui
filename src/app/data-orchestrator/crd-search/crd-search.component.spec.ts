@@ -1,19 +1,14 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { HttpClient, provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { BehaviorSubject, of, throwError } from 'rxjs'
 import { CrdSearchComponent } from '../crd-search/crd-search.component'
 
-import {
-  AppStateService,
-  createTranslateLoader,
-  PortalMessageService,
-  UserService,
-  RowListGridData
-} from '@onecx/portal-integration-angular'
+import { PortalMessageService, UserService, RowListGridData } from '@onecx/portal-integration-angular'
 import { ContextKind, DataAPIService, GenericCrdStatusEnum } from 'src/app/shared/generated'
+import { createTranslateLoader } from '@onecx/angular-utils'
 
 const crdData: any = [
   {
@@ -61,18 +56,15 @@ describe('CrdSearchComponent', () => {
     TestBed.configureTestingModule({
       declarations: [CrdSearchComponent],
       imports: [
-        HttpClientTestingModule,
         TranslateModule.forRoot({
           isolate: true,
-          loader: {
-            provide: TranslateLoader,
-            useFactory: createTranslateLoader,
-            deps: [HttpClient, AppStateService]
-          }
+          loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })
       ],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
         { provide: PortalMessageService, useValue: msgServiceSpy },
         { provide: DataAPIService, useValue: apiServiceSpy },
         { provide: UserService, useValue: mockUserService }

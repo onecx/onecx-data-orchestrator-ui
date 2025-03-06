@@ -1,17 +1,12 @@
 import { NO_ERRORS_SCHEMA, QueryList } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { HttpClient } from '@angular/common/http'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { HttpClient, provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { of, throwError } from 'rxjs'
 import { CrdDetailComponent, Update } from '../crd-detail/crd-detail.component'
 
-import {
-  AppStateService,
-  createTranslateLoader,
-  PortalMessageService,
-  UserService
-} from '@onecx/portal-integration-angular'
+import { PortalMessageService, UserService } from '@onecx/portal-integration-angular'
 import { ContextKind, DataAPIService } from 'src/app/shared/generated'
 import { DataFormComponent } from './data-form/data-form.component'
 import { DatabaseFormComponent } from './database-form/database-form.component'
@@ -21,6 +16,7 @@ import { MicroserviceFormComponent } from './microservice-form/microservice-form
 import { PermissionFormComponent } from './permission-form/permission-form.component'
 import { SlotFormComponent } from './slot-form/slot-form.component'
 import { KeycloakFormComponent } from './keycloak-form/keycloak-form.component'
+import { createTranslateLoader } from '@onecx/angular-utils'
 
 describe('CrdDetailComponent', () => {
   let component: CrdDetailComponent
@@ -47,17 +43,14 @@ describe('CrdDetailComponent', () => {
     TestBed.configureTestingModule({
       declarations: [CrdDetailComponent],
       imports: [
-        HttpClientTestingModule,
         TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: createTranslateLoader,
-            deps: [HttpClient, AppStateService]
-          }
+          loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })
       ],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
         { provide: PortalMessageService, useValue: msgServiceSpy },
         { provide: DataAPIService, useValue: apiServiceSpy },
         { provide: UserService, useValue: mockUserService }
