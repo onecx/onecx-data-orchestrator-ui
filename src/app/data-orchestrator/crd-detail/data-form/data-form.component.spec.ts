@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { DataFormComponent } from './data-form.component'
-import { HttpClient } from '@angular/common/http'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { NO_ERRORS_SCHEMA } from '@angular/core'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { HttpClient, provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
-import { createTranslateLoader } from '@onecx/angular-accelerator'
-import { AppStateService, UserService } from '@onecx/angular-integration-interface'
+import { createTranslateLoader } from '@onecx/angular-utils'
+import { UserService } from '@onecx/angular-integration-interface'
 import { CustomResourceData, StatusStatusEnum } from 'src/app/shared/generated'
+import { DataFormComponent } from './data-form.component'
 
 describe('DataFormComponent', () => {
   let component: DataFormComponent
@@ -20,16 +20,11 @@ describe('DataFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DataFormComponent],
       imports: [
-        HttpClientTestingModule,
         TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: createTranslateLoader,
-            deps: [HttpClient, AppStateService]
-          }
+          loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })
       ],
-      providers: [{ provide: UserService, useValue: mockUserService }],
+      providers: [provideHttpClient(), provideHttpClientTesting(), { provide: UserService, useValue: mockUserService }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents()
   }))
