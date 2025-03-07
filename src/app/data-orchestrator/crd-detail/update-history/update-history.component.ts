@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
-import { Update } from '../crd-detail.component'
 import { UserService } from '@onecx/angular-integration-interface'
+import { Update } from '../crd-detail.component'
 
 @Component({
   selector: 'app-update-history',

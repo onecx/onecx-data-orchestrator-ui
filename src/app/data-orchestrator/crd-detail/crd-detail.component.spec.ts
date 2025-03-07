@@ -4,9 +4,10 @@ import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { of, throwError } from 'rxjs'
-import { CrdDetailComponent, Update } from '../crd-detail/crd-detail.component'
 
 import { PortalMessageService, UserService } from '@onecx/portal-integration-angular'
+import { createTranslateLoader } from '@onecx/angular-utils'
+
 import { ContextKind, DataAPIService } from 'src/app/shared/generated'
 import { DataFormComponent } from './data-form/data-form.component'
 import { DatabaseFormComponent } from './database-form/database-form.component'
@@ -16,7 +17,7 @@ import { MicroserviceFormComponent } from './microservice-form/microservice-form
 import { PermissionFormComponent } from './permission-form/permission-form.component'
 import { SlotFormComponent } from './slot-form/slot-form.component'
 import { KeycloakFormComponent } from './keycloak-form/keycloak-form.component'
-import { createTranslateLoader } from '@onecx/angular-utils'
+import { CrdDetailComponent, Update } from '../crd-detail/crd-detail.component'
 
 describe('CrdDetailComponent', () => {
   let component: CrdDetailComponent

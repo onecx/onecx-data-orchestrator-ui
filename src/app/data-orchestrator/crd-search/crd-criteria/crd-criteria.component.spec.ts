@@ -5,11 +5,12 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { FormControl, FormGroup } from '@angular/forms'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { SelectItem } from 'primeng/api'
-import { CrdCriteriaComponent, CrdCriteriaForm } from '../crd-criteria/crd-criteria.component'
 
 import { UserService } from '@onecx/portal-integration-angular'
-import { ContextKind } from 'src/app/shared/generated'
 import { createTranslateLoader } from '@onecx/angular-utils'
+
+import { ContextKind } from 'src/app/shared/generated'
+import { CrdCriteriaComponent, CrdCriteriaForm } from '../crd-criteria/crd-criteria.component'
 
 const filledCriteria = new FormGroup<CrdCriteriaForm>({
   name: new FormControl<string | null>('test'),

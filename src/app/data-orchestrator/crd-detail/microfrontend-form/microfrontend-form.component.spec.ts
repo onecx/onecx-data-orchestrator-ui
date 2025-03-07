@@ -1,14 +1,14 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { MicrofrontendFormComponent } from './microfrontend-form.component'
 import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
-import { NO_ERRORS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
+import { CheckboxModule } from 'primeng/checkbox'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { createTranslateLoader } from '@onecx/angular-utils'
 import { UserService } from '@onecx/angular-integration-interface'
 import { CustomResourceMicrofrontend, StatusStatusEnum } from 'src/app/shared/generated'
-import { ReactiveFormsModule } from '@angular/forms'
-import { CheckboxModule } from 'primeng/checkbox'
+import { MicrofrontendFormComponent } from './microfrontend-form.component'
 
 describe('MicrofrontendFormComponent', () => {
   let component: MicrofrontendFormComponent

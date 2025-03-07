@@ -1,13 +1,13 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { ProductFormComponent } from './product-form.component'
 import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
-import { NO_ERRORS_SCHEMA } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { createTranslateLoader } from '@onecx/angular-utils'
 import { UserService } from '@onecx/angular-integration-interface'
 import { CustomResourceProduct } from 'src/app/shared/generated'
-import { ReactiveFormsModule } from '@angular/forms'
+import { ProductFormComponent } from './product-form.component'
 
 describe('ProductFormComponent', () => {
   let component: ProductFormComponent
