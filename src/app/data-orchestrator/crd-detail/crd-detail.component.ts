@@ -195,24 +195,22 @@ export class CrdDetailComponent implements OnChanges {
   private updateFields(base: any, update: { [key: string]: any }): any {
     for (const key in update) {
       if (update.hasOwnProperty(key)) {
-        const contextMatch = key.match(/^(spec|metadata)([A-Z].*)$/)
+        const contextMatch = /^(spec|metadata)([A-Z].*)$/.exec(key)
         if (contextMatch) {
           const context = contextMatch[1]
           const field = contextMatch[2].charAt(0).toLowerCase() + contextMatch[2].slice(1)
 
           if (context === 'spec' && base.spec) {
-            ;(base.spec as any)[field] = update[key]
+            base.spec[field] = update[key]
           } else if (context === 'metadata' && base.metadata) {
-            ;(base.metadata as any)[field] = update[key]
+            base.metadata[field] = update[key]
           }
-        } else {
-          if (key in base) {
-            ;(base as any)[key] = update[key]
-          } else if (base.spec && key in base.spec) {
-            ;(base.spec as any)[key] = update[key]
-          } else if (base.metadata && key in base.metadata) {
-            ;(base.metadata as any)[key] = update[key]
-          }
+        } else if (key in base) {
+          base[key] = update[key]
+        } else if (base.spec && key in base.spec) {
+          base.spec[key] = update[key]
+        } else if (base.metadata && key in base.metadata) {
+          base.metadata[key] = update[key]
         }
       }
     }

@@ -181,11 +181,11 @@ export class CrdSearchComponent implements OnInit {
     ]
   }
 
-  private toggleChartVisibility() {
+  public toggleChartVisibility() {
     this.chartVisible = !this.chartVisible
   }
   /****************************************************************************
-   *  SEARCH announcements
+   *  SEARCH CRDs
    */
   public onSearch(criteria: GetCustomResourcesByCriteriaRequestParams, reuseCriteria = false): void {
     this.exceptionKey = undefined
@@ -200,9 +200,6 @@ export class CrdSearchComponent implements OnInit {
         return of({ stream: [] } as CrdResponse)
       }),
       map((data: CrdResponse) => {
-        if (!data) {
-          this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_204.CRDS'
-        }
         const modifiedData = data.customResources?.map((c) => {
           if (c.status === undefined || c.status === null) {
             c.status = GenericCrdStatusEnum.Undefined
@@ -249,7 +246,6 @@ export class CrdSearchComponent implements OnInit {
   }
 
   public onDetail(ev: RowListGridData, mode: ChangeMode): void {
-    //ev.stopPropagation()
     this.changeMode = mode
     this.crd = ev as GenericCrd
     this.displayDetailDialog = true

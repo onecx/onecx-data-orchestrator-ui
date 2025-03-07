@@ -29,7 +29,6 @@ export class PermissionFormComponent implements OnChanges {
       productName: new FormControl(null)
     })
   }
-  //permissions?: { [key: string]: { [key: string]: string } }
   ngOnChanges() {
     this.fillForm()
     if (this.changeMode === 'VIEW') this.formGroup.disable()

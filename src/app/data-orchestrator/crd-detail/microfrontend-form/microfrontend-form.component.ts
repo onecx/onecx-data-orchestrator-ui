@@ -41,16 +41,13 @@ export class MicrofrontendFormComponent implements OnChanges {
       type: new FormControl(null)
     })
   }
-  //TODO:
-  //classifications?: Array<string>
-  //endpoints?: Array<CustomResourceMicrofrontendSpecEndpointsInner>
 
   ngOnChanges() {
     this.fillForm()
     if (this.changeMode === 'VIEW') this.formGroup.disable()
     if (this.changeMode === 'EDIT') {
       this.formGroup.enable()
-      this.formGroup.controls['metadataName'].disable()
+      this.formGroup.controls['name'].disable()
       this.formGroup.controls['kind'].disable()
     }
   }

@@ -37,7 +37,6 @@ export class MicroserviceFormComponent implements OnChanges {
     if (this.changeMode === 'VIEW') this.formGroup.disable()
     if (this.changeMode === 'EDIT') {
       this.formGroup.enable()
-      this.formGroup.controls['apiVersion'].disable()
       this.formGroup.controls['metadataName'].disable()
       this.formGroup.controls['kind'].disable()
     }

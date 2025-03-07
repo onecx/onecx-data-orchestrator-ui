@@ -39,19 +39,13 @@ export class KeycloakFormComponent implements OnChanges {
       standardFlowEnabled: new FormControl(null)
     })
   }
-  //TODO:
-  //attributes?: { [key: string]: string }
-  //defaultClientScopes?: Array<string>
-  // optionalClientScopes?: Array<string>
-  //redirectUris?: Array<string>
-  //webOrigins?: Array<string>
 
   ngOnChanges() {
     this.fillForm()
     if (this.changeMode === 'VIEW') this.formGroup.disable()
     if (this.changeMode === 'EDIT') {
       this.formGroup.enable()
-      this.formGroup.controls['metadataName'].disable()
+      this.formGroup.controls['name'].disable()
       this.formGroup.controls['kind'].disable()
     }
   }
