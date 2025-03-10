@@ -341,7 +341,7 @@
   },
   "EXCEPTIONS": {
     "HTTP_STATUS_0": {
-      "CRDS": "Unknown problem retrieving Announcement data - please try again."
+      "CRDS": "Unknown problem retrieving Custom Resources data - please try again."
     },
     "HTTP_STATUS_401": {
       "CRDS": "You are not authorized to see Custom Resources."

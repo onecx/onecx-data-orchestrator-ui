@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { DatabaseFormComponent } from './database-form.component'
-import { HttpClient } from '@angular/common/http'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { NO_ERRORS_SCHEMA } from '@angular/core'
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
-import { createTranslateLoader } from '@onecx/angular-accelerator'
-import { AppStateService, UserService } from '@onecx/angular-integration-interface'
-import { CustomResourceDatabase, StatusStatusEnum } from 'src/app/shared/generated'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { HttpClient, provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ReactiveFormsModule } from '@angular/forms'
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { createTranslateLoader } from '@onecx/angular-utils'
+import { UserService } from '@onecx/angular-integration-interface'
+import { CustomResourceDatabase, StatusStatusEnum } from 'src/app/shared/generated'
+import { DatabaseFormComponent } from './database-form.component'
 
 describe('DatabaseFormComponent', () => {
   let component: DatabaseFormComponent
@@ -21,17 +21,12 @@ describe('DatabaseFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DatabaseFormComponent],
       imports: [
-        HttpClientTestingModule,
         ReactiveFormsModule,
         TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: createTranslateLoader,
-            deps: [HttpClient, AppStateService]
-          }
+          loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })
       ],
-      providers: [{ provide: UserService, useValue: mockUserService }],
+      providers: [provideHttpClient(), provideHttpClientTesting(), { provide: UserService, useValue: mockUserService }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents()
   }))

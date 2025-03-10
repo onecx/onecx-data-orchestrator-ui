@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { MicroserviceFormComponent } from './microservice-form.component'
-import { HttpClient } from '@angular/common/http'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { NO_ERRORS_SCHEMA } from '@angular/core'
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
-import { createTranslateLoader } from '@onecx/angular-accelerator'
-import { AppStateService, UserService } from '@onecx/angular-integration-interface'
-import { CustomResourceMicroservice, StatusStatusEnum } from 'src/app/shared/generated'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { HttpClient, provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ReactiveFormsModule } from '@angular/forms'
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { CheckboxModule } from 'primeng/checkbox'
+import { createTranslateLoader } from '@onecx/angular-utils'
+import { UserService } from '@onecx/angular-integration-interface'
+import { CustomResourceMicroservice, StatusStatusEnum } from 'src/app/shared/generated'
+import { MicroserviceFormComponent } from './microservice-form.component'
 
 describe('MicroserviceFormComponent', () => {
   let component: MicroserviceFormComponent
@@ -22,18 +22,13 @@ describe('MicroserviceFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [MicroserviceFormComponent],
       imports: [
-        HttpClientTestingModule,
         ReactiveFormsModule,
         CheckboxModule,
         TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: createTranslateLoader,
-            deps: [HttpClient, AppStateService]
-          }
+          loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })
       ],
-      providers: [{ provide: UserService, useValue: mockUserService }],
+      providers: [provideHttpClient(), provideHttpClientTesting(), { provide: UserService, useValue: mockUserService }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents()
   }))
