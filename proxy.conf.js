@@ -19,7 +19,7 @@ const onProxyRes = function (proxyRes, req, res) {
 
 const PROXY_CONFIG = {
   '/bff': {
-    target: 'http://onecx-data-orchestrator-bff',
+    target: 'http://localhost:3000',
     secure: false,
     pathRewrite: {
       '^.*/bff': ''

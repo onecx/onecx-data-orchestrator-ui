@@ -18,5 +18,7 @@ README.md
 Dockerfile
 *.log
 *.sh
+*.js
+!proxy.conf.js
 src/app/shared/generated/**
 src/assets/api/*

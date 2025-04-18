@@ -6,6 +6,7 @@ import { provideErrorTailorConfig } from '@ngneat/error-tailor'
 
 import { AutoCompleteModule } from 'primeng/autocomplete'
 import { CalendarModule } from 'primeng/calendar'
+import { CheckboxModule } from 'primeng/checkbox'
 import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { ConfirmPopupModule } from 'primeng/confirmpopup'
 import { ConfirmationService } from 'primeng/api'
@@ -21,6 +22,7 @@ import { MultiSelectModule } from 'primeng/multiselect'
 import { OverlayPanelModule } from 'primeng/overlaypanel'
 import { SelectButtonModule } from 'primeng/selectbutton'
 import { TableModule } from 'primeng/table'
+import { TabViewModule } from 'primeng/tabview'
 import { TagModule } from 'primeng/tag'
 import { ToastModule } from 'primeng/toast'
 import { TooltipModule } from 'primeng/tooltip'
@@ -35,6 +37,7 @@ import { LabelResolver } from './label.resolver'
     PortalCoreModule.forMicroFrontend(),
     AutoCompleteModule,
     CalendarModule,
+    CheckboxModule,
     CommonModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
@@ -52,6 +55,7 @@ import { LabelResolver } from './label.resolver'
     ReactiveFormsModule,
     SelectButtonModule,
     TableModule,
+    TabViewModule,
     TagModule,
     ToastModule,
     TooltipModule,
@@ -60,6 +64,7 @@ import { LabelResolver } from './label.resolver'
   exports: [
     AutoCompleteModule,
     CalendarModule,
+    CheckboxModule,
     CommonModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
@@ -77,6 +82,7 @@ import { LabelResolver } from './label.resolver'
     ReactiveFormsModule,
     SelectButtonModule,
     TableModule,
+    TabViewModule,
     TagModule,
     ToastModule,
     TooltipModule,

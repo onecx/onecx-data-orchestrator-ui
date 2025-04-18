@@ -279,7 +279,7 @@ describe('CrdSearchComponent', () => {
   })
 
   it('should open edit dialog', () => {
-    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.EDIT.LABEL': 'Edit' }))
+    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.EDIT.CRD': 'Edit' }))
     spyOn(component, 'onDetail')
 
     component.ngOnInit()
@@ -290,7 +290,7 @@ describe('CrdSearchComponent', () => {
   })
 
   it('should open detail dialog', () => {
-    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.VIEW.LABEL': 'View' }))
+    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.VIEW.CRD': 'View' }))
     spyOn(component, 'onDetail')
 
     component.ngOnInit()
