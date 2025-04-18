@@ -6,22 +6,16 @@
       "NO.TOOLTIP": "Cancel the action",
       "YES.TOOLTIP": "Proceed with the action"
     },
+    "DELETE": {
+      "CRD": "Löschen",
+      "INFO": "Diese Aktion kann nicht rückgängig gemacht werden!"
+    },
     "EDIT": {
-      "LABEL": "Edit",
-      "CRD": "Edit Custom Resource",
+      "CRD": "Edit",
       "CRD.TOOLTIP": "Edit the custom resource properties",
       "MESSAGE": {
         "OK": "The Custom Resource was saved successfully",
         "NOK": "An error has occurred. The Custom Resource was not saved."
-      }
-    },
-    "TOUCH": {
-      "LABEL": "Touch",
-      "CRD": "Touch Custom Resource",
-      "CRD.TOOLTIP": "Touch Custom Resource to trigger reload in k8s",
-      "MESSAGE": {
-        "OK": "The Custom Resource was updated successfully",
-        "NOK": "An error has occurred. The Custom Resource was updated."
       }
     },
     "SEARCH": {
@@ -43,15 +37,24 @@
         "ALL": "All"
       }
     },
+    "TOUCH": {
+      "CRD": "Touch",
+      "CRD.TOOLTIP": "Touch Custom Resource to trigger reload in k8s",
+      "MESSAGE": {
+        "OK": "The Custom Resource was updated successfully",
+        "NOK": "An error has occurred. The Custom Resource was updated."
+      }
+    },
     "VIEW": {
-      "LABEL": "Show Details",
-      "CRD": "Custom Resource Details",
-      "CRD.TOOLTIP": "Show the details of the Announcement"
+      "CRD": "Details",
+      "CRD.TOOLTIP": "Show the details of the Custom Resource"
     },
     "CANCEL": "Cancel",
     "CHOOSE": "Choose",
     "CLOSE": "Close",
+    "CLOSE.TOOLTIP": "Close",
     "CONFIRM": "Confirm",
+    "LOADING": "Loading...",
     "RELOAD": "Reload",
     "SAVE": "Save",
     "SAVE_AS": "Save as ...",
@@ -63,6 +66,20 @@
       "CLOSE": "Close dialog",
       "SAVE": "Save changes",
       "SAVE_AS": "Save as new {{TYPE}}"
+    }
+  },
+  "INTERNAL": {
+    "HEADER": "Internal",
+    "TOOLTIP": "Internal properties",
+    "CREATION_DATE": "Created on",
+    "CREATION_USER": "Created by",
+    "MODIFICATION_DATE": "Changed on",
+    "MODIFICATION_USER": "Changed by",
+    "TOOLTIPS": {
+      "CREATION_DATE": "Timestamp of the creation",
+      "CREATION_USER": "ID of the user of the creation",
+      "MODIFICATION_DATE": "Timestamp of the last change",
+      "MODIFICATION_USER": "ID of the user of the last change"
     }
   },
   "DIALOG": {
@@ -80,14 +97,11 @@
     "STATUS_MESSAGE": "Message",
     "RESOURCE_VERSION": "Resource Version",
     "VERSION": "Version",
-    "CREATION_DATE": "Creation Date",
-    "LAST_MODIFIED_DATE": "Last modified",
     "TOOLTIPS": {
       "NAME": "Name of the Custom Resource",
       "NAME.CRITERIA": "Name of the Custom Resource",
       "TYPE": "Type of the Custom Resource",
       "STATUS": "Status of the Custom Resource",
-      "CREATION_DATE": "Date and Time on which the Custom Resource was created",
       "RESOURCE_VERSION": "Version of the Custom Resource",
       "VERSION": "Release version of the Custom Resource"
     },
@@ -343,14 +357,14 @@
     "HTTP_STATUS_0": {
       "CRDS": "Unknown problem retrieving Custom Resources data - please try again."
     },
+    "HTTP_STATUS_204": {
+      "CRDS": "No Custom Resources found matching the search criterias."
+    },
     "HTTP_STATUS_401": {
       "CRDS": "You are not authorized to see Custom Resources."
     },
     "HTTP_STATUS_403": {
       "CRDS": "You have no permissions to see Custom Resources."
-    },
-    "HTTP_STATUS_204": {
-      "CRDS": "No Custom Resources found matching the search criterias."
     },
     "HTTP_STATUS_404": {
       "CRDS": "No Custom Resource could be loaded."

@@ -15,7 +15,6 @@ import {
   UserService
 } from '@onecx/portal-integration-angular'
 
-import { limitText } from 'src/app/shared/utils'
 import {
   CrdResponse,
   DataAPIService,
@@ -33,8 +32,9 @@ type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
   styleUrls: ['./crd-search.component.scss']
 })
 export class CrdSearchComponent implements OnInit {
-  @ViewChild('crdTable', { static: false }) crdTable: Table | undefined
-
+  // dialog
+  public loading = false
+  public exceptionKey: string | undefined = undefined
   public changeMode: ChangeMode = 'NEW'
   public actions$: Observable<Action[]> | undefined
   public additionalActions!: DataAction[]
@@ -42,18 +42,15 @@ export class CrdSearchComponent implements OnInit {
   public crds$: Observable<GenericCrd[]> | undefined
   public displayDeleteDialog = false
   public displayDetailDialog = false
-  public searchInProgress = false
-  public exceptionKey: string | undefined = undefined
   public dateFormat: string
   public allCriteriaLists$: Observable<allCriteriaLists> | undefined
   public allItem: SelectItem | undefined
   private filterData = ''
+  @ViewChild('crdTable', { static: false }) crdTable: Table | undefined
 
   public allMetaData$!: Observable<string>
   public filteredData$ = new BehaviorSubject<RowListGridData[]>([])
   public resultData$ = new BehaviorSubject<RowListGridData[]>([])
-
-  public limitText = limitText
 
   public columns: DataTableColumn[] = [
     {
@@ -88,14 +85,14 @@ export class CrdSearchComponent implements OnInit {
     },
     {
       id: 'lastModified',
-      nameKey: 'CRD.LAST_MODIFIED_DATE',
+      nameKey: 'INTERNAL.MODIFICATION_DATE',
       columnType: ColumnType.DATE,
       predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
       sortable: true
     },
     {
       id: 'creationTimestamp',
-      nameKey: 'CRD.CREATION_DATE',
+      nameKey: 'INTERNAL.CREATION_DATE',
       columnType: ColumnType.DATE,
       predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
       sortable: true
@@ -111,7 +108,7 @@ export class CrdSearchComponent implements OnInit {
     private readonly msgService: PortalMessageService,
     private readonly translate: TranslateService
   ) {
-    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.MM.yyyy HH:mm' : 'M/d/yy, h:mm a'
+    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.MM.yyyy HH:mm:ss' : 'M/d/yy, h:mm:ss a'
   }
 
   ngOnInit(): void {
@@ -159,21 +156,21 @@ export class CrdSearchComponent implements OnInit {
     this.additionalActions = [
       {
         id: 'view',
-        labelKey: 'ACTIONS.VIEW.LABEL',
+        labelKey: 'ACTIONS.VIEW.CRD',
         icon: 'pi pi-eye',
         permission: 'CRD#VIEW',
         callback: (event: any) => this.onDetail(event, 'VIEW')
       },
       {
         id: 'edit',
-        labelKey: 'ACTIONS.EDIT.LABEL',
+        labelKey: 'ACTIONS.EDIT.CRD',
         icon: 'pi pi-pencil',
         permission: 'CRD#EDIT',
         callback: (event) => this.onDetail(event, 'EDIT')
       },
       {
         id: 'touch',
-        labelKey: 'ACTIONS.DELETE.USER.TOOLTIP',
+        labelKey: 'ACTIONS.TOUCH.CRD',
         icon: 'pi pi-refresh',
         permission: 'CRD#TOUCH',
         callback: (event) => this.onTouch(event)
@@ -192,7 +189,7 @@ export class CrdSearchComponent implements OnInit {
     if (!reuseCriteria) {
       if (criteria?.crdSearchCriteria?.name === '') criteria.crdSearchCriteria.name = undefined
     }
-    this.searchInProgress = true
+    this.loading = true
     this.crds$ = this.dataOrchestratorApi.getCustomResourcesByCriteria(criteria).pipe(
       catchError((err) => {
         this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
@@ -221,7 +218,7 @@ export class CrdSearchComponent implements OnInit {
         this.filteredData$.next(modifiedData as any)
         return data.customResources ?? []
       }),
-      finalize(() => (this.searchInProgress = false))
+      finalize(() => (this.loading = false))
     )
   }
 

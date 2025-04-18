@@ -279,7 +279,7 @@ describe('CrdSearchComponent', () => {
   })
 
   it('should open edit dialog', () => {
-    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.EDIT.LABEL': 'Edit' }))
+    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.EDIT.CRD': 'Edit' }))
     spyOn(component, 'onDetail')
 
     component.ngOnInit()
@@ -290,7 +290,7 @@ describe('CrdSearchComponent', () => {
   })
 
   it('should open detail dialog', () => {
-    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.VIEW.LABEL': 'View' }))
+    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.VIEW.CRD': 'View' }))
     spyOn(component, 'onDetail')
 
     component.ngOnInit()
@@ -315,7 +315,7 @@ describe('CrdSearchComponent', () => {
    * Language tests
    */
   it('should set a German date format', () => {
-    expect(component.dateFormat).toEqual('dd.MM.yyyy HH:mm')
+    expect(component.dateFormat).toEqual('dd.MM.yyyy HH:mm:ss')
   })
 
   it('should set default date format', () => {
@@ -323,6 +323,6 @@ describe('CrdSearchComponent', () => {
     fixture = TestBed.createComponent(CrdSearchComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
-    expect(component.dateFormat).toEqual('M/d/yy, h:mm a')
+    expect(component.dateFormat).toEqual('M/d/yy, h:mm:ss a')
   })
 })

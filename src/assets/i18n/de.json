@@ -6,22 +6,16 @@
       "NO.TOOLTIP": "Abbruch der Aktion",
       "YES.TOOLTIP": "Fortfahren mit der Aktion"
     },
+    "DELETE": {
+      "CRD": "Löschen",
+      "INFO": "Diese Aktion kann nicht rückgängig gemacht werden!"
+    },
     "EDIT": {
-      "LABEL": "Bearbeiten",
-      "ANNOUNCEMENT": "Custom Resource bearbeiten",
-      "ANNOUNCEMENT.TOOLTIP": "Die Custom Resource bearbeiten",
+      "CRD": "Bearbeiten",
+      "CRD.TOOLTIP": "Die Custom Resource bearbeiten",
       "MESSAGE": {
         "OK": "Die Custom Resource wurde erfolgreich gespeichert",
         "NOK": "Ein Fehler ist aufgetreten. Die Custom Resource wurde nicht gespeichert."
-      }
-    },
-    "TOUCH": {
-      "LABEL": "Aktualisieren",
-      "CRD": "Custom Resource aktualisieren",
-      "CRD.TOOLTIP": "Custom Resource aktualisieren in K8s",
-      "MESSAGE": {
-        "OK": "Die Custom Resource wurde erfolgreich aktualisiert",
-        "NOK": "Ein Fehler ist aufgetreten. Die Custom Resource wurde nicht aktualisiert."
       }
     },
     "SEARCH": {
@@ -43,15 +37,24 @@
         "ALL": "Alle"
       }
     },
+    "TOUCH": {
+      "CRD": "Aktualisieren",
+      "CRD.TOOLTIP": "Custom Resource aktualisieren in K8s",
+      "MESSAGE": {
+        "OK": "Die Custom Resource wurde erfolgreich aktualisiert",
+        "NOK": "Ein Fehler ist aufgetreten. Die Custom Resource wurde nicht aktualisiert."
+      }
+    },
     "VIEW": {
-      "LABEL": "Details anzeigen",
-      "CRD": "Custom Resource Details",
+      "CRD": "Details",
       "CRD.TOOLTIP": "Die Details der Custom Resource anzeigen"
     },
     "CANCEL": "Abbrechen",
     "CHOOSE": "Auswählen",
     "CLOSE": "Schließen",
+    "CLOSE.TOOLTIP": "Dialog Schließen",
     "CONFIRM": "Bestätigen",
+    "LOADING": "Laden...",
     "RELOAD": "Neuladen",
     "SAVE": "Speichern",
     "SAVE_AS": "Speichern als ...",
@@ -63,6 +66,20 @@
       "CLOSE": "Dialog schließen",
       "SAVE": "Die Änderungen speichern",
       "SAVE_AS": "Speichern als neues {{TYPE}}"
+    }
+  },
+  "INTERNAL": {
+    "HEADER": "Intern",
+    "TOOLTIP": "Interne Eigenschaften",
+    "CREATION_DATE": "Erstellt am",
+    "CREATION_USER": "Erstellt von",
+    "MODIFICATION_DATE": "Geändert am",
+    "MODIFICATION_USER": "Geändert von",
+    "TOOLTIPS": {
+      "CREATION_DATE": "Zeitpunkt der Erstellung",
+      "CREATION_USER": "ID des Benutzers der Erstellung",
+      "MODIFICATION_DATE": "Zeitpunkt der letzten Änderung",
+      "MODIFICATION_USER": "ID des Benutzers der letzten Änderung"
     }
   },
   "DIALOG": {
@@ -80,14 +97,11 @@
     "STATUS_MESSAGE": "Meldung",
     "RESOURCE_VERSION": "Resource Version",
     "VERSION": "Version",
-    "CREATION_DATE": "Erstellungsdatum",
-    "Zuletzt aktualisiert": "Last modified",
     "TOOLTIPS": {
       "NAME": "Name der Custom Resource",
       "NAME.CRITERIA": "Name der Custom Resource",
       "TYPE": "Art der Custom Resource",
       "STATUS": "Status der Custom Resource",
-      "CREATION_DATE": "Erstellungsdatum und Zeit der Erstellung der Custom Resource",
       "RESOURCE_VERSION": "Version der Custom Resource",
       "VERSION": "Release version der Custom Resource"
     },
@@ -342,6 +356,9 @@
   "EXCEPTIONS": {
     "HTTP_STATUS_0": {
       "CRDS": "Unbekanntes Problem beim Abrufen von K8s Resourcen - bitte versuchen Sie es noch einmal."
+    },
+    "HTTP_STATUS_204": {
+      "CRDS": "Es wurden keine Custom Resources für die Suchkriterien gefunden."
     },
     "HTTP_STATUS_401": {
       "CRDS": "Sie sind nicht autorisiert, um K8s Resourcen zu sehen."

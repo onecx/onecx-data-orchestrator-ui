@@ -3,21 +3,29 @@
     [actions]="(actions$ | async) ?? []"
     (criteriaEmitter)="onSearch($event)"
     (resetSearchEmitter)="onCriteriaReset()"
-    [actions]="(actions$ | async) ?? []"
   ></app-crd-criteria>
-  <p-message *ngIf="exceptionKey" severity="error" styleClass="m-3 p-2" [text]="exceptionKey | translate"></p-message>
-  <p-message
-    *ngIf="searchInProgress"
-    severity="info"
-    styleClass="my-3 p-2"
-    [text]="'ACTIONS.SEARCH.IN_PROGRESS' | translate"
-  ></p-message>
+
   <ocx-content-container layout="horizontal" *ngIf="crds$ | async as crds" styleClass="px-3 pb-2">
-    <ocx-content class="w-full no-card-padding">
+    <p-message
+      *ngIf="loading"
+      id="do_search_message_loading"
+      severity="info"
+      styleClass="m-3"
+      [text]="'ACTIONS.LOADING' | translate"
+    ></p-message>
+    <p-message
+      *ngIf="exceptionKey"
+      id="do_search_message_error"
+      severity="error"
+      styleClass="m-3"
+      [text]="exceptionKey | translate"
+    ></p-message>
+
+    <ocx-content class="w-full adjust-card-padding">
       <ocx-interactive-data-view
-        *ngIf="!searchInProgress"
+        *ngIf="!loading && !exceptionKey"
         #crdTable
-        id="crd_search_table"
+        id="do_search_table"
         [data]="(filteredData$ | async) ?? []"
         [columns]="columns"
         [emptyResultsMessage]="'ACTIONS.SEARCH.NO_DATA' | translate"
@@ -25,7 +33,6 @@
         [additionalActions]="additionalActions"
         [actionColumnPosition]="'left'"
         [defaultGroupKey]="'ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT'"
-        column
       >
         <ng-template #topCenter>
           <ocx-data-view-controls
@@ -41,7 +48,7 @@
             [class.text-red-600]="item.status === 'ERROR'"
             [class.text-yellow-600]="item.status === 'UNDEFINED'"
             [class.text-green-600]="item.status === 'UPDATED' || item.status === 'CREATED'"
-            [aria-label]="'ENUMS.CRD_STATUS.' + item.status | translate"
+            [attr.aria-label]="'ENUMS.CRD_STATUS.' + item.status | translate"
             [pTooltip]="'ENUMS.CRD_STATUS.' + item.status | translate"
             tooltipPosition="top"
             tooltipEvent="hover"
@@ -54,7 +61,7 @@
               [class.text-red-600]="rowObject.status === 'ERROR'"
               [class.text-yellow-600]="rowObject.status === 'UNDEFINED'"
               [class.text-green-600]="rowObject.status === 'UPDATED' || rowObject.status === 'CREATED'"
-              [aria-label]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
+              [attr.aria-label]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
               [pTooltip]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
@@ -65,6 +72,7 @@
         </ng-template>
       </ocx-interactive-data-view>
     </ocx-content>
+
     <ocx-content class="w-full lg:w-3" *ngIf="crds.length > 0 && chartVisible && diagramColumn !== undefined">
       <ocx-group-by-count-diagram
         *ngIf="diagramColumn as diagramColumn"

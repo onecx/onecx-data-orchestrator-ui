@@ -1,11 +1,16 @@
-@import '/src/app/_am-mixins.scss';
+@import '/src/app/_do-mixins.scss';
 
 @include danger-action;
 @include table-inline-buttons;
 @include table-responsive-columns;
 @include dialog-footer-buttons;
+@include correct-ocx-interactive-data-view;
 
 :host ::ng-deep {
+  .adjust-card-padding .card {
+    padding: 0.5rem 1rem;
+  }
+
   .p-datatable {
     .p-datatable-thead > tr > th {
       border-bottom-width: 2px;

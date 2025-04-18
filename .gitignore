@@ -31,6 +31,8 @@ reports
 typings
 *.log
 *.sh
+*.js
+!proxy.conf.js
 
 # System Files
 .DS_Store
