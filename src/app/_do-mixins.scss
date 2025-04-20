@@ -51,13 +51,8 @@
 
 // disable preset of opacity in form: not readable
 @mixin readable-disabled-form-controls {
-  :host {
-    .p-inputtext.p-component:disabled,
-    .p-dropdown.p-component.p-disabled,
-    .p-checkbox-box.p-disabled,
-    .p-checkbox-label.p-disabled {
-      opacity: unset;
-    }
+  :host ::ng-deep {
+    --disabled-opacity: 0.7;
   }
 }
 
@@ -457,6 +452,22 @@
   :host ::ng-deep {
     .p-dialog .p-dialog-footer button {
       margin: 0;
+    }
+  }
+}
+
+@mixin tabview-reduce-padding {
+  :host ::ng-deep {
+    .p-tabview .p-tabview-panels {
+      padding: 1.4rem 0 0 0;
+    }
+  }
+}
+@mixin tabview-fix-color-selected-tab {
+  :host ::ng-deep {
+    // correct the background color on inital selected tab
+    .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link[aria-selected='true'] {
+      background-color: rgba(var(--primary-color-rgb), 0.12);
     }
   }
 }

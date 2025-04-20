@@ -8,14 +8,14 @@
   <ocx-content-container layout="horizontal" *ngIf="crds$ | async as crds" styleClass="px-3 pb-2">
     <p-message
       *ngIf="loading"
-      id="do_search_message_loading"
+      id="do_crd_search_message_loading"
       severity="info"
       styleClass="m-3"
       [text]="'ACTIONS.LOADING' | translate"
     ></p-message>
     <p-message
       *ngIf="exceptionKey"
-      id="do_search_message_error"
+      id="do_crd_search_message_error"
       severity="error"
       styleClass="m-3"
       [text]="exceptionKey | translate"
@@ -25,7 +25,7 @@
       <ocx-interactive-data-view
         *ngIf="!loading && !exceptionKey"
         #crdTable
-        id="do_search_table"
+        id="do_crd_search_table"
         [data]="(filteredData$ | async) ?? []"
         [columns]="columns"
         [emptyResultsMessage]="'ACTIONS.SEARCH.NO_DATA' | translate"

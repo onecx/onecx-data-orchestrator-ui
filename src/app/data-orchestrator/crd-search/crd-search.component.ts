@@ -23,7 +23,7 @@ import {
   GetCustomResourcesByCriteriaRequestParams
 } from 'src/app/shared/generated'
 
-type ChangeMode = 'VIEW' | 'NEW' | 'EDIT'
+export type ChangeMode = 'VIEW' | 'NEW' | 'EDIT'
 type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
 
 @Component({
@@ -35,7 +35,7 @@ export class CrdSearchComponent implements OnInit {
   // dialog
   public loading = false
   public exceptionKey: string | undefined = undefined
-  public changeMode: ChangeMode = 'NEW'
+  public changeMode: ChangeMode = 'VIEW'
   public actions$: Observable<Action[]> | undefined
   public additionalActions!: DataAction[]
   public crd: GenericCrd | undefined
@@ -181,19 +181,21 @@ export class CrdSearchComponent implements OnInit {
   public toggleChartVisibility() {
     this.chartVisible = !this.chartVisible
   }
+
   /****************************************************************************
    *  SEARCH CRDs
    */
   public onSearch(criteria: GetCustomResourcesByCriteriaRequestParams, reuseCriteria = false): void {
-    this.exceptionKey = undefined
     if (!reuseCriteria) {
       if (criteria?.crdSearchCriteria?.name === '') criteria.crdSearchCriteria.name = undefined
     }
     this.loading = true
+    this.exceptionKey = undefined
     this.crds$ = this.dataOrchestratorApi.getCustomResourcesByCriteria(criteria).pipe(
       catchError((err) => {
-        this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
         this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.MSG_SEARCH_FAILED' })
+        this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
+        console.error('getCustomResourcesByCriteria', err)
         return of({ stream: [] } as CrdResponse)
       }),
       map((data: CrdResponse) => {
@@ -237,15 +239,15 @@ export class CrdSearchComponent implements OnInit {
   /****************************************************************************
    *  CHANGES
    */
-  public onCloseDetail(refresh: boolean): void {
-    this.displayDetailDialog = false
-    this.crd = undefined
-  }
-
   public onDetail(ev: RowListGridData, mode: ChangeMode): void {
     this.changeMode = mode
     this.crd = ev as GenericCrd
     this.displayDetailDialog = true
+  }
+
+  public onCloseDetail(refresh: boolean): void {
+    this.displayDetailDialog = false
+    this.crd = undefined
   }
 
   public onTouch(item: GenericCrd): void {

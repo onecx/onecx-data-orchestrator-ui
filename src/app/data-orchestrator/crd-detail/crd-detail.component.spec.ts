@@ -92,7 +92,7 @@ describe('CrdDetailComponent', () => {
     component.crdType = ContextKind.Data
     ;(component as any).getCrd()
 
-    expect(component.isLoading).toBeFalse()
+    expect(component.loading).toBeFalse()
     expect(component.crd).toEqual(mockCrd.crd)
     expect(component.updateHistory).toEqual(mockUpdateHistory.reverse())
   })
@@ -103,7 +103,7 @@ describe('CrdDetailComponent', () => {
     component.crdType = 'Data'
     ;(component as any).getCrd()
 
-    expect(component.isLoading).toBeFalse()
+    expect(component.loading).toBeFalse()
     expect(msgServiceSpy.error).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
   })
 

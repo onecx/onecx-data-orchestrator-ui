@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { TranslateService } from '@ngx-translate/core'
 import { SelectItem } from 'primeng/api'
@@ -17,7 +17,7 @@ export interface CrdCriteriaForm {
   templateUrl: './crd-criteria.component.html',
   styleUrls: ['./crd-criteria.component.scss']
 })
-export class CrdCriteriaComponent implements OnInit {
+export class CrdCriteriaComponent {
   @Input() public actions: Action[] = []
   @Output() public criteriaEmitter = new EventEmitter<GetCustomResourcesByCriteriaRequestParams>()
   @Output() public resetSearchEmitter = new EventEmitter<boolean>()
@@ -35,13 +35,29 @@ export class CrdCriteriaComponent implements OnInit {
     public readonly translate: TranslateService
   ) {
     this.dateFormatForRange = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'm/d/yy'
-  }
-
-  ngOnInit(): void {
     this.crdCriteria = new FormGroup<CrdCriteriaForm>({
       name: new FormControl<string | null>(null),
       type: new FormControl<ContextKind[] | null>({ value: null, disabled: false }, { validators: Validators.required })
     })
+    this.fillTypes()
+  }
+
+  public submitCriteria(): void {
+    const criteriaRequest: GetCustomResourcesByCriteriaRequestParams = {
+      crdSearchCriteria: {
+        name: this.crdCriteria.value.name === null ? undefined : this.crdCriteria.value.name,
+        type: this.crdCriteria.value.type === null ? undefined : this.crdCriteria.value.type
+      }
+    }
+    this.criteriaEmitter.emit(criteriaRequest)
+  }
+
+  public resetCriteria(): void {
+    this.crdCriteria.reset()
+    this.resetSearchEmitter.emit(true)
+  }
+
+  private fillTypes(): void {
     this.type$ = this.translate
       .get([
         'ENUMS.CRD_TYPE.' + ContextKind.Data,
@@ -71,20 +87,5 @@ export class CrdCriteriaComponent implements OnInit {
         })
       )
     this.crdCriteria.get('type')?.markAsDirty()
-  }
-
-  public submitCriteria(): void {
-    const criteriaRequest: GetCustomResourcesByCriteriaRequestParams = {
-      crdSearchCriteria: {
-        name: this.crdCriteria.value.name === null ? undefined : this.crdCriteria.value.name,
-        type: this.crdCriteria.value.type === null ? undefined : this.crdCriteria.value.type
-      }
-    }
-    this.criteriaEmitter.emit(criteriaRequest)
-  }
-
-  public resetCriteria(): void {
-    this.crdCriteria.reset()
-    this.resetSearchEmitter.emit(true)
   }
 }

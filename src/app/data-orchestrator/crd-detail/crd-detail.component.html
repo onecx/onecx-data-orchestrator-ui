@@ -15,60 +15,79 @@
     '630px': '100vw'
   }"
 >
-  <app-data-form
-    *ngIf="crdType && crdType.toString() === 'Data'"
-    [changeMode]="changeMode"
-    [dataCrd]="crd"
-    [updateHistory]="updateHistory"
-  />
-  <app-database-form
-    *ngIf="crdType && crdType.toString() === 'Database'"
-    [changeMode]="changeMode"
-    [databaseCrd]="crd"
-    [updateHistory]="updateHistory"
-  />
-  <app-product-form
-    *ngIf="crdType && crdType.toString() === 'Product'"
-    [changeMode]="changeMode"
-    [productCrd]="crd"
-    [updateHistory]="updateHistory"
-  />
-  <app-permission-form
-    *ngIf="crdType && crdType.toString() === 'Permission'"
-    [changeMode]="changeMode"
-    [permissionCrd]="crd"
-    [updateHistory]="updateHistory"
-  />
-  <app-keycloak-form
-    *ngIf="crdType && crdType.toString() === 'KeycloakClient'"
-    [changeMode]="changeMode"
-    [keycloakClientCrd]="crd"
-    [updateHistory]="updateHistory"
-  />
-  <app-slot-form
-    *ngIf="crdType && crdType.toString() === 'Slot'"
-    [changeMode]="changeMode"
-    [slotCrd]="crd"
-    [updateHistory]="updateHistory"
-  />
-  <app-microfrontend-form
-    *ngIf="crdType && crdType.toString() === 'Microfrontend'"
-    [changeMode]="changeMode"
-    [microfrontendCrd]="crd"
-    [updateHistory]="updateHistory"
-  />
-  <app-microservice-form
-    *ngIf="crdType && crdType.toString() === 'Microservice'"
-    [changeMode]="changeMode"
-    [microserviceCrd]="crd"
-    [updateHistory]="updateHistory"
-  />
+  <ng-container *ngIf="crd$ | async as crd">
+    <p-message
+      *ngIf="loading"
+      id="do_crd_detail_message_loading"
+      severity="info"
+      styleClass=""
+      [text]="'ACTIONS.LOADING' | translate"
+    ></p-message>
+    <p-message
+      *ngIf="exceptionKey"
+      id="do_crd_search_message_error"
+      severity="error"
+      styleClass="m-3"
+      [text]="exceptionKey | translate"
+    ></p-message>
+
+    <ng-container *ngIf="!loading && !exceptionKey">
+      <app-data-form
+        *ngIf="crdType && crdType.toString() === 'Data'"
+        [changeMode]="changeMode"
+        [dataCrd]="crd"
+        [updateHistory]="prepareHistory(crd)"
+      />
+      <app-database-form
+        *ngIf="crdType && crdType.toString() === 'Database'"
+        [changeMode]="changeMode"
+        [databaseCrd]="crd"
+        [updateHistory]="prepareHistory(crd)"
+      />
+      <app-product-form
+        *ngIf="crdType && crdType.toString() === 'Product'"
+        [changeMode]="changeMode"
+        [productCrd]="crd"
+        [updateHistory]="prepareHistory(crd)"
+      />
+      <app-permission-form
+        *ngIf="crdType && crdType.toString() === 'Permission'"
+        [changeMode]="changeMode"
+        [permissionCrd]="crd"
+        [updateHistory]="prepareHistory(crd)"
+      />
+      <app-keycloak-form
+        *ngIf="crdType && crdType.toString() === 'KeycloakClient'"
+        [changeMode]="changeMode"
+        [keycloakClientCrd]="crd"
+        [updateHistory]="prepareHistory(crd)"
+      />
+      <app-slot-form
+        *ngIf="crdType && crdType.toString() === 'Slot'"
+        [changeMode]="changeMode"
+        [slotCrd]="crd"
+        [updateHistory]="prepareHistory(crd)"
+      />
+      <app-microfrontend-form
+        *ngIf="crdType && crdType.toString() === 'Microfrontend'"
+        [changeMode]="changeMode"
+        [microfrontendCrd]="crd"
+        [updateHistory]="prepareHistory(crd)"
+      />
+      <app-microservice-form
+        *ngIf="crdType && crdType.toString() === 'Microservice'"
+        [changeMode]="changeMode"
+        [microserviceCrd]="crd"
+        [updateHistory]="prepareHistory(crd)"
+      />
+    </ng-container>
+  </ng-container>
 
   <ng-template pTemplate="footer">
     <div class="flex flex-wrap justify-content-end gap-2 mb-1">
       <p-button
         *ngIf="changeMode === 'VIEW'"
-        id="data_detail_action_close"
+        id="do_crd_detail_action_close"
         icon="pi pi-times"
         (onClick)="onDialogHide()"
         [label]="'ACTIONS.CLOSE' | translate"
@@ -79,7 +98,7 @@
       ></p-button>
       <p-button
         *ngIf="changeMode !== 'VIEW'"
-        id="data_detail_action_cancel"
+        id="do_crd_detail_action_cancel"
         icon="pi pi-times"
         (onClick)="onDialogHide()"
         [label]="'ACTIONS.CANCEL' | translate"
@@ -90,7 +109,7 @@
       ></p-button>
       <p-button
         *ngIf="changeMode !== 'VIEW'"
-        id="data_detail_action_save"
+        id="do_crd_detail_action_save"
         icon="pi pi-save"
         (onClick)="onSave()"
         [label]="'ACTIONS.SAVE' | translate"

@@ -12,11 +12,15 @@
     },
     "EDIT": {
       "CRD": "Bearbeiten",
-      "CRD.TOOLTIP": "Die Custom Resource bearbeiten",
+      "CRD.TOOLTIP": "Die K8s Ressource bearbeiten",
       "MESSAGE": {
-        "OK": "Die Custom Resource wurde erfolgreich gespeichert",
-        "NOK": "Ein Fehler ist aufgetreten. Die Custom Resource wurde nicht gespeichert."
+        "OK": "Die K8s Ressource wurde erfolgreich gespeichert",
+        "NOK": "Ein Fehler ist aufgetreten. Die K8s Ressource wurde nicht gespeichert."
       }
+    },
+    "NEW": {
+      "CRD": "New",
+      "CRD.TOOLTIP": "Create a custom resource"
     },
     "SEARCH": {
       "ACTIONS": "Aktionen",
@@ -39,15 +43,15 @@
     },
     "TOUCH": {
       "CRD": "Aktualisieren",
-      "CRD.TOOLTIP": "Custom Resource aktualisieren in K8s",
+      "CRD.TOOLTIP": "K8s Custom Ressource aktualisieren",
       "MESSAGE": {
-        "OK": "Die Custom Resource wurde erfolgreich aktualisiert",
-        "NOK": "Ein Fehler ist aufgetreten. Die Custom Resource wurde nicht aktualisiert."
+        "OK": "Die K8s Custom Ressource wurde erfolgreich aktualisiert",
+        "NOK": "Ein Fehler ist aufgetreten. Die K8s Custom Ressource wurde nicht aktualisiert."
       }
     },
     "VIEW": {
       "CRD": "Details",
-      "CRD.TOOLTIP": "Die Details der Custom Resource anzeigen"
+      "CRD.TOOLTIP": "Die Details der K8s Custom Ressource anzeigen"
     },
     "CANCEL": "Abbrechen",
     "CHOOSE": "Auswählen",
@@ -83,8 +87,8 @@
     }
   },
   "DIALOG": {
-    "SEARCH.HEADER": "Custom Resourcen",
-    "SEARCH.SUBHEADER": "Suchen und Verwalten von K8s Custom Resourcen",
+    "SEARCH.HEADER": "K8s Custom Ressourcen",
+    "SEARCH.SUBHEADER": "Suchen und Verwalten von K8s Custom Ressourcen",
     "DETAILS_TAB": "Details",
     "HISTORY_TAB": "Verlauf",
     "STATUS_TAB": "Status"
@@ -95,15 +99,14 @@
     "TYPE": "Typ",
     "STATUS": "Status",
     "STATUS_MESSAGE": "Meldung",
-    "RESOURCE_VERSION": "Resource Version",
+    "RESOURCE_VERSION": "Ressource Version",
     "VERSION": "Version",
     "TOOLTIPS": {
-      "NAME": "Name der Custom Resource",
-      "NAME.CRITERIA": "Name der Custom Resource",
-      "TYPE": "Art der Custom Resource",
-      "STATUS": "Status der Custom Resource",
-      "RESOURCE_VERSION": "Version der Custom Resource",
-      "VERSION": "Release version der Custom Resource"
+      "NAME": "Name der K8s Custom Ressource",
+      "TYPE": "Art der K8s Custom Ressource",
+      "STATUS": "Status der K8s Custom Ressource",
+      "RESOURCE_VERSION": "Version der K8s Custom Ressource",
+      "VERSION": "Release version der K8s Custom Ressource"
     },
     "DATA": {
       "NAME": "Name",
@@ -355,22 +358,28 @@
   },
   "EXCEPTIONS": {
     "HTTP_STATUS_0": {
-      "CRDS": "Unbekanntes Problem beim Abrufen von K8s Resourcen - bitte versuchen Sie es noch einmal."
+      "CRD": "Unbekanntes Problem beim Abrufen von K8s Custom Ressourcen - bitte versuchen Sie es noch einmal.",
+      "CRDS": "Unbekanntes Problem beim Abrufen von K8s Custom Ressourcen - bitte versuchen Sie es noch einmal."
     },
     "HTTP_STATUS_204": {
-      "CRDS": "Es wurden keine Custom Resources für die Suchkriterien gefunden."
+      "CRD": "Es wurde keine K8s Custom Ressource für die Suchkriterien gefunden.",
+      "CRDS": "Es wurden keine K8s Custom Ressources für die Suchkriterien gefunden."
     },
     "HTTP_STATUS_401": {
-      "CRDS": "Sie sind nicht autorisiert, um K8s Resourcen zu sehen."
+      "CRD": "Sie sind nicht autorisiert um K8s Custom Ressourcen zu sehen.",
+      "CRDS": "Sie sind nicht autorisiert um K8s Custom Ressourcen zu sehen."
     },
     "HTTP_STATUS_403": {
-      "CRDS": "Sie haben keine Rechte, um K8s Resourcen zu sehen."
+      "CRD": "Sie haben keine Rechte, um die K8s Custom Ressource zu sehen.",
+      "CRDS": "Sie haben keine Rechte, um K8s Custom Ressourcen zu sehen."
     },
     "HTTP_STATUS_404": {
-      "CRDS": "Es konnten keine K8s Resourcen gefunden werden."
+      "CRD": "Die K8s Custom Ressource konnte nicht gefunden werden.",
+      "CRDS": "Es konnten keine K8s Custom Ressourcen gefunden werden."
     },
     "HTTP_STATUS_500": {
-      "CRDS": "Unbekanntes Server-Problem beim Abrufen von K8s Resourcen - bitte versuchen Sie es noch einmal."
+      "CRD": "Unbekanntes Server-Problem beim Abrufen der K8s Custom Ressource - bitte versuchen Sie es noch einmal.",
+      "CRDS": "Unbekanntes Server-Problem beim Abrufen von K8s Custom Ressourcen - bitte versuchen Sie es noch einmal."
     }
   }
 }
