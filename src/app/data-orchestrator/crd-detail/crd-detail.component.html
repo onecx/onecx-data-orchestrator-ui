@@ -3,12 +3,11 @@
   [(visible)]="displayDetailDialog"
   (onHide)="onDialogHide()"
   [baseZIndex]="10000"
-  [draggable]="false"
-  [resizable]="false"
-  [closable]="true"
   [modal]="true"
+  [closable]="true"
+  [draggable]="true"
+  [resizable]="true"
   [style]="{ width: '600px' }"
-  [showHeader]="true"
   [breakpoints]="{
     '992px': '75vw',
     '768px': '90vw',

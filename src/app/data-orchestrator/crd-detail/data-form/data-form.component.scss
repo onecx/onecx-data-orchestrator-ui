@@ -1,7 +1,7 @@
 @import '/src/app/_do-mixins.scss';
 
 @include text-badges;
-@include correct-select-button;
+@include displaying-text-responsive;
 @include dialog-footer-buttons;
 @include dialog-non-full-size-modal;
 
