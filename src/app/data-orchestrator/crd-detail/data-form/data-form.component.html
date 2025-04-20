@@ -2,8 +2,8 @@
   <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
     <div class="flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
       <!-- row 1 -->
-      <div class="flex flex-row flex-wrap row-gap-4">
-        <div class="flex-grow-1 pr-4">
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
@@ -37,8 +37,8 @@
         </div>
       </div>
       <!-- row 2 -->
-      <div class="flex flex-row flex-wrap row-gap-4">
-        <div class="flex-grow-1 pr-4">
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
@@ -72,8 +72,8 @@
         </div>
       </div>
       <!-- row 3 -->
-      <div class="flex flex-row flex-wrap row-gap-4">
-        <div class="flex-grow-1 pr-4">
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
@@ -129,18 +129,18 @@
           <textarea
             pInputTextarea
             type="text"
-            id="do_crd_detail_data_form_data"
-            style="min-height: 2.5rem"
+            id="do_crd_detail_data_data"
             class="w-full textarea-sm"
+            style="min-height: 3rem"
             formControlName="data"
-            rows="1"
+            rows="3"
             [autoResize]="true"
             [attr.aria-label]="'CRD.DATA.DATA' | translate"
             [pTooltip]="'CRD.DATA.DATA' | translate"
             tooltipPosition="top"
             tooltipEvent="hover"
           ></textarea>
-          <label for="do_crd_detail_data_form_data"> {{ 'CRD.DATA.DATA' | translate }} </label>
+          <label for="do_crd_detail_data_data"> {{ 'CRD.DATA.DATA' | translate }} </label>
         </span>
       </div>
     </div>

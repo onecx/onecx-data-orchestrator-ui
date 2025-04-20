@@ -156,28 +156,28 @@
     },
     "PRODUCT": {
       "NAME": "Name",
-      "API_VERSION": "Api Version",
+      "API_VERSION": "API Version",
       "KIND": "Typ",
       "BASE_PATH": "Basis Pfad",
       "DESCRIPTION": "Beschreibung",
-      "DISPLAY_NAME": "Anzeigename",
+      "DISPLAY_NAME": "Produkt",
       "ICON_NAME": "Icon Name",
       "IMAGE_URL": "Bild URL",
       "PRODUCT_NAME": "Produktname",
       "PROVIDER": "Anbieter",
       "VERSION": "Version",
       "TOOLTIPS": {
-        "NAME": "Name",
-        "API_VERSION": "Api Version",
+        "NAME": "Name der K8s Custom Ressource",
+        "API_VERSION": "API Version",
         "KIND": "Typ",
         "BASE_PATH": "Basis Pfad des Produkts",
         "DESCRIPTION": "Beschreibung",
-        "DISPLAY_NAME": "Anzeigename",
+        "DISPLAY_NAME": "Anzeigename des Produkts",
         "ICON_NAME": "Icon Name",
         "IMAGE_URL": "Bild URL",
-        "PRODUCT_NAME": "Produktname",
-        "PROVIDER": "Anbieter",
-        "VERSION": "Version"
+        "PRODUCT_NAME": "Eindeutiger Produktname",
+        "PROVIDER": "Anbieter des Produkts",
+        "VERSION": "Produktversion"
       }
     },
     "SLOT": {

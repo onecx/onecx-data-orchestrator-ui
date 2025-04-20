@@ -156,28 +156,28 @@
     },
     "PRODUCT": {
       "NAME": "Name",
-      "API_VERSION": "Api version",
+      "API_VERSION": "API version",
       "KIND": "Type",
       "BASE_PATH": "Base path",
       "DESCRIPTION": "Description",
-      "DISPLAY_NAME": "Display name",
+      "DISPLAY_NAME": "Product",
       "ICON_NAME": "Icon name",
-      "IMAGE_URL": "Image url",
+      "IMAGE_URL": "Image URL",
       "PRODUCT_NAME": "Product name",
       "PROVIDER": "Provider",
       "VERSION": "Version",
       "TOOLTIPS": {
         "NAME": "Name",
-        "API_VERSION": "Api version",
-        "KIND": "Type",
-        "BASE_PATH": "Base path of the product",
+        "API_VERSION": "API version",
+        "KIND": "Type of the K8s Custom Resource",
+        "BASE_PATH": "Base path of the Product",
         "DESCRIPTION": "Description",
-        "DISPLAY_NAME": "Display name",
+        "DISPLAY_NAME": "Display name of the Product",
         "ICON_NAME": "Icon name",
-        "IMAGE_URL": "Image url",
+        "IMAGE_URL": "Image URL",
         "PRODUCT_NAME": "Product name",
-        "PROVIDER": "Provider",
-        "VERSION": "Version"
+        "PROVIDER": "Provider of Product",
+        "VERSION": "Version of Product"
       }
     },
     "SLOT": {
