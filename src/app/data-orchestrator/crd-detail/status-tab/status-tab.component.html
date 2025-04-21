@@ -1,10 +1,7 @@
-<div class="p-1">
-  <p>
-    <span class="font-medium">{{ 'CRD.STATUS' | translate }}:</span>
-    {{ 'ENUMS.CRD_STATUS.' + status?.status | translate }}
-  </p>
-  <p *ngIf="status?.message" class="break-words">
-    <span class="font-medium">{{ 'CRD.STATUS_MESSAGE' | translate }}:</span><br />
-    {{ status?.message }}
-  </p>
-</div>
+<p-tag
+  [value]="'ENUMS.CRD_STATUS.' + status?.status | translate"
+  [rounded]="true"
+  styleClass="mr-3 mt-2 px-3 floated text-base"
+  [severity]="getSeverity(status?.status)"
+></p-tag>
+<div *ngIf="status?.message" class="break-words">{{ status?.message }}</div>

@@ -30,54 +30,54 @@
       [text]="exceptionKey | translate"
     ></p-message>
 
-    <ng-container *ngIf="!loading && !exceptionKey">
+    <ng-container *ngIf="!loading && !exceptionKey && crdType">
       <app-data-form
-        *ngIf="crdType && crdType.toString() === 'Data'"
+        *ngIf="crdType.toString() === 'Data'"
         [changeMode]="changeMode"
         [dataCrd]="crd"
-        [updateHistory]="prepareHistory(crd)"
+        [updateHistory]="updateHistory"
       />
       <app-database-form
-        *ngIf="crdType && crdType.toString() === 'Database'"
+        *ngIf="crdType.toString() === 'Database'"
         [changeMode]="changeMode"
         [databaseCrd]="crd"
-        [updateHistory]="prepareHistory(crd)"
+        [updateHistory]="updateHistory"
       />
       <app-product-form
-        *ngIf="crdType && crdType.toString() === 'Product'"
+        *ngIf="crdType.toString() === 'Product'"
         [changeMode]="changeMode"
         [productCrd]="crd"
-        [updateHistory]="prepareHistory(crd)"
+        [updateHistory]="updateHistory"
       />
       <app-permission-form
-        *ngIf="crdType && crdType.toString() === 'Permission'"
+        *ngIf="crdType.toString() === 'Permission'"
         [changeMode]="changeMode"
         [permissionCrd]="crd"
-        [updateHistory]="prepareHistory(crd)"
+        [updateHistory]="updateHistory"
       />
       <app-keycloak-form
-        *ngIf="crdType && crdType.toString() === 'KeycloakClient'"
+        *ngIf="crdType.toString() === 'KeycloakClient'"
         [changeMode]="changeMode"
         [keycloakClientCrd]="crd"
-        [updateHistory]="prepareHistory(crd)"
+        [updateHistory]="updateHistory"
       />
       <app-slot-form
-        *ngIf="crdType && crdType.toString() === 'Slot'"
+        *ngIf="crdType.toString() === 'Slot'"
         [changeMode]="changeMode"
         [slotCrd]="crd"
-        [updateHistory]="prepareHistory(crd)"
+        [updateHistory]="updateHistory"
       />
       <app-microfrontend-form
-        *ngIf="crdType && crdType.toString() === 'Microfrontend'"
+        *ngIf="crdType.toString() === 'Microfrontend'"
         [changeMode]="changeMode"
         [microfrontendCrd]="crd"
-        [updateHistory]="prepareHistory(crd)"
+        [updateHistory]="updateHistory"
       />
       <app-microservice-form
-        *ngIf="crdType && crdType.toString() === 'Microservice'"
+        *ngIf="crdType.toString() === 'Microservice'"
         [changeMode]="changeMode"
         [microserviceCrd]="crd"
-        [updateHistory]="prepareHistory(crd)"
+        [updateHistory]="updateHistory"
       />
     </ng-container>
   </ng-container>

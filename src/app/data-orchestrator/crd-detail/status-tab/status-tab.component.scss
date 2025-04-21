@@ -1,3 +1,9 @@
 .break-words {
   word-break: break-word;
 }
+
+:host ::ng-deep {
+  .floated {
+    float: left;
+  }
+}

@@ -74,6 +74,8 @@ export class CrdDetailComponent implements OnChanges {
   public loading = false
   public exceptionKey: string | undefined = undefined
   public displayDateRangeError = false
+  public dateFormat: string
+  public timeFormat: string
   // data
   public crd: any
   public crd$: Observable<any> = of(undefined)
@@ -83,7 +85,10 @@ export class CrdDetailComponent implements OnChanges {
     private readonly user: UserService,
     private readonly dataOrchestratorApi: DataAPIService,
     private readonly msgService: PortalMessageService
-  ) {}
+  ) {
+    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'mm/dd/yy'
+    this.timeFormat = this.user.lang$.getValue() === 'de' ? '24' : '12'
+  }
 
   public ngOnChanges(): void {
     this.getCrd()
@@ -101,16 +106,59 @@ export class CrdDetailComponent implements OnChanges {
       this.crd$ = this.dataOrchestratorApi
         .getCrdByTypeAndName({ type: this.crdType as ContextKind, name: this.crdName })
         .pipe(
-          map((item) => item.crd),
+          map((response) => {
+            console.log(response)
+            const obj = response.crd
+            if (Object.keys(obj as any).length > 0) this.updateHistory = this.prepareHistory(obj).reverse()
+            return obj
+          }),
           catchError((err) => {
             this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRD'
-            console.error('getCustomResourcesByCriteria', err)
+            console.error('getCrdByTypeAndName', err)
             return of({} as any)
           }),
           finalize(() => (this.loading = false))
         )
-      //if (Object.keys(item).length > 0) this.updateHistory = this.prepareHistory().reverse()
     }
+  }
+
+  /**
+   * This method extracts all past updates from the managedFields sub-object and groups them by date on top-level
+   * and all updated fields by its parent-object name underneath.
+   */
+  public prepareHistory(item: any): Update[] {
+    console.log('prepareHistory', item)
+    if (Object.keys(item).length === 0 || !item.metadata?.managedFields) return []
+
+    const managedFields: ManagedField[] = item.metadata.managedFields
+    const history: Update[] = managedFields.map((field) => {
+      const fields: Record<string, string[]> = {}
+
+      function extractFields(obj: Record<string, any>, prefix: string = '') {
+        for (const key in obj) {
+          if (key === '.') continue
+          const newKey = prefix ? `${prefix}.${key}` : key
+          if (Object.keys(obj[key]).length === 0) {
+            const topLevelKey = newKey.split('.')[0].replace(/f:/g, '')
+            const fieldKey = newKey.split('.').slice(1).join('.').replace(/f:/g, '')
+            if (!fields[topLevelKey]) {
+              fields[topLevelKey] = []
+            }
+            fields[topLevelKey].push(fieldKey)
+          } else {
+            extractFields(obj[key], newKey)
+          }
+        }
+      }
+
+      extractFields(field.fieldsV1)
+      return {
+        date: field.time,
+        fields: fields,
+        operation: field.operation
+      }
+    })
+    return history.reverse()
   }
 
   /**
@@ -123,17 +171,16 @@ export class CrdDetailComponent implements OnChanges {
         this.crdType,
         this.submitFormValues(formValuesOfChild)
       )
-      this.dataOrchestratorApi
-        .editCrd({
-          editResourceRequest
-        })
-        .subscribe({
-          next: () => {
-            this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
-            this.hideDialogAndChanged.emit(true)
-          },
-          error: () => this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
-        })
+      this.dataOrchestratorApi.editCrd({ editResourceRequest }).subscribe({
+        next: () => {
+          this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
+          this.hideDialogAndChanged.emit(true)
+        },
+        error: (err) => {
+          this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
+          console.error('editCrd', err)
+        }
+      })
     }
   }
 
@@ -226,44 +273,5 @@ export class CrdDetailComponent implements OnChanges {
       }
     }
     return base
-  }
-
-  /**
-   * This method extracts all past updates from the managedFields sub-object and groups them by date on top-level
-   * and all updated fields by its parent-object name underneath.
-   */
-  public prepareHistory(item: any): Update[] {
-    return []
-    if (Object.keys(item).length === 0 || !item.metadata?.managedFields) return []
-
-    const managedFields: ManagedField[] = item.metadata.managedFields
-    const history: Update[] = managedFields.map((field) => {
-      const fields: Record<string, string[]> = {}
-
-      function extractFields(obj: Record<string, any>, prefix: string = '') {
-        for (const key in obj) {
-          if (key === '.') continue
-          const newKey = prefix ? `${prefix}.${key}` : key
-          if (Object.keys(obj[key]).length === 0) {
-            const topLevelKey = newKey.split('.')[0].replace(/f:/g, '')
-            const fieldKey = newKey.split('.').slice(1).join('.').replace(/f:/g, '')
-            if (!fields[topLevelKey]) {
-              fields[topLevelKey] = []
-            }
-            fields[topLevelKey].push(fieldKey)
-          } else {
-            extractFields(obj[key], newKey)
-          }
-        }
-      }
-
-      extractFields(field.fieldsV1)
-      return {
-        date: field.time,
-        fields: fields,
-        operation: field.operation
-      }
-    })
-    return history.reverse()
   }
 }

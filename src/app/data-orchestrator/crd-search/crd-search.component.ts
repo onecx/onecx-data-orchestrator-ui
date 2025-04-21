@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs'
-import { Table } from 'primeng/table'
 import { PrimeIcons, SelectItem } from 'primeng/api'
 
 import {
@@ -38,19 +37,20 @@ export class CrdSearchComponent implements OnInit {
   public changeMode: ChangeMode = 'VIEW'
   public actions$: Observable<Action[]> | undefined
   public additionalActions!: DataAction[]
-  public crd: GenericCrd | undefined
-  public crds$: Observable<GenericCrd[]> | undefined
   public displayDeleteDialog = false
   public displayDetailDialog = false
   public dateFormat: string
   public allCriteriaLists$: Observable<allCriteriaLists> | undefined
   public allItem: SelectItem | undefined
   private filterData = ''
-  @ViewChild('crdTable', { static: false }) crdTable: Table | undefined
 
+  public crd: GenericCrd | undefined
+  public crds$!: Observable<GenericCrd[]>
   public allMetaData$!: Observable<string>
   public filteredData$ = new BehaviorSubject<RowListGridData[]>([])
   public resultData$ = new BehaviorSubject<RowListGridData[]>([])
+  public diagramColumn: DiagramColumn = { columnType: ColumnType.STRING, id: 'status' }
+  public chartVisible = false
 
   public columns: DataTableColumn[] = [
     {
@@ -99,9 +99,6 @@ export class CrdSearchComponent implements OnInit {
     }
   ]
 
-  diagramColumnId = 'status'
-  diagramColumn: DiagramColumn = { columnType: ColumnType.STRING, id: 'status' }
-  chartVisible = false
   constructor(
     private readonly user: UserService,
     private readonly dataOrchestratorApi: DataAPIService,
@@ -192,20 +189,17 @@ export class CrdSearchComponent implements OnInit {
     this.loading = true
     this.exceptionKey = undefined
     this.crds$ = this.dataOrchestratorApi.getCustomResourcesByCriteria(criteria).pipe(
-      catchError((err) => {
-        this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.MSG_SEARCH_FAILED' })
-        this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
-        console.error('getCustomResourcesByCriteria', err)
-        return of({ stream: [] } as CrdResponse)
-      }),
       map((data: CrdResponse) => {
+        // manage missing status
         const modifiedData = data.customResources?.map((c) => {
           if (c.status === undefined || c.status === null) {
             c.status = GenericCrdStatusEnum.Undefined
           }
           return c
         })
+        // sort
         modifiedData?.sort((a, b) => {
+          // Errors on top of the list
           if (a.status === GenericCrdStatusEnum.Error && b.status !== GenericCrdStatusEnum.Error) {
             return -1
           }
@@ -219,6 +213,12 @@ export class CrdSearchComponent implements OnInit {
         this.resultData$.next(modifiedData as any)
         this.filteredData$.next(modifiedData as any)
         return data.customResources ?? []
+      }),
+      catchError((err) => {
+        this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.MSG_SEARCH_FAILED' })
+        this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
+        console.error('getCustomResourcesByCriteria', err)
+        return of([])
       }),
       finalize(() => (this.loading = false))
     )
