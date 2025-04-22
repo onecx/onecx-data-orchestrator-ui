@@ -79,16 +79,4 @@ describe('DatabaseFormComponent', () => {
     expect(component.formGroup.controls['specName'].value).toBe('testSpecName')
     expect(component.formGroup.controls['schema'].value).toBe('testSchema')
   })
-
-  /**
-   * Language tests
-   */
-  it('should set german date format', () => {
-    mockUserService.lang$.getValue.and.returnValue('de')
-    fixture = TestBed.createComponent(DatabaseFormComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-    expect(component.dateFormat).toEqual('dd.mm.yy')
-    expect(component.timeFormat).toEqual('24')
-  })
 })

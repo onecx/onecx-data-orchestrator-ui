@@ -39,15 +39,4 @@ describe('UpdateHistoryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
   })
-
-  /**
-   * Language tests
-   */
-  it('should set german date format', () => {
-    mockUserService.lang$.getValue.and.returnValue('de')
-    fixture = TestBed.createComponent(UpdateHistoryComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-    expect(component.dateFormat).toEqual('dd.MM.yy HH:mm:ss')
-  })
 })

@@ -5,6 +5,7 @@
       [value]="update.operation + ':  ' + (update.date | date: dateFormat)"
       class="z-1 text-badge-right"
       styleClass="text-base font-normal"
+      [style]="{ 'padding-left': '0.75rem', 'padding-right': '0.75rem' }"
     />
     <div *ngFor="let key of objectKeys(update.fields)" class="grid">
       <div class="col-2 font-bold">{{ key }}</div>
