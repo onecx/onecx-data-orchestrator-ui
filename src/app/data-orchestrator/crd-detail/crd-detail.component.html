@@ -2,12 +2,11 @@
   [header]="'ACTIONS.' + this.changeMode + '.CRD' | translate"
   [(visible)]="displayDetailDialog"
   (onHide)="onDialogHide()"
-  [baseZIndex]="10000"
   [modal]="true"
   [closable]="true"
   [draggable]="true"
   [resizable]="true"
-  [style]="{ width: '600px' }"
+  [style]="exceptionKey ? null : { width: '600px', height: '500px' }"
   [breakpoints]="{
     '992px': '75vw',
     '768px': '90vw',

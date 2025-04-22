@@ -1,48 +1,52 @@
 <p-tabView>
   <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
-    <form [formGroup]="formGroup" errorTailor>
-      <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
-        <div>
+    <div class="flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
+      <!-- row 1 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
           <span class="p-float-label">
             <input
               pInputText
+              type="text"
               inputId="do_crd_detail_database_name"
-              type="text"
               formControlName="metadataName"
-              styleClass="w-15rem"
-              appendTo="body"
-              [pTooltip]="'CRD.DATABASE.TOOLTIPS.NAME' | translate"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.COMMON.NAME' | translate"
+              [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="do_crd_detail_database_name"> {{ 'CRD.DATABASE.NAME' | translate }}</label>
+            <label for="do_crd_detail_database_name"> {{ 'CRD.COMMON.NAME' | translate }}</label>
           </span>
         </div>
-        <div>
+        <div class="flex-grow-1">
           <span class="p-float-label">
             <input
               pInputText
-              inputId="do_crd_detail_database_kind"
               type="text"
+              inputId="do_crd_detail_database_kind"
               formControlName="kind"
-              styleClass="w-15rem"
-              appendTo="body"
-              [pTooltip]="'CRD.DATABASE.TOOLTIPS.KIND' | translate"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.COMMON.KIND' | translate"
+              [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="do_crd_detail_database_kind"> {{ 'CRD.DATABASE.KIND' | translate }}</label>
+            <label for="do_crd_detail_database_kind"> {{ 'CRD.COMMON.KIND' | translate }}</label>
           </span>
         </div>
-        <div>
+      </div>
+      <!-- row 2 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="do_crd_detail_database_host"
               type="text"
+              inputId="do_crd_detail_database_host"
               formControlName="host"
-              styleClass="w-15rem"
-              appendTo="body"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.DATABASE.HOST' | translate"
               [pTooltip]="'CRD.DATABASE.TOOLTIPS.HOST' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
@@ -50,31 +54,34 @@
             <label for="do_crd_detail_database_host"> {{ 'CRD.DATABASE.HOST' | translate }}</label>
           </span>
         </div>
-        <div>
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="do_crd_detail_database_db_name"
               type="text"
+              inputId="do_crd_detail_database_db_name"
               formControlName="specName"
-              styleClass="w-15rem"
-              appendTo="body"
-              [pTooltip]="'CRD.DATABASE.TOOLTIPS.DB_NAME' | translate"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.DATABASE.DATABASE_NAME' | translate"
+              [pTooltip]="'CRD.DATABASE.TOOLTIPS.DATABASE_NAME' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="do_crd_detail_database_db_name"> {{ 'CRD.DATABASE.DB_NAME' | translate }}</label>
+            <label for="do_crd_detail_database_db_name"> {{ 'CRD.DATABASE.DATABASE_NAME' | translate }}</label>
           </span>
         </div>
-        <div>
+      </div>
+      <!-- row 3 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="do_crd_detail_database_schema"
               type="text"
+              inputId="do_crd_detail_database_schema"
               formControlName="schema"
-              styleClass="w-15rem"
-              appendTo="body"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.DATABASE.SCHEMA' | translate"
               [pTooltip]="'CRD.DATABASE.TOOLTIPS.SCHEMA' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
@@ -82,15 +89,15 @@
             <label for="do_crd_detail_database_schema"> {{ 'CRD.DATABASE.SCHEMA' | translate }}</label>
           </span>
         </div>
-        <div>
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="do_crd_detail_database_user"
               type="text"
+              inputId="do_crd_detail_database_user"
               formControlName="user"
-              styleClass="w-15rem"
-              appendTo="body"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.DATABASE.USER' | translate"
               [pTooltip]="'CRD.DATABASE.TOOLTIPS.USER' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
@@ -98,15 +105,18 @@
             <label for="do_crd_detail_database_user"> {{ 'CRD.DATABASE.USER' | translate }}</label>
           </span>
         </div>
-        <div>
+      </div>
+      <!-- row 4 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="do_crd_detail_database_user_search_path"
               type="text"
+              inputId="do_crd_detail_database_user_search_path"
               formControlName="user_search_path"
-              styleClass="w-15rem"
-              appendTo="body"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.DATABASE.USER_SEARCH_PATH' | translate"
               [pTooltip]="'CRD.DATABASE.TOOLTIPS.USER_SEARCH_PATH' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
@@ -117,7 +127,7 @@
           </span>
         </div>
       </div>
-    </form>
+    </div>
   </p-tabPanel>
 
   <p-tabPanel

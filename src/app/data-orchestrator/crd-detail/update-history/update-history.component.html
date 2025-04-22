@@ -1,7 +1,7 @@
 <div class="mt-2 flex flex-column row-gap-2">
-  <div *ngFor="let update of updateHistory" class="card relative p-3 pt-4pb-2 surface-100">
+  <div *ngFor="let update of updateHistory" class="card relative p-3 pb-2 surface-100">
     <p-badge
-      severity="primary"
+      severity="warning"
       [value]="update.operation + ':  ' + (update.date | date: dateFormat)"
       class="z-1 text-badge-right"
       styleClass="text-base font-normal"

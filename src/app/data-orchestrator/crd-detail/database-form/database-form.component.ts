@@ -15,8 +15,8 @@ export class DatabaseFormComponent implements OnChanges {
   @Input() public databaseCrd: CustomResourceDatabase | undefined
   @Input() public dateFormat: string | undefined
   @Input() public updateHistory: Update[] | undefined
-  objectKeys = Object.keys
 
+  public objectKeys = Object.keys
   public formGroup: FormGroup
 
   constructor() {

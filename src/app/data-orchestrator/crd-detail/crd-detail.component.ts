@@ -96,6 +96,7 @@ export class CrdDetailComponent implements OnChanges {
 
   public onDialogHide() {
     this.displayDetailDialog = false
+    this.exceptionKey = undefined
     this.hideDialogAndChanged.emit(false)
   }
 
