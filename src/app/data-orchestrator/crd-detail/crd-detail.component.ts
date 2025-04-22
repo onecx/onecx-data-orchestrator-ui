@@ -78,7 +78,7 @@ export class CrdDetailComponent implements OnChanges {
   public timeFormat: string
   // data
   public crd: any
-  public crd$: Observable<any> = of(undefined)
+  public crd$!: Observable<any>
   public updateHistory: Update[] = []
 
   constructor(
@@ -86,12 +86,12 @@ export class CrdDetailComponent implements OnChanges {
     private readonly dataOrchestratorApi: DataAPIService,
     private readonly msgService: PortalMessageService
   ) {
-    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'mm/dd/yy'
+    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yyyy' : 'mm/dd/yyyy'
     this.timeFormat = this.user.lang$.getValue() === 'de' ? '24' : '12'
   }
 
   public ngOnChanges(): void {
-    this.getCrd()
+    if (this.displayDetailDialog) this.getCrd()
   }
 
   public onDialogHide() {
@@ -107,10 +107,9 @@ export class CrdDetailComponent implements OnChanges {
         .getCrdByTypeAndName({ type: this.crdType as ContextKind, name: this.crdName })
         .pipe(
           map((response) => {
-            console.log(response)
-            const obj = response.crd
-            if (Object.keys(obj as any).length > 0) this.updateHistory = this.prepareHistory(obj).reverse()
-            return obj
+            const obj: any | undefined = response.crd
+            this.updateHistory = this.prepareHistory(obj).reverse()
+            return obj ?? {}
           }),
           catchError((err) => {
             this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRD'
@@ -127,7 +126,6 @@ export class CrdDetailComponent implements OnChanges {
    * and all updated fields by its parent-object name underneath.
    */
   public prepareHistory(item: any): Update[] {
-    console.log('prepareHistory', item)
     if (Object.keys(item).length === 0 || !item.metadata?.managedFields) return []
 
     const managedFields: ManagedField[] = item.metadata.managedFields
@@ -150,7 +148,6 @@ export class CrdDetailComponent implements OnChanges {
           }
         }
       }
-
       extractFields(field.fieldsV1)
       return {
         date: field.time,

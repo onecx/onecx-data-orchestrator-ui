@@ -113,7 +113,7 @@ export class CrdSearchComponent implements OnInit {
     this.initFilter()
   }
 
-  initFilter() {
+  private initFilter() {
     this.resultData$
       .pipe(
         map((array) => {
@@ -191,11 +191,12 @@ export class CrdSearchComponent implements OnInit {
     this.crds$ = this.dataOrchestratorApi.getCustomResourcesByCriteria(criteria).pipe(
       map((data: CrdResponse) => {
         // manage missing status
-        const modifiedData = data.customResources?.map((c) => {
+        const modifiedData: GenericCrd[] = []
+        data.customResources?.map((c) => {
           if (c.status === undefined || c.status === null) {
             c.status = GenericCrdStatusEnum.Undefined
           }
-          return c
+          modifiedData.push(c)
         })
         // sort
         modifiedData?.sort((a, b) => {
@@ -212,7 +213,7 @@ export class CrdSearchComponent implements OnInit {
         })
         this.resultData$.next(modifiedData as any)
         this.filteredData$.next(modifiedData as any)
-        return data.customResources ?? []
+        return modifiedData
       }),
       catchError((err) => {
         this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.MSG_SEARCH_FAILED' })

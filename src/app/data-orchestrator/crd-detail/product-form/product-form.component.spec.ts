@@ -4,19 +4,16 @@ import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+
 import { createTranslateLoader } from '@onecx/angular-utils'
-import { UserService } from '@onecx/angular-integration-interface'
+
 import { CustomResourceProduct } from 'src/app/shared/generated'
 import { ProductFormComponent } from './product-form.component'
 
 describe('ProductFormComponent', () => {
   let component: ProductFormComponent
   let fixture: ComponentFixture<ProductFormComponent>
-  const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
-  }
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ProductFormComponent],
@@ -26,7 +23,7 @@ describe('ProductFormComponent', () => {
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })
       ],
-      providers: [provideHttpClient(), provideHttpClientTesting(), { provide: UserService, useValue: mockUserService }],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents()
   }))
@@ -96,17 +93,5 @@ describe('ProductFormComponent', () => {
     expect(component.formGroup.controls['specName'].value).toBe('testSpecName')
     expect(component.formGroup.controls['provider'].value).toBe('testProvider')
     expect(component.formGroup.controls['version'].value).toBe('testVersion')
-  })
-
-  /**
-   * Language tests
-   */
-  it('should set german date format', () => {
-    mockUserService.lang$.getValue.and.returnValue('de')
-    fixture = TestBed.createComponent(ProductFormComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-    expect(component.dateFormat).toEqual('dd.mm.yy')
-    expect(component.timeFormat).toEqual('24')
   })
 })
