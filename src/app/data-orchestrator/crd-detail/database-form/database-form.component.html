@@ -1,12 +1,12 @@
 <p-tabView>
-  <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
+  <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
     <form [formGroup]="formGroup" errorTailor>
       <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
         <div>
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="database_detail_name"
+              inputId="do_crd_detail_database_name"
               type="text"
               formControlName="metadataName"
               styleClass="w-15rem"
@@ -15,14 +15,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="database_detail_name"> {{ 'CRD.DATABASE.NAME' | translate }}</label>
+            <label for="do_crd_detail_database_name"> {{ 'CRD.DATABASE.NAME' | translate }}</label>
           </span>
         </div>
         <div>
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="database_detail_kind"
+              inputId="do_crd_detail_database_kind"
               type="text"
               formControlName="kind"
               styleClass="w-15rem"
@@ -31,14 +31,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="database_detail_kind"> {{ 'CRD.DATABASE.KIND' | translate }}</label>
+            <label for="do_crd_detail_database_kind"> {{ 'CRD.DATABASE.KIND' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="database_detail_host"
+              inputId="do_crd_detail_database_host"
               type="text"
               formControlName="host"
               styleClass="w-15rem"
@@ -47,14 +47,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="database_detail_host"> {{ 'CRD.DATABASE.HOST' | translate }}</label>
+            <label for="do_crd_detail_database_host"> {{ 'CRD.DATABASE.HOST' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="database_detail_db_name"
+              inputId="do_crd_detail_database_db_name"
               type="text"
               formControlName="specName"
               styleClass="w-15rem"
@@ -63,14 +63,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="database_detail_db_name"> {{ 'CRD.DATABASE.DB_NAME' | translate }}</label>
+            <label for="do_crd_detail_database_db_name"> {{ 'CRD.DATABASE.DB_NAME' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="database_detail_schema"
+              inputId="do_crd_detail_database_schema"
               type="text"
               formControlName="schema"
               styleClass="w-15rem"
@@ -79,14 +79,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="database_detail_schema"> {{ 'CRD.DATABASE.SCHEMA' | translate }}</label>
+            <label for="do_crd_detail_database_schema"> {{ 'CRD.DATABASE.SCHEMA' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="database_detail_user"
+              inputId="do_crd_detail_database_user"
               type="text"
               formControlName="user"
               styleClass="w-15rem"
@@ -95,14 +95,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="database_detail_user"> {{ 'CRD.DATABASE.USER' | translate }}</label>
+            <label for="do_crd_detail_database_user"> {{ 'CRD.DATABASE.USER' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="database_detail_user_search_path"
+              inputId="do_crd_detail_database_user_search_path"
               type="text"
               formControlName="user_search_path"
               styleClass="w-15rem"
@@ -111,19 +111,23 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="database_detail_user_search_path"> {{ 'CRD.DATABASE.USER_SEARCH_PATH' | translate }}</label>
+            <label for="do_crd_detail_database_user_search_path">
+              {{ 'CRD.DATABASE.USER_SEARCH_PATH' | translate }}</label
+            >
           </span>
         </div>
       </div>
     </form>
   </p-tabPanel>
+
   <p-tabPanel
-    [header]="'DIALOG.HISTORY_TAB' | translate"
+    [header]="'DIALOG.TABS.CHANGES' | translate"
     *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
   >
-    <app-update-history [updateHistory]="updateHistory" />
+    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
   </p-tabPanel>
-  <p-tabPanel [header]="'DIALOG.STATUS_TAB' | translate" *ngIf="databaseCrd?.status">
+
+  <p-tabPanel [header]="'DIALOG.TABS.STATUS' | translate" *ngIf="databaseCrd?.status">
     <app-status-tab [status]="databaseCrd?.status" />
   </p-tabPanel>
 </p-tabView>

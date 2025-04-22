@@ -193,9 +193,7 @@ export class CrdSearchComponent implements OnInit {
         // manage missing status
         const modifiedData: GenericCrd[] = []
         data.customResources?.map((c) => {
-          if (c.status === undefined || c.status === null) {
-            c.status = GenericCrdStatusEnum.Undefined
-          }
+          c.status = c.status ?? GenericCrdStatusEnum.Undefined
           modifiedData.push(c)
         })
         // sort

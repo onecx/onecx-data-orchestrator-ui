@@ -73,8 +73,7 @@ describe('CrdDetailComponent', () => {
 
       fixture.detectChanges()
 
-      expect(component.dateFormat).toEqual('dd.mm.yyyy')
-      expect(component.timeFormat).toEqual('24')
+      expect(component.datetimeFormat).toEqual('dd.MM.yyyy HH:mm:ss')
     })
 
     it('should set english date format', () => {
@@ -84,8 +83,7 @@ describe('CrdDetailComponent', () => {
 
       fixture.detectChanges()
 
-      expect(component.dateFormat).toEqual('mm/dd/yyyy')
-      expect(component.timeFormat).toEqual('12')
+      expect(component.datetimeFormat).toEqual('M/d/yyyy, hh:mm:ss a')
     })
   })
 
@@ -181,6 +179,7 @@ describe('CrdDetailComponent', () => {
           done()
         }
       })
+      expect(component.loading).toBeFalse()
     })
   })
 

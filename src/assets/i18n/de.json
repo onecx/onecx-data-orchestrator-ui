@@ -89,9 +89,11 @@
   "DIALOG": {
     "SEARCH.HEADER": "K8s Custom Ressourcen",
     "SEARCH.SUBHEADER": "Suchen und Verwalten von K8s Custom Ressourcen",
-    "DETAILS_TAB": "Details",
-    "HISTORY_TAB": "Verlauf",
-    "STATUS_TAB": "Status"
+    "TABS": {
+      "DETAILS": "Details",
+      "CHANGES": "Änderungen",
+      "STATUS": "Status"
+    }
   },
   "CRD": {
     "ID": "Id",

@@ -13,6 +13,7 @@ import { Update } from '../crd-detail.component'
 export class ProductFormComponent implements OnChanges {
   @Input() public changeMode: ChangeMode = 'VIEW'
   @Input() public productCrd: CustomResourceProduct | undefined
+  @Input() public dateFormat: string | undefined
   @Input() public updateHistory: Update[] | undefined
 
   public formGroup: FormGroup

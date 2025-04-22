@@ -1,12 +1,12 @@
 <p-tabView>
-  <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
+  <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
     <form [formGroup]="formGroup" errorTailor>
       <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
         <div>
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="keycloak_detail_name"
+              inputId="do_crd_detail_keycloak_name"
               type="text"
               formControlName="name"
               styleClass="w-15rem"
@@ -15,14 +15,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_name"> {{ 'CRD.KEYCLOAK.NAME' | translate }}</label>
+            <label for="do_crd_detail_keycloak_name"> {{ 'CRD.KEYCLOAK.NAME' | translate }}</label>
           </span>
         </div>
         <div>
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="keycloak_detail_kind"
+              inputId="do_crd_detail_keycloak_kind"
               type="text"
               formControlName="kind"
               styleClass="w-15rem"
@@ -31,14 +31,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_kind"> {{ 'CRD.KEYCLOAK.KIND' | translate }}</label>
+            <label for="do_crd_detail_keycloak_kind"> {{ 'CRD.KEYCLOAK.KIND' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_basePath"
+              inputId="do_crd_detail_keycloak_basePath"
               type="text"
               formControlName="basePath"
               styleClass="w-15rem"
@@ -47,14 +47,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_basePath"> {{ 'CRD.KEYCLOAK.BASE_PATH' | translate }}</label>
+            <label for="do_crd_detail_keycloak_basePath"> {{ 'CRD.KEYCLOAK.BASE_PATH' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_description"
+              inputId="do_crd_detail_keycloak_description"
               type="text"
               formControlName="description"
               styleClass="w-15rem"
@@ -63,14 +63,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_description"> {{ 'CRD.KEYCLOAK.DESCRIPTION' | translate }}</label>
+            <label for="do_crd_detail_keycloak_description"> {{ 'CRD.KEYCLOAK.DESCRIPTION' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_realm"
+              inputId="do_crd_detail_keycloak_realm"
               type="text"
               formControlName="realm"
               styleClass="w-15rem"
@@ -79,7 +79,7 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_realm"> {{ 'CRD.KEYCLOAK.REALM' | translate }} </label>
+            <label for="do_crd_detail_keycloak_realm"> {{ 'CRD.KEYCLOAK.REALM' | translate }} </label>
           </span>
         </div>
 
@@ -87,7 +87,7 @@
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_type"
+              inputId="do_crd_detail_keycloak_type"
               type="text"
               formControlName="type"
               styleClass="w-15rem"
@@ -96,7 +96,7 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_type"> {{ 'CRD.KEYCLOAK.TYPE' | translate }} </label>
+            <label for="do_crd_detail_keycloak_type"> {{ 'CRD.KEYCLOAK.TYPE' | translate }} </label>
           </span>
         </div>
         <div class="mt-auto mb-auto">
@@ -104,7 +104,7 @@
             type="text"
             [binary]="true"
             [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_bearer_only"
+            inputId="do_crd_detail_keycloak_bearer_only"
             formControlName="bearerOnly"
             appendTo="body"
             [pTooltip]="'CRD.KEYCLOAK.BEARER_ONLY.TOOLTIPS' | translate"
@@ -117,7 +117,7 @@
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_client_authenticator_type"
+              inputId="do_crd_detail_keycloak_client_authenticator_type"
               type="text"
               formControlName="clientAuthenticatorType"
               styleClass="w-15rem"
@@ -126,7 +126,7 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_client_authenticator_type">
+            <label for="do_crd_detail_keycloak_client_authenticator_type">
               {{ 'CRD.KEYCLOAK.CLIENT_AUTHENTICATOR_TYPE' | translate }}
             </label>
           </span>
@@ -136,7 +136,7 @@
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_client_id"
+              inputId="do_crd_detail_keycloak_client_id"
               type="text"
               formControlName="clientId"
               styleClass="w-15rem"
@@ -145,7 +145,7 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_client_id"> {{ 'CRD.KEYCLOAK.CLIENT_ID' | translate }} </label>
+            <label for="do_crd_detail_keycloak_client_id"> {{ 'CRD.KEYCLOAK.CLIENT_ID' | translate }} </label>
           </span>
         </div>
         <div class="mt-auto mb-auto">
@@ -153,7 +153,7 @@
             type="text"
             [binary]="true"
             [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_direct_access_grants_enabled"
+            inputId="do_crd_detail_keycloak_direct_access_grants_enabled"
             formControlName="directAccessGrantsEnabled"
             appendTo="body"
             [pTooltip]="'CRD.KEYCLOAK.DIRECT_ACCESS_GRANTS_ENABLED.TOOLTIPS' | translate"
@@ -167,7 +167,7 @@
             type="text"
             [binary]="true"
             [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_enabled"
+            inputId="do_crd_detail_keycloak_enabled"
             formControlName="enabled"
             appendTo="body"
             [pTooltip]="'CRD.KEYCLOAK.ENABLED.TOOLTIPS' | translate"
@@ -181,7 +181,7 @@
             type="text"
             [binary]="true"
             [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_implicit_flow_enabled"
+            inputId="do_crd_detail_keycloak_implicit_flow_enabled"
             formControlName="implicitFlowEnabled"
             appendTo="body"
             [pTooltip]="'CRD.KEYCLOAK.IMPLICIT_FLOW_ENABLED.TOOLTIPS' | translate"
@@ -191,7 +191,7 @@
           ></p-checkbox>
         </div>
         <div>
-          <span class="keycloak_detail_p-float-label" controlErrorAnchor>
+          <span class="do_crd_detail_keycloak_p-float-label" controlErrorAnchor>
             <input
               pInputText
               inputId="protocol"
@@ -203,7 +203,7 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_protocol"> {{ 'CRD.KEYCLOAK.PROTOCOL' | translate }} </label>
+            <label for="do_crd_detail_keycloak_protocol"> {{ 'CRD.KEYCLOAK.PROTOCOL' | translate }} </label>
           </span>
         </div>
         <div class="mt-auto mb-auto">
@@ -211,7 +211,7 @@
             type="text"
             [binary]="true"
             [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_public_client"
+            inputId="do_crd_detail_keycloak_public_client"
             formControlName="publicClient"
             appendTo="body"
             [pTooltip]="'CRD.KEYCLOAK.PUBLIC_CLIENT.TOOLTIPS' | translate"
@@ -225,7 +225,7 @@
             type="text"
             [binary]="true"
             [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_service_accounts_enabled"
+            inputId="do_crd_detail_keycloak_service_accounts_enabled"
             formControlName="serviceAccountsEnabled"
             appendTo="body"
             [pTooltip]="'CRD.KEYCLOAK.SERVICE_ACCOUNTS_ENABLED.TOOLTIPS' | translate"
@@ -239,7 +239,7 @@
             type="text"
             [binary]="true"
             [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_standard_flow_enabled"
+            inputId="do_crd_detail_keycloak_standard_flow_enabled"
             formControlName="standardFlowEnabled"
             appendTo="body"
             [pTooltip]="'CRD.KEYCLOAK.STANDARD_FLOW_ENABLED.TOOLTIPS' | translate"
@@ -251,13 +251,15 @@
       </div>
     </form>
   </p-tabPanel>
+
   <p-tabPanel
-    [header]="'DIALOG.HISTORY_TAB' | translate"
+    [header]="'DIALOG.TABS.CHANGES' | translate"
     *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
   >
-    <app-update-history [updateHistory]="updateHistory" />
+    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
   </p-tabPanel>
-  <p-tabPanel [header]="'DIALOG.STATUS_TAB' | translate" *ngIf="keycloakClientCrd?.status">
+
+  <p-tabPanel [header]="'DIALOG.TABS.STATUS' | translate" *ngIf="keycloakClientCrd?.status">
     <app-status-tab [status]="keycloakClientCrd?.status" />
   </p-tabPanel>
 </p-tabView>

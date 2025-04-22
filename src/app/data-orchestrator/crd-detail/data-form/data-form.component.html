@@ -1,10 +1,10 @@
 <p-tabView>
-  <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
+  <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
     <div class="flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
       <!-- row 1 -->
       <div class="flex flex-row flex-wrap justify-content-between gap-4">
         <div class="flex-grow-1">
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
               type="text"
@@ -20,7 +20,7 @@
           </span>
         </div>
         <div class="flex-grow-1">
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
               type="text"
@@ -148,12 +148,12 @@
 
   <p-tabPanel
     *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
-    [header]="'DIALOG.HISTORY_TAB' | translate"
+    [header]="'DIALOG.TABS.CHANGES' | translate"
   >
-    <app-update-history [updateHistory]="updateHistory" />
+    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
   </p-tabPanel>
 
-  <p-tabPanel *ngIf="dataCrd?.status" [header]="'DIALOG.STATUS_TAB' | translate">
+  <p-tabPanel *ngIf="dataCrd?.status" [header]="'DIALOG.TABS.STATUS' | translate">
     <app-status-tab [status]="dataCrd?.status" />
   </p-tabPanel>
 </p-tabView>
