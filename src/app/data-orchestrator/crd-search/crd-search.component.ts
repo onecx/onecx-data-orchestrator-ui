@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs'
-import { Table } from 'primeng/table'
 import { PrimeIcons, SelectItem } from 'primeng/api'
 
 import {
@@ -23,7 +22,7 @@ import {
   GetCustomResourcesByCriteriaRequestParams
 } from 'src/app/shared/generated'
 
-type ChangeMode = 'VIEW' | 'NEW' | 'EDIT'
+export type ChangeMode = 'VIEW' | 'NEW' | 'EDIT'
 type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
 
 @Component({
@@ -35,22 +34,23 @@ export class CrdSearchComponent implements OnInit {
   // dialog
   public loading = false
   public exceptionKey: string | undefined = undefined
-  public changeMode: ChangeMode = 'NEW'
+  public changeMode: ChangeMode = 'VIEW'
   public actions$: Observable<Action[]> | undefined
   public additionalActions!: DataAction[]
-  public crd: GenericCrd | undefined
-  public crds$: Observable<GenericCrd[]> | undefined
   public displayDeleteDialog = false
   public displayDetailDialog = false
   public dateFormat: string
   public allCriteriaLists$: Observable<allCriteriaLists> | undefined
   public allItem: SelectItem | undefined
   private filterData = ''
-  @ViewChild('crdTable', { static: false }) crdTable: Table | undefined
 
+  public crd: GenericCrd | undefined
+  public crds$!: Observable<GenericCrd[]>
   public allMetaData$!: Observable<string>
   public filteredData$ = new BehaviorSubject<RowListGridData[]>([])
   public resultData$ = new BehaviorSubject<RowListGridData[]>([])
+  public diagramColumn: DiagramColumn = { columnType: ColumnType.STRING, id: 'status' }
+  public chartVisible = false
 
   public columns: DataTableColumn[] = [
     {
@@ -99,9 +99,6 @@ export class CrdSearchComponent implements OnInit {
     }
   ]
 
-  diagramColumnId = 'status'
-  diagramColumn: DiagramColumn = { columnType: ColumnType.STRING, id: 'status' }
-  chartVisible = false
   constructor(
     private readonly user: UserService,
     private readonly dataOrchestratorApi: DataAPIService,
@@ -116,7 +113,7 @@ export class CrdSearchComponent implements OnInit {
     this.initFilter()
   }
 
-  initFilter() {
+  private initFilter() {
     this.resultData$
       .pipe(
         map((array) => {
@@ -181,29 +178,29 @@ export class CrdSearchComponent implements OnInit {
   public toggleChartVisibility() {
     this.chartVisible = !this.chartVisible
   }
+
   /****************************************************************************
    *  SEARCH CRDs
    */
   public onSearch(criteria: GetCustomResourcesByCriteriaRequestParams, reuseCriteria = false): void {
-    this.exceptionKey = undefined
     if (!reuseCriteria) {
       if (criteria?.crdSearchCriteria?.name === '') criteria.crdSearchCriteria.name = undefined
     }
     this.loading = true
+    this.exceptionKey = undefined
     this.crds$ = this.dataOrchestratorApi.getCustomResourcesByCriteria(criteria).pipe(
-      catchError((err) => {
-        this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
-        this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.MSG_SEARCH_FAILED' })
-        return of({ stream: [] } as CrdResponse)
-      }),
       map((data: CrdResponse) => {
-        const modifiedData = data.customResources?.map((c) => {
+        // manage missing status
+        const modifiedData: GenericCrd[] = []
+        data.customResources?.map((c) => {
           if (c.status === undefined || c.status === null) {
             c.status = GenericCrdStatusEnum.Undefined
           }
-          return c
+          modifiedData.push(c)
         })
+        // sort
         modifiedData?.sort((a, b) => {
+          // Errors on top of the list
           if (a.status === GenericCrdStatusEnum.Error && b.status !== GenericCrdStatusEnum.Error) {
             return -1
           }
@@ -216,7 +213,13 @@ export class CrdSearchComponent implements OnInit {
         })
         this.resultData$.next(modifiedData as any)
         this.filteredData$.next(modifiedData as any)
-        return data.customResources ?? []
+        return modifiedData
+      }),
+      catchError((err) => {
+        this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.MSG_SEARCH_FAILED' })
+        this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
+        console.error('getCustomResourcesByCriteria', err)
+        return of([])
       }),
       finalize(() => (this.loading = false))
     )
@@ -237,15 +240,15 @@ export class CrdSearchComponent implements OnInit {
   /****************************************************************************
    *  CHANGES
    */
-  public onCloseDetail(refresh: boolean): void {
-    this.displayDetailDialog = false
-    this.crd = undefined
-  }
-
   public onDetail(ev: RowListGridData, mode: ChangeMode): void {
     this.changeMode = mode
     this.crd = ev as GenericCrd
     this.displayDetailDialog = true
+  }
+
+  public onCloseDetail(refresh: boolean): void {
+    this.displayDetailDialog = false
+    this.crd = undefined
   }
 
   public onTouch(item: GenericCrd): void {

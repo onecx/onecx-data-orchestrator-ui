@@ -3,19 +3,16 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+
 import { createTranslateLoader } from '@onecx/angular-utils'
-import { UserService } from '@onecx/angular-integration-interface'
+
 import { CustomResourceData, StatusStatusEnum } from 'src/app/shared/generated'
 import { DataFormComponent } from './data-form.component'
 
 describe('DataFormComponent', () => {
   let component: DataFormComponent
   let fixture: ComponentFixture<DataFormComponent>
-  const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
-  }
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DataFormComponent],
@@ -24,7 +21,7 @@ describe('DataFormComponent', () => {
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })
       ],
-      providers: [provideHttpClient(), provideHttpClientTesting(), { provide: UserService, useValue: mockUserService }],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents()
   }))
@@ -76,17 +73,5 @@ describe('DataFormComponent', () => {
     component.ngOnChanges()
     expect(component.formGroup.controls['name'].value).toBe('testName')
     expect(component.formGroup.controls['description'].value).toBe('testDescription')
-  })
-
-  /**
-   * Language tests
-   */
-  it('should set german date format', () => {
-    mockUserService.lang$.getValue.and.returnValue('de')
-    fixture = TestBed.createComponent(DataFormComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-    expect(component.dateFormat).toEqual('dd.mm.yy')
-    expect(component.timeFormat).toEqual('24')
   })
 })

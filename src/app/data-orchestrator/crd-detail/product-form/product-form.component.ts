@@ -1,28 +1,23 @@
 import { Component, Input, OnChanges } from '@angular/core'
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
-import { UserService } from '@onecx/angular-integration-interface'
+import { FormControl, FormGroup } from '@angular/forms'
+
 import { CustomResourceProduct } from 'src/app/shared/generated'
+
+import { ChangeMode } from '../../crd-search/crd-search.component'
 import { Update } from '../crd-detail.component'
 
 @Component({
   selector: 'app-product-form',
-  templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.scss']
+  templateUrl: './product-form.component.html'
 })
 export class ProductFormComponent implements OnChanges {
-  @Input() public changeMode = 'VIEW'
+  @Input() public changeMode: ChangeMode = 'VIEW'
   @Input() public productCrd: CustomResourceProduct | undefined
   @Input() public updateHistory: Update[] | undefined
 
   public formGroup: FormGroup
-  public dateFormat: string
-  public timeFormat: string
-  constructor(
-    private readonly user: UserService,
-    private readonly fb: FormBuilder
-  ) {
-    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'mm/dd/yy'
-    this.timeFormat = this.user.lang$.getValue() === 'de' ? '24' : '12'
+
+  constructor() {
     this.formGroup = new FormGroup({
       metadataName: new FormControl({ value: null, disabled: true }),
       kind: new FormControl({ value: null, disabled: true }),

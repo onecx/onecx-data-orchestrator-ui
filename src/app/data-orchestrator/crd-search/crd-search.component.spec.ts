@@ -86,20 +86,22 @@ describe('CrdSearchComponent', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
-    expect(component).toBeTruthy()
-  })
+  describe('initialize', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy()
+    })
 
-  it('should filter data based on filterData', () => {
-    component.resultData$ = new BehaviorSubject(crdData)
-    ;(component as any).filterData = 'UPDATED'
+    it('should filter data based on filterData', () => {
+      component.resultData$ = new BehaviorSubject(crdData)
+      ;(component as any).filterData = 'UPDATED'
 
-    component.filteredData$ = new BehaviorSubject(crdData)
+      component.filteredData$ = new BehaviorSubject(crdData)
 
-    component.initFilter()
+      component.ngOnInit()
 
-    component.filteredData$.subscribe((filteredData) => {
-      expect(filteredData.length).toEqual(1)
+      component.filteredData$.subscribe((filteredData) => {
+        expect(filteredData.length).toEqual(1)
+      })
     })
   })
 
@@ -109,11 +111,11 @@ describe('CrdSearchComponent', () => {
 
       component.onSearch({ crdSearchCriteria: { type: [ContextKind.Data] } })
 
-      component.crds$!.subscribe({
+      component.crds$.subscribe({
         next: (data) => {
           expect(data.length).toBe(2)
-          expect(data[0]).toEqual(crdData[0])
-          expect(data[1]).toEqual(crdData[1])
+          expect(data[0]).toEqual(crdData[1])
+          expect(data[1]).toEqual(crdData[0])
           done()
         },
         error: done.fail
@@ -126,7 +128,7 @@ describe('CrdSearchComponent', () => {
 
     component.onSearch({ crdSearchCriteria: { type: [ContextKind.Data], name: 'onecx-help-ui' } })
 
-    component.crds$!.subscribe({
+    component.crds$.subscribe({
       next: (data) => {
         expect(data.length).toBe(1)
         expect(data[0]).toEqual(crdData[0])
@@ -144,22 +146,24 @@ describe('CrdSearchComponent', () => {
   })
 
   it('should display an error message if the search call fails', (done) => {
-    const err = { status: '400' }
-    apiServiceSpy.getCustomResourcesByCriteria.and.returnValue(throwError(() => err))
+    const errorResponse = { status: 403, statusText: 'No permissions' }
+    apiServiceSpy.getCustomResourcesByCriteria.and.returnValue(throwError(() => errorResponse))
+    spyOn(console, 'error')
 
     component.onSearch({ crdSearchCriteria: { type: [ContextKind.Data] } })
 
-    component.crds$!.subscribe({
+    component.crds$.subscribe({
       next: (data) => {
         expect(data.length).toBe(0)
         done()
       },
       error: () => {
-        expect(component.exceptionKey).toEqual('EXCEPTIONS.HTTP_STATUS_400.CRDS')
+        expect(component.exceptionKey).toEqual('EXCEPTIONS.HTTP_STATUS_' + errorResponse.status + '.CRDS')
         expect(msgServiceSpy.error).toHaveBeenCalledWith({
           summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED',
-          detailKey: 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
+          detailKey: component.exceptionKey
         })
+        expect(console.error).toHaveBeenCalledWith('getCustomResourcesByCriteria', errorResponse)
         done.fail
       }
     })
@@ -179,12 +183,12 @@ describe('CrdSearchComponent', () => {
 
     component.onSearch({ crdSearchCriteria: { type: [ContextKind.Data] } })
 
-    component.crds$!.subscribe({
+    component.crds$.subscribe({
       next: (data) => {
         expect(data[0]['status']).toEqual(GenericCrdStatusEnum.Error)
         expect(data[1]['status']).toEqual(GenericCrdStatusEnum.Error)
-        expect(data[2]['status']).toEqual(GenericCrdStatusEnum.Created)
-        expect(data[3]['status']).toEqual(GenericCrdStatusEnum.Undefined)
+        expect(data[2]['status']).toEqual(GenericCrdStatusEnum.Undefined)
+        expect(data[3]['status']).toEqual(GenericCrdStatusEnum.Created)
         expect(data[4]['status']).toEqual(GenericCrdStatusEnum.Undefined)
         done()
       },
@@ -217,112 +221,124 @@ describe('CrdSearchComponent', () => {
     expect(component.displayDetailDialog).toBeFalse()
     expect(component.crd).toBeUndefined()
   })
+
   /*
    * UI ACTIONS
    */
+  describe('ui actions', () => {
+    it('should show details of an crd', () => {
+      const ev: RowListGridData = { id: '1', imagePath: '', ...crdData[0] }
+      const mode = 'EDIT'
 
-  it('should show details of an crd', () => {
-    const ev: RowListGridData = { id: '1', imagePath: '', ...crdData[0] }
-    const mode = 'EDIT'
+      component.onDetail(ev, mode)
 
-    component.onDetail(ev, mode)
-
-    expect(component.changeMode).toEqual(mode)
-    expect(component.crd).toEqual({ id: '1', imagePath: '', ...crdData[0] })
-    expect(component.displayDetailDialog).toBeTrue()
-  })
-
-  it('should touch a crd', () => {
-    apiServiceSpy.touchCrdByNameAndType.and.returnValue(of({}))
-    component.onTouch(crdData[0])
-    expect(msgServiceSpy.success).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.TOUCH.MESSAGE.OK' })
-  })
-
-  it('should display error if touch fails', () => {
-    apiServiceSpy.touchCrdByNameAndType.and.returnValue(throwError(() => new Error()))
-    component.crd = {
-      name: ''
-    }
-    component.onTouch(crdData[0])
-    expect(msgServiceSpy.error).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.TOUCH.MESSAGE.NOK' })
-  })
-
-  it('should trigger diagram action', () => {
-    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.SEARCH.SHOW_DIAGRAM': 'Show diagram' }))
-    spyOn(component, 'toggleChartVisibility')
-
-    component.ngOnInit()
-    component.actions$?.subscribe((action) => {
-      action[0].actionCallback()
+      expect(component.changeMode).toEqual(mode)
+      expect(component.crd).toEqual({ id: '1', imagePath: '', ...crdData[0] })
+      expect(component.displayDetailDialog).toBeTrue()
     })
 
-    expect(component.toggleChartVisibility).toHaveBeenCalled()
-  })
+    it('should touch a crd', () => {
+      apiServiceSpy.touchCrdByNameAndType.and.returnValue(of({}))
 
-  it('should show/hide diagram', () => {
-    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.SEARCH.SHOW_DIAGRAM': 'Show diagram' }))
-    spyOn(component, 'toggleChartVisibility').and.callThrough()
+      component.onTouch(crdData[0])
 
-    component.ngOnInit()
-    component.actions$?.subscribe((action) => {
-      action[0].actionCallback()
+      expect(msgServiceSpy.success).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.TOUCH.MESSAGE.OK' })
     })
 
-    expect(component.toggleChartVisibility).toHaveBeenCalled()
-    expect(component.chartVisible).toBeTrue()
+    it('should display error if touch fails', () => {
+      apiServiceSpy.touchCrdByNameAndType.and.returnValue(throwError(() => new Error()))
+      component.crd = { name: '' }
 
-    component.actions$?.subscribe((action) => {
-      action[0].actionCallback()
+      component.onTouch(crdData[0])
+
+      expect(msgServiceSpy.error).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.TOUCH.MESSAGE.NOK' })
     })
 
-    expect(component.chartVisible).toBeFalse()
-  })
+    it('should trigger diagram action', () => {
+      translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.SEARCH.SHOW_DIAGRAM': 'Show diagram' }))
+      spyOn(component, 'toggleChartVisibility')
 
-  it('should open edit dialog', () => {
-    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.EDIT.CRD': 'Edit' }))
-    spyOn(component, 'onDetail')
+      component.ngOnInit()
 
-    component.ngOnInit()
-    const editAction = component.additionalActions.find((action) => action.id === 'edit')
-    editAction?.callback(null)
+      component.actions$?.subscribe((action) => {
+        action[0].actionCallback()
+      })
 
-    expect(component.onDetail).toHaveBeenCalled()
-  })
+      expect(component.toggleChartVisibility).toHaveBeenCalled()
+    })
 
-  it('should open detail dialog', () => {
-    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.VIEW.CRD': 'View' }))
-    spyOn(component, 'onDetail')
+    it('should show/hide diagram', () => {
+      translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.SEARCH.SHOW_DIAGRAM': 'Show diagram' }))
+      spyOn(component, 'toggleChartVisibility').and.callThrough()
 
-    component.ngOnInit()
-    const viewAction = component.additionalActions.find((action) => action.id === 'view')
-    viewAction?.callback(null)
+      component.ngOnInit()
 
-    expect(component.onDetail).toHaveBeenCalled()
-  })
+      component.actions$?.subscribe((action) => {
+        action[0].actionCallback()
+      })
 
-  it('should trigger touch action', () => {
-    translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.TOUCH.LABEL': 'Touch' }))
-    spyOn(component, 'onTouch')
+      expect(component.toggleChartVisibility).toHaveBeenCalled()
+      expect(component.chartVisible).toBeTrue()
 
-    component.ngOnInit()
-    const touchAction = component.additionalActions.find((action) => action.id === 'touch')
-    touchAction?.callback(null)
+      component.actions$?.subscribe((action) => {
+        action[0].actionCallback()
+      })
 
-    expect(component.onTouch).toHaveBeenCalled()
+      expect(component.chartVisible).toBeFalse()
+    })
+
+    it('should open edit dialog', () => {
+      translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.EDIT.CRD': 'Edit' }))
+      spyOn(component, 'onDetail')
+
+      component.ngOnInit()
+
+      const editAction = component.additionalActions.find((action) => action.id === 'edit')
+      editAction?.callback(null)
+
+      expect(component.onDetail).toHaveBeenCalled()
+    })
+
+    it('should open detail dialog', () => {
+      translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.VIEW.CRD': 'View' }))
+      spyOn(component, 'onDetail')
+
+      component.ngOnInit()
+
+      const viewAction = component.additionalActions.find((action) => action.id === 'view')
+      viewAction?.callback(null)
+
+      expect(component.onDetail).toHaveBeenCalled()
+    })
+
+    it('should trigger touch action', () => {
+      translateServiceSpy.get.and.returnValue(of({ 'ACTIONS.TOUCH.LABEL': 'Touch' }))
+      spyOn(component, 'onTouch')
+
+      component.ngOnInit()
+
+      const touchAction = component.additionalActions.find((action) => action.id === 'touch')
+      touchAction?.callback(null)
+
+      expect(component.onTouch).toHaveBeenCalled()
+    })
   })
 
   /**
    * Language tests
    */
-  it('should set a German date format', () => {
-    expect(component.dateFormat).toEqual('dd.MM.yyyy HH:mm:ss')
-  })
+  describe('language', () => {
+    it('should set a German date format', () => {
+      expect(component.dateFormat).toEqual('dd.MM.yyyy HH:mm:ss')
+    })
 
-  it('should set default date format', () => {
-    mockUserService.lang$.getValue.and.returnValue('en')
-    fixture = TestBed.createComponent(CrdSearchComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-    expect(component.dateFormat).toEqual('M/d/yy, h:mm:ss a')
+    it('should set default date format', () => {
+      mockUserService.lang$.getValue.and.returnValue('en')
+      fixture = TestBed.createComponent(CrdSearchComponent)
+      component = fixture.componentInstance
+      fixture.detectChanges()
+
+      expect(component.dateFormat).toEqual('M/d/yy, h:mm:ss a')
+    })
   })
 })

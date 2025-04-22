@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, QueryList, ViewChildren } from '@angular/core'
-import { FormBuilder } from '@angular/forms'
-import { finalize } from 'rxjs'
+import { catchError, finalize, map, Observable, of } from 'rxjs'
 
 import { PortalMessageService, UserService } from '@onecx/portal-integration-angular'
 import {
@@ -16,6 +15,7 @@ import {
   DataAPIService,
   EditResourceRequest
 } from 'src/app/shared/generated'
+
 import { DataFormComponent } from './data-form/data-form.component'
 import { DatabaseFormComponent } from './database-form/database-form.component'
 import { ProductFormComponent } from './product-form/product-form.component'
@@ -24,6 +24,8 @@ import { KeycloakFormComponent } from './keycloak-form/keycloak-form.component'
 import { SlotFormComponent } from './slot-form/slot-form.component'
 import { MicrofrontendFormComponent } from './microfrontend-form/microfrontend-form.component'
 import { MicroserviceFormComponent } from './microservice-form/microservice-form.component'
+
+import { ChangeMode } from '../crd-search/crd-search.component'
 
 interface ManagedField {
   apiVersion: string
@@ -47,6 +49,12 @@ export interface Update {
   styleUrls: ['./crd-detail.component.scss']
 })
 export class CrdDetailComponent implements OnChanges {
+  @Input() public changeMode: ChangeMode = 'VIEW'
+  @Input() public displayDetailDialog = false
+  @Input() public crdName: string | undefined = undefined
+  @Input() public crdType: string | undefined = undefined
+  @Output() public hideDialogAndChanged = new EventEmitter<boolean>()
+
   @ViewChildren(DataFormComponent, { read: DataFormComponent }) dataFormComponent!: QueryList<DataFormComponent>
   @ViewChildren(DatabaseFormComponent, { read: DatabaseFormComponent })
   databaseFormComponent!: QueryList<DatabaseFormComponent>
@@ -62,25 +70,30 @@ export class CrdDetailComponent implements OnChanges {
   @ViewChildren(MicroserviceFormComponent, { read: MicroserviceFormComponent })
   microserviceFormComponent!: QueryList<MicroserviceFormComponent>
 
-  @Input() public changeMode = 'VIEW'
-  @Input() public displayDetailDialog = false
-  @Input() public crdName: string | undefined = ''
-  @Input() public crdType: string | undefined = ''
-  @Output() public hideDialogAndChanged = new EventEmitter<boolean>()
-  public isLoading = false
+  // dialog
+  public loading = false
+  public exceptionKey: string | undefined = undefined
   public displayDateRangeError = false
+  public dateFormat: string
+  public timeFormat: string
+  // data
   public crd: any
+  public crd$!: Observable<any>
   public updateHistory: Update[] = []
 
   constructor(
     private readonly user: UserService,
     private readonly dataOrchestratorApi: DataAPIService,
-    private readonly fb: FormBuilder,
     private readonly msgService: PortalMessageService
-  ) {}
-  ngOnChanges(): void {
-    this.getCrd()
+  ) {
+    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yyyy' : 'mm/dd/yyyy'
+    this.timeFormat = this.user.lang$.getValue() === 'de' ? '24' : '12'
   }
+
+  public ngOnChanges(): void {
+    if (this.displayDetailDialog) this.getCrd()
+  }
+
   public onDialogHide() {
     this.displayDetailDialog = false
     this.hideDialogAndChanged.emit(false)
@@ -88,19 +101,61 @@ export class CrdDetailComponent implements OnChanges {
 
   private getCrd(): void {
     if (this.crdName && this.crdType) {
-      this.isLoading = true
-      this.crd = undefined
-      this.dataOrchestratorApi
+      this.loading = true
+      this.exceptionKey = undefined
+      this.crd$ = this.dataOrchestratorApi
         .getCrdByTypeAndName({ type: this.crdType as ContextKind, name: this.crdName })
-        .pipe(finalize(() => (this.isLoading = false)))
-        .subscribe({
-          next: (item) => {
-            this.crd = item.crd
-            this.updateHistory = this.prepareHistory().reverse()
-          },
-          error: () => this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
-        })
+        .pipe(
+          map((response) => {
+            const obj = response.crd
+            this.updateHistory = this.prepareHistory(obj).reverse()
+            return obj ?? {}
+          }),
+          catchError((err) => {
+            this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRD'
+            console.error('getCrdByTypeAndName', err)
+            return of({} as any)
+          }),
+          finalize(() => (this.loading = false))
+        )
     }
+  }
+
+  /**
+   * This method extracts all past updates from the managedFields sub-object and groups them by date on top-level
+   * and all updated fields by its parent-object name underneath.
+   */
+  public prepareHistory(item: any): Update[] {
+    if (Object.keys(item).length === 0 || !item.metadata?.managedFields) return []
+
+    const managedFields: ManagedField[] = item.metadata.managedFields
+    const history: Update[] = managedFields.map((field) => {
+      const fields: Record<string, string[]> = {}
+
+      function extractFields(obj: Record<string, any>, prefix: string = '') {
+        for (const key in obj) {
+          if (key === '.') continue
+          const newKey = prefix ? `${prefix}.${key}` : key
+          if (Object.keys(obj[key]).length === 0) {
+            const topLevelKey = newKey.split('.')[0].replace(/f:/g, '')
+            const fieldKey = newKey.split('.').slice(1).join('.').replace(/f:/g, '')
+            if (!fields[topLevelKey]) {
+              fields[topLevelKey] = []
+            }
+            fields[topLevelKey].push(fieldKey)
+          } else {
+            extractFields(obj[key], newKey)
+          }
+        }
+      }
+      extractFields(field.fieldsV1)
+      return {
+        date: field.time,
+        fields: fields,
+        operation: field.operation
+      }
+    })
+    return history.reverse()
   }
 
   /**
@@ -113,19 +168,19 @@ export class CrdDetailComponent implements OnChanges {
         this.crdType,
         this.submitFormValues(formValuesOfChild)
       )
-      this.dataOrchestratorApi
-        .editCrd({
-          editResourceRequest
-        })
-        .subscribe({
-          next: () => {
-            this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
-            this.hideDialogAndChanged.emit(true)
-          },
-          error: () => this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
-        })
+      this.dataOrchestratorApi.editCrd({ editResourceRequest }).subscribe({
+        next: () => {
+          this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
+          this.hideDialogAndChanged.emit(true)
+        },
+        error: (err) => {
+          this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
+          console.error('editCrd', err)
+        }
+      })
     }
   }
+
   private getFormValuesOfActiveChild(): any {
     if (this.crdType === 'Data' && this.dataFormComponent) {
       return this.dataFormComponent.first.formGroup.value
@@ -215,40 +270,5 @@ export class CrdDetailComponent implements OnChanges {
       }
     }
     return base
-  }
-
-  /**
-   * This method extracts all past updates from the managedFields sub-object and groups them by date on top-level
-   * and all updated fields by its parent-object name underneath.
-   */
-  prepareHistory(): Update[] {
-    const managedFields: ManagedField[] = this.crd.metadata.managedFields
-    return managedFields.map((field) => {
-      const fields: Record<string, string[]> = {}
-
-      function extractFields(obj: Record<string, any>, prefix: string = '') {
-        for (const key in obj) {
-          if (key === '.') continue
-          const newKey = prefix ? `${prefix}.${key}` : key
-          if (Object.keys(obj[key]).length === 0) {
-            const topLevelKey = newKey.split('.')[0].replace(/f:/g, '')
-            const fieldKey = newKey.split('.').slice(1).join('.').replace(/f:/g, '')
-            if (!fields[topLevelKey]) {
-              fields[topLevelKey] = []
-            }
-            fields[topLevelKey].push(fieldKey)
-          } else {
-            extractFields(obj[key], newKey)
-          }
-        }
-      }
-
-      extractFields(field.fieldsV1)
-      return {
-        date: field.time,
-        fields: fields,
-        operation: field.operation
-      }
-    })
   }
 }

@@ -1,28 +1,23 @@
 import { Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 
-import { UserService } from '@onecx/angular-integration-interface'
-
 import { CustomResourceData } from 'src/app/shared/generated'
 
 import { Update } from '../crd-detail.component'
+import { ChangeMode } from '../../crd-search/crd-search.component'
 
 @Component({
   selector: 'app-data-form',
-  templateUrl: './data-form.component.html',
-  styleUrls: ['./data-form.component.scss']
+  templateUrl: './data-form.component.html'
 })
 export class DataFormComponent implements OnChanges {
-  @Input() public changeMode = 'VIEW'
+  @Input() public changeMode: ChangeMode = 'VIEW'
   @Input() public dataCrd: CustomResourceData | undefined
   @Input() public updateHistory: Update[] | undefined
 
   public formGroup: FormGroup
-  public dateFormat: string
-  public timeFormat: string
-  constructor(private readonly user: UserService) {
-    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'mm/dd/yy'
-    this.timeFormat = this.user.lang$.getValue() === 'de' ? '24' : '12'
+
+  constructor() {
     this.formGroup = new FormGroup({
       kind: new FormControl({ value: null, disabled: true }),
       name: new FormControl({ value: null, disabled: true }),
@@ -34,6 +29,7 @@ export class DataFormComponent implements OnChanges {
       data: new FormControl(null)
     })
   }
+
   ngOnChanges() {
     this.fillForm()
     if (this.changeMode === 'VIEW') this.formGroup.disable()

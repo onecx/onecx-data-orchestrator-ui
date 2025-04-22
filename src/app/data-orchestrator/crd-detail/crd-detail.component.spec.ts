@@ -22,22 +22,11 @@ import { CrdDetailComponent, Update } from '../crd-detail/crd-detail.component'
 describe('CrdDetailComponent', () => {
   let component: CrdDetailComponent
   let fixture: ComponentFixture<CrdDetailComponent>
-
-  const msgServiceSpy = jasmine.createSpyObj<PortalMessageService>('PortalMessageService', [
-    'success',
-    'error',
-    'info',
-    'warning'
-  ])
-  const apiServiceSpy = {
+  const mockUserService = { lang$: { getValue: jasmine.createSpy('getValue') } }
+  const msgServiceSpy = jasmine.createSpyObj<PortalMessageService>('PortalMessageService', ['success', 'error'])
+  const doApiSpy = {
     getCrdByTypeAndName: jasmine.createSpy('getCrdByTypeAndName').and.returnValue(of({})),
     editCrd: jasmine.createSpy('editCrd').and.returnValue(of({}))
-  }
-
-  const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
   }
 
   beforeEach(waitForAsync(() => {
@@ -53,17 +42,17 @@ describe('CrdDetailComponent', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: PortalMessageService, useValue: msgServiceSpy },
-        { provide: DataAPIService, useValue: apiServiceSpy },
+        { provide: DataAPIService, useValue: doApiSpy },
         { provide: UserService, useValue: mockUserService }
       ]
     }).compileComponents()
+    // reset
     msgServiceSpy.success.calls.reset()
     msgServiceSpy.error.calls.reset()
-    msgServiceSpy.info.calls.reset()
-    msgServiceSpy.warning.calls.reset()
-    apiServiceSpy.getCrdByTypeAndName.calls.reset()
-    apiServiceSpy.editCrd.calls.reset()
+    doApiSpy.getCrdByTypeAndName.calls.reset()
+    doApiSpy.editCrd.calls.reset()
     mockUserService.lang$.getValue.and.returnValue('de')
+    doApiSpy.getCrdByTypeAndName.and.returnValue(of({}))
   }))
 
   beforeEach(() => {
@@ -72,71 +61,164 @@ describe('CrdDetailComponent', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
-    expect(component).toBeTruthy()
+  describe('initialize', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy()
+    })
+
+    it('should set german date format', () => {
+      mockUserService.lang$.getValue.and.returnValue('de')
+      fixture = TestBed.createComponent(CrdDetailComponent)
+      component = fixture.componentInstance
+
+      fixture.detectChanges()
+
+      expect(component.dateFormat).toEqual('dd.mm.yyyy')
+      expect(component.timeFormat).toEqual('24')
+    })
+
+    it('should set english date format', () => {
+      mockUserService.lang$.getValue.and.returnValue('en')
+      fixture = TestBed.createComponent(CrdDetailComponent)
+      component = fixture.componentInstance
+
+      fixture.detectChanges()
+
+      expect(component.dateFormat).toEqual('mm/dd/yyyy')
+      expect(component.timeFormat).toEqual('12')
+    })
   })
 
-  it('should call getCrd when ngOnChanges is called', () => {
-    const getCrdSpy = spyOn<any>(component, 'getCrd')
-    component.ngOnChanges()
-    expect(getCrdSpy).toHaveBeenCalled()
+  describe('ngOnChanges', () => {
+    it('should call getCrd if dialog is open', () => {
+      component.displayDetailDialog = true
+      const getCrdSpy = spyOn<any>(component, 'getCrd')
+
+      component.ngOnChanges()
+
+      expect(getCrdSpy).toHaveBeenCalled()
+    })
+
+    it('should load crd data and update updateHistory', (done) => {
+      component.displayDetailDialog = true
+      const mockCrd: any = { crd: { name: 'testCrd' } }
+      const mockUpdateHistory = [{ date: '2023-01-01', fields: {} }] as Update[]
+      doApiSpy.getCrdByTypeAndName.and.returnValue(of(mockCrd))
+      spyOn(component, 'prepareHistory').and.returnValue(mockUpdateHistory)
+      component.crdName = 'testCrd'
+      component.crdType = ContextKind.Data
+
+      component.ngOnChanges()
+
+      component.crd$.subscribe({
+        next: (data) => {
+          expect(data).toEqual(mockCrd.crd)
+          expect(component.updateHistory).toEqual(mockUpdateHistory.reverse())
+          done()
+        },
+        error: done.fail
+      })
+      expect(component.loading).toBeFalse()
+    })
+
+    it('should load crd data, with missing crd tag', (done) => {
+      component.displayDetailDialog = true
+      const mockCrd = { crd: {} }
+      doApiSpy.getCrdByTypeAndName.and.returnValue(of(mockCrd))
+      spyOn(component, 'prepareHistory').and.returnValue([])
+      component.crdName = 'testCrd'
+      component.crdType = ContextKind.Data
+
+      component.ngOnChanges()
+
+      component.crd$.subscribe({
+        next: (data) => {
+          expect(data).toEqual({})
+          expect(component.updateHistory).toEqual([])
+          done()
+        },
+        error: done.fail
+      })
+      expect(component.loading).toBeFalse()
+    })
+
+    it('should load crd data, data empty', (done) => {
+      component.displayDetailDialog = true
+      const mockCrd = {}
+      doApiSpy.getCrdByTypeAndName.and.returnValue(of(mockCrd))
+      spyOn(component, 'prepareHistory').and.returnValue([])
+      component.crdName = 'testCrd'
+      component.crdType = ContextKind.Data
+
+      component.ngOnChanges()
+
+      component.crd$.subscribe({
+        next: (data) => {
+          expect(data).toEqual({})
+          expect(component.updateHistory).toEqual([])
+          done()
+        },
+        error: done.fail
+      })
+      expect(component.loading).toBeFalse()
+    })
+
+    it('should show error when getCrd fails', (done) => {
+      const errorResponse = { status: 403, statusText: 'No permissions' }
+      doApiSpy.getCrdByTypeAndName.and.returnValue(throwError(() => errorResponse))
+      component.displayDetailDialog = true
+      component.crdName = 'testCrd'
+      component.crdType = 'Data'
+      spyOn(console, 'error')
+
+      component.ngOnChanges()
+
+      component.crd$.subscribe({
+        next: (data) => {
+          expect(data).toEqual({})
+          expect(component.exceptionKey).toBe('EXCEPTIONS.HTTP_STATUS_' + errorResponse.status + '.CRD')
+          expect(console.error).toHaveBeenCalledWith('getCrdByTypeAndName', errorResponse)
+          done()
+        }
+      })
+    })
   })
 
-  it('should load crd data and update updateHistory when getCrd is called', () => {
-    const mockCrd = { crd: { name: 'testCrd' } }
-    const mockUpdateHistory = [{ date: '2023-01-01', fields: {} }] as Update[]
-    apiServiceSpy.getCrdByTypeAndName.and.returnValue(of(mockCrd))
-    spyOn(component, 'prepareHistory').and.returnValue(mockUpdateHistory)
+  describe('Saving', () => {
+    it('should save crd data and emit hideDialogAndChanged with true when onSave is called', () => {
+      const mockFormValues = { name: 'testCrd' }
+      const mockEditResourceRequest = { CrdData: mockFormValues }
+      spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
+      spyOn<any>(component, 'prepareUpdateData').and.returnValue(mockEditResourceRequest)
+      doApiSpy.editCrd.and.returnValue(of({}))
+      const emitSpy = spyOn(component.hideDialogAndChanged, 'emit')
 
-    component.crdName = 'testCrd'
-    component.crdType = ContextKind.Data
-    ;(component as any).getCrd()
+      component.changeMode = 'EDIT'
+      component.crdName = 'testCrd'
+      component.crdType = 'Data'
+      component.onSave()
 
-    expect(component.isLoading).toBeFalse()
-    expect(component.crd).toEqual(mockCrd.crd)
-    expect(component.updateHistory).toEqual(mockUpdateHistory.reverse())
-  })
+      expect(doApiSpy.editCrd).toHaveBeenCalledWith({ editResourceRequest: mockEditResourceRequest })
+      expect(emitSpy).toHaveBeenCalledWith(true)
+    })
 
-  it('should show error message when getCrd fails', () => {
-    apiServiceSpy.getCrdByTypeAndName.and.returnValue(throwError(() => new Error('Error')))
-    component.crdName = 'testCrd'
-    component.crdType = 'Data'
-    ;(component as any).getCrd()
+    it('should show error message when onSave fails', () => {
+      const mockFormValues = { name: 'testCrd' }
+      const mockEditResourceRequest = { CrdData: mockFormValues }
+      spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
+      spyOn<any>(component, 'prepareUpdateData').and.returnValue(mockEditResourceRequest)
+      const errorResponse = { status: 400, statusText: 'Cannot save' }
+      doApiSpy.editCrd.and.returnValue(throwError(() => errorResponse))
+      spyOn(console, 'error')
 
-    expect(component.isLoading).toBeFalse()
-    expect(msgServiceSpy.error).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
-  })
+      component.changeMode = 'EDIT'
+      component.crdName = 'testCrd'
+      component.crdType = 'Data'
+      component.onSave()
 
-  it('should save crd data and emit hideDialogAndChanged with true when onSave is called', () => {
-    const mockFormValues = { name: 'testCrd' }
-    const mockEditResourceRequest = { CrdData: mockFormValues }
-    spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
-    spyOn<any>(component, 'prepareUpdateData').and.returnValue(mockEditResourceRequest)
-    apiServiceSpy.editCrd.and.returnValue(of({}))
-    const emitSpy = spyOn(component.hideDialogAndChanged, 'emit')
-
-    component.changeMode = 'EDIT'
-    component.crdName = 'testCrd'
-    component.crdType = 'Data'
-    component.onSave()
-
-    expect(apiServiceSpy.editCrd).toHaveBeenCalledWith({ editResourceRequest: mockEditResourceRequest })
-    expect(emitSpy).toHaveBeenCalledWith(true)
-  })
-
-  it('should show error message when onSave fails', () => {
-    const mockFormValues = { name: 'testCrd' }
-    const mockEditResourceRequest = { CrdData: mockFormValues }
-    spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
-    spyOn<any>(component, 'prepareUpdateData').and.returnValue(mockEditResourceRequest)
-    apiServiceSpy.editCrd.and.returnValue(throwError(() => new Error('Error')))
-
-    component.changeMode = 'EDIT'
-    component.crdName = 'testCrd'
-    component.crdType = 'Data'
-    component.onSave()
-
-    expect(msgServiceSpy.error).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
+      expect(console.error).toHaveBeenCalledWith('editCrd', errorResponse)
+      expect(msgServiceSpy.error).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
+    })
   })
 
   it('should return form values of the active child component based on crdType', () => {
@@ -293,69 +375,77 @@ describe('CrdDetailComponent', () => {
     expect(result.metadata.annotations).toEqual('newAnnotation')
   })
 
-  it('should prepare history from managedFields and skip keys with "."', () => {
-    const mockManagedFields = [
-      {
-        time: '2023-01-01T00:00:00Z',
-        fieldsV1: {
-          'f:spec': {
-            'f:name': {},
-            'f:description': {},
-            '.': {} // This key should be skipped
+  describe('history', () => {
+    it('should provide empty history if given object is empty', () => {
+      let history = component.prepareHistory({})
+
+      expect(history).toEqual([])
+
+      history = component.prepareHistory({ metadata: {} })
+
+      expect(history).toEqual([])
+    })
+
+    it('should prepare history from managedFields and skip keys with "."', () => {
+      const mockManagedFields = [
+        {
+          time: '2023-01-01T00:00:00Z',
+          fieldsV1: {
+            'f:spec': {
+              'f:name': {},
+              'f:description': {},
+              '.': {} // This key should be skipped
+            },
+            'f:metadata': {
+              'f:labels': {}
+            }
           },
-          'f:metadata': {
-            'f:labels': {}
-          }
+          operation: 'Update'
         },
-        operation: 'Update'
-      },
-      {
-        time: '2023-01-02T00:00:00Z',
-        fieldsV1: {
-          'f:spec': {
-            'f:version': {}
-          }
-        },
-        operation: 'Update'
+        {
+          time: '2023-01-02T00:00:00Z',
+          fieldsV1: {
+            'f:spec': {
+              'f:version': {}
+            }
+          },
+          operation: 'Update'
+        }
+      ]
+      component.crd = {
+        metadata: {
+          managedFields: mockManagedFields
+        }
       }
-    ]
-
-    component.crd = {
-      metadata: {
-        managedFields: mockManagedFields
-      }
-    }
-
-    const expectedHistory: Update[] = [
-      {
-        date: '2023-01-01T00:00:00Z',
-        fields: {
-          spec: ['name', 'description'],
-          metadata: ['labels']
+      const expectedHistory: Update[] = [
+        {
+          date: '2023-01-02T00:00:00Z',
+          fields: { spec: ['version'] },
+          operation: 'Update'
         },
-        operation: 'Update'
-      },
-      {
-        date: '2023-01-02T00:00:00Z',
-        fields: {
-          spec: ['version']
-        },
-        operation: 'Update'
-      }
-    ]
+        {
+          date: '2023-01-01T00:00:00Z',
+          fields: { spec: ['name', 'description'], metadata: ['labels'] },
+          operation: 'Update'
+        }
+      ]
 
-    const history = component.prepareHistory()
+      const history = component.prepareHistory(component.crd)
 
-    expect(history).toEqual(expectedHistory)
+      expect(history).toEqual(expectedHistory)
+    })
   })
+
   /*
    * UI ACTIONS
    */
-  it('should close the dialog', () => {
-    spyOn(component.hideDialogAndChanged, 'emit')
-    component.onDialogHide()
+  describe('ui actions', () => {
+    it('should close the dialog', () => {
+      spyOn(component.hideDialogAndChanged, 'emit')
+      component.onDialogHide()
 
-    expect(component.displayDetailDialog).toBeFalse()
-    expect(component.hideDialogAndChanged.emit).toHaveBeenCalledWith(false)
+      expect(component.displayDetailDialog).toBeFalse()
+      expect(component.hideDialogAndChanged.emit).toHaveBeenCalledWith(false)
+    })
   })
 })

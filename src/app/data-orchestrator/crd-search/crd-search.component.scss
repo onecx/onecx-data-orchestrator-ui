@@ -11,15 +11,21 @@
     padding: 0.5rem 1rem;
   }
 
-  .p-datatable {
-    .p-datatable-thead > tr > th {
-      border-bottom-width: 2px;
-    }
-    .p-datatable-thead > tr > th,
-    .p-datatable-tbody > tr > td {
-      padding: 0.5rem;
+  .p-datatable .p-datatable-thead > tr > th {
+    border-bottom-width: 2px;
+  }
+
+  .p-datatable .p-datatable-thead > tr > th:nth-of-type(n + 1):nth-of-type(-n + 2),
+  .p-datatable .p-datatable-tbody > tr > td:nth-of-type(n + 1):nth-of-type(-n + 2) {
+    text-align: center !important;
+    white-space: nowrap;
+
+    .table-header-wrapper {
+      justify-content: center !important;
     }
   }
+
+  /* correct header layouting by lib */
   .table-header-wrapper {
     display: flex !important;
     flex-direction: row !important;
