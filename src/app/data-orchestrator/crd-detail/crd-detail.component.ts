@@ -107,7 +107,7 @@ export class CrdDetailComponent implements OnChanges {
         .getCrdByTypeAndName({ type: this.crdType as ContextKind, name: this.crdName })
         .pipe(
           map((response) => {
-            const obj: any | undefined = response.crd
+            const obj = response.crd
             this.updateHistory = this.prepareHistory(obj).reverse()
             return obj ?? {}
           }),

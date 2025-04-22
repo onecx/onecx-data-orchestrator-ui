@@ -8,8 +8,7 @@ import { ChangeMode } from '../../crd-search/crd-search.component'
 
 @Component({
   selector: 'app-data-form',
-  templateUrl: './data-form.component.html',
-  styleUrls: ['./data-form.component.scss']
+  templateUrl: './data-form.component.html'
 })
 export class DataFormComponent implements OnChanges {
   @Input() public changeMode: ChangeMode = 'VIEW'

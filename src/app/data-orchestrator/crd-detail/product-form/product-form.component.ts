@@ -8,8 +8,7 @@ import { Update } from '../crd-detail.component'
 
 @Component({
   selector: 'app-product-form',
-  templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.scss']
+  templateUrl: './product-form.component.html'
 })
 export class ProductFormComponent implements OnChanges {
   @Input() public changeMode: ChangeMode = 'VIEW'
