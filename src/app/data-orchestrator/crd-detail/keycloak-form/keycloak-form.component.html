@@ -1,263 +1,280 @@
 <p-tabView>
-  <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
-    <form [formGroup]="formGroup" errorTailor>
-      <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
-        <div>
-          <span class="p-float-label" controlErrorAnchor>
+  <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
+    <div class="flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
+      <!-- row 1 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="keycloak_detail_name"
               type="text"
+              inputId="do_crd_detail_keycloak_name"
               formControlName="name"
-              styleClass="w-15rem"
-              appendTo="body"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.COMMON.NAME' | translate"
               [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.NAME' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_name"> {{ 'CRD.KEYCLOAK.NAME' | translate }}</label>
+            <label for="do_crd_detail_keycloak_name">{{ 'CRD.COMMON.NAME' | translate }}</label>
           </span>
         </div>
-        <div>
-          <span class="p-float-label" controlErrorAnchor>
+        <div class="flex-grow-1">
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="keycloak_detail_kind"
               type="text"
+              inputId="do_crd_detail_keycloak_kind"
               formControlName="kind"
-              styleClass="w-15rem"
-              appendTo="body"
-              [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.KIND' | translate"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.COMMON.KIND' | translate"
+              [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_kind"> {{ 'CRD.KEYCLOAK.KIND' | translate }}</label>
+            <label for="do_crd_detail_keycloak_kind">{{ 'CRD.COMMON.KIND' | translate }}</label>
           </span>
         </div>
-        <div>
+      </div>
+      <!-- row 2 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_basePath"
               type="text"
+              inputId="do_crd_detail_keycloak_basePath"
               formControlName="basePath"
-              styleClass="w-15rem"
-              appendTo="body"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.KEYCLOAK.BASE_PATH' | translate"
               [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.BASE_PATH' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_basePath"> {{ 'CRD.KEYCLOAK.BASE_PATH' | translate }}</label>
+            <label for="do_crd_detail_keycloak_basePath">{{ 'CRD.KEYCLOAK.BASE_PATH' | translate }}</label>
           </span>
         </div>
-        <div>
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_description"
               type="text"
+              inputId="do_crd_detail_keycloak_description"
               formControlName="description"
-              styleClass="w-15rem"
-              appendTo="body"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.KEYCLOAK.DESCRIPTION' | translate"
               [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.DESCRIPTION' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_description"> {{ 'CRD.KEYCLOAK.DESCRIPTION' | translate }}</label>
+            <label for="do_crd_detail_keycloak_description">{{ 'CRD.KEYCLOAK.DESCRIPTION' | translate }}</label>
           </span>
         </div>
-        <div>
+      </div>
+      <!-- row 3 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_realm"
               type="text"
+              inputId="do_crd_detail_keycloak_realm"
               formControlName="realm"
-              styleClass="w-15rem"
-              appendTo="body"
-              [pTooltip]="'CRD.REALM.KEYCLOAK.TOOLTIPS' | translate"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.KEYCLOAK.REALM' | translate"
+              [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.REALM' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_realm"> {{ 'CRD.KEYCLOAK.REALM' | translate }} </label>
+            <label for="do_crd_detail_keycloak_realm">{{ 'CRD.KEYCLOAK.REALM' | translate }}</label>
           </span>
         </div>
-
-        <div>
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_type"
               type="text"
+              inputId="do_crd_detail_keycloak_type"
               formControlName="type"
-              styleClass="w-15rem"
-              appendTo="body"
-              [pTooltip]="'CRD.TYPE.KEYCLOAK.TOOLTIPS' | translate"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.KEYCLOAK.TYPE' | translate"
+              [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.TYPE' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_type"> {{ 'CRD.KEYCLOAK.TYPE' | translate }} </label>
+            <label for="do_crd_detail_keycloak_type">{{ 'CRD.KEYCLOAK.TYPE' | translate }}</label>
           </span>
         </div>
-        <div class="mt-auto mb-auto">
-          <p-checkbox
-            type="text"
-            [binary]="true"
-            [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_bearer_only"
-            formControlName="bearerOnly"
-            appendTo="body"
-            [pTooltip]="'CRD.KEYCLOAK.BEARER_ONLY.TOOLTIPS' | translate"
-            tooltipPosition="top"
-            tooltipEvent="hover"
-            [label]="'CRD.KEYCLOAK.BEARER_ONLY' | translate"
-          ></p-checkbox>
-        </div>
-        <div>
+      </div>
+      <!-- row 4 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_client_authenticator_type"
               type="text"
+              inputId="do_crd_detail_keycloak_client_authenticator_type"
               formControlName="clientAuthenticatorType"
-              styleClass="w-15rem"
-              appendTo="body"
-              [pTooltip]="'CRD.KEYCLOAK.CLIENT_AUTHENTICATOR_TYPE.TOOLTIPS' | translate"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.KEYCLOAK.CLIENT_AUTHENTICATOR_TYPE' | translate"
+              [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.CLIENT_AUTHENTICATOR_TYPE' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_client_authenticator_type">
+            <label for="do_crd_detail_keycloak_client_authenticator_type">
               {{ 'CRD.KEYCLOAK.CLIENT_AUTHENTICATOR_TYPE' | translate }}
             </label>
           </span>
         </div>
-
-        <div>
+        <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="keycloak_detail_client_id"
               type="text"
+              inputId="do_crd_detail_keycloak_client_id"
               formControlName="clientId"
-              styleClass="w-15rem"
-              appendTo="body"
-              [pTooltip]="'CRD.KEYCLOAK.CLIENT_ID.TOOLTIPS' | translate"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.KEYCLOAK.CLIENT_ID' | translate"
+              [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.CLIENT_ID' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_client_id"> {{ 'CRD.KEYCLOAK.CLIENT_ID' | translate }} </label>
+            <label for="do_crd_detail_keycloak_client_id">{{ 'CRD.KEYCLOAK.CLIENT_ID' | translate }}</label>
           </span>
         </div>
-        <div class="mt-auto mb-auto">
-          <p-checkbox
-            type="text"
-            [binary]="true"
-            [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_direct_access_grants_enabled"
-            formControlName="directAccessGrantsEnabled"
-            appendTo="body"
-            [pTooltip]="'CRD.KEYCLOAK.DIRECT_ACCESS_GRANTS_ENABLED.TOOLTIPS' | translate"
-            tooltipPosition="top"
-            tooltipEvent="hover"
-            [label]="'CRD.KEYCLOAK.DIRECT_ACCESS_GRANTS_ENABLED' | translate"
-          ></p-checkbox>
-        </div>
-        <div class="mt-auto mb-auto">
-          <p-checkbox
-            type="text"
-            [binary]="true"
-            [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_enabled"
-            formControlName="enabled"
-            appendTo="body"
-            [pTooltip]="'CRD.KEYCLOAK.ENABLED.TOOLTIPS' | translate"
-            tooltipPosition="top"
-            tooltipEvent="hover"
-            [label]="'CRD.KEYCLOAK.ENABLED' | translate"
-          ></p-checkbox>
-        </div>
-        <div class="mt-auto mb-auto">
-          <p-checkbox
-            type="text"
-            [binary]="true"
-            [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_implicit_flow_enabled"
-            formControlName="implicitFlowEnabled"
-            appendTo="body"
-            [pTooltip]="'CRD.KEYCLOAK.IMPLICIT_FLOW_ENABLED.TOOLTIPS' | translate"
-            tooltipPosition="top"
-            tooltipEvent="hover"
-            [label]="'CRD.KEYCLOAK.IMPLICIT_FLOW_ENABLED' | translate"
-          ></p-checkbox>
-        </div>
-        <div>
-          <span class="keycloak_detail_p-float-label" controlErrorAnchor>
+      </div>
+      <!-- row 5 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
+          <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="protocol"
               type="text"
+              inputId="do_crd_detail_keycloak_protocol"
               formControlName="protocol"
-              styleClass="w-15rem"
-              appendTo="body"
-              [pTooltip]="'CRD.KEYCLOAK.PROTOCOL.TOOLTIPS' | translate"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.KEYCLOAK.PROTOCOL' | translate"
+              [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.PROTOCOL' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="keycloak_detail_protocol"> {{ 'CRD.KEYCLOAK.PROTOCOL' | translate }} </label>
+            <label for="do_crd_detail_keycloak_protocol">{{ 'CRD.KEYCLOAK.PROTOCOL' | translate }}</label>
           </span>
         </div>
+      </div>
+
+      <!-- row 6 -->
+      <div class="flex flex-row flex-wrap justify-content-between align-items-center gap-4">
         <div class="mt-auto mb-auto">
           <p-checkbox
             type="text"
             [binary]="true"
-            [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_public_client"
-            formControlName="publicClient"
-            appendTo="body"
-            [pTooltip]="'CRD.KEYCLOAK.PUBLIC_CLIENT.TOOLTIPS' | translate"
+            inputId="do_crd_detail_keycloak_enabled"
+            styleClass="cursor-auto shadow-none"
+            formControlName="enabled"
+            [label]="'CRD.KEYCLOAK.ENABLED' | translate"
+            [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.ENABLED' | translate"
             tooltipPosition="top"
             tooltipEvent="hover"
-            [label]="'CRD.KEYCLOAK.PUBLIC_CLIENT' | translate"
           ></p-checkbox>
         </div>
         <div class="mt-auto mb-auto">
           <p-checkbox
             type="text"
             [binary]="true"
-            [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_service_accounts_enabled"
-            formControlName="serviceAccountsEnabled"
-            appendTo="body"
-            [pTooltip]="'CRD.KEYCLOAK.SERVICE_ACCOUNTS_ENABLED.TOOLTIPS' | translate"
+            inputId="do_crd_detail_keycloak_bearer_only"
+            styleClass="cursor-auto shadow-none"
+            formControlName="bearerOnly"
+            [label]="'CRD.KEYCLOAK.BEARER_ONLY' | translate"
+            [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.BEARER_ONLY' | translate"
             tooltipPosition="top"
             tooltipEvent="hover"
-            [label]="'CRD.KEYCLOAK.SERVICE_ACCOUNTS_ENABLED' | translate"
           ></p-checkbox>
         </div>
         <div class="mt-auto mb-auto">
           <p-checkbox
             type="text"
             [binary]="true"
-            [styleClass]="'cursor-auto shadow-none '"
-            inputId="keycloak_detail_standard_flow_enabled"
+            inputId="do_crd_detail_keycloak_standard_flow_enabled"
+            styleClass="cursor-auto shadow-none"
             formControlName="standardFlowEnabled"
-            appendTo="body"
-            [pTooltip]="'CRD.KEYCLOAK.STANDARD_FLOW_ENABLED.TOOLTIPS' | translate"
+            [label]="'CRD.KEYCLOAK.STANDARD_FLOW_ENABLED' | translate"
+            [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.STANDARD_FLOW_ENABLED' | translate"
             tooltipPosition="top"
             tooltipEvent="hover"
-            [label]="'CRD.KEYCLOAK.STANDARD_FLOW_ENABLED' | translate"
           ></p-checkbox>
         </div>
       </div>
-    </form>
+      <!-- row 7 -->
+      <div class="flex flex-row flex-wrap justify-content-between align-items-center gap-4">
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            inputId="do_crd_detail_keycloak_implicit_flow_enabled"
+            styleClass="cursor-auto shadow-none"
+            formControlName="implicitFlowEnabled"
+            [label]="'CRD.KEYCLOAK.IMPLICIT_FLOW_ENABLED' | translate"
+            [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.IMPLICIT_FLOW_ENABLED' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+          ></p-checkbox>
+        </div>
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            inputId="do_crd_detail_keycloak_direct_access_grants_enabled"
+            styleClass="cursor-auto shadow-none"
+            formControlName="directAccessGrantsEnabled"
+            [label]="'CRD.KEYCLOAK.DIRECT_ACCESS_GRANTS_ENABLED' | translate"
+            [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.DIRECT_ACCESS_GRANTS_ENABLED' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+          ></p-checkbox>
+        </div>
+      </div>
+
+      <!-- row 8 -->
+      <div class="flex flex-row flex-wrap justify-content-between align-items-center gap-4">
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            inputId="do_crd_detail_keycloak_public_client"
+            styleClass="cursor-auto shadow-none"
+            formControlName="publicClient"
+            [label]="'CRD.KEYCLOAK.PUBLIC_CLIENT' | translate"
+            [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.PUBLIC_CLIENT' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+          ></p-checkbox>
+        </div>
+        <div class="mt-auto mb-auto">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            inputId="do_crd_detail_keycloak_service_accounts_enabled"
+            styleClass="cursor-auto shadow-none"
+            formControlName="serviceAccountsEnabled"
+            [label]="'CRD.KEYCLOAK.SERVICE_ACCOUNTS_ENABLED' | translate"
+            [pTooltip]="'CRD.KEYCLOAK.TOOLTIPS.SERVICE_ACCOUNTS_ENABLED' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
   </p-tabPanel>
+
   <p-tabPanel
-    [header]="'DIALOG.HISTORY_TAB' | translate"
+    [header]="'DIALOG.TABS.CHANGES' | translate"
     *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
   >
-    <app-update-history [updateHistory]="updateHistory" />
+    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
   </p-tabPanel>
-  <p-tabPanel [header]="'DIALOG.STATUS_TAB' | translate" *ngIf="keycloakClientCrd?.status">
+
+  <p-tabPanel [header]="'DIALOG.TABS.STATUS' | translate" *ngIf="keycloakClientCrd?.status">
     <app-status-tab [status]="keycloakClientCrd?.status" />
   </p-tabPanel>
 </p-tabView>

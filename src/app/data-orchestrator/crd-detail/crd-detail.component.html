@@ -2,12 +2,11 @@
   [header]="'ACTIONS.' + this.changeMode + '.CRD' | translate"
   [(visible)]="displayDetailDialog"
   (onHide)="onDialogHide()"
-  [baseZIndex]="10000"
   [modal]="true"
   [closable]="true"
   [draggable]="true"
   [resizable]="true"
-  [style]="{ width: '600px' }"
+  [style]="exceptionKey ? null : { width: '600px', height: '500px' }"
   [breakpoints]="{
     '992px': '75vw',
     '768px': '90vw',
@@ -33,48 +32,56 @@
         *ngIf="crdType.toString() === 'Data'"
         [changeMode]="changeMode"
         [dataCrd]="crd"
+        [dateFormat]="datetimeFormat"
         [updateHistory]="updateHistory"
       />
       <app-database-form
         *ngIf="crdType.toString() === 'Database'"
         [changeMode]="changeMode"
         [databaseCrd]="crd"
-        [updateHistory]="updateHistory"
-      />
-      <app-product-form
-        *ngIf="crdType.toString() === 'Product'"
-        [changeMode]="changeMode"
-        [productCrd]="crd"
-        [updateHistory]="updateHistory"
-      />
-      <app-permission-form
-        *ngIf="crdType.toString() === 'Permission'"
-        [changeMode]="changeMode"
-        [permissionCrd]="crd"
+        [dateFormat]="datetimeFormat"
         [updateHistory]="updateHistory"
       />
       <app-keycloak-form
         *ngIf="crdType.toString() === 'KeycloakClient'"
         [changeMode]="changeMode"
         [keycloakClientCrd]="crd"
-        [updateHistory]="updateHistory"
-      />
-      <app-slot-form
-        *ngIf="crdType.toString() === 'Slot'"
-        [changeMode]="changeMode"
-        [slotCrd]="crd"
+        [dateFormat]="datetimeFormat"
         [updateHistory]="updateHistory"
       />
       <app-microfrontend-form
         *ngIf="crdType.toString() === 'Microfrontend'"
         [changeMode]="changeMode"
         [microfrontendCrd]="crd"
+        [dateFormat]="datetimeFormat"
         [updateHistory]="updateHistory"
       />
       <app-microservice-form
         *ngIf="crdType.toString() === 'Microservice'"
         [changeMode]="changeMode"
         [microserviceCrd]="crd"
+        [dateFormat]="datetimeFormat"
+        [updateHistory]="updateHistory"
+      />
+      <app-permission-form
+        *ngIf="crdType.toString() === 'Permission'"
+        [changeMode]="changeMode"
+        [permissionCrd]="crd"
+        [dateFormat]="datetimeFormat"
+        [updateHistory]="updateHistory"
+      />
+      <app-product-form
+        *ngIf="crdType.toString() === 'Product'"
+        [changeMode]="changeMode"
+        [productCrd]="crd"
+        [dateFormat]="datetimeFormat"
+        [updateHistory]="updateHistory"
+      />
+      <app-slot-form
+        *ngIf="crdType.toString() === 'Slot'"
+        [changeMode]="changeMode"
+        [slotCrd]="crd"
+        [dateFormat]="datetimeFormat"
         [updateHistory]="updateHistory"
       />
     </ng-container>

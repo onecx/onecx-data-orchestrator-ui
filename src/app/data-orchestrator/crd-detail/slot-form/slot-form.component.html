@@ -1,12 +1,12 @@
 <p-tabView>
-  <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
+  <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
     <form [formGroup]="formGroup" errorTailor>
       <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
         <div>
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="slot_detail_name"
+              inputId="do_crd_detail_slot_name"
               type="text"
               formControlName="metadataName"
               styleClass="w-15rem"
@@ -15,14 +15,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="slot_detail_name"> {{ 'CRD.SLOT.NAME' | translate }}</label>
+            <label for="do_crd_detail_slot_name"> {{ 'CRD.SLOT.NAME' | translate }}</label>
           </span>
         </div>
         <div>
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="slot_detail_kind"
+              inputId="do_crd_detail_slot_kind"
               type="text"
               formControlName="kind"
               styleClass="w-15rem"
@@ -31,14 +31,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="slot_detail_kind"> {{ 'CRD.SLOT.KIND' | translate }}</label>
+            <label for="do_crd_detail_slot_kind"> {{ 'CRD.SLOT.KIND' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="slot_detail_slot_name"
+              inputId="do_crd_detail_slot_slot_name"
               type="text"
               formControlName="specName"
               styleClass="w-15rem"
@@ -47,14 +47,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="slot_detail_slot_name"> {{ 'CRD.SLOT.SLOT_NAME' | translate }}</label>
+            <label for="do_crd_detail_slot_slot_name"> {{ 'CRD.SLOT.SLOT_NAME' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="slot_detail_appId"
+              inputId="do_crd_detail_slot_appId"
               type="text"
               formControlName="appId"
               styleClass="w-15rem"
@@ -63,14 +63,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="slot_detail_appId"> {{ 'CRD.SLOT.APP_ID' | translate }}</label>
+            <label for="do_crd_detail_slot_appId"> {{ 'CRD.SLOT.APP_ID' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="slot_detail_productName"
+              inputId="do_crd_detail_slot_productName"
               type="text"
               formControlName="productName"
               styleClass="w-15rem"
@@ -79,7 +79,7 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="slot_detail_productName"> {{ 'CRD.SLOT.PRODUCT_NAME' | translate }}</label>
+            <label for="do_crd_detail_slot_productName"> {{ 'CRD.SLOT.PRODUCT_NAME' | translate }}</label>
           </span>
         </div>
         <div class="mt-auto mb-auto">
@@ -87,7 +87,7 @@
             type="text"
             [binary]="true"
             [styleClass]="'cursor-auto shadow-none '"
-            inputId="slot_detail_deprecated"
+            inputId="do_crd_detail_slot_deprecated"
             formControlName="deprecated"
             appendTo="body"
             [pTooltip]="'CRD.SLOT.TOOLTIPS.DEPRECATED' | translate"
@@ -100,7 +100,7 @@
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="slot_detail_description"
+              inputId="do_crd_detail_slot_description"
               type="text"
               formControlName="description"
               styleClass="w-15rem"
@@ -109,19 +109,21 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="slot_detail_description"> {{ 'CRD.SLOT.DESCRIPTION' | translate }}</label>
+            <label for="do_crd_detail_slot_description"> {{ 'CRD.SLOT.DESCRIPTION' | translate }}</label>
           </span>
         </div>
       </div>
     </form>
   </p-tabPanel>
+
   <p-tabPanel
-    [header]="'DIALOG.HISTORY_TAB' | translate"
+    [header]="'DIALOG.TABS.CHANGES' | translate"
     *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
   >
-    <app-update-history [updateHistory]="updateHistory" />
+    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
   </p-tabPanel>
-  <p-tabPanel [header]="'DIALOG.STATUS_TAB' | translate" *ngIf="slotCrd?.status">
+
+  <p-tabPanel [header]="'DIALOG.TABS.STATUS' | translate" *ngIf="slotCrd?.status">
     <app-status-tab [status]="slotCrd?.status" />
   </p-tabPanel>
 </p-tabView>

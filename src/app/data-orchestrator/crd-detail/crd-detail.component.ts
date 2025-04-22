@@ -55,7 +55,9 @@ export class CrdDetailComponent implements OnChanges {
   @Input() public crdType: string | undefined = undefined
   @Output() public hideDialogAndChanged = new EventEmitter<boolean>()
 
-  @ViewChildren(DataFormComponent, { read: DataFormComponent }) dataFormComponent!: QueryList<DataFormComponent>
+  @ViewChildren(DataFormComponent, { read: DataFormComponent }) dataFormComponent:
+    | QueryList<DataFormComponent>
+    | undefined
   @ViewChildren(DatabaseFormComponent, { read: DatabaseFormComponent })
   databaseFormComponent!: QueryList<DatabaseFormComponent>
   @ViewChildren(ProductFormComponent, { read: ProductFormComponent })
@@ -74,8 +76,7 @@ export class CrdDetailComponent implements OnChanges {
   public loading = false
   public exceptionKey: string | undefined = undefined
   public displayDateRangeError = false
-  public dateFormat: string
-  public timeFormat: string
+  public datetimeFormat: string
   // data
   public crd: any
   public crd$!: Observable<any>
@@ -86,8 +87,7 @@ export class CrdDetailComponent implements OnChanges {
     private readonly dataOrchestratorApi: DataAPIService,
     private readonly msgService: PortalMessageService
   ) {
-    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.mm.yyyy' : 'mm/dd/yyyy'
-    this.timeFormat = this.user.lang$.getValue() === 'de' ? '24' : '12'
+    this.datetimeFormat = this.user.lang$.getValue() === 'de' ? 'dd.MM.yyyy HH:mm:ss' : 'M/d/yyyy, hh:mm:ss a'
   }
 
   public ngOnChanges(): void {
@@ -96,6 +96,7 @@ export class CrdDetailComponent implements OnChanges {
 
   public onDialogHide() {
     this.displayDetailDialog = false
+    this.exceptionKey = undefined
     this.hideDialogAndChanged.emit(false)
   }
 
@@ -182,29 +183,23 @@ export class CrdDetailComponent implements OnChanges {
   }
 
   private getFormValuesOfActiveChild(): any {
-    if (this.crdType === 'Data' && this.dataFormComponent) {
-      return this.dataFormComponent.first.formGroup.value
-    }
-    if (this.crdType === 'Database' && this.databaseFormComponent) {
-      return this.databaseFormComponent.first.formGroup.value
-    }
-    if (this.crdType === 'Product' && this.productFormComponent) {
-      return this.productFormComponent.first.formGroup.value
-    }
-    if (this.crdType === 'Permission' && this.permissionFormComponent) {
-      return this.permissionFormComponent.first.formGroup.value
-    }
-    if (this.crdType === 'KeycloakClient' && this.keycloakFormComponent) {
-      return this.keycloakFormComponent.first.formGroup.value
-    }
-    if (this.crdType === 'Slot' && this.slotFormComponent) {
-      return this.slotFormComponent.first.formGroup.value
-    }
-    if (this.crdType === 'Microfrontend' && this.microfrontendFormComponent) {
-      return this.microfrontendFormComponent.first.formGroup.value
-    }
-    if (this.crdType === 'Microservice' && this.microserviceFormComponent) {
-      return this.microserviceFormComponent.first.formGroup.value
+    switch (this.crdType) {
+      case 'Data':
+        return this.dataFormComponent?.first.formGroup.value
+      case 'Database':
+        return this.databaseFormComponent?.first.formGroup.value
+      case 'KeycloakClient':
+        return this.keycloakFormComponent?.first.formGroup.value
+      case 'Microfrontend':
+        return this.microfrontendFormComponent?.first.formGroup.value
+      case 'Microservice':
+        return this.microserviceFormComponent?.first.formGroup.value
+      case 'Permission':
+        return this.permissionFormComponent?.first.formGroup.value
+      case 'Product':
+        return this.productFormComponent?.first.formGroup.value
+      case 'Slot':
+        return this.slotFormComponent?.first.formGroup.value
     }
   }
   private prepareUpdateData(type: string, crd: any): EditResourceRequest {

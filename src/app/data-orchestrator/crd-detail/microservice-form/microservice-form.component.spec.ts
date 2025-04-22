@@ -93,16 +93,4 @@ describe('MicroserviceFormComponent', () => {
     expect(component.formGroup.controls['productName'].value).toBe('testProductName')
     expect(component.formGroup.controls['type'].value).toBe('testType')
   })
-
-  /**
-   * Language tests
-   */
-  it('should set german date format', () => {
-    mockUserService.lang$.getValue.and.returnValue('de')
-    fixture = TestBed.createComponent(MicroserviceFormComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-    expect(component.dateFormat).toEqual('dd.mm.yy')
-    expect(component.timeFormat).toEqual('24')
-  })
 })

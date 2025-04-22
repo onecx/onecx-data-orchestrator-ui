@@ -1,12 +1,12 @@
 <p-tabView>
-  <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
+  <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
     <form [formGroup]="formGroup" errorTailor>
       <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
         <div>
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="permission_detail_name"
+              inputId="do_crd_detail_permission_name"
               type="text"
               formControlName="metadataName"
               styleClass="w-15rem"
@@ -15,14 +15,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="permission_detail_name"> {{ 'CRD.PERMISSION.NAME' | translate }}</label>
+            <label for="do_crd_detail_permission_name"> {{ 'CRD.PERMISSION.NAME' | translate }}</label>
           </span>
         </div>
         <div>
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="permission_detail_kind"
+              inputId="do_crd_detail_permission_kind"
               type="text"
               formControlName="kind"
               styleClass="w-15rem"
@@ -31,14 +31,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="permission_detail_kind"> {{ 'CRD.PERMISSION.KIND' | translate }}</label>
+            <label for="do_crd_detail_permission_kind"> {{ 'CRD.PERMISSION.KIND' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="permission_detail_app_id"
+              inputId="do_crd_detail_permission_app_id"
               type="text"
               formControlName="appId"
               styleClass="w-15rem"
@@ -47,14 +47,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="permission_detail_app_id"> {{ 'CRD.PERMISSION.APP_ID' | translate }}</label>
+            <label for="do_crd_detail_permission_app_id"> {{ 'CRD.PERMISSION.APP_ID' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="permission_detail_permission_name"
+              inputId="do_crd_detail_permission_permission_name"
               type="text"
               formControlName="productName"
               styleClass="w-15rem"
@@ -63,14 +63,16 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="permission_detail_permission_name"> {{ 'CRD.PERMISSION.PRODUCT_NAME' | translate }}</label>
+            <label for="do_crd_detail_permission_permission_name">
+              {{ 'CRD.PERMISSION.PRODUCT_NAME' | translate }}</label
+            >
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="permission_detail_description"
+              inputId="do_crd_detail_permission_description"
               type="text"
               formControlName="description"
               styleClass="w-15rem"
@@ -79,19 +81,21 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="permission_detail_description"> {{ 'CRD.PERMISSION.DESCRIPTION' | translate }}</label>
+            <label for="do_crd_detail_permission_description"> {{ 'CRD.PERMISSION.DESCRIPTION' | translate }}</label>
           </span>
         </div>
       </div>
     </form>
   </p-tabPanel>
+
   <p-tabPanel
-    [header]="'DIALOG.HISTORY_TAB' | translate"
+    [header]="'DIALOG.TABS.CHANGES' | translate"
     *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
   >
-    <app-update-history [updateHistory]="updateHistory" />
+    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
   </p-tabPanel>
-  <p-tabPanel [header]="'DIALOG.STATUS_TAB' | translate" *ngIf="permissionCrd?.status">
+
+  <p-tabPanel [header]="'DIALOG.TABS.STATUS' | translate" *ngIf="permissionCrd?.status">
     <app-status-tab [status]="permissionCrd?.status" />
   </p-tabPanel>
 </p-tabView>

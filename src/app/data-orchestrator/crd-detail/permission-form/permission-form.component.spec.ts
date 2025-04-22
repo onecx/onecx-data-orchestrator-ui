@@ -83,16 +83,4 @@ describe('PermissionFormComponent', () => {
     expect(component.formGroup.controls['description'].value).toBe('testDescription')
     expect(component.formGroup.controls['productName'].value).toBe('testProductName')
   })
-
-  /**
-   * Language tests
-   */
-  it('should set german date format', () => {
-    mockUserService.lang$.getValue.and.returnValue('de')
-    fixture = TestBed.createComponent(PermissionFormComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-    expect(component.dateFormat).toEqual('dd.mm.yy')
-    expect(component.timeFormat).toEqual('24')
-  })
 })

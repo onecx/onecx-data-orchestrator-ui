@@ -89,12 +89,14 @@
   "DIALOG": {
     "SEARCH.HEADER": "K8s Custom Resources",
     "SEARCH.SUBHEADER": "Searching and managing of K8s Custom Resources",
-    "DETAILS_TAB": "Details",
-    "HISTORY_TAB": "History",
-    "STATUS_TAB": "Status"
+    "TABS": {
+      "DETAILS": "Details",
+      "CHANGES": "Changes",
+      "STATUS": "Status"
+    }
   },
   "CRD": {
-    "ID": "Id",
+    "ID": "ID",
     "NAME": "Name",
     "TYPE": "Type",
     "STATUS": "Status",
@@ -108,43 +110,41 @@
       "RESOURCE_VERSION": "Version of the K8s Custom Resource",
       "VERSION": "Release version of the K8s Custom Resource"
     },
-    "DATA": {
-      "NAME": "Name",
-      "API_VERSION": "Api version",
+    "COMMON": {
+      "NAME": "Resource Name",
       "KIND": "Type",
-      "APP_ID": "App Id",
+      "PRODUCT_NAME": "Product",
+      "APP_ID": "App",
+      "API_VERSION": "API Version",
+      "TOOLTIPS": {
+        "NAME": "Name of the K8s Custom Resource",
+        "KIND": "Type of the K8s Custom Resource",
+        "PRODUCT_NAME": "Name of the Product",
+        "APP_ID": "App / Componente",
+        "API_VERSION": "API Version"
+      }
+    },
+    "DATA": {
       "DESCRIPTION": "Description",
       "KEY": "Key",
-      "ORG_ID": "Organization Id",
-      "PRODUCT_NAME": "Product name",
+      "ORG_ID": "Organization ID",
       "DATA": "Data",
       "TOOLTIPS": {
-        "NAME": "Name",
-        "API_VERSION": "Api version",
-        "KIND": "Type",
-        "APP_ID": "App Id",
         "DESCRIPTION": "Description",
         "KEY": "Key",
-        "ORG_ID": "Organization Id",
-        "PRODUCT_NAME": "Product name",
+        "ORG_ID": "Organization ID",
         "DATA": "Data"
       }
     },
     "DATABASE": {
-      "NAME": "Name",
-      "API_VERSION": "Api version",
-      "KIND": "Type",
       "HOST": "Host",
-      "DATABASE_NAME": "Database name",
-      "PASSWORD_KEY": "Password key",
+      "DATABASE_NAME": "Database Name",
+      "PASSWORD_KEY": "Password Key",
       "PASSWORD_SECRETS": "Password secrets",
       "SCHEMA": "Schema",
       "USER": "User",
       "USER_SEARCH_PATH": "User search path",
       "TOOLTIPS": {
-        "NAME": "Name",
-        "API_VERSION": "Api version",
-        "KIND": "Type",
         "HOST": "Host",
         "DATABASE_NAME": "Database name",
         "PASSWORD_KEY": "Password key",
@@ -163,7 +163,7 @@
       "DISPLAY_NAME": "Product",
       "ICON_NAME": "Icon name",
       "IMAGE_URL": "Image URL",
-      "PRODUCT_NAME": "Product name",
+      "PRODUCT_NAME": "Product Name",
       "PROVIDER": "Provider",
       "VERSION": "Version",
       "TOOLTIPS": {
@@ -175,72 +175,66 @@
         "DISPLAY_NAME": "Display name of the Product",
         "ICON_NAME": "Icon name",
         "IMAGE_URL": "Image URL",
-        "PRODUCT_NAME": "Product name",
+        "PRODUCT_NAME": "Product Name",
         "PROVIDER": "Provider of Product",
         "VERSION": "Version of Product"
       }
     },
     "SLOT": {
       "NAME": "Name",
-      "API_VERSION": "Api version",
+      "API_VERSION": "API version",
       "KIND": "Type",
-      "APP_ID": "App Id",
+      "APP_ID": "App ID",
       "DESCRIPTION": "Description",
-      "PRODUCT_NAME": "Product name",
+      "PRODUCT_NAME": "Product Name",
       "SLOT_NAME": "Slot name",
       "DEPRECATED": "Deprecated?",
       "TOOLTIPS": {
         "NAME": "Name",
-        "API_VERSION": "Api version",
+        "API_VERSION": "API version",
         "KIND": "Type",
-        "APP_ID": "App Id",
+        "APP_ID": "App ID",
         "DESCRIPTION": "Description",
-        "PRODUCT_NAME": "Product name",
-        "SLOT_NAME": "Slot name",
+        "PRODUCT_NAME": "Product Name",
+        "SLOT_NAME": "Slot Name",
         "DEPRECATED": "Deprecated?"
       }
     },
     "PERMISSION": {
       "NAME": "Name",
-      "API_VERSION": "Api version",
+      "API_VERSION": "API version",
       "KIND": "Type",
-      "APP_ID": "App Id",
+      "APP_ID": "App ID",
       "DESCRIPTION": "Description",
-      "PRODUCT_NAME": "Product name",
+      "PRODUCT_NAME": "Product Name",
       "TOOLTIPS": {
         "NAME": "Name",
-        "API_VERSION": "Api version",
+        "API_VERSION": "API version",
         "KIND": "Type",
-        "APP_ID": "App Id",
+        "APP_ID": "App ID",
         "DESCRIPTION": "Description",
-        "PRODUCT_NAME": "Product name"
+        "PRODUCT_NAME": "Product Name"
       }
     },
     "KEYCLOAK": {
-      "NAME": "Name",
-      "API_VERSION": "Api version",
-      "KIND": "Type",
       "BASE_PATH": "Base path",
       "DESCRIPTION": "Description",
-      "PASSWORD_KEY": "Password key",
-      "PASSWORD_SECRETS": "Password secrets",
+      "PASSWORD_KEY": "Password Key",
+      "PASSWORD_SECRETS": "Password Secrets",
       "REALM": "Realm",
       "TYPE": "Type",
       "BEARER_ONLY": "Bearer only?",
-      "CLIENT_AUTHENTICATOR_TYPE": "Client authenticator type",
-      "CLIENT_ID": "Client Id",
-      "DIRECT_ACCESS_GRANTS_ENABLED": "Direct access grants enabled?",
+      "CLIENT_AUTHENTICATOR_TYPE": "Client Authenticator Type",
+      "CLIENT_ID": "Client ID",
+      "DIRECT_ACCESS_GRANTS_ENABLED": "Direct access grants",
       "ENABLED": "Enabled?",
-      "IMPLICIT_FLOW_ENABLED": "Implicit flow enabled?",
+      "IMPLICIT_FLOW_ENABLED": "Implicit flow",
       "PASSWORD": "Password",
       "PROTOCOL": "Protocol",
       "PUBLIC_CLIENT": "Public client",
-      "SERVICE_ACCOUNTS_ENABLED": "Service accounts enabled?",
-      "STANDARD_FLOW_ENABLED": "Standard flow enabled?",
+      "SERVICE_ACCOUNTS_ENABLED": "Service accounts",
+      "STANDARD_FLOW_ENABLED": "Standard flow",
       "TOOLTIPS": {
-        "NAME": "Name",
-        "API_VERSION": "Api version",
-        "KIND": "Type",
         "BASE_PATH": "Base path",
         "DESCRIPTION": "Description",
         "PASSWORD_KEY": "Password key",
@@ -249,7 +243,7 @@
         "TYPE": "Type",
         "BEARER_ONLY": "Bearer only?",
         "CLIENT_AUTHENTICATOR_TYPE": "Client authenticator type",
-        "CLIENT_ID": "Client Id",
+        "CLIENT_ID": "Client ID",
         "DIRECT_ACCESS_GRANTS_ENABLED": "Direct access grants enabled?",
         "ENABLED": "Enabled?",
         "IMPLICIT_FLOW_ENABLED": "Implicit flow enabled?",
@@ -262,7 +256,7 @@
     },
     "MICROFRONTEND": {
       "NAME": "Name",
-      "API_VERSION": "Api version",
+      "API_VERSION": "API version",
       "KIND": "Type",
       "APP_ID": "App ID",
       "APP_NAME": "App Name",
@@ -282,7 +276,7 @@
       "TYPE": "Type",
       "TOOLTIPS": {
         "NAME": "Name",
-        "API_VERSION": "Api version",
+        "API_VERSION": "API version",
         "KIND": "Type",
         "APP_ID": "App ID",
         "APP_NAME": "App Name",
@@ -358,11 +352,11 @@
   },
   "EXCEPTIONS": {
     "HTTP_STATUS_0": {
-      "CRD": "Unknown problem retrieving K8s Custom Resources data - please try again.",
+      "CRD": "Unknown problem retrieving K8s Custom Resource data - please try again.",
       "CRDS": "Unknown problem retrieving K8s Custom Resources data - please try again."
     },
     "HTTP_STATUS_204": {
-      "CRD": "No K8s Custom Resources found matching the search criterias.",
+      "CRD": "No K8s Custom Resource found matching the search criterias.",
       "CRDS": "No K8s Custom Resources found matching the search criterias."
     },
     "HTTP_STATUS_401": {

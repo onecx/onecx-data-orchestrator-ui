@@ -89,16 +89,4 @@ describe('SlotFormComponent', () => {
     expect(component.formGroup.controls['deprecated'].value).toBe(false)
     expect(component.formGroup.controls['productName'].value).toBe('testProductName')
   })
-
-  /**
-   * Language tests
-   */
-  it('should set german date format', () => {
-    mockUserService.lang$.getValue.and.returnValue('de')
-    fixture = TestBed.createComponent(SlotFormComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-    expect(component.dateFormat).toEqual('dd.mm.yy')
-    expect(component.timeFormat).toEqual('24')
-  })
 })

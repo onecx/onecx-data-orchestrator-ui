@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core'
-import { UserService } from '@onecx/angular-integration-interface'
 import { Update } from '../crd-detail.component'
 
 @Component({
@@ -8,10 +7,9 @@ import { Update } from '../crd-detail.component'
 })
 export class UpdateHistoryComponent {
   @Input() public updateHistory: Update[] | undefined
-  public dateFormat: string
-  objectKeys = Object.keys
+  @Input() public dateFormat: string | undefined
 
-  constructor(private readonly user: UserService) {
-    this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.MM.yy HH:mm:ss' : 'MM/dd/yy HH:mm:ss'
-  }
+  public objectKeys = Object.keys
+
+  constructor() {}
 }

@@ -1,12 +1,12 @@
 <p-tabView>
-  <p-tabPanel [header]="'DIALOG.DETAILS_TAB' | translate">
+  <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
     <form [formGroup]="formGroup" errorTailor>
       <div class="flex flex-wrap flex-column sm:flex-row row-gap-3 sm:row-gap-4 column-gap-5 mt-2">
         <div>
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="microservice_detail_name"
+              inputId="do_crd_detail_microservice_name"
               type="text"
               formControlName="metadataName"
               styleClass="w-15rem"
@@ -15,14 +15,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="microservice_detail_name"> {{ 'CRD.MICROSERVICE.NAME' | translate }}</label>
+            <label for="do_crd_detail_microservice_name"> {{ 'CRD.MICROSERVICE.NAME' | translate }}</label>
           </span>
         </div>
         <div>
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
-              inputId="microservice_detail_kind"
+              inputId="do_crd_detail_microservice_kind"
               type="text"
               formControlName="kind"
               styleClass="w-15rem"
@@ -31,14 +31,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="microservice_detail_kind"> {{ 'CRD.MICROSERVICE.KIND' | translate }}</label>
+            <label for="do_crd_detail_microservice_kind"> {{ 'CRD.MICROSERVICE.KIND' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="microservice_detail_microservice_name"
+              inputId="do_crd_detail_microservice_microservice_name"
               type="text"
               formControlName="specName"
               styleClass="w-15rem"
@@ -47,7 +47,7 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="microservice_detail_microservice_name">
+            <label for="do_crd_detail_microservice_microservice_name">
               {{ 'CRD.MICROSERVICE.MICROSERVICE_NAME' | translate }}</label
             >
           </span>
@@ -56,7 +56,7 @@
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="microservice_detail_appId"
+              inputId="do_crd_detail_microservice_appId"
               type="text"
               formControlName="appId"
               styleClass="w-15rem"
@@ -65,14 +65,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="microservice_detail_appId"> {{ 'CRD.MICROSERVICE.APP_ID' | translate }}</label>
+            <label for="do_crd_detail_microservice_appId"> {{ 'CRD.MICROSERVICE.APP_ID' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="microservice_detail_product_name"
+              inputId="do_crd_detail_microservice_product_name"
               type="text"
               formControlName="productName"
               styleClass="w-15rem"
@@ -81,14 +81,16 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="microservice_detail_product_name"> {{ 'CRD.MICROSERVICE.PRODUCT_NAME' | translate }}</label>
+            <label for="do_crd_detail_microservice_product_name">
+              {{ 'CRD.MICROSERVICE.PRODUCT_NAME' | translate }}</label
+            >
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="microservice_detail_version"
+              inputId="do_crd_detail_microservice_version"
               type="text"
               formControlName="version"
               styleClass="w-15rem"
@@ -97,14 +99,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="microservice_detail_version"> {{ 'CRD.MICROSERVICE.VERSION' | translate }}</label>
+            <label for="do_crd_detail_microservice_version"> {{ 'CRD.MICROSERVICE.VERSION' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="microservice_detail_type"
+              inputId="do_crd_detail_microservice_type"
               type="text"
               formControlName="type"
               styleClass="w-15rem"
@@ -113,14 +115,14 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="microservice_detail_type"> {{ 'CRD.MICROSERVICE.TYPE' | translate }}</label>
+            <label for="do_crd_detail_microservice_type"> {{ 'CRD.MICROSERVICE.TYPE' | translate }}</label>
           </span>
         </div>
         <div>
           <span class="p-float-label" controlErrorAnchor>
             <input
               pInputText
-              inputId="microservice_detail_description"
+              inputId="do_crd_detail_microservice_description"
               type="text"
               formControlName="description"
               styleClass="w-15rem"
@@ -129,19 +131,22 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="microservice_detail_description"> {{ 'CRD.MICROSERVICE.DESCRIPTION' | translate }}</label>
+            <label for="do_crd_detail_microservice_description">
+              {{ 'CRD.MICROSERVICE.DESCRIPTION' | translate }}</label
+            >
           </span>
         </div>
       </div>
     </form>
   </p-tabPanel>
+
   <p-tabPanel
-    [header]="'DIALOG.HISTORY_TAB' | translate"
+    [header]="'DIALOG.TABS.CHANGES' | translate"
     *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
   >
-    <app-update-history [updateHistory]="updateHistory" />
+    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
   </p-tabPanel>
-  <p-tabPanel [header]="'DIALOG.STATUS_TAB' | translate" *ngIf="microserviceCrd?.status">
+  <p-tabPanel [header]="'DIALOG.TABS.STATUS' | translate" *ngIf="microserviceCrd?.status">
     <app-status-tab [status]="microserviceCrd?.status" />
   </p-tabPanel>
 </p-tabView>

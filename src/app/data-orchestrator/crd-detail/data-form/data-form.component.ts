@@ -13,6 +13,7 @@ import { ChangeMode } from '../../crd-search/crd-search.component'
 export class DataFormComponent implements OnChanges {
   @Input() public changeMode: ChangeMode = 'VIEW'
   @Input() public dataCrd: CustomResourceData | undefined
+  @Input() public dateFormat: string | undefined
   @Input() public updateHistory: Update[] | undefined
 
   public formGroup: FormGroup

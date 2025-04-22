@@ -1,10 +1,10 @@
 <p-tabView>
-  <p-tabPanel header="{{ 'DIALOG.DETAILS_TAB' | translate }}">
+  <p-tabPanel header="{{ 'DIALOG.TABS.DETAILS' | translate }}">
     <div class="flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
       <!-- row 1 -->
       <div class="flex flex-row flex-wrap justify-content-between gap-4">
         <div class="flex-grow-1">
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
               type="text"
@@ -20,7 +20,7 @@
           </span>
         </div>
         <div class="flex-grow-1">
-          <span class="p-float-label" controlErrorAnchor>
+          <span class="p-float-label">
             <input
               pInputText
               type="text"
@@ -78,6 +78,41 @@
             <input
               pInputText
               type="text"
+              inputId="do_crd_detail_product_provider"
+              formControlName="provider"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.PRODUCT.PROVIDER' | translate"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.PROVIDER' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="do_crd_detail_product_provider"> {{ 'CRD.PRODUCT.PROVIDER' | translate }}</label>
+          </span>
+        </div>
+        <div class="flex-grow-1">
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              type="text"
+              inputId="do_crd_detail_product_description"
+              formControlName="description"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.PRODUCT.DESCRIPTION' | translate"
+              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.DESCRIPTION' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="do_crd_detail_product_description"> {{ 'CRD.PRODUCT.DESCRIPTION' | translate }}</label>
+          </span>
+        </div>
+      </div>
+      <!-- row 4 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              type="text"
               inputId="do_crd_detail_product_version"
               formControlName="version"
               class="w-full pt-3 pb-2 text-responsive"
@@ -106,7 +141,7 @@
           </span>
         </div>
       </div>
-      <!-- row 4 -->
+      <!-- row 5 -->
       <div class="flex flex-row flex-wrap justify-content-between gap-4">
         <div class="flex-grow-1">
           <span class="p-float-label" controlErrorAnchor>
@@ -141,50 +176,17 @@
           </span>
         </div>
       </div>
-      <!-- row 5 -->
-      <div class="flex flex-row flex-wrap justify-content-between gap-4">
-        <div class="flex-grow-1">
-          <span class="p-float-label" controlErrorAnchor>
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_product_provider"
-              formControlName="provider"
-              class="w-full pt-3 pb-2 text-responsive"
-              [attr.aria-label]="'CRD.PRODUCT.PROVIDER' | translate"
-              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.PROVIDER' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_product_provider"> {{ 'CRD.PRODUCT.PROVIDER' | translate }}</label>
-          </span>
-        </div>
-        <div class="flex-grow-1">
-          <span class="p-float-label" controlErrorAnchor>
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_product_description"
-              formControlName="description"
-              class="w-full pt-3 pb-2 text-responsive"
-              [attr.aria-label]="'CRD.PRODUCT.DESCRIPTION' | translate"
-              [pTooltip]="'CRD.PRODUCT.TOOLTIPS.DESCRIPTION' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_product_description"> {{ 'CRD.PRODUCT.DESCRIPTION' | translate }}</label>
-          </span>
-        </div>
-      </div>
     </div>
   </p-tabPanel>
+
   <p-tabPanel
-    header="{{ 'DIALOG.HISTORY_TAB' | translate }}"
+    header="{{ 'DIALOG.TABS.CHANGES' | translate }}"
     *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
   >
-    <app-update-history [updateHistory]="updateHistory" />
+    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
   </p-tabPanel>
-  <p-tabPanel [header]="'DIALOG.STATUS_TAB' | translate" *ngIf="productCrd?.status">
+
+  <p-tabPanel [header]="'DIALOG.TABS.STATUS' | translate" *ngIf="productCrd?.status">
     <app-status-tab [status]="productCrd?.status" />
   </p-tabPanel>
 </p-tabView>
