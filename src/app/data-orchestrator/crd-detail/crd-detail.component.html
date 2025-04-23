@@ -6,7 +6,7 @@
   [closable]="true"
   [draggable]="true"
   [resizable]="true"
-  [style]="exceptionKey ? null : { width: '600px', height: '500px' }"
+  [style]="exceptionKey === undefined ? { width: '600px', height: '500px' } : {}"
   [breakpoints]="{
     '992px': '75vw',
     '768px': '90vw',

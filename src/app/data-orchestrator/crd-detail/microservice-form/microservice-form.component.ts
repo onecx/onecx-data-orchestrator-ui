@@ -7,8 +7,7 @@ import { Update } from '../crd-detail.component'
 
 @Component({
   selector: 'app-microservice-form',
-  templateUrl: './microservice-form.component.html',
-  styleUrls: ['./microservice-form.component.scss']
+  templateUrl: './microservice-form.component.html'
 })
 export class MicroserviceFormComponent implements OnChanges {
   @Input() public changeMode = 'VIEW'

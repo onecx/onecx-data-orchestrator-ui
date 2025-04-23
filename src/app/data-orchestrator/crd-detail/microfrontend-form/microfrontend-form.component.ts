@@ -7,8 +7,7 @@ import { Update } from '../crd-detail.component'
 
 @Component({
   selector: 'app-microfrontend-form',
-  templateUrl: './microfrontend-form.component.html',
-  styleUrls: ['./microfrontend-form.component.scss']
+  templateUrl: './microfrontend-form.component.html'
 })
 export class MicrofrontendFormComponent implements OnChanges {
   @Input() public changeMode = 'VIEW'

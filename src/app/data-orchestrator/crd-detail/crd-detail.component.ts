@@ -91,6 +91,7 @@ export class CrdDetailComponent implements OnChanges {
   }
 
   public ngOnChanges(): void {
+    this.exceptionKey = undefined
     if (this.displayDetailDialog) this.getCrd()
   }
 

@@ -112,7 +112,7 @@
     },
     "COMMON": {
       "NAME": "Resource Name",
-      "KIND": "Type",
+      "KIND": "Resource Type",
       "PRODUCT_NAME": "Product",
       "APP_ID": "App",
       "API_VERSION": "API Version",
@@ -120,7 +120,7 @@
         "NAME": "Name of the K8s Custom Resource",
         "KIND": "Type of the K8s Custom Resource",
         "PRODUCT_NAME": "Name of the Product",
-        "APP_ID": "App / Componente",
+        "APP_ID": "App / Component as part of the Product",
         "API_VERSION": "API Version"
       }
     },
@@ -297,30 +297,21 @@
       }
     },
     "MICROSERVICE": {
-      "NAME": "Name",
-      "API_VERSION": "API version",
-      "KIND": "Type",
-      "APP_ID": "App",
       "DESCRIPTION": "Description",
-      "MICROSERVICE_NAME": "Microservice Name",
+      "NAME": "Microservice Name",
       "VERSION": "Version",
-      "PRODUCT_NAME": "Product",
       "TYPE": "Type",
       "TOOLTIPS": {
-        "NAME": "Name",
-        "API_VERSION": "API version",
-        "KIND": "Type",
-        "APP_ID": "App",
         "DESCRIPTION": "Description",
-        "MICROSERVICE_NAME": "Microservice Name",
-        "VERSION": "Version",
-        "PRODUCT_NAME": "Product Name",
+        "NAME": "Microservice Name",
+        "VERSION": "Release version",
         "TYPE": "Type"
       }
     }
   },
   "ENUMS": {
     "CRD_TYPE": {
+      "ALL": "All",
       "Data": "Data",
       "Database": "Database",
       "KeycloakClient": "Keycloak client",
