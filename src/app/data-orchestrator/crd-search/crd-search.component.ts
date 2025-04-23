@@ -214,7 +214,7 @@ export class CrdSearchComponent implements OnInit {
         return modifiedData
       }),
       catchError((err) => {
-        this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.MSG_SEARCH_FAILED' })
+        this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
         this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
         console.error('getCustomResourcesByCriteria', err)
         return of([])

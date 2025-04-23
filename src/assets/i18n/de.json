@@ -92,7 +92,8 @@
     "TABS": {
       "DETAILS": "Details",
       "CHANGES": "Änderungen",
-      "STATUS": "Status"
+      "STATUS": "Status",
+      "PERMISSIONS": "Permissions"
     }
   },
   "CRD": {
@@ -207,6 +208,12 @@
       "APP_ID": "App ID",
       "DESCRIPTION": "Beschreibung",
       "PRODUCT_NAME": "Produktname",
+      "PERMISSIONS": {
+        "NOT_EXIST": "Keine Permissions vorhanden.",
+        "RESOURCE": "Ressource",
+        "ACTION": "Aktion",
+        "DESCRIPTION": "Beschreibung"
+      },
       "TOOLTIPS": {
         "NAME": "Name der K8s Custom Ressource",
         "API_VERSION": "API Version",

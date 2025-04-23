@@ -92,7 +92,8 @@
     "TABS": {
       "DETAILS": "Details",
       "CHANGES": "Changes",
-      "STATUS": "Status"
+      "STATUS": "Status",
+      "PERMISSIONS": "Permissions"
     }
   },
   "CRD": {
@@ -207,6 +208,12 @@
       "APP_ID": "App ID",
       "DESCRIPTION": "Description",
       "PRODUCT_NAME": "Product Name",
+      "PERMISSIONS": {
+        "NOT_EXIST": "No permissions available.",
+        "RESOURCE": "Resource",
+        "ACTION": "Action",
+        "DESCRIPTION": "Description"
+      },
       "TOOLTIPS": {
         "NAME": "Name",
         "API_VERSION": "API version",

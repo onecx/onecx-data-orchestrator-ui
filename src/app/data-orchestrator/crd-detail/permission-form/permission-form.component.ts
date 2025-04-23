@@ -5,10 +5,14 @@ import { CustomResourcePermission } from 'src/app/shared/generated'
 
 import { Update } from '../crd-detail.component'
 
+type Permission = {
+  resource: string
+  action: string
+  description: string
+}
 @Component({
   selector: 'app-permission-form',
-  templateUrl: './permission-form.component.html',
-  styleUrls: ['./permission-form.component.scss']
+  templateUrl: './permission-form.component.html'
 })
 export class PermissionFormComponent implements OnChanges {
   @Input() public changeMode = 'VIEW'
@@ -17,6 +21,7 @@ export class PermissionFormComponent implements OnChanges {
   @Input() public updateHistory: Update[] | undefined
 
   public formGroup: FormGroup
+  public permissions: Permission[] = []
 
   constructor() {
     this.formGroup = new FormGroup({
@@ -45,5 +50,14 @@ export class PermissionFormComponent implements OnChanges {
       specName: this.permissionCrd?.spec?.name,
       metadataName: this.permissionCrd?.metadata?.name
     })
+    // transfer permission object to displayable table format
+    if (this.permissionCrd?.spec?.permissions) {
+      const permObj = this.permissionCrd?.spec?.permissions // important move
+      Object.keys(this.permissionCrd?.spec?.permissions).forEach((res) => {
+        for (const [key, value] of Object.entries(permObj[res])) {
+          this.permissions.push({ resource: res, action: key, description: value })
+        }
+      })
+    }
   }
 }
