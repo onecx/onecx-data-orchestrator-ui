@@ -202,31 +202,18 @@
       }
     },
     "PERMISSION": {
-      "NAME": "Ressourcename",
-      "API_VERSION": "API Version",
-      "KIND": "Typ",
-      "APP_ID": "App ID",
       "DESCRIPTION": "Beschreibung",
-      "PRODUCT_NAME": "Produktname",
+      "TOOLTIPS": {
+        "DESCRIPTION": "Beschreibung"
+      },
       "PERMISSIONS": {
         "NOT_EXIST": "Keine Permissions vorhanden.",
         "RESOURCE": "Ressource",
         "ACTION": "Aktion",
         "DESCRIPTION": "Beschreibung"
-      },
-      "TOOLTIPS": {
-        "NAME": "Name der K8s Custom Ressource",
-        "API_VERSION": "API Version",
-        "KIND": "Typ der K8s Custom Ressource",
-        "APP_ID": "App ID",
-        "DESCRIPTION": "Beschreibung",
-        "PRODUCT_NAME": "Produktname"
       }
     },
     "KEYCLOAK": {
-      "NAME": "Ressourcename",
-      "API_VERSION": "API Version",
-      "KIND": "Typ",
       "BASE_PATH": "Basis Pfad",
       "DESCRIPTION": "Beschreibung",
       "PASSWORD_KEY": "Passwort Schlüssel",
@@ -245,9 +232,6 @@
       "SERVICE_ACCOUNTS_ENABLED": "Service Konten",
       "STANDARD_FLOW_ENABLED": "Standardfluss",
       "TOOLTIPS": {
-        "NAME": "Name der K8s Custom Ressource",
-        "API_VERSION": "API Version",
-        "KIND": "Typ der K8s Custom Ressource",
         "BASE_PATH": "Basis Pfad",
         "DESCRIPTION": "Beschreibung",
         "PASSWORD_KEY": "Passwort Schlüssel",

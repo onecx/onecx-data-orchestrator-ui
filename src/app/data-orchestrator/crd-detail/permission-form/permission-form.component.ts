@@ -27,11 +27,12 @@ export class PermissionFormComponent implements OnChanges {
     this.formGroup = new FormGroup({
       metadataName: new FormControl({ value: null, disabled: true }),
       kind: new FormControl({ value: null, disabled: true }),
+      productName: new FormControl(null),
       appId: new FormControl(null),
-      description: new FormControl(null),
-      productName: new FormControl(null)
+      description: new FormControl(null)
     })
   }
+
   ngOnChanges() {
     this.fillForm()
     if (this.changeMode === 'VIEW') this.formGroup.disable()
@@ -50,6 +51,7 @@ export class PermissionFormComponent implements OnChanges {
       specName: this.permissionCrd?.spec?.name,
       metadataName: this.permissionCrd?.metadata?.name
     })
+
     // transfer permission object to displayable table format
     if (this.permissionCrd?.spec?.permissions) {
       const permObj = this.permissionCrd?.spec?.permissions // important move

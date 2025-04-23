@@ -37,16 +37,18 @@ describe('PermissionFormComponent', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
-    expect(component).toBeTruthy()
-  })
+  describe('initialize', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy()
+    })
 
-  it('should initialize form group with default values', () => {
-    expect(component.formGroup.controls['metadataName'].value).toBeNull()
-    expect(component.formGroup.controls['kind'].value).toBeNull()
-    expect(component.formGroup.controls['appId'].value).toBeNull()
-    expect(component.formGroup.controls['description'].value).toBeNull()
-    expect(component.formGroup.controls['productName'].value).toBeNull()
+    it('should initialize form group with default values', () => {
+      expect(component.formGroup.controls['metadataName'].value).toBeNull()
+      expect(component.formGroup.controls['kind'].value).toBeNull()
+      expect(component.formGroup.controls['productName'].value).toBeNull()
+      expect(component.formGroup.controls['appId'].value).toBeNull()
+      expect(component.formGroup.controls['description'].value).toBeNull()
+    })
   })
 
   it('should disable form controls in VIEW mode', () => {
@@ -72,7 +74,12 @@ describe('PermissionFormComponent', () => {
         appId: 'testAppId',
         description: 'testDescription',
         name: 'testSpecName',
-        productName: 'testProductName'
+        productName: 'testProductName',
+        permissions: {
+          PERMISSION: {
+            VIEW: 'View user permissions'
+          }
+        }
       },
       status: { status: StatusStatusEnum.Created }
     }
