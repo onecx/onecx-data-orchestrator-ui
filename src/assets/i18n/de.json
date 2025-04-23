@@ -92,7 +92,8 @@
     "TABS": {
       "DETAILS": "Details",
       "CHANGES": "Änderungen",
-      "STATUS": "Status"
+      "STATUS": "Status",
+      "PERMISSIONS": "Permissions"
     }
   },
   "CRD": {
@@ -111,8 +112,8 @@
       "VERSION": "Release version der K8s Custom Ressource"
     },
     "COMMON": {
-      "NAME": "Ressourcename",
-      "KIND": "Typ",
+      "NAME": "Ressource Name",
+      "KIND": "Ressource Typ",
       "PRODUCT_NAME": "Produkt",
       "APP_ID": "App",
       "API_VERSION": "Version",
@@ -120,7 +121,7 @@
         "NAME": "Name der K8s Custom Ressource",
         "KIND": "Typ der K8s Custom Ressource",
         "PRODUCT_NAME": "Names des Produkts",
-        "APP_ID": "App / Komponente",
+        "APP_ID": "App / Komponente asl Teil des Produkts",
         "API_VERSION": "API Version"
       }
     },
@@ -201,25 +202,18 @@
       }
     },
     "PERMISSION": {
-      "NAME": "Ressourcename",
-      "API_VERSION": "API Version",
-      "KIND": "Typ",
-      "APP_ID": "App ID",
       "DESCRIPTION": "Beschreibung",
-      "PRODUCT_NAME": "Produktname",
       "TOOLTIPS": {
-        "NAME": "Name der K8s Custom Ressource",
-        "API_VERSION": "API Version",
-        "KIND": "Typ der K8s Custom Ressource",
-        "APP_ID": "App ID",
-        "DESCRIPTION": "Beschreibung",
-        "PRODUCT_NAME": "Produktname"
+        "DESCRIPTION": "Beschreibung"
+      },
+      "PERMISSIONS": {
+        "NOT_EXIST": "Keine Permissions vorhanden.",
+        "RESOURCE": "Ressource",
+        "ACTION": "Aktion",
+        "DESCRIPTION": "Beschreibung"
       }
     },
     "KEYCLOAK": {
-      "NAME": "Ressourcename",
-      "API_VERSION": "API Version",
-      "KIND": "Typ",
       "BASE_PATH": "Basis Pfad",
       "DESCRIPTION": "Beschreibung",
       "PASSWORD_KEY": "Passwort Schlüssel",
@@ -238,9 +232,6 @@
       "SERVICE_ACCOUNTS_ENABLED": "Service Konten",
       "STANDARD_FLOW_ENABLED": "Standardfluss",
       "TOOLTIPS": {
-        "NAME": "Name der K8s Custom Ressource",
-        "API_VERSION": "API Version",
-        "KIND": "Typ der K8s Custom Ressource",
         "BASE_PATH": "Basis Pfad",
         "DESCRIPTION": "Beschreibung",
         "PASSWORD_KEY": "Passwort Schlüssel",
@@ -303,30 +294,21 @@
       }
     },
     "MICROSERVICE": {
-      "NAME": "Ressourcename",
-      "API_VERSION": "API Version",
-      "KIND": "Typ",
-      "APP_ID": "App ID",
       "DESCRIPTION": "Beschreibung",
-      "MICROSERVICE_NAME": "Microservice Name",
+      "NAME": "Microservice Name",
       "VERSION": "Version",
-      "PRODUCT_NAME": "Produktname",
-      "TYPE": "Typ",
+      "TYPE": "Microservice Typ",
       "TOOLTIPS": {
-        "NAME": "Name der K8s Custom Ressource",
-        "API_VERSION": "API Version",
-        "KIND": "Typ der K8s Custom Ressource",
-        "APP_ID": "App ID",
         "DESCRIPTION": "Beschreibung",
-        "MICROSERVICE_NAME": "Microservice Name",
-        "VERSION": "Version",
-        "PRODUCT_NAME": "Produktname",
-        "TYPE": "Typ"
+        "NAME": "Microservice Name",
+        "VERSION": "Release version",
+        "TYPE": "Typ des Microservices"
       }
     }
   },
   "ENUMS": {
     "CRD_TYPE": {
+      "ALL": "Alle",
       "Data": "Data",
       "Database": "Database",
       "KeycloakClient": "Keycloak Client",

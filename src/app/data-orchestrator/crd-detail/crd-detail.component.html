@@ -6,7 +6,7 @@
   [closable]="true"
   [draggable]="true"
   [resizable]="true"
-  [style]="exceptionKey ? null : { width: '600px', height: '500px' }"
+  [style]="exceptionKey === undefined ? { width: '600px', height: '500px' } : {}"
   [breakpoints]="{
     '992px': '75vw',
     '768px': '90vw',
@@ -14,6 +14,26 @@
   }"
 >
   <ng-container *ngIf="crd$ | async as crd">
+    <!-- display crd type on dialog header -->
+    <div
+      class="absolute sm:dialog-header-right-slot"
+      [pTooltip]="'CRD.COMMON.KIND' | translate"
+      tooltipPosition="top"
+      tooltipEvent="hover"
+    >
+      <div
+        class="mr-2 pi pi-circle-on"
+        [class.text-red-600]="crd.status.status === 'ERROR'"
+        [class.text-yellow-600]="crd.status.status === 'UNDEFINED'"
+        [class.text-green-600]="crd.status.status === 'UPDATED' || crd.status.status === 'CREATED'"
+        [attr.aria-label]="'ENUMS.CRD_STATUS.' + crd.status.status | translate"
+        [pTooltip]="'ENUMS.CRD_STATUS.' + crd.status.status | translate"
+        tooltipPosition="top"
+        tooltipEvent="hover"
+      ></div>
+      {{ crdType }}
+    </div>
+
     <p-message
       *ngIf="loading"
       id="do_crd_detail_message_loading"

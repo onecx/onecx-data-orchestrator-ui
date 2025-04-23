@@ -7,8 +7,7 @@ import { Update } from '../crd-detail.component'
 
 @Component({
   selector: 'app-keycloak-form',
-  templateUrl: './keycloak-form.component.html',
-  styleUrls: ['./keycloak-form.component.scss']
+  templateUrl: './keycloak-form.component.html'
 })
 export class KeycloakFormComponent implements OnChanges {
   @Input() public changeMode = 'VIEW'

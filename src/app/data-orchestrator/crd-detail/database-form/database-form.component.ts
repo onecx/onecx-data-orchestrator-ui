@@ -7,8 +7,7 @@ import { Update } from '../crd-detail.component'
 
 @Component({
   selector: 'app-database-form',
-  templateUrl: './database-form.component.html',
-  styleUrls: ['./database-form.component.scss']
+  templateUrl: './database-form.component.html'
 })
 export class DatabaseFormComponent implements OnChanges {
   @Input() public changeMode = 'VIEW'
