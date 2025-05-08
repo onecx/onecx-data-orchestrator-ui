@@ -9,6 +9,7 @@ import {
   CustomResourceKeycloakClient,
   CustomResourceMicrofrontend,
   CustomResourceMicroservice,
+  CustomResourceParameter,
   CustomResourcePermission,
   CustomResourceProduct,
   CustomResourceSlot,
@@ -26,6 +27,7 @@ import { MicrofrontendFormComponent } from './microfrontend-form/microfrontend-f
 import { MicroserviceFormComponent } from './microservice-form/microservice-form.component'
 
 import { ChangeMode } from '../crd-search/crd-search.component'
+import { ParameterFormComponent } from './parameter-form/parameter-form.component'
 
 interface ManagedField {
   apiVersion: string
@@ -60,6 +62,8 @@ export class CrdDetailComponent implements OnChanges {
     | undefined
   @ViewChildren(DatabaseFormComponent, { read: DatabaseFormComponent })
   databaseFormComponent!: QueryList<DatabaseFormComponent>
+  @ViewChildren(ParameterFormComponent, { read: ParameterFormComponent })
+  parameterFormComponent!: QueryList<ParameterFormComponent>
   @ViewChildren(ProductFormComponent, { read: ProductFormComponent })
   productFormComponent!: QueryList<ProductFormComponent>
   @ViewChildren(PermissionFormComponent, { read: PermissionFormComponent })
@@ -151,13 +155,9 @@ export class CrdDetailComponent implements OnChanges {
         }
       }
       extractFields(field.fieldsV1)
-      return {
-        date: field.time,
-        fields: fields,
-        operation: field.operation
-      }
+      return { date: field.time, fields: fields, operation: field.operation }
     })
-    return history.reverse()
+    return history
   }
 
   /**
@@ -195,6 +195,8 @@ export class CrdDetailComponent implements OnChanges {
         return this.microfrontendFormComponent?.first.formGroup.value
       case 'Microservice':
         return this.microserviceFormComponent?.first.formGroup.value
+      case 'Parameter':
+        return this.parameterFormComponent?.first.formGroup.value
       case 'Permission':
         return this.permissionFormComponent?.first.formGroup.value
       case 'Product':
@@ -209,6 +211,8 @@ export class CrdDetailComponent implements OnChanges {
       editResourceRequest = { CrdData: crd as CustomResourceData }
     } else if (type === ContextKind.Database) {
       editResourceRequest = { CrdDatabase: crd as CustomResourceDatabase }
+    } else if (type === ContextKind.Parameter) {
+      editResourceRequest = { CrdParameter: crd as CustomResourceParameter }
     } else if (type === ContextKind.Product) {
       editResourceRequest = { CrdProduct: crd as CustomResourceProduct }
     } else if (type === ContextKind.Permission) {

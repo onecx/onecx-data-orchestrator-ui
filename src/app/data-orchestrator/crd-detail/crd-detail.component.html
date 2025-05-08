@@ -83,6 +83,13 @@
         [dateFormat]="datetimeFormat"
         [updateHistory]="updateHistory"
       />
+      <app-parameter-form
+        *ngIf="crdType.toString() === 'Parameter'"
+        [changeMode]="changeMode"
+        [parameterCrd]="crd"
+        [dateFormat]="datetimeFormat"
+        [updateHistory]="updateHistory"
+      />
       <app-permission-form
         *ngIf="crdType.toString() === 'Permission'"
         [changeMode]="changeMode"

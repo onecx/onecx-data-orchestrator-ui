@@ -6,10 +6,7 @@
       "NO.TOOLTIP": "Cancel the action",
       "YES.TOOLTIP": "Proceed with the action"
     },
-    "DELETE": {
-      "CRD": "Löschen",
-      "INFO": "Diese Aktion kann nicht rückgängig gemacht werden!"
-    },
+    "DELETE": { "CRD": "Löschen", "INFO": "Diese Aktion kann nicht rückgängig gemacht werden!" },
     "EDIT": {
       "CRD": "Edit",
       "CRD.TOOLTIP": "Edit the custom resource properties",
@@ -18,10 +15,7 @@
         "NOK": "An error has occurred. The Custom Resource was not saved."
       }
     },
-    "NEW": {
-      "CRD": "New",
-      "CRD.TOOLTIP": "Create a custom resource"
-    },
+    "NEW": { "CRD": "New", "CRD.TOOLTIP": "Create a custom resource" },
     "SEARCH": {
       "ACTIONS": "Actions",
       "LABEL": "Search",
@@ -36,10 +30,7 @@
       "OF": "of",
       "DIAGRAM_SUM": "Total",
       "SHOW_DIAGRAM": "Show overview",
-      "PREDEFINED_GROUP": {
-        "DEFAULT": "Default",
-        "ALL": "All"
-      }
+      "PREDEFINED_GROUP": { "DEFAULT": "Default", "ALL": "All" }
     },
     "TOUCH": {
       "CRD": "Touch",
@@ -49,10 +40,7 @@
         "NOK": "An error has occurred. The K8s Custom Resource was updated."
       }
     },
-    "VIEW": {
-      "CRD": "Details",
-      "CRD.TOOLTIP": "Show the details of the K8s Custom Resource"
-    },
+    "VIEW": { "CRD": "Details", "CRD.TOOLTIP": "Show the details of the K8s Custom Resource" },
     "CANCEL": "Cancel",
     "CHOOSE": "Choose",
     "CLOSE": "Close",
@@ -93,7 +81,8 @@
       "DETAILS": "Details",
       "CHANGES": "Changes",
       "STATUS": "Status",
-      "PERMISSIONS": "Permissions"
+      "PERMISSIONS": "Permissions",
+      "PARAMETERS": "Parameters"
     }
   },
   "CRD": {
@@ -130,12 +119,7 @@
       "KEY": "Key",
       "ORG_ID": "Organization ID",
       "DATA": "Data",
-      "TOOLTIPS": {
-        "DESCRIPTION": "Description",
-        "KEY": "Key",
-        "ORG_ID": "Organization ID",
-        "DATA": "Data"
-      }
+      "TOOLTIPS": { "DESCRIPTION": "Description", "KEY": "Key", "ORG_ID": "Organization ID", "DATA": "Data" }
     },
     "DATABASE": {
       "HOST": "Host",
@@ -203,15 +187,19 @@
     },
     "PERMISSION": {
       "DESCRIPTION": "Description",
-      "TOOLTIPS": {
-        "DESCRIPTION": "Description"
-      },
+      "TOOLTIPS": { "DESCRIPTION": "Description" },
       "PERMISSIONS": {
         "NOT_EXIST": "No permissions available.",
         "RESOURCE": "Resource",
         "ACTION": "Action",
         "DESCRIPTION": "Description"
       }
+    },
+    "PARAMETER": {
+      "KEY": "Key",
+      "ORGID": "Organization ID",
+      "TOOLTIPS": { "KEY": "key", "ORGID": "Organization ID" },
+      "PARAMETERS": { "DESCRIPTION": "Description", "DISPLAY_NAME": "Display name", "VALUE": "Value", "NAME": "Name" }
     },
     "KEYCLOAK": {
       "BASE_PATH": "Base path",
@@ -314,21 +302,15 @@
       "KeycloakClient": "Keycloak client",
       "Microfrontend": "Microfrontend",
       "Microservice": "Microservice",
+      "Parameter": "Parameter",
       "Permission": "Permission",
       "Product": "Product",
       "Slot": "Slot"
     },
-    "CRD_STATUS": {
-      "ERROR": "Error",
-      "CREATED": "Created",
-      "UPDATED": "Updated",
-      "UNDEFINED": "Not processed"
-    }
+    "CRD_STATUS": { "ERROR": "Error", "CREATED": "Created", "UPDATED": "Updated", "UNDEFINED": "Not processed" }
   },
   "VALIDATION": {
-    "HINTS": {
-      "FORMAT_URL": "Format: "
-    },
+    "HINTS": { "FORMAT_URL": "Format: " },
     "ERRORS": {
       "INTERNAL_ERROR": "Internal error",
       "INVALID_DATE_RANGE": "The start date is after the end date. It must be before that.",
