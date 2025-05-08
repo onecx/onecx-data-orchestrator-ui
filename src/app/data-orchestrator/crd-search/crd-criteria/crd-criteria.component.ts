@@ -65,6 +65,7 @@ export class CrdCriteriaComponent {
         'ENUMS.CRD_TYPE.' + ContextKind.KeycloakClient,
         'ENUMS.CRD_TYPE.' + ContextKind.Microfrontend,
         'ENUMS.CRD_TYPE.' + ContextKind.Microservice,
+        'ENUMS.CRD_TYPE.' + ContextKind.Parameter,
         'ENUMS.CRD_TYPE.' + ContextKind.Permission,
         'ENUMS.CRD_TYPE.' + ContextKind.Product,
         'ENUMS.CRD_TYPE.' + ContextKind.Slot
@@ -74,12 +75,10 @@ export class CrdCriteriaComponent {
           return [
             { label: data['ENUMS.CRD_TYPE.' + ContextKind.Data], value: ContextKind.Data },
             { label: data['ENUMS.CRD_TYPE.' + ContextKind.Database], value: ContextKind.Database },
-            {
-              label: data['ENUMS.CRD_TYPE.' + ContextKind.KeycloakClient],
-              value: ContextKind.KeycloakClient
-            },
+            { label: data['ENUMS.CRD_TYPE.' + ContextKind.KeycloakClient], value: ContextKind.KeycloakClient },
             { label: data['ENUMS.CRD_TYPE.' + ContextKind.Microfrontend], value: ContextKind.Microfrontend },
             { label: data['ENUMS.CRD_TYPE.' + ContextKind.Microservice], value: ContextKind.Microservice },
+            { label: data['ENUMS.CRD_TYPE.' + ContextKind.Parameter], value: ContextKind.Parameter },
             { label: data['ENUMS.CRD_TYPE.' + ContextKind.Permission], value: ContextKind.Permission },
             { label: data['ENUMS.CRD_TYPE.' + ContextKind.Product], value: ContextKind.Product },
             { label: data['ENUMS.CRD_TYPE.' + ContextKind.Slot], value: ContextKind.Slot }

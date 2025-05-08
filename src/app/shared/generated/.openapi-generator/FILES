@@ -23,6 +23,9 @@ model/customResourceMicrofrontendSpec.ts
 model/customResourceMicrofrontendSpecEndpointsInner.ts
 model/customResourceMicroservice.ts
 model/customResourceMicroserviceSpec.ts
+model/customResourceParameter.ts
+model/customResourceParameterSpec.ts
+model/customResourceParameterSpecParametersValue.ts
 model/customResourcePermission.ts
 model/customResourcePermissionSpec.ts
 model/customResourceProduct.ts

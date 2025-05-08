@@ -11,15 +11,9 @@
  */
 
 
-export enum ContextKind {
-    Data = 'Data',
-    Database = 'Database',
-    KeycloakClient = 'KeycloakClient',
-    Microfrontend = 'Microfrontend',
-    Microservice = 'Microservice',
-    Permission = 'Permission',
-    Product = 'Product',
-    Slot = 'Slot',
-    Parameter = 'Parameter'
+export interface CustomResourceParameterSpecParametersValue { 
+    description?: string;
+    displayName?: string;
+    value?: string;
 }
 

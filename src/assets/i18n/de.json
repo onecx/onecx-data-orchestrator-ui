@@ -6,10 +6,7 @@
       "NO.TOOLTIP": "Abbruch der Aktion",
       "YES.TOOLTIP": "Fortfahren mit der Aktion"
     },
-    "DELETE": {
-      "CRD": "Löschen",
-      "INFO": "Diese Aktion kann nicht rückgängig gemacht werden!"
-    },
+    "DELETE": { "CRD": "Löschen", "INFO": "Diese Aktion kann nicht rückgängig gemacht werden!" },
     "EDIT": {
       "CRD": "Bearbeiten",
       "CRD.TOOLTIP": "Die K8s Ressource bearbeiten",
@@ -18,10 +15,7 @@
         "NOK": "Ein Fehler ist aufgetreten. Die K8s Ressource wurde nicht gespeichert."
       }
     },
-    "NEW": {
-      "CRD": "New",
-      "CRD.TOOLTIP": "Create a custom resource"
-    },
+    "NEW": { "CRD": "New", "CRD.TOOLTIP": "Create a custom resource" },
     "SEARCH": {
       "ACTIONS": "Aktionen",
       "LABEL": "Suchen",
@@ -36,10 +30,7 @@
       "OF": "von",
       "DIAGRAM_SUM": "Total",
       "SHOW_DIAGRAM": "Übersicht anzeigen",
-      "PREDEFINED_GROUP": {
-        "DEFAULT": "Default",
-        "ALL": "Alle"
-      }
+      "PREDEFINED_GROUP": { "DEFAULT": "Default", "ALL": "Alle" }
     },
     "TOUCH": {
       "CRD": "Aktualisieren",
@@ -49,10 +40,7 @@
         "NOK": "Ein Fehler ist aufgetreten. Die K8s Custom Ressource wurde nicht aktualisiert."
       }
     },
-    "VIEW": {
-      "CRD": "Details",
-      "CRD.TOOLTIP": "Die Details der K8s Custom Ressource anzeigen"
-    },
+    "VIEW": { "CRD": "Details", "CRD.TOOLTIP": "Die Details der K8s Custom Ressource anzeigen" },
     "CANCEL": "Abbrechen",
     "CHOOSE": "Auswählen",
     "CLOSE": "Schließen",
@@ -93,7 +81,8 @@
       "DETAILS": "Details",
       "CHANGES": "Änderungen",
       "STATUS": "Status",
-      "PERMISSIONS": "Permissions"
+      "PERMISSIONS": "Permissions",
+      "PARAMETERS": "Parameter"
     }
   },
   "CRD": {
@@ -130,12 +119,7 @@
       "KEY": "Schlüssel",
       "ORG_ID": "Organisation ID",
       "DATA": "Daten",
-      "TOOLTIPS": {
-        "DESCRIPTION": "Beschreibung",
-        "KEY": "Schlüssel",
-        "ORG_ID": "Organisation ID",
-        "DATA": "Daten"
-      }
+      "TOOLTIPS": { "DESCRIPTION": "Beschreibung", "KEY": "Schlüssel", "ORG_ID": "Organisation ID", "DATA": "Daten" }
     },
     "DATABASE": {
       "HOST": "Host",
@@ -203,15 +187,19 @@
     },
     "PERMISSION": {
       "DESCRIPTION": "Beschreibung",
-      "TOOLTIPS": {
-        "DESCRIPTION": "Beschreibung"
-      },
+      "TOOLTIPS": { "DESCRIPTION": "Beschreibung" },
       "PERMISSIONS": {
         "NOT_EXIST": "Keine Permissions vorhanden.",
         "RESOURCE": "Ressource",
         "ACTION": "Aktion",
         "DESCRIPTION": "Beschreibung"
       }
+    },
+    "PARAMETER": {
+      "KEY": "Schlüssel",
+      "ORGID": "Organisations ID",
+      "TOOLTIPS": { "KEY": "Schlüssel", "ORGID": "Organisations ID" },
+      "PARAMETERS": { "DESCRIPTION": "Beschreibung", "DISPLAY_NAME": "Anzeigename", "VALUE": "Wert", "NAME": "Name" }
     },
     "KEYCLOAK": {
       "BASE_PATH": "Basis Pfad",
@@ -314,6 +302,7 @@
       "KeycloakClient": "Keycloak Client",
       "Microfrontend": "Microfrontend",
       "Microservice": "Microservice",
+      "Parameter": "Parameter",
       "Permission": "Permission",
       "Product": "Product",
       "Slot": "Slot"
@@ -326,9 +315,7 @@
     }
   },
   "VALIDATION": {
-    "HINTS": {
-      "FORMAT_URL": "Format: "
-    },
+    "HINTS": { "FORMAT_URL": "Format: " },
     "ERRORS": {
       "INTERNAL_ERROR": "Interner Fehler",
       "INVALID_DATE_RANGE": "Das Startdatum liegt nach dem Enddatum. Es muss davor liegen.",

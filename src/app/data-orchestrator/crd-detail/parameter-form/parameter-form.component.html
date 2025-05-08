@@ -1,0 +1,145 @@
+<p-tabView>
+  <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
+    <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
+      <!-- row 1 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
+          <span class="p-float-label">
+            <input
+              pInputText
+              type="text"
+              inputId="do_crd_detail_parameter_name"
+              formControlName="name"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.COMMON.NAME' | translate"
+              [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="do_crd_detail_parameter_name"> {{ 'CRD.COMMON.NAME' | translate }}</label>
+          </span>
+        </div>
+        <div class="flex-grow-1">
+          <span class="p-float-label">
+            <input
+              pInputText
+              type="text"
+              inputId="do_crd_detail_parameter_kind"
+              formControlName="kind"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.COMMON.KIND' | translate"
+              [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="do_crd_detail_parameter_kind"> {{ 'CRD.COMMON.KIND' | translate }}</label>
+          </span>
+        </div>
+      </div>
+      <!-- row 2 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              inputId="do_crd_detail_parameter_product_name"
+              type="text"
+              formControlName="productName"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.COMMON.PRODUCT_NAME' | translate"
+              [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="do_crd_detail_parameter_product_name"> {{ 'CRD.COMMON.PRODUCT_NAME' | translate }}</label>
+          </span>
+        </div>
+        <div class="flex-grow-1">
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              type="text"
+              inputId="do_crd_detail_parameter_app_id"
+              formControlName="applicationId"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.COMMON.APP_ID' | translate"
+              [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="do_crd_detail_parameter_app_id"> {{ 'CRD.COMMON.APP_ID' | translate }}</label>
+          </span>
+        </div>
+      </div>
+      <!-- row 3 -->
+      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <div class="flex-grow-1">
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              type="text"
+              inputId="do_crd_detail_parameter_key"
+              formControlName="key"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.PARAMETER.KEY' | translate"
+              [pTooltip]="'CRD.PARAMETER.TOOLTIPS.KEY' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="do_crd_detail_parameter_key"> {{ 'CRD.PARAMETER.KEY' | translate }}</label>
+          </span>
+        </div>
+        <div class="flex-grow-1">
+          <span class="p-float-label" controlErrorAnchor>
+            <input
+              pInputText
+              type="text"
+              s
+              inputId="do_crd_detail_parameter_orgId"
+              formControlName="orgId"
+              class="w-full pt-3 pb-2 text-responsive"
+              [attr.aria-label]="'CRD.PARAMETER.ORGID' | translate"
+              [pTooltip]="'CRD.PARAMETER.TOOLTIPS.ORGID' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            />
+            <label for="do_crd_detail_parameter_orgId"> {{ 'CRD.PARAMETER.ORGID' | translate }}</label>
+          </span>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+
+  <p-tabPanel
+    [header]="'DIALOG.TABS.CHANGES' | translate"
+    *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
+  >
+    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
+  </p-tabPanel>
+
+  <p-tabPanel [header]="'DIALOG.TABS.STATUS' | translate" *ngIf="parameterCrd?.status">
+    <app-status-tab [status]="parameterCrd?.status" />
+  </p-tabPanel>
+
+  <p-tabPanel [header]="'DIALOG.TABS.PARAMETERS' | translate">
+    <p-message
+      *ngIf="parameters.length === 0"
+      id="do_crd_detail_parameter_message_not_exist"
+      severity="info"
+      [text]="'CRD.PARAMETER.PARAMETERS.NOT_EXIST' | translate"
+    ></p-message>
+
+    <div class="flex flex-column gap-3">
+      <div *ngFor="let param of parameters" class="border-1 border-200 p-3 border-round surface-50">
+        <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.NAME' | translate }}</div>
+        <div class="font-medium mb-2">{{ param.name }}</div>
+        <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.VALUE' | translate }}</div>
+        <div class="mb-2 text-pre-wrap break-word">{{ param.value }}</div>
+        <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.DISPLAY_NAME' | translate }}</div>
+        <div class="mb-2">{{ param.displayName }}</div>
+        <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.DESCRIPTION' | translate }}</div>
+        <div class="mb-2 text-pre-wrap break-word">{{ param.description }}</div>
+      </div>
+    </div>
+  </p-tabPanel>
+</p-tabView>

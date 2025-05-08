@@ -12,6 +12,7 @@
 import { CustomResourceMicroservice } from './customResourceMicroservice';
 import { CustomResourceSlot } from './customResourceSlot';
 import { CustomResourceKeycloakClient } from './customResourceKeycloakClient';
+import { CustomResourceParameter } from './customResourceParameter';
 import { CustomResourceData } from './customResourceData';
 import { CustomResourceDatabase } from './customResourceDatabase';
 import { CustomResourceMicrofrontend } from './customResourceMicrofrontend';
@@ -28,5 +29,6 @@ export interface EditResourceRequest {
     CrdPermission?: CustomResourcePermission;
     CrdProduct?: CustomResourceProduct;
     CrdSlot?: CustomResourceSlot;
+    CrdParameter?: CustomResourceParameter;
 }
 

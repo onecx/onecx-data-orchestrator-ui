@@ -21,14 +21,9 @@ import { MicroserviceFormComponent } from './crd-detail/microservice-form/micros
 import { SlotFormComponent } from './crd-detail/slot-form/slot-form.component'
 import { UpdateHistoryComponent } from './crd-detail/update-history/update-history.component'
 import { StatusTabComponent } from './crd-detail/status-tab/status-tab.component'
+import { ParameterFormComponent } from './crd-detail/parameter-form/parameter-form.component'
 
-const routes: Routes = [
-  {
-    path: '',
-    component: CrdSearchComponent,
-    pathMatch: 'full'
-  }
-]
+const routes: Routes = [{ path: '', component: CrdSearchComponent, pathMatch: 'full' }]
 @NgModule({
   declarations: [
     CrdSearchComponent,
@@ -43,7 +38,8 @@ const routes: Routes = [
     MicrofrontendFormComponent,
     MicroserviceFormComponent,
     UpdateHistoryComponent,
-    StatusTabComponent
+    StatusTabComponent,
+    ParameterFormComponent
   ],
   imports: [
     CommonModule,

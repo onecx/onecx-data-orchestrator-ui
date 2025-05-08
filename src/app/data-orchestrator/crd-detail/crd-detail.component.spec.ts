@@ -18,6 +18,7 @@ import { PermissionFormComponent } from './permission-form/permission-form.compo
 import { SlotFormComponent } from './slot-form/slot-form.component'
 import { KeycloakFormComponent } from './keycloak-form/keycloak-form.component'
 import { CrdDetailComponent, Update } from '../crd-detail/crd-detail.component'
+import { ParameterFormComponent } from './parameter-form/parameter-form.component'
 
 describe('CrdDetailComponent', () => {
   let component: CrdDetailComponent
@@ -111,7 +112,7 @@ describe('CrdDetailComponent', () => {
       component.crd$.subscribe({
         next: (data) => {
           expect(data).toEqual(mockCrd.crd)
-          expect(component.updateHistory).toEqual(mockUpdateHistory.reverse())
+          expect(component.updateHistory).toEqual(mockUpdateHistory)
           done()
         },
         error: done.fail
@@ -239,6 +240,15 @@ describe('CrdDetailComponent', () => {
 
     expect(formValues).toEqual(mockFormGroup.value)
 
+    //Parameter
+    component.parameterFormComponent = new QueryList<ParameterFormComponent>()
+    component.parameterFormComponent.reset([{ formGroup: mockFormGroup } as ParameterFormComponent])
+
+    component.crdType = 'Parameter'
+    formValues = (component as any).getFormValuesOfActiveChild()
+
+    expect(formValues).toEqual(mockFormGroup.value)
+
     //Product
     component.productFormComponent = new QueryList<ProductFormComponent>()
     component.productFormComponent.reset([{ formGroup: mockFormGroup } as ProductFormComponent])
@@ -305,6 +315,11 @@ describe('CrdDetailComponent', () => {
     // Database
     expectedRequest = { CrdDatabase: mockCrd }
     result = (component as any).prepareUpdateData('Database', mockCrd)
+    expect(result).toEqual(expectedRequest)
+
+    // Product
+    expectedRequest = { CrdParameter: mockCrd }
+    result = (component as any).prepareUpdateData('Parameter', mockCrd)
     expect(result).toEqual(expectedRequest)
 
     // Product
@@ -387,6 +402,7 @@ describe('CrdDetailComponent', () => {
 
     it('should prepare history from managedFields and skip keys with "."', () => {
       const mockManagedFields = [
+        { time: '2023-01-02T00:00:00Z', fieldsV1: { 'f:spec': { 'f:version': {} } }, operation: 'Update' },
         {
           time: '2023-01-01T00:00:00Z',
           fieldsV1: {
@@ -395,33 +411,14 @@ describe('CrdDetailComponent', () => {
               'f:description': {},
               '.': {} // This key should be skipped
             },
-            'f:metadata': {
-              'f:labels': {}
-            }
-          },
-          operation: 'Update'
-        },
-        {
-          time: '2023-01-02T00:00:00Z',
-          fieldsV1: {
-            'f:spec': {
-              'f:version': {}
-            }
+            'f:metadata': { 'f:labels': {} }
           },
           operation: 'Update'
         }
       ]
-      component.crd = {
-        metadata: {
-          managedFields: mockManagedFields
-        }
-      }
+      component.crd = { metadata: { managedFields: mockManagedFields } }
       const expectedHistory: Update[] = [
-        {
-          date: '2023-01-02T00:00:00Z',
-          fields: { spec: ['version'] },
-          operation: 'Update'
-        },
+        { date: '2023-01-02T00:00:00Z', fields: { spec: ['version'] }, operation: 'Update' },
         {
           date: '2023-01-01T00:00:00Z',
           fields: { spec: ['name', 'description'], metadata: ['labels'] },
