@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core'
-import { ComponentFixture, TestBed, tick, waitForAsync } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { FormControl, FormGroup } from '@angular/forms'
