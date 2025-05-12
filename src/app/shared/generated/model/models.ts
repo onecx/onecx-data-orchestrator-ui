@@ -25,6 +25,7 @@ export * from './customResourceSlotSpec';
 export * from './editResourceRequest';
 export * from './genericCrd';
 export * from './getCRDResponse';
+export * from './getContextKindsResponse';
 export * from './metadata';
 export * from './problemDetailInvalidParam';
 export * from './problemDetailParam';

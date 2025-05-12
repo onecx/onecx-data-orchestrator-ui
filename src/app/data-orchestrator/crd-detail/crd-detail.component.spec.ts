@@ -188,8 +188,11 @@ describe('CrdDetailComponent', () => {
     it('should save crd data and emit hideDialogAndChanged with true when onSave is called', () => {
       const mockFormValues = { name: 'testCrd' }
       const mockEditResourceRequest = { CrdData: mockFormValues }
+      const mockCrd = {}
       spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
       spyOn<any>(component, 'prepareUpdateData').and.returnValue(mockEditResourceRequest)
+
+      component.crd$ = of(mockCrd)
       doApiSpy.editCrd.and.returnValue(of({}))
       const emitSpy = spyOn(component.hideDialogAndChanged, 'emit')
 
@@ -205,10 +208,12 @@ describe('CrdDetailComponent', () => {
     it('should show error message when onSave fails', () => {
       const mockFormValues = { name: 'testCrd' }
       const mockEditResourceRequest = { CrdData: mockFormValues }
+      const mockCrd = {}
       spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
       spyOn<any>(component, 'prepareUpdateData').and.returnValue(mockEditResourceRequest)
       const errorResponse = { status: 400, statusText: 'Cannot save' }
       doApiSpy.editCrd.and.returnValue(throwError(() => errorResponse))
+      component.crd$ = of(mockCrd)
       spyOn(console, 'error')
 
       component.changeMode = 'EDIT'
@@ -353,15 +358,16 @@ describe('CrdDetailComponent', () => {
     expect(result).toEqual(expectedRequest)
   })
 
-  it('should update crd data with form values when submitFormValues is called', () => {
+  it('should update crd data with form values when submitFormValues is called', (done) => {
     const mockCrd = { name: 'testCrd' }
     const mockFormValues = { name: 'updatedCrd' }
     spyOn<any>(component, 'updateFields').and.returnValue(mockFormValues)
 
-    component.crd = mockCrd
-    const result = (component as any).submitFormValues(mockFormValues)
-
-    expect(result).toEqual(mockFormValues)
+    component.crd$ = of(mockCrd)
+    ;(component as any).submitFormValues(mockFormValues).subscribe((result: any) => {
+      expect(result).toEqual(mockFormValues)
+      done()
+    })
   })
 
   it('should update crd fields with form values when updateFields is called', () => {
@@ -416,7 +422,7 @@ describe('CrdDetailComponent', () => {
           operation: 'Update'
         }
       ]
-      component.crd = { metadata: { managedFields: mockManagedFields } }
+      component.crd$ = of({ metadata: { managedFields: mockManagedFields } })
       const expectedHistory: Update[] = [
         { date: '2023-01-02T00:00:00Z', fields: { spec: ['version'] }, operation: 'Update' },
         {
@@ -426,7 +432,12 @@ describe('CrdDetailComponent', () => {
         }
       ]
 
-      const history = component.prepareHistory(component.crd)
+      // Mock the crd$ observable and get the value synchronously
+      let crdValue: any
+      component.crd$.subscribe((crd) => (crdValue = crd))
+
+      // Call the prepareHistory method with the mocked value
+      const history = component.prepareHistory(crdValue)
 
       expect(history).toEqual(expectedHistory)
     })

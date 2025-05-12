@@ -5,7 +5,12 @@ import { SelectItem } from 'primeng/api'
 import { Observable, map, of } from 'rxjs'
 
 import { Action, UserService } from '@onecx/portal-integration-angular'
-import { ContextKind, GetCustomResourcesByCriteriaRequestParams } from 'src/app/shared/generated'
+import {
+  ContextKind,
+  DataAPIService,
+  GetContextKindsResponse,
+  GetCustomResourcesByCriteriaRequestParams
+} from 'src/app/shared/generated'
 
 export interface CrdCriteriaForm {
   name: FormControl<string | null>
@@ -32,7 +37,8 @@ export class CrdCriteriaComponent {
 
   constructor(
     private readonly user: UserService,
-    public readonly translate: TranslateService
+    public readonly translate: TranslateService,
+    private readonly dataOrchestratorApi: DataAPIService
   ) {
     this.dateFormatForRange = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'm/d/yy'
     this.crdCriteria = new FormGroup<CrdCriteriaForm>({
@@ -58,33 +64,17 @@ export class CrdCriteriaComponent {
   }
 
   private fillTypes(): void {
-    this.type$ = this.translate
-      .get([
-        'ENUMS.CRD_TYPE.' + ContextKind.Data,
-        'ENUMS.CRD_TYPE.' + ContextKind.Database,
-        'ENUMS.CRD_TYPE.' + ContextKind.KeycloakClient,
-        'ENUMS.CRD_TYPE.' + ContextKind.Microfrontend,
-        'ENUMS.CRD_TYPE.' + ContextKind.Microservice,
-        'ENUMS.CRD_TYPE.' + ContextKind.Parameter,
-        'ENUMS.CRD_TYPE.' + ContextKind.Permission,
-        'ENUMS.CRD_TYPE.' + ContextKind.Product,
-        'ENUMS.CRD_TYPE.' + ContextKind.Slot
-      ])
-      .pipe(
+    this.dataOrchestratorApi.getActiveCrdKinds().subscribe((response: GetContextKindsResponse) => {
+      const kinds = response.kinds ?? []
+      this.type$ = this.translate.get(kinds.map((kind) => 'ENUMS.CRD_TYPE.' + kind)).pipe(
         map((data) => {
-          return [
-            { label: data['ENUMS.CRD_TYPE.' + ContextKind.Data], value: ContextKind.Data },
-            { label: data['ENUMS.CRD_TYPE.' + ContextKind.Database], value: ContextKind.Database },
-            { label: data['ENUMS.CRD_TYPE.' + ContextKind.KeycloakClient], value: ContextKind.KeycloakClient },
-            { label: data['ENUMS.CRD_TYPE.' + ContextKind.Microfrontend], value: ContextKind.Microfrontend },
-            { label: data['ENUMS.CRD_TYPE.' + ContextKind.Microservice], value: ContextKind.Microservice },
-            { label: data['ENUMS.CRD_TYPE.' + ContextKind.Parameter], value: ContextKind.Parameter },
-            { label: data['ENUMS.CRD_TYPE.' + ContextKind.Permission], value: ContextKind.Permission },
-            { label: data['ENUMS.CRD_TYPE.' + ContextKind.Product], value: ContextKind.Product },
-            { label: data['ENUMS.CRD_TYPE.' + ContextKind.Slot], value: ContextKind.Slot }
-          ]
+          return kinds.map((kind) => ({
+            label: data['ENUMS.CRD_TYPE.' + kind],
+            value: kind
+          }))
         })
       )
-    this.crdCriteria.get('type')?.markAsDirty()
+      this.crdCriteria.get('type')?.markAsDirty()
+    })
   }
 }

@@ -29,6 +29,8 @@ import { EditResourceRequest } from '../model/editResourceRequest';
 // @ts-ignore
 import { GetCRDResponse } from '../model/getCRDResponse';
 // @ts-ignore
+import { GetContextKindsResponse } from '../model/getContextKindsResponse';
+// @ts-ignore
 import { ProblemDetailResponse } from '../model/problemDetailResponse';
 
 // @ts-ignore
@@ -50,7 +52,7 @@ export interface GetCustomResourcesByCriteriaRequestParams {
 }
 
 export interface TouchCrdByNameAndTypeRequestParams {
-    type: string;
+    type: ContextKind;
     name: string;
 }
 
@@ -179,6 +181,60 @@ export class DataAPIService {
             {
                 context: localVarHttpContext,
                 body: editResourceRequest,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * get crd
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getActiveCrdKinds(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<GetContextKindsResponse>;
+    public getActiveCrdKinds(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<GetContextKindsResponse>>;
+    public getActiveCrdKinds(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<GetContextKindsResponse>>;
+    public getActiveCrdKinds(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/crd/kinds`;
+        return this.httpClient.request<GetContextKindsResponse>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -367,7 +423,7 @@ export class DataAPIService {
             }
         }
 
-        let localVarPath = `/crd/${this.configuration.encodeParam({name: "type", value: type, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/${this.configuration.encodeParam({name: "name", value: name, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        let localVarPath = `/crd/${this.configuration.encodeParam({name: "type", value: type, in: "path", style: "simple", explode: false, dataType: "ContextKind", dataFormat: undefined})}/${this.configuration.encodeParam({name: "name", value: name, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
