@@ -82,7 +82,6 @@ export class CrdDetailComponent implements OnChanges {
   public displayDateRangeError = false
   public datetimeFormat: string
   // data
-  public crd: any
   public crd$!: Observable<any>
   public updateHistory: Update[] = []
 
@@ -166,21 +165,32 @@ export class CrdDetailComponent implements OnChanges {
   public onSave(): void {
     if (this.changeMode === 'EDIT' && this.crdName && this.crdType) {
       const formValuesOfChild = this.getFormValuesOfActiveChild()
-      const editResourceRequest: EditResourceRequest = this.prepareUpdateData(
-        this.crdType,
-        this.submitFormValues(formValuesOfChild)
-      )
-      this.dataOrchestratorApi.editCrd({ editResourceRequest }).subscribe({
-        next: () => {
-          this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
-          this.hideDialogAndChanged.emit(true)
-        },
-        error: (err) => {
-          this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
-          console.error('editCrd', err)
-        }
+
+      this.submitFormValues(formValuesOfChild).subscribe((crd) => {
+        const editResourceRequest: EditResourceRequest = this.prepareUpdateData(this.crdType!, crd)
+
+        this.dataOrchestratorApi.editCrd({ editResourceRequest }).subscribe({
+          next: () => {
+            this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
+            this.hideDialogAndChanged.emit(true)
+          },
+          error: (err) => {
+            this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
+            console.error('editCrd', err)
+          }
+        })
       })
     }
+  }
+
+  private submitFormValues(formValues: any): Observable<any> {
+    return this.crd$.pipe(
+      map((crd) => {
+        if (crd) {
+          return this.updateFields(crd, { ...formValues })
+        }
+      })
+    )
   }
 
   private getFormValuesOfActiveChild(): any {
@@ -227,13 +237,6 @@ export class CrdDetailComponent implements OnChanges {
       editResourceRequest = { CrdMicroservice: crd as CustomResourceMicroservice }
     }
     return editResourceRequest
-  }
-
-  private submitFormValues(formValues: any): any {
-    if (this.crd) {
-      const crd: any = this.updateFields(this.crd, { ...formValues })
-      return crd
-    }
   }
 
   /**

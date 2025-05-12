@@ -15,6 +15,7 @@ import {
 } from '@onecx/portal-integration-angular'
 
 import {
+  ContextKind,
   CrdResponse,
   DataAPIService,
   GenericCrd,
@@ -251,7 +252,7 @@ export class CrdSearchComponent implements OnInit {
 
   public onTouch(item: GenericCrd): void {
     if (item.kind && item.name) {
-      this.dataOrchestratorApi.touchCrdByNameAndType({ name: item.name, type: item.kind }).subscribe({
+      this.dataOrchestratorApi.touchCrdByNameAndType({ name: item.name, type: item.kind as ContextKind }).subscribe({
         next: () => {
           this.msgService.success({ summaryKey: 'ACTIONS.TOUCH.MESSAGE.OK' })
         },

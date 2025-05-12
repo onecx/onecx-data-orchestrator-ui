@@ -35,6 +35,7 @@ model/customResourceSlotSpec.ts
 model/editResourceRequest.ts
 model/genericCrd.ts
 model/getCRDResponse.ts
+model/getContextKindsResponse.ts
 model/metadata.ts
 model/models.ts
 model/problemDetailInvalidParam.ts

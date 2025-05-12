@@ -9,8 +9,9 @@ import { SelectItem } from 'primeng/api'
 import { UserService } from '@onecx/portal-integration-angular'
 import { createTranslateLoader } from '@onecx/angular-utils'
 
-import { ContextKind } from 'src/app/shared/generated'
+import { ContextKind, DataAPIService } from 'src/app/shared/generated'
 import { CrdCriteriaComponent, CrdCriteriaForm } from '../crd-criteria/crd-criteria.component'
+import { firstValueFrom, lastValueFrom, of } from 'rxjs'
 
 const filledCriteria = new FormGroup<CrdCriteriaForm>({
   name: new FormControl<string | null>('test'),
@@ -32,6 +33,23 @@ describe('CrdCriteriaComponent', () => {
     }
   }
 
+  const getKindMock = {
+    kinds: [
+      ContextKind.Data,
+      ContextKind.Database,
+      ContextKind.KeycloakClient,
+      ContextKind.Microfrontend,
+      ContextKind.Microservice,
+      ContextKind.Parameter,
+      ContextKind.Permission,
+      ContextKind.Product,
+      ContextKind.Slot
+    ]
+  }
+  const apiServiceSpy = {
+    getActiveCrdKinds: jasmine.createSpy('getActiveCrdKinds').and.returnValue(of({}))
+  }
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [CrdCriteriaComponent],
@@ -41,8 +59,14 @@ describe('CrdCriteriaComponent', () => {
         })
       ],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [provideHttpClient(), provideHttpClientTesting(), { provide: UserService, useValue: mockUserService }]
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: UserService, useValue: mockUserService },
+        { provide: DataAPIService, useValue: apiServiceSpy }
+      ]
     }).compileComponents()
+    apiServiceSpy.getActiveCrdKinds.calls.reset()
   }))
 
   beforeEach(() => {
@@ -96,11 +120,22 @@ describe('CrdCriteriaComponent', () => {
   /**
    * Translations
    */
-  it('should load dropdown lists with translations', () => {
+
+  it('should have no kinds if api returns nothing', async () => {
+    apiServiceSpy.getActiveCrdKinds.and.returnValue(of({}))
+    fixture.detectChanges()
+
     let data2: SelectItem[] = []
-    component.type$?.subscribe((data) => {
-      data2 = data
-    })
+    data2 = await firstValueFrom(component.type$)
+    expect(data2.length).toBe(0)
+  })
+
+  it('should load dropdown lists with translations', async () => {
+    apiServiceSpy.getActiveCrdKinds.and.returnValue(of({ getKindMock }))
+    fixture.detectChanges()
+
+    let data2: SelectItem[] = []
+    data2 = await firstValueFrom(component.type$)
     expect(data2.length).toBeGreaterThanOrEqual(8)
   })
 })
