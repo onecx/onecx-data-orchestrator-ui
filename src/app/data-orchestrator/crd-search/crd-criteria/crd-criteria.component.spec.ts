@@ -11,7 +11,7 @@ import { createTranslateLoader } from '@onecx/angular-utils'
 
 import { ContextKind, DataAPIService } from 'src/app/shared/generated'
 import { CrdCriteriaComponent, CrdCriteriaForm } from '../crd-criteria/crd-criteria.component'
-import { firstValueFrom, lastValueFrom, of } from 'rxjs'
+import { firstValueFrom, of } from 'rxjs'
 
 const filledCriteria = new FormGroup<CrdCriteriaForm>({
   name: new FormControl<string | null>('test'),
