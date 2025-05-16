@@ -68,10 +68,12 @@ export class CrdCriteriaComponent {
       const kinds = response.kinds ?? []
       this.type$ = this.translate.get(kinds.map((kind) => 'ENUMS.CRD_TYPE.' + kind)).pipe(
         map((data) => {
-          return kinds.map((kind) => ({
-            label: data['ENUMS.CRD_TYPE.' + kind],
-            value: kind
-          }))
+          return kinds
+            .map((kind) => ({
+              label: data['ENUMS.CRD_TYPE.' + kind],
+              value: kind
+            }))
+            .sort((a, b) => a.label.localeCompare(b.label))
         })
       )
       this.crdCriteria.get('type')?.markAsDirty()
