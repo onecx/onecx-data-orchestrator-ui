@@ -3,16 +3,9 @@ import { TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs'
 import { PrimeIcons, SelectItem } from 'primeng/api'
 
-import {
-  Action,
-  ColumnType,
-  DataAction,
-  DataTableColumn,
-  DiagramColumn,
-  PortalMessageService,
-  RowListGridData,
-  UserService
-} from '@onecx/portal-integration-angular'
+import { Action, DataAction, DataTableColumn, DiagramColumn, RowListGridData } from '@onecx/angular-accelerator'
+import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
+import { ColumnType } from '@onecx/portal-integration-angular'
 
 import {
   ContextKind,

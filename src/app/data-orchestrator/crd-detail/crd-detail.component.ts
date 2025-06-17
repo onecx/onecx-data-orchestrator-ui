@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, QueryList, ViewChildren } from '@angular/core'
 import { catchError, finalize, map, Observable, of } from 'rxjs'
 
-import { PortalMessageService, UserService } from '@onecx/portal-integration-angular'
+import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
 import {
   ContextKind,
   CustomResourceData,

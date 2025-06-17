@@ -5,7 +5,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { BehaviorSubject, of, throwError } from 'rxjs'
 
-import { PortalMessageService, UserService, RowListGridData } from '@onecx/portal-integration-angular'
+import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
+import { RowListGridData } from '@onecx/angular-accelerator'
 import { createTranslateLoader } from '@onecx/angular-utils'
 
 import { ContextKind, DataAPIService, GenericCrdStatusEnum } from 'src/app/shared/generated'
