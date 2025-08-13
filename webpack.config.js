@@ -22,8 +22,9 @@ const config = withModuleFederationPlugin({
     '@onecx/angular-auth': { requiredVersion: 'auto', includeSecondaries: true },
     '@onecx/angular-integration-interface': { requiredVersion: 'auto', includeSecondaries: true },
     '@onecx/angular-remote-components': { requiredVersion: 'auto', includeSecondaries: true },
-    '@onecx/angular-webcomponents': { requiredVersion: 'auto', includeSecondaries: true },
+    '@onecx/angular-testing': { requiredVersion: 'auto', includeSecondaries: true },
     '@onecx/angular-utils': { requiredVersion: 'auto', includeSecondaries: true },
+    '@onecx/angular-webcomponents': { requiredVersion: 'auto', includeSecondaries: true },
     '@onecx/integration-interface': { requiredVersion: 'auto', includeSecondaries: true },
     '@onecx/keycloak-auth': { requiredVersion: 'auto', includeSecondaries: true },
     '@onecx/portal-integration-angular': { requiredVersion: 'auto', includeSecondaries: true },
@@ -38,6 +39,7 @@ const plugins = config.plugins.filter((plugin) => !(plugin instanceof ModifyEntr
 module.exports = {
   ...config,
   plugins,
+  module: { parser: { javascript: { importMeta: false } } },
   output: { uniqueName: 'onecx-data-orchestrator-ui', publicPath: 'auto' },
   experiments: { ...config.experiments, topLevelAwait: true },
   optimization: { runtimeChunk: false, splitChunks: false }
