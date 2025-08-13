@@ -4,11 +4,12 @@ import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/
 import { RouterModule, Routes } from '@angular/router'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core'
+import { TranslateLoader, TranslateModule, TranslateService, MissingTranslationHandler } from '@ngx-translate/core'
 
 import { KeycloakAuthModule } from '@onecx/keycloak-auth'
-import { createTranslateLoader } from '@onecx/angular-utils'
+import { createTranslateLoader, provideTranslationPathFromMeta } from '@onecx/angular-utils'
 import { APP_CONFIG, UserService } from '@onecx/angular-integration-interface'
+import { AngularAcceleratorMissingTranslationHandler } from '@onecx/angular-accelerator'
 import { translateServiceInitializer, PortalCoreModule } from '@onecx/portal-integration-angular'
 
 import { environment } from 'src/environments/environment'
@@ -35,7 +36,11 @@ const routes: Routes = [
     }),
     TranslateModule.forRoot({
       isolate: true,
-      loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
+      loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] },
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useClass: AngularAcceleratorMissingTranslationHandler
+      }
     })
   ],
   providers: [
@@ -46,6 +51,7 @@ const routes: Routes = [
       multi: true,
       deps: [UserService, TranslateService]
     },
+    provideTranslationPathFromMeta(import.meta.url, 'assets/i18n/'),
     provideHttpClient(withInterceptorsFromDi())
   ]
 })
