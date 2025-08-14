@@ -163,6 +163,7 @@ export class CrdSearchComponent implements OnInit {
         id: 'touch',
         labelKey: 'ACTIONS.TOUCH.CRD',
         icon: 'pi pi-refresh',
+        classes: ['p-button-danger'],
         permission: 'CRD#TOUCH',
         callback: (event) => this.onTouch(event)
       }
