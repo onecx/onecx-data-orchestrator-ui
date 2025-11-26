@@ -142,8 +142,8 @@ export class CrdDetailComponent implements OnChanges {
           if (key === '.') continue
           const newKey = prefix ? `${prefix}.${key}` : key
           if (Object.keys(obj[key]).length === 0) {
-            const topLevelKey = newKey.split('.')[0].replaceAll(/f:/g, '')
-            const fieldKey = newKey.split('.').slice(1).join('.').replaceAll(/f:/g, '')
+            const topLevelKey = newKey.split('.')[0].replaceAll('f:', '')
+            const fieldKey = newKey.split('.').slice(1).join('.').replaceAll('f:', '')
             if (!fields[topLevelKey]) {
               fields[topLevelKey] = []
             }
