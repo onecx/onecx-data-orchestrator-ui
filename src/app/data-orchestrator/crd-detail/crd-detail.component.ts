@@ -142,8 +142,8 @@ export class CrdDetailComponent implements OnChanges {
           if (key === '.') continue
           const newKey = prefix ? `${prefix}.${key}` : key
           if (Object.keys(obj[key]).length === 0) {
-            const topLevelKey = newKey.split('.')[0].replace(/f:/g, '')
-            const fieldKey = newKey.split('.').slice(1).join('.').replace(/f:/g, '')
+            const topLevelKey = newKey.split('.')[0].replaceAll('f:', '')
+            const fieldKey = newKey.split('.').slice(1).join('.').replaceAll('f:', '')
             if (!fields[topLevelKey]) {
               fields[topLevelKey] = []
             }
@@ -253,25 +253,39 @@ export class CrdDetailComponent implements OnChanges {
   private updateFields(base: any, update: { [key: string]: any }): any {
     for (const key in update) {
       if (update.hasOwnProperty(key)) {
-        const contextMatch = /^(spec|metadata)([A-Z].*)$/.exec(key)
-        if (contextMatch) {
-          const context = contextMatch[1]
-          const field = contextMatch[2].charAt(0).toLowerCase() + contextMatch[2].slice(1)
-
-          if (context === 'spec' && base.spec) {
-            base.spec[field] = update[key]
-          } else if (context === 'metadata' && base.metadata) {
-            base.metadata[field] = update[key]
-          }
-        } else if (key in base) {
-          base[key] = update[key]
-        } else if (base.spec && key in base.spec) {
-          base.spec[key] = update[key]
-        } else if (base.metadata && key in base.metadata) {
-          base.metadata[key] = update[key]
-        }
+        this.applyUpdateToBase(base, key, update[key])
       }
     }
     return base
+  }
+
+  private applyUpdateToBase(base: any, key: string, value: any): void {
+    const contextMatch = /^(spec|metadata)([A-Z].*)$/.exec(key)
+    if (contextMatch) {
+      this.updateContextField(base, contextMatch, value)
+    } else {
+      this.updateDirectOrNestedField(base, key, value)
+    }
+  }
+
+  private updateContextField(base: any, contextMatch: RegExpExecArray, value: any): void {
+    const context = contextMatch[1]
+    const field = contextMatch[2].charAt(0).toLowerCase() + contextMatch[2].slice(1)
+
+    if (context === 'spec' && base.spec) {
+      base.spec[field] = value
+    } else if (context === 'metadata' && base.metadata) {
+      base.metadata[field] = value
+    }
+  }
+
+  private updateDirectOrNestedField(base: any, key: string, value: any): void {
+    if (key in base) {
+      base[key] = value
+    } else if (base.spec && key in base.spec) {
+      base.spec[key] = value
+    } else if (base.metadata && key in base.metadata) {
+      base.metadata[key] = value
+    }
   }
 }

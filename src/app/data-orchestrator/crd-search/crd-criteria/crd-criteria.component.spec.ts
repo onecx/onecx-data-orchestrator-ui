@@ -5,6 +5,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { FormControl, FormGroup } from '@angular/forms'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { SelectItem } from 'primeng/api'
+import { throwError } from 'rxjs'
 
 import { UserService } from '@onecx/angular-integration-interface'
 import { createTranslateLoader } from '@onecx/angular-utils'
@@ -120,19 +121,37 @@ describe('CrdCriteriaComponent', () => {
    * Translations
    */
 
-  //   it('should have no kinds if api returns nothing', async () => {
-  //     apiServiceSpy.getActiveCrdKinds.and.returnValue(of({}))
-  //     fixture.detectChanges()
-
-  //     let data2: SelectItem[] = []
-  //     data2 = await firstValueFrom(component.type$)
-  //     expect(data2.length).toBe(0)
-  //   })
-
   it('should load dropdown lists with translations', async () => {
     apiServiceSpy.getActiveCrdKinds.and.returnValue(of(getKindMock))
     let data2: SelectItem[] = []
     data2 = await firstValueFrom(component.type$)
     expect(data2.length).toBeGreaterThanOrEqual(8)
+  })
+
+  it('should have no kinds if api returns nothing', async () => {
+    // Mock API response with kinds as null
+    apiServiceSpy.getActiveCrdKinds.and.returnValue(of({ kinds: null }))
+
+    // Create a fresh component instance with the new mock
+    const freshFixture = TestBed.createComponent(CrdCriteriaComponent)
+    const freshComponent = freshFixture.componentInstance
+    freshFixture.detectChanges()
+
+    // Verify the type$ observable
+    const data: SelectItem[] = await firstValueFrom(freshComponent.type$)
+    expect(data.length).toBe(0)
+  })
+
+  it('should fall back to an empty array if the API returns an error', async () => {
+    apiServiceSpy.getActiveCrdKinds.and.returnValue(throwError(() => ({ status: 500 })))
+
+    // Create a fresh component instance with the new mock
+    const freshFixture = TestBed.createComponent(CrdCriteriaComponent)
+    const freshComponent = freshFixture.componentInstance
+    freshFixture.detectChanges()
+
+    // Verify the type$ observable falls back to empty array
+    const data: SelectItem[] = await firstValueFrom(freshComponent.type$)
+    expect(data.length).toBe(0)
   })
 })
