@@ -24,3 +24,4 @@ Dockerfile
 
 src/app/shared/generated/**
 src/assets/api
+docs
