@@ -10,7 +10,6 @@ import { CheckboxModule } from 'primeng/checkbox'
 import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { ConfirmPopupModule } from 'primeng/confirmpopup'
 import { ConfirmationService } from 'primeng/api'
-import { DataViewModule } from 'primeng/dataview'
 import { DialogModule } from 'primeng/dialog'
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog'
 import { DropdownModule } from 'primeng/dropdown'
@@ -41,7 +40,6 @@ import { LabelResolver } from './label.resolver'
     CommonModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
-    DataViewModule,
     DialogModule,
     DropdownModule,
     DynamicDialogModule,
@@ -68,7 +66,6 @@ import { LabelResolver } from './label.resolver'
     CommonModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
-    DataViewModule,
     DialogModule,
     DropdownModule,
     DynamicDialogModule,

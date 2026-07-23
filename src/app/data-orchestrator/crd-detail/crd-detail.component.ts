@@ -58,8 +58,7 @@ export class CrdDetailComponent implements OnChanges {
   @Output() public hideDialogAndChanged = new EventEmitter<boolean>()
 
   @ViewChildren(DataFormComponent, { read: DataFormComponent }) dataFormComponent:
-    | QueryList<DataFormComponent>
-    | undefined
+    QueryList<DataFormComponent> | undefined
   @ViewChildren(DatabaseFormComponent, { read: DatabaseFormComponent })
   databaseFormComponent!: QueryList<DatabaseFormComponent>
   @ViewChildren(ParameterFormComponent, { read: ParameterFormComponent })
