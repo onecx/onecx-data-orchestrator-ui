@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
+import { FloatLabelModule } from 'primeng/floatlabel'
 import { TabViewModule } from 'primeng/tabview'
 import { TooltipModule } from 'primeng/tooltip'
 
@@ -18,7 +19,8 @@ import { StatusTabComponent } from '../status-tab/status-tab.component'
     UpdateHistoryComponent,
     TooltipModule,
     ReactiveFormsModule,
-    StatusTabComponent
+    StatusTabComponent,
+    FloatLabelModule
   ],
   templateUrl: './product-form.component.html'
 })

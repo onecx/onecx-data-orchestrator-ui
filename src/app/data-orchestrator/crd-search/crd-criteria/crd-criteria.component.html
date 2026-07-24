@@ -7,7 +7,7 @@
   [actions]="actions"
 >
   <div [formGroup]="crdCriteria" class="flex flex-wrap gap-3">
-    <span class="p-float-label">
+    <p-float-label variant="on">
       <input
         id="do_crd_search_criteria_name"
         pInputText
@@ -20,8 +20,8 @@
         tooltipEvent="hover"
       />
       <label for="do_crd_search_criteria_title">{{ 'CRD.NAME' | translate }}</label>
-    </span>
-    <span class="p-float-label">
+    </p-float-label>
+    <p-float-label variant="on">
       <p-multiSelect
         id="do_crd_search_criteria_type"
         [options]="(type$ | async) ?? []"
@@ -38,6 +38,6 @@
         </ng-template>
       </p-multiSelect>
       <label class="ocx-required-label" for="do_crd_search_criteria_type">{{ 'CRD.TYPE' | translate }}</label>
-    </span>
+    </p-float-label>
   </div>
 </ocx-search-header>

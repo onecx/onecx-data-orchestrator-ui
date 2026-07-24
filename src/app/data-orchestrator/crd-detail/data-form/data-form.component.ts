@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { FloatLabelModule } from 'primeng/floatlabel'
 import { TabViewModule } from 'primeng/tabview'
 import { TextareaModule } from 'primeng/textarea'
 import { TooltipModule } from 'primeng/tooltip'
@@ -21,7 +22,8 @@ import { UpdateHistoryComponent } from '../update-history/update-history.compone
     UpdateHistoryComponent,
     TooltipModule,
     TextareaModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FloatLabelModule
   ],
   templateUrl: './data-form.component.html'
 })

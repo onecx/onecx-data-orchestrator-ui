@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, QueryList, ViewChildren } from '@angular/core'
+import { CommonModule } from '@angular/common'
 import { TranslateModule } from '@ngx-translate/core'
 import { catchError, finalize, map, Observable, of } from 'rxjs'
 import { TooltipModule } from 'primeng/tooltip'
@@ -31,7 +32,6 @@ import { MicrofrontendFormComponent } from './microfrontend-form/microfrontend-f
 import { MicroserviceFormComponent } from './microservice-form/microservice-form.component'
 import { ParameterFormComponent } from './parameter-form/parameter-form.component'
 import { ChangeMode } from '../crd-search/crd-search.component'
-import { CommonModule } from '@angular/common'
 
 interface ManagedField {
   apiVersion: string

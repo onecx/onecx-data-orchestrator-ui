@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
+import { FloatLabelModule } from 'primeng/floatlabel'
 import { MessageModule } from 'primeng/message'
 import { TabViewModule } from 'primeng/tabview'
 import { TooltipModule } from 'primeng/tooltip'
@@ -20,7 +21,8 @@ type Parameter = { name: string; displayName: string | undefined; value: string;
     StatusTabComponent,
     UpdateHistoryComponent,
     TooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FloatLabelModule
   ],
   templateUrl: './parameter-form.component.html'
 })

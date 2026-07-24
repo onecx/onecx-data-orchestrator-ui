@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { Observable, map, of } from 'rxjs'
 import { SelectItem } from 'primeng/api'
+import { FloatLabelModule } from 'primeng/floatlabel'
 import { MultiSelectModule } from 'primeng/multiselect'
 import { TooltipModule } from 'primeng/tooltip'
 
@@ -30,7 +31,8 @@ export interface CrdCriteriaForm {
     AngularAcceleratorModule,
     ReactiveFormsModule,
     CommonModule,
-    MultiSelectModule
+    MultiSelectModule,
+    FloatLabelModule
   ],
   templateUrl: './crd-criteria.component.html',
   styleUrls: ['./crd-criteria.component.scss']

@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
+import { TranslateModule } from '@ngx-translate/core'
+import { TooltipModule } from 'primeng/tooltip'
 
 import { AngularAcceleratorModule } from '@onecx/angular-accelerator'
+import { providePermissionService } from '@onecx/angular-utils'
 
 import { SharedModule } from '../shared/shared.module'
-
 import { CrdSearchComponent } from './crd-search/crd-search.component'
 import { CrdCriteriaComponent } from './crd-search/crd-criteria/crd-criteria.component'
 import { CrdDetailComponent } from './crd-detail/crd-detail.component'
@@ -21,8 +23,6 @@ import { SlotFormComponent } from './crd-detail/slot-form/slot-form.component'
 import { UpdateHistoryComponent } from './crd-detail/update-history/update-history.component'
 import { StatusTabComponent } from './crd-detail/status-tab/status-tab.component'
 import { ParameterFormComponent } from './crd-detail/parameter-form/parameter-form.component'
-import { TranslateModule } from '@ngx-translate/core'
-import { TooltipModule } from 'primeng/tooltip'
 
 const routes: Routes = [{ path: '', component: CrdSearchComponent, pathMatch: 'full' }]
 @NgModule({
@@ -50,7 +50,7 @@ const routes: Routes = [{ path: '', component: CrdSearchComponent, pathMatch: 'f
     TranslateModule,
     TooltipModule
   ],
-  providers: []
+  providers: [...providePermissionService()]
 })
 export class DataOrchestratorModule {
   constructor() {

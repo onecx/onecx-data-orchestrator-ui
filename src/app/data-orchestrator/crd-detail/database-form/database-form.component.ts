@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
+import { FloatLabelModule } from 'primeng/floatlabel'
 import { TabViewModule } from 'primeng/tabview'
 import { TooltipModule } from 'primeng/tooltip'
 
@@ -17,7 +18,8 @@ import { UpdateHistoryComponent } from '../update-history/update-history.compone
     TabViewModule,
     UpdateHistoryComponent,
     TooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FloatLabelModule
   ],
   templateUrl: './database-form.component.html'
 })
