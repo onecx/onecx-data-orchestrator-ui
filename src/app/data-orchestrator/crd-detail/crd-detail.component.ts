@@ -31,6 +31,7 @@ import { MicrofrontendFormComponent } from './microfrontend-form/microfrontend-f
 import { MicroserviceFormComponent } from './microservice-form/microservice-form.component'
 import { ParameterFormComponent } from './parameter-form/parameter-form.component'
 import { ChangeMode } from '../crd-search/crd-search.component'
+import { CommonModule } from '@angular/common'
 
 interface ManagedField {
   apiVersion: string
@@ -51,6 +52,7 @@ export interface Update {
 @Component({
   selector: 'app-crd-detail',
   imports: [
+    CommonModule,
     TranslateModule,
     TooltipModule,
     SlotFormComponent,

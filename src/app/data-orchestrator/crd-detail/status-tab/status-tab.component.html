@@ -4,4 +4,6 @@
   styleClass="mr-3 px-3 floated text-base"
   [severity]="getSeverity(status?.status)"
 ></p-tag>
-<div *ngIf="status?.message" class="break-words">{{ status?.message }}</div>
+@if (status?.message) {
+  <div class="break-words">{{ status?.message }}</div>
+}

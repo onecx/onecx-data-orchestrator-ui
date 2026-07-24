@@ -13,106 +13,110 @@
     '630px': '100vw'
   }"
 >
-  <ng-container *ngIf="crd$ | async as crd">
-    <!-- display crd type on dialog header -->
-    <div
-      class="absolute sm:dialog-header-right-slot"
-      [pTooltip]="'CRD.COMMON.KIND' | translate"
-      tooltipPosition="top"
-      tooltipEvent="hover"
-    >
+  @if (crd$ | async; as crd) {
+    <ng-container>
+      <!-- display crd type on dialog header -->
       <div
-        class="mr-2 pi pi-circle-on"
-        [class.text-red-600]="crd.status.status === 'ERROR'"
-        [class.text-yellow-600]="crd.status.status === 'UNDEFINED'"
-        [class.text-green-600]="crd.status.status === 'UPDATED' || crd.status.status === 'CREATED'"
-        [attr.aria-label]="'ENUMS.CRD_STATUS.' + crd.status.status | translate"
-        [pTooltip]="'ENUMS.CRD_STATUS.' + crd.status.status | translate"
+        class="absolute sm:dialog-header-right-slot"
+        [pTooltip]="'CRD.COMMON.KIND' | translate"
         tooltipPosition="top"
         tooltipEvent="hover"
-      ></div>
-      {{ crdType }}
-    </div>
+      >
+        <div
+          class="mr-2 pi pi-circle-on"
+          [class.text-red-600]="crd.status.status === 'ERROR'"
+          [class.text-yellow-600]="crd.status.status === 'UNDEFINED'"
+          [class.text-green-600]="crd.status.status === 'UPDATED' || crd.status.status === 'CREATED'"
+          [attr.aria-label]="'ENUMS.CRD_STATUS.' + crd.status.status | translate"
+          [pTooltip]="'ENUMS.CRD_STATUS.' + crd.status.status | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        ></div>
+        {{ crdType }}
+      </div>
 
-    <p-message
-      *ngIf="loading"
-      id="do_crd_detail_message_loading"
-      severity="info"
-      [text]="'ACTIONS.LOADING' | translate"
-    ></p-message>
-    <p-message
-      *ngIf="exceptionKey"
-      id="do_crd_search_message_error"
-      severity="error"
-      [text]="exceptionKey ?? '' | translate"
-    ></p-message>
+      <p-message
+        *ngIf="loading"
+        id="do_crd_detail_message_loading"
+        severity="info"
+        [text]="'ACTIONS.LOADING' | translate"
+      ></p-message>
+      <p-message
+        *ngIf="exceptionKey"
+        id="do_crd_search_message_error"
+        severity="error"
+        [text]="exceptionKey! | translate"
+      ></p-message>
 
-    <ng-container *ngIf="!loading && !exceptionKey && crdType">
-      <app-data-form
-        *ngIf="crdType.toString() === 'Data'"
-        [changeMode]="changeMode"
-        [dataCrd]="crd"
-        [dateFormat]="datetimeFormat"
-        [updateHistory]="updateHistory"
-      />
-      <app-database-form
-        *ngIf="crdType.toString() === 'Database'"
-        [changeMode]="changeMode"
-        [databaseCrd]="crd"
-        [dateFormat]="datetimeFormat"
-        [updateHistory]="updateHistory"
-      />
-      <app-keycloak-form
-        *ngIf="crdType.toString() === 'KeycloakClient'"
-        [changeMode]="changeMode"
-        [keycloakClientCrd]="crd"
-        [dateFormat]="datetimeFormat"
-        [updateHistory]="updateHistory"
-      />
-      <app-microfrontend-form
-        *ngIf="crdType.toString() === 'Microfrontend'"
-        [changeMode]="changeMode"
-        [microfrontendCrd]="crd"
-        [dateFormat]="datetimeFormat"
-        [updateHistory]="updateHistory"
-      />
-      <app-microservice-form
-        *ngIf="crdType.toString() === 'Microservice'"
-        [changeMode]="changeMode"
-        [microserviceCrd]="crd"
-        [dateFormat]="datetimeFormat"
-        [updateHistory]="updateHistory"
-      />
-      <app-parameter-form
-        *ngIf="crdType.toString() === 'Parameter'"
-        [changeMode]="changeMode"
-        [parameterCrd]="crd"
-        [dateFormat]="datetimeFormat"
-        [updateHistory]="updateHistory"
-      />
-      <app-permission-form
-        *ngIf="crdType.toString() === 'Permission'"
-        [changeMode]="changeMode"
-        [permissionCrd]="crd"
-        [dateFormat]="datetimeFormat"
-        [updateHistory]="updateHistory"
-      />
-      <app-product-form
-        *ngIf="crdType.toString() === 'Product'"
-        [changeMode]="changeMode"
-        [productCrd]="crd"
-        [dateFormat]="datetimeFormat"
-        [updateHistory]="updateHistory"
-      />
-      <app-slot-form
-        *ngIf="crdType.toString() === 'Slot'"
-        [changeMode]="changeMode"
-        [slotCrd]="crd"
-        [dateFormat]="datetimeFormat"
-        [updateHistory]="updateHistory"
-      />
+      @if (!loading && !exceptionKey && crdType) {
+        <ng-container>
+          <app-data-form
+            *ngIf="crdType.toString() === 'Data'"
+            [changeMode]="changeMode"
+            [dataCrd]="crd"
+            [dateFormat]="datetimeFormat"
+            [updateHistory]="updateHistory"
+          />
+          <app-database-form
+            *ngIf="crdType.toString() === 'Database'"
+            [changeMode]="changeMode"
+            [databaseCrd]="crd"
+            [dateFormat]="datetimeFormat"
+            [updateHistory]="updateHistory"
+          />
+          <app-keycloak-form
+            *ngIf="crdType.toString() === 'KeycloakClient'"
+            [changeMode]="changeMode"
+            [keycloakClientCrd]="crd"
+            [dateFormat]="datetimeFormat"
+            [updateHistory]="updateHistory"
+          />
+          <app-microfrontend-form
+            *ngIf="crdType.toString() === 'Microfrontend'"
+            [changeMode]="changeMode"
+            [microfrontendCrd]="crd"
+            [dateFormat]="datetimeFormat"
+            [updateHistory]="updateHistory"
+          />
+          <app-microservice-form
+            *ngIf="crdType.toString() === 'Microservice'"
+            [changeMode]="changeMode"
+            [microserviceCrd]="crd"
+            [dateFormat]="datetimeFormat"
+            [updateHistory]="updateHistory"
+          />
+          <app-parameter-form
+            *ngIf="crdType.toString() === 'Parameter'"
+            [changeMode]="changeMode"
+            [parameterCrd]="crd"
+            [dateFormat]="datetimeFormat"
+            [updateHistory]="updateHistory"
+          />
+          <app-permission-form
+            *ngIf="crdType.toString() === 'Permission'"
+            [changeMode]="changeMode"
+            [permissionCrd]="crd"
+            [dateFormat]="datetimeFormat"
+            [updateHistory]="updateHistory"
+          />
+          <app-product-form
+            *ngIf="crdType.toString() === 'Product'"
+            [changeMode]="changeMode"
+            [productCrd]="crd"
+            [dateFormat]="datetimeFormat"
+            [updateHistory]="updateHistory"
+          />
+          <app-slot-form
+            *ngIf="crdType.toString() === 'Slot'"
+            [changeMode]="changeMode"
+            [slotCrd]="crd"
+            [dateFormat]="datetimeFormat"
+            [updateHistory]="updateHistory"
+          />
+        </ng-container>
+      }
     </ng-container>
-  </ng-container>
+  }
 
   <ng-template pTemplate="footer">
     <div class="flex flex-wrap justify-content-end gap-2 mb-1">

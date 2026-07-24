@@ -130,16 +130,18 @@
     ></p-message>
 
     <div class="flex flex-column gap-3">
-      <div *ngFor="let param of parameters" class="border-1 border-200 p-3 border-round surface-50">
-        <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.NAME' | translate }}</div>
-        <div class="font-medium mb-2">{{ param.name }}</div>
-        <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.VALUE' | translate }}</div>
-        <div class="mb-2 text-pre-wrap break-word">{{ param.value }}</div>
-        <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.DISPLAY_NAME' | translate }}</div>
-        <div class="mb-2">{{ param.displayName }}</div>
-        <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.DESCRIPTION' | translate }}</div>
-        <div class="mb-2 text-pre-wrap break-word">{{ param.description }}</div>
-      </div>
+      @for (param of parameters; track param) {
+        <div class="border-1 border-200 p-3 border-round surface-50">
+          <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.NAME' | translate }}</div>
+          <div class="font-medium mb-2">{{ param.name }}</div>
+          <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.VALUE' | translate }}</div>
+          <div class="mb-2 text-pre-wrap break-word">{{ param.value }}</div>
+          <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.DISPLAY_NAME' | translate }}</div>
+          <div class="mb-2">{{ param.displayName }}</div>
+          <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.DESCRIPTION' | translate }}</div>
+          <div class="mb-2 text-pre-wrap break-word">{{ param.description }}</div>
+        </div>
+      }
     </div>
   </p-tabPanel>
 </p-tabView>

@@ -122,11 +122,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let perm of permissions">
-          <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.resource }}</td>
-          <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.action }}</td>
-          <td class="p-2 border-200 border-bottom-1">{{ perm.description }}</td>
-        </tr>
+        @for (perm of permissions; track perm) {
+          <tr>
+            <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.resource }}</td>
+            <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.action }}</td>
+            <td class="p-2 border-200 border-bottom-1">{{ perm.description }}</td>
+          </tr>
+        }
       </tbody>
     </table>
   </p-tabPanel>
