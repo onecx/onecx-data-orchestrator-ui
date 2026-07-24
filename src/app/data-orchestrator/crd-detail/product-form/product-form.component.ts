@@ -1,13 +1,25 @@
 import { Component, Input, OnChanges } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { TranslateModule } from '@ngx-translate/core'
+import { TabViewModule } from 'primeng/tabview'
+import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourceProduct } from 'src/app/shared/generated'
-
 import { ChangeMode } from '../../crd-search/crd-search.component'
 import { Update } from '../crd-detail.component'
+import { UpdateHistoryComponent } from '../update-history/update-history.component'
+import { StatusTabComponent } from '../status-tab/status-tab.component'
 
 @Component({
   selector: 'app-product-form',
+  imports: [
+    TranslateModule,
+    TabViewModule,
+    UpdateHistoryComponent,
+    TooltipModule,
+    ReactiveFormsModule,
+    StatusTabComponent
+  ],
   templateUrl: './product-form.component.html'
 })
 export class ProductFormComponent implements OnChanges {

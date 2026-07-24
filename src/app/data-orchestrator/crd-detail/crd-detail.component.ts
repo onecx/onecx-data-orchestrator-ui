@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, Output, QueryList, ViewChildren } from '@angular/core'
+import { TranslateModule } from '@ngx-translate/core'
 import { catchError, finalize, map, Observable, of } from 'rxjs'
+import { TooltipModule } from 'primeng/tooltip'
+import { MessageModule } from 'primeng/message'
+import { DialogModule } from 'primeng/dialog'
 
 import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
 import {
@@ -25,9 +29,8 @@ import { KeycloakFormComponent } from './keycloak-form/keycloak-form.component'
 import { SlotFormComponent } from './slot-form/slot-form.component'
 import { MicrofrontendFormComponent } from './microfrontend-form/microfrontend-form.component'
 import { MicroserviceFormComponent } from './microservice-form/microservice-form.component'
-
-import { ChangeMode } from '../crd-search/crd-search.component'
 import { ParameterFormComponent } from './parameter-form/parameter-form.component'
+import { ChangeMode } from '../crd-search/crd-search.component'
 
 interface ManagedField {
   apiVersion: string
@@ -47,6 +50,21 @@ export interface Update {
 
 @Component({
   selector: 'app-crd-detail',
+  imports: [
+    TranslateModule,
+    TooltipModule,
+    SlotFormComponent,
+    ProductFormComponent,
+    PermissionFormComponent,
+    ParameterFormComponent,
+    MicrofrontendFormComponent,
+    MicroserviceFormComponent,
+    KeycloakFormComponent,
+    DatabaseFormComponent,
+    DataFormComponent,
+    MessageModule,
+    DialogModule
+  ],
   templateUrl: './crd-detail.component.html',
   styleUrls: ['./crd-detail.component.scss']
 })

@@ -1,20 +1,17 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core'
+import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { RouterModule, Routes } from '@angular/router'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { TranslateLoader, TranslateModule, TranslateService, MissingTranslationHandler } from '@ngx-translate/core'
+import { TranslateLoader, TranslateModule, MissingTranslationHandler } from '@ngx-translate/core'
 
 import { AngularAuthModule } from '@onecx/angular-auth'
-import {
-  createTranslateLoader,
-  provideTranslationPathFromMeta,
-  translateServiceInitializer
-} from '@onecx/angular-utils'
-import { APP_CONFIG, UserService } from '@onecx/angular-integration-interface'
+import { createTranslateLoader, provideThemeConfig, provideTranslationPathFromMeta } from '@onecx/angular-utils'
+import { APP_CONFIG } from '@onecx/angular-integration-interface'
 import { AngularAcceleratorMissingTranslationHandler } from '@onecx/angular-accelerator'
-import { PortalCoreModule } from '@onecx/portal-integration-angular'
+import { AngularAcceleratorModule } from '@onecx/angular-accelerator'
+import { StandaloneShellModule, provideStandaloneProviders } from '@onecx/angular-standalone-shell'
 
 import { environment } from 'src/environments/environment'
 import { AppComponent } from './app.component'
@@ -26,14 +23,14 @@ const routes: Routes = [
   }
 ]
 @NgModule({
-  bootstrap: [AppComponent],
-  declarations: [AppComponent],
+  declarations: [],
   imports: [
+    AppComponent,
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AngularAuthModule,
-    PortalCoreModule.forRoot('onecx-data-orchestrator-ui'),
+    AngularAcceleratorModule,
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabledBlocking',
       enableTracing: true
@@ -48,13 +45,10 @@ const routes: Routes = [
     })
   ],
   providers: [
+    StandaloneShellModule,
+    provideThemeConfig(),
     { provide: APP_CONFIG, useValue: environment },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateServiceInitializer,
-      multi: true,
-      deps: [UserService, TranslateService]
-    },
+    provideStandaloneProviders(),
     provideTranslationPathFromMeta(import.meta.url, 'assets/i18n/'),
     provideHttpClient(withInterceptorsFromDi())
   ]

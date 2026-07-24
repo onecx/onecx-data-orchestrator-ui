@@ -44,7 +44,7 @@
       *ngIf="exceptionKey"
       id="do_crd_search_message_error"
       severity="error"
-      [text]="exceptionKey | translate"
+      [text]="exceptionKey ?? '' | translate"
     ></p-message>
 
     <ng-container *ngIf="!loading && !exceptionKey && crdType">
@@ -121,7 +121,7 @@
         id="do_crd_detail_action_close"
         icon="pi pi-times"
         (onClick)="onDialogHide()"
-        [label]="'ACTIONS.CLOSE' | translate"
+        [ariaLabel]="'ACTIONS.CLOSE' | translate"
         [ariaLabel]="'ACTIONS.CLOSE' | translate"
         [pTooltip]="'ACTIONS.TOOLTIPS.CLOSE' | translate"
         tooltipPosition="top"
@@ -132,7 +132,7 @@
         id="do_crd_detail_action_cancel"
         icon="pi pi-times"
         (onClick)="onDialogHide()"
-        [label]="'ACTIONS.CANCEL' | translate"
+        [ariaLabel]="'ACTIONS.CANCEL' | translate"
         [ariaLabel]="'ACTIONS.CANCEL' | translate"
         [pTooltip]="'ACTIONS.TOOLTIPS.CANCEL_AND_CLOSE' | translate"
         tooltipPosition="top"
@@ -143,7 +143,7 @@
         id="do_crd_detail_action_save"
         icon="pi pi-save"
         (onClick)="onSave()"
-        [label]="'ACTIONS.SAVE' | translate"
+        [ariaLabel]="'ACTIONS.SAVE' | translate"
         [ariaLabel]="'ACTIONS.SAVE' | translate"
         [pTooltip]="'ACTIONS.TOOLTIPS.SAVE' | translate"
         tooltipPosition="top"

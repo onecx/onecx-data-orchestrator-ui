@@ -25,11 +25,6 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "./node_modules/@onecx/portal-integration-angular/assets/",
-                "output": "/onecx-portal-lib/assets/"
-              },
-              {
-                "glob": "**/*",
                 "input": "./node_modules/@onecx/angular-accelerator/assets/",
                 "output": "/onecx-angular-accelerator/assets/"
               }
@@ -88,6 +83,12 @@
             "publicHost": "http://localhost:4200",
             "extraWebpackConfig": "webpack.config.js",
             "proxyConfig": "proxy.conf.js",
+            "headers": {
+              "Allow": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Headers": "*",
+              "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+            },
             "disableHostCheck": true
           },
           "configurations": {

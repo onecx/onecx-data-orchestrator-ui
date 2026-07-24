@@ -4,8 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { provideErrorTailorConfig } from '@ngneat/error-tailor'
 
+import { AngularAcceleratorModule, PortalDialogService } from '@onecx/angular-accelerator'
+
 import { AutoCompleteModule } from 'primeng/autocomplete'
-import { CalendarModule } from 'primeng/calendar'
 import { CheckboxModule } from 'primeng/checkbox'
 import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { ConfirmPopupModule } from 'primeng/confirmpopup'
@@ -14,7 +15,6 @@ import { DialogModule } from 'primeng/dialog'
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog'
 import { DropdownModule } from 'primeng/dropdown'
 import { InputTextModule } from 'primeng/inputtext'
-import { InputTextareaModule } from 'primeng/inputtextarea'
 import { KeyFilterModule } from 'primeng/keyfilter'
 import { ListboxModule } from 'primeng/listbox'
 import { MultiSelectModule } from 'primeng/multiselect'
@@ -26,16 +26,13 @@ import { TagModule } from 'primeng/tag'
 import { ToastModule } from 'primeng/toast'
 import { TooltipModule } from 'primeng/tooltip'
 
-import { PortalCoreModule, PortalDialogService } from '@onecx/portal-integration-angular'
-
 import { LabelResolver } from './label.resolver'
 
 @NgModule({
   declarations: [],
   imports: [
-    PortalCoreModule.forMicroFrontend(),
+    AngularAcceleratorModule,
     AutoCompleteModule,
-    CalendarModule,
     CheckboxModule,
     CommonModule,
     ConfirmDialogModule,
@@ -45,7 +42,6 @@ import { LabelResolver } from './label.resolver'
     DynamicDialogModule,
     FormsModule,
     InputTextModule,
-    InputTextareaModule,
     KeyFilterModule,
     ListboxModule,
     MultiSelectModule,
@@ -61,7 +57,6 @@ import { LabelResolver } from './label.resolver'
   ],
   exports: [
     AutoCompleteModule,
-    CalendarModule,
     CheckboxModule,
     CommonModule,
     ConfirmDialogModule,
@@ -71,7 +66,6 @@ import { LabelResolver } from './label.resolver'
     DynamicDialogModule,
     FormsModule,
     InputTextModule,
-    InputTextareaModule,
     KeyFilterModule,
     ListboxModule,
     MultiSelectModule,

@@ -1,11 +1,23 @@
 import { Component, OnInit } from '@angular/core'
-import { TranslateService } from '@ngx-translate/core'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs'
 import { PrimeIcons, SelectItem } from 'primeng/api'
+import { TooltipModule } from 'primeng/tooltip'
+import { MessageModule } from 'primeng/message'
 
-import { Action, DataAction, DataTableColumn, DiagramColumn, RowListGridData } from '@onecx/angular-accelerator'
+import {
+  Action,
+  AngularAcceleratorModule,
+  DataAction,
+  DataTableColumn,
+  DiagramColumn,
+  RowListGridData,
+  ColumnType
+} from '@onecx/angular-accelerator'
 import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
-import { ColumnType } from '@onecx/portal-integration-angular'
+import { PortalPageComponent } from '@onecx/angular-utils'
 
 import {
   ContextKind,
@@ -15,6 +27,8 @@ import {
   GenericCrdStatusEnum,
   GetCustomResourcesByCriteriaRequestParams
 } from 'src/app/shared/generated'
+import { CrdDetailComponent } from '../crd-detail/crd-detail.component'
+import { CrdCriteriaComponent } from './crd-criteria/crd-criteria.component'
 
 export type ChangeMode = 'VIEW' | 'NEW' | 'EDIT'
 type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
@@ -22,6 +36,17 @@ type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
 @Component({
   selector: 'app-crd-search',
   templateUrl: './crd-search.component.html',
+  imports: [
+    CommonModule,
+    FormsModule,
+    TranslateModule,
+    TooltipModule,
+    AngularAcceleratorModule,
+    CrdCriteriaComponent,
+    CrdDetailComponent,
+    MessageModule,
+    PortalPageComponent
+  ],
   styleUrls: ['./crd-search.component.scss']
 })
 export class CrdSearchComponent implements OnInit {

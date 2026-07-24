@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
 
-import { PortalCoreModule } from '@onecx/portal-integration-angular'
-import { InitializeModuleGuard, addInitializeModuleGuard } from '@onecx/angular-integration-interface'
+import { AngularAcceleratorModule } from '@onecx/angular-accelerator'
 
 import { SharedModule } from '../shared/shared.module'
 
@@ -22,10 +21,18 @@ import { SlotFormComponent } from './crd-detail/slot-form/slot-form.component'
 import { UpdateHistoryComponent } from './crd-detail/update-history/update-history.component'
 import { StatusTabComponent } from './crd-detail/status-tab/status-tab.component'
 import { ParameterFormComponent } from './crd-detail/parameter-form/parameter-form.component'
+import { TranslateModule } from '@ngx-translate/core'
+import { TooltipModule } from 'primeng/tooltip'
 
 const routes: Routes = [{ path: '', component: CrdSearchComponent, pathMatch: 'full' }]
 @NgModule({
-  declarations: [
+  declarations: [],
+  imports: [
+    CommonModule,
+    FormsModule,
+    AngularAcceleratorModule,
+    [RouterModule.forChild(routes)],
+    SharedModule,
     CrdSearchComponent,
     CrdCriteriaComponent,
     CrdDetailComponent,
@@ -39,16 +46,11 @@ const routes: Routes = [{ path: '', component: CrdSearchComponent, pathMatch: 'f
     MicroserviceFormComponent,
     UpdateHistoryComponent,
     StatusTabComponent,
-    ParameterFormComponent
+    ParameterFormComponent,
+    TranslateModule,
+    TooltipModule
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    PortalCoreModule.forMicroFrontend(),
-    [RouterModule.forChild(addInitializeModuleGuard(routes))],
-    SharedModule
-  ],
-  providers: [InitializeModuleGuard]
+  providers: []
 })
 export class DataOrchestratorModule {
   constructor() {

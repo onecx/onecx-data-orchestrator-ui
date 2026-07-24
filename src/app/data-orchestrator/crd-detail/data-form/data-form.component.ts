@@ -1,13 +1,28 @@
 import { Component, Input, OnChanges } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { TabViewModule } from 'primeng/tabview'
+import { TextareaModule } from 'primeng/textarea'
+import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourceData } from 'src/app/shared/generated'
 
 import { Update } from '../crd-detail.component'
 import { ChangeMode } from '../../crd-search/crd-search.component'
+import { StatusTabComponent } from '../status-tab/status-tab.component'
+import { TranslateModule } from '@ngx-translate/core'
+import { UpdateHistoryComponent } from '../update-history/update-history.component'
 
 @Component({
   selector: 'app-data-form',
+  imports: [
+    StatusTabComponent,
+    TranslateModule,
+    TabViewModule,
+    UpdateHistoryComponent,
+    TooltipModule,
+    TextareaModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './data-form.component.html'
 })
 export class DataFormComponent implements OnChanges {
