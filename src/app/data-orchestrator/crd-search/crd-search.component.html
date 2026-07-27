@@ -34,13 +34,6 @@
         [actionColumnPosition]="'left'"
         [defaultGroupKey]="'ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT'"
       >
-        <ng-template #topCenter>
-          <ocx-interactive-data-view>
-            [enableSorting]="false" [enableFiltering]="true" (filterChange)="onFilterChange($event)"
-            [filterColumns]="['CRD.NAME' | translate, 'CRD.TYPE' | translate, 'CRD.STATUS' | translate]"
-            ></ocx-interactive-data-view
-          >
-        </ng-template>
         <ng-template pTemplate="statusIdCell" let-item="rowObject">
           <span
             class="pi pi-circle-on"

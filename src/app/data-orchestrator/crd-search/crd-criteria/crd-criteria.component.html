@@ -12,14 +12,14 @@
         id="do_crd_search_criteria_name"
         pInputText
         type="text"
+        class="w-full pt-2 pb-2"
         formControlName="name"
-        class="w-9rem sm:w-13rem"
-        [attr.aria-label]="'CRD.NAME' | translate"
+        [ariaLabel]="'CRD.NAME' | translate"
         [pTooltip]="'CRD.TOOLTIPS.NAME' | translate"
         tooltipPosition="top"
         tooltipEvent="hover"
       />
-      <label for="do_crd_search_criteria_title">{{ 'CRD.NAME' | translate }}</label>
+      <label for="do_crd_search_criteria_name">{{ 'CRD.NAME' | translate }}</label>
     </p-float-label>
     <p-float-label variant="on">
       <p-multiSelect
@@ -34,7 +34,7 @@
         tooltipEvent="hover"
       >
         <ng-template pTemplate="header">
-          <div class="absolute" style="left: 35px">{{ 'ENUMS.CRD_TYPE.ALL' | translate }}</div>
+          <div class="absolute" style="left: 35px; top: 13px">{{ 'ENUMS.CRD_TYPE.ALL' | translate }}</div>
         </ng-template>
       </p-multiSelect>
       <label class="ocx-required-label" for="do_crd_search_criteria_type">{{ 'CRD.TYPE' | translate }}</label>
