@@ -20,8 +20,9 @@ describe('KeycloakFormComponent', () => {
   }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [KeycloakFormComponent],
+      declarations: [],
       imports: [
+        KeycloakFormComponent,
         ReactiveFormsModule,
         CheckboxModule,
         TranslateModule.forRoot({

@@ -15,8 +15,9 @@ describe('ParameterFormComponent', () => {
   const mockUserService = { lang$: { getValue: jasmine.createSpy('getValue') } }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ParameterFormComponent],
+      declarations: [],
       imports: [
+        ParameterFormComponent,
         ReactiveFormsModule,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }

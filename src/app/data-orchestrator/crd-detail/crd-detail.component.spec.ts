@@ -32,8 +32,9 @@ describe('CrdDetailComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CrdDetailComponent],
+      declarations: [],
       imports: [
+        CrdDetailComponent,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })

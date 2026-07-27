@@ -5,75 +5,83 @@
     (resetSearchEmitter)="onCriteriaReset()"
   ></app-crd-criteria>
 
-  <ocx-content-container layout="horizontal" *ngIf="crds$ | async as crds" styleClass="px-3 pb-2">
-    <p-message
-      *ngIf="loading"
-      id="do_crd_search_message_loading"
-      severity="info"
-      styleClass="m-3"
-      [text]="'ACTIONS.LOADING' | translate"
-    ></p-message>
-    <p-message
-      *ngIf="exceptionKey"
-      id="do_crd_search_message_error"
-      severity="error"
-      styleClass="m-3"
-      [text]="exceptionKey | translate"
-    ></p-message>
+  @if (crds$ | async; as crds) {
+    <ocx-content-container layout="horizontal" styleClass="px-3 pb-2">
+      @if (loading) {
+        <p-message
+          id="do_crd_search_message_loading"
+          severity="info"
+          styleClass="m-3"
+          [text]="'ACTIONS.LOADING' | translate"
+        ></p-message>
+      }
+      @if (exceptionKey) {
+        <p-message
+          id="do_crd_search_message_error"
+          severity="error"
+          styleClass="m-3"
+          [text]="exceptionKey | translate"
+        ></p-message>
+      }
 
-    <ocx-content class="w-full adjust-card-padding">
-      <ocx-interactive-data-view
-        *ngIf="!loading && !exceptionKey"
-        #crdTable
-        id="do_crd_search_table"
-        [data]="(filteredData$ | async) ?? []"
-        [columns]="columns"
-        [emptyResultsMessage]="'ACTIONS.SEARCH.NO_DATA' | translate"
-        [supportedViewLayouts]="['table']"
-        [additionalActions]="additionalActions"
-        [actionColumnPosition]="'left'"
-        [defaultGroupKey]="'ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT'"
-      >
-        <ng-template pTemplate="statusIdCell" let-item="rowObject">
-          <span
-            class="pi pi-circle-on"
-            [class.text-red-600]="item.status === 'ERROR'"
-            [class.text-yellow-600]="item.status === 'UNDEFINED'"
-            [class.text-green-600]="item.status === 'UPDATED' || item.status === 'CREATED'"
-            [attr.aria-label]="'ENUMS.CRD_STATUS.' + item.status | translate"
-            [pTooltip]="'ENUMS.CRD_STATUS.' + item.status | translate"
-            tooltipPosition="top"
-            tooltipEvent="hover"
-          ></span>
-        </ng-template>
-        <ng-template pTemplate="statusIdTableFilterCell" let-rowObject="rowObject">
-          <ng-container>
-            <span
-              class="pi pi-circle-on"
-              [class.text-red-600]="rowObject.status === 'ERROR'"
-              [class.text-yellow-600]="rowObject.status === 'UNDEFINED'"
-              [class.text-green-600]="rowObject.status === 'UPDATED' || rowObject.status === 'CREATED'"
-              [attr.aria-label]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
-              [pTooltip]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            >
-            </span>
-            <p>&nbsp; {{ 'ENUMS.CRD_STATUS.' + rowObject.status | translate }}</p>
-          </ng-container>
-        </ng-template>
-      </ocx-interactive-data-view>
-    </ocx-content>
+      <ocx-content class="w-full adjust-card-padding">
+        @if (!loading && !exceptionKey) {
+          <ocx-interactive-data-view
+            #crdTable
+            id="do_crd_search_table"
+            [data]="(filteredData$ | async) ?? []"
+            [columns]="columns"
+            [emptyResultsMessage]="'ACTIONS.SEARCH.NO_DATA' | translate"
+            [supportedViewLayouts]="['table']"
+            [additionalActions]="additionalActions"
+            [actionColumnPosition]="'left'"
+            [defaultGroupKey]="'ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT'"
+          >
+            <ng-template pTemplate="statusIdCell" let-item="rowObject">
+              <span
+                class="pi pi-circle-on"
+                [class.text-red-600]="item.status === 'ERROR'"
+                [class.text-yellow-600]="item.status === 'UNDEFINED'"
+                [class.text-green-600]="item.status === 'UPDATED' || item.status === 'CREATED'"
+                [attr.aria-label]="'ENUMS.CRD_STATUS.' + item.status | translate"
+                [pTooltip]="'ENUMS.CRD_STATUS.' + item.status | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              ></span>
+            </ng-template>
+            <ng-template pTemplate="statusIdTableFilterCell" let-rowObject="rowObject">
+              <ng-container>
+                <span
+                  class="pi pi-circle-on"
+                  [class.text-red-600]="rowObject.status === 'ERROR'"
+                  [class.text-yellow-600]="rowObject.status === 'UNDEFINED'"
+                  [class.text-green-600]="rowObject.status === 'UPDATED' || rowObject.status === 'CREATED'"
+                  [attr.aria-label]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
+                  [pTooltip]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
+                  tooltipPosition="top"
+                  tooltipEvent="hover"
+                >
+                </span>
+                <p>&nbsp; {{ 'ENUMS.CRD_STATUS.' + rowObject.status | translate }}</p>
+              </ng-container>
+            </ng-template>
+          </ocx-interactive-data-view>
+        }
+      </ocx-content>
 
-    <ocx-content class="w-full lg:w-3" *ngIf="crds.length > 0 && chartVisible && diagramColumn !== undefined">
-      <ocx-group-by-count-diagram
-        *ngIf="diagramColumn as diagramColumn"
-        [data]="crds"
-        [column]="diagramColumn"
-        sumKey="ACTIONS.SEARCH.DIAGRAM_SUM"
-      ></ocx-group-by-count-diagram>
-    </ocx-content>
-  </ocx-content-container>
+      @if (crds.length > 0 && chartVisible && diagramColumn !== undefined) {
+        <ocx-content class="w-full lg:w-3">
+          @if (diagramColumn) {
+            <ocx-group-by-count-diagram
+              [data]="crds"
+              [column]="diagramColumn"
+              sumKey="ACTIONS.SEARCH.DIAGRAM_SUM"
+            ></ocx-group-by-count-diagram>
+          }
+        </ocx-content>
+      }
+    </ocx-content-container>
+  }
 </ocx-portal-page>
 
 <!-- DETAIL -->

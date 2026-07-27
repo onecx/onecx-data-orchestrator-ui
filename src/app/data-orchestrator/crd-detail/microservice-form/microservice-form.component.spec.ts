@@ -20,8 +20,9 @@ describe('MicroserviceFormComponent', () => {
   }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MicroserviceFormComponent],
+      declarations: [],
       imports: [
+        MicroserviceFormComponent,
         ReactiveFormsModule,
         CheckboxModule,
         TranslateModule.forRoot({

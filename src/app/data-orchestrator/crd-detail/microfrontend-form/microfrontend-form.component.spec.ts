@@ -20,8 +20,9 @@ describe('MicrofrontendFormComponent', () => {
   }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MicrofrontendFormComponent],
+      declarations: [],
       imports: [
+        MicrofrontendFormComponent,
         ReactiveFormsModule,
         CheckboxModule,
         TranslateModule.forRoot({

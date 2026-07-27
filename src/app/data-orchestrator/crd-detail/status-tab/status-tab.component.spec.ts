@@ -14,8 +14,9 @@ describe('StatusTabComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [StatusTabComponent],
+      declarations: [],
       imports: [
+        StatusTabComponent,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })

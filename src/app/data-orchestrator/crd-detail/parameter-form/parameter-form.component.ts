@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
 import { MessageModule } from 'primeng/message'
-import { TabViewModule } from 'primeng/tabview'
+import { TabsModule } from 'primeng/tabs'
 import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourceParameter } from 'src/app/shared/generated'
@@ -18,7 +18,7 @@ type Parameter = { name: string; displayName: string | undefined; value: string;
   imports: [
     TranslateModule,
     MessageModule,
-    TabViewModule,
+    TabsModule,
     StatusTabComponent,
     UpdateHistoryComponent,
     TooltipModule,

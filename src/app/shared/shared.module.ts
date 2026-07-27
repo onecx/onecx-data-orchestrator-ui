@@ -21,7 +21,7 @@ import { MultiSelectModule } from 'primeng/multiselect'
 import { OverlayPanelModule } from 'primeng/overlaypanel'
 import { SelectButtonModule } from 'primeng/selectbutton'
 import { TableModule } from 'primeng/table'
-import { TabViewModule } from 'primeng/tabview'
+import { TabsModule } from 'primeng/tabs'
 import { TagModule } from 'primeng/tag'
 import { ToastModule } from 'primeng/toast'
 import { TooltipModule } from 'primeng/tooltip'
@@ -49,7 +49,7 @@ import { LabelResolver } from './label.resolver'
     ReactiveFormsModule,
     SelectButtonModule,
     TableModule,
-    TabViewModule,
+    TabsModule,
     TagModule,
     ToastModule,
     TooltipModule,
@@ -73,7 +73,7 @@ import { LabelResolver } from './label.resolver'
     ReactiveFormsModule,
     SelectButtonModule,
     TableModule,
-    TabViewModule,
+    TabsModule,
     TagModule,
     ToastModule,
     TooltipModule,

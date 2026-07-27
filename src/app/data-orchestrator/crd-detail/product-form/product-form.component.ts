@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
-import { TabViewModule } from 'primeng/tabview'
+import { TabsModule } from 'primeng/tabs'
 import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourceProduct } from 'src/app/shared/generated'
@@ -16,7 +16,7 @@ import { StatusTabComponent } from '../status-tab/status-tab.component'
   selector: 'app-product-form',
   imports: [
     TranslateModule,
-    TabViewModule,
+    TabsModule,
     UpdateHistoryComponent,
     TooltipModule,
     ReactiveFormsModule,

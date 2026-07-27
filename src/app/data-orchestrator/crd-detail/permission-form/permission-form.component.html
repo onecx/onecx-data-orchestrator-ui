@@ -1,135 +1,149 @@
-<p-tabView>
-  <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
-    <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
-      <!-- row 1 -->
-      <div class="flex flex-row flex-wrap justify-content-between gap-4">
-        <div class="flex-grow-1">
-          <p-float-label variant="on">
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_permission_name"
-              formControlName="metadataName"
-              class="w-full pt-3 pb-2 text-responsive"
-              [ariaLabel]="'CRD.COMMON.NAME' | translate"
-              [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_permission_name"> {{ 'CRD.COMMON.NAME' | translate }}</label>
-          </p-float-label>
+<p-tabs>
+  <p-tablist>
+    <p-tab value="0">{{ 'DIALOG.TABS.DETAILS' | translate }}</p-tab>
+    @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
+      <p-tab value="1">{{ 'DIALOG.TABS.CHANGES' | translate }}</p-tab>
+    }
+    @if (permissionCrd?.status) {
+      <p-tab value="2">{{ 'DIALOG.TABS.STATUS' | translate }}</p-tab>
+    }
+    <p-tab value="3">{{ 'DIALOG.TABS.PERMISSIONS' | translate }}</p-tab>
+  </p-tablist>
+  <p-tabpanels>
+    <p-tabpanel value="0">
+      <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
+        <!-- row 1 -->
+        <div class="flex flex-row flex-wrap justify-content-between gap-4">
+          <div class="flex-grow-1">
+            <p-float-label variant="on">
+              <input
+                pInputText
+                type="text"
+                inputId="do_crd_detail_permission_name"
+                formControlName="metadataName"
+                class="w-full pt-3 pb-2 text-responsive"
+                [ariaLabel]="'CRD.COMMON.NAME' | translate"
+                [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              />
+              <label for="do_crd_detail_permission_name"> {{ 'CRD.COMMON.NAME' | translate }}</label>
+            </p-float-label>
+          </div>
+          <div class="flex-grow-1">
+            <p-float-label variant="on">
+              <input
+                pInputText
+                type="text"
+                inputId="do_crd_detail_permission_kind"
+                formControlName="kind"
+                class="w-full pt-3 pb-2 text-responsive"
+                [ariaLabel]="'CRD.COMMON.KIND' | translate"
+                [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              />
+              <label for="do_crd_detail_permission_kind"> {{ 'CRD.COMMON.KIND' | translate }}</label>
+            </p-float-label>
+          </div>
         </div>
-        <div class="flex-grow-1">
-          <p-float-label variant="on">
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_permission_kind"
-              formControlName="kind"
-              class="w-full pt-3 pb-2 text-responsive"
-              [ariaLabel]="'CRD.COMMON.KIND' | translate"
-              [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_permission_kind"> {{ 'CRD.COMMON.KIND' | translate }}</label>
-          </p-float-label>
+        <!-- row 2 -->
+        <div class="flex flex-row flex-wrap justify-content-between gap-4">
+          <div class="flex-grow-1">
+            <p-float-label variant="on" controlErrorAnchor>
+              <input
+                pInputText
+                inputId="do_crd_detail_permission_product_name"
+                type="text"
+                formControlName="productName"
+                class="w-full pt-3 pb-2 text-responsive"
+                [ariaLabel]="'CRD.COMMON.PRODUCT_NAME' | translate"
+                [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              />
+              <label for="do_crd_detail_permission_product_name"> {{ 'CRD.COMMON.PRODUCT_NAME' | translate }}</label>
+            </p-float-label>
+          </div>
+          <div class="flex-grow-1">
+            <p-float-label variant="on" controlErrorAnchor>
+              <input
+                pInputText
+                type="text"
+                inputId="do_crd_detail_permission_app_id"
+                formControlName="appId"
+                class="w-full pt-3 pb-2 text-responsive"
+                [ariaLabel]="'CRD.COMMON.APP_ID' | translate"
+                [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              />
+              <label for="do_crd_detail_permission_app_id"> {{ 'CRD.COMMON.APP_ID' | translate }}</label>
+            </p-float-label>
+          </div>
         </div>
-      </div>
-      <!-- row 2 -->
-      <div class="flex flex-row flex-wrap justify-content-between gap-4">
+        <!-- row 3 -->
         <div class="flex-grow-1">
           <p-float-label variant="on" controlErrorAnchor>
             <input
               pInputText
-              inputId="do_crd_detail_permission_product_name"
               type="text"
-              formControlName="productName"
+              inputId="do_crd_detail_permission_description"
+              formControlName="description"
               class="w-full pt-3 pb-2 text-responsive"
-              [ariaLabel]="'CRD.COMMON.PRODUCT_NAME' | translate"
-              [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
+              [ariaLabel]="'CRD.PERMISSION.DESCRIPTION' | translate"
+              [pTooltip]="'CRD.PERMISSION.TOOLTIPS.DESCRIPTION' | translate"
               tooltipPosition="top"
               tooltipEvent="hover"
             />
-            <label for="do_crd_detail_permission_product_name"> {{ 'CRD.COMMON.PRODUCT_NAME' | translate }}</label>
-          </p-float-label>
-        </div>
-        <div class="flex-grow-1">
-          <p-float-label variant="on" controlErrorAnchor>
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_permission_app_id"
-              formControlName="appId"
-              class="w-full pt-3 pb-2 text-responsive"
-              [ariaLabel]="'CRD.COMMON.APP_ID' | translate"
-              [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_permission_app_id"> {{ 'CRD.COMMON.APP_ID' | translate }}</label>
+            <label for="do_crd_detail_permission_description"> {{ 'CRD.PERMISSION.DESCRIPTION' | translate }}</label>
           </p-float-label>
         </div>
       </div>
-      <!-- row 3 -->
-      <div class="flex-grow-1">
-        <p-float-label variant="on" controlErrorAnchor>
-          <input
-            pInputText
-            type="text"
-            inputId="do_crd_detail_permission_description"
-            formControlName="description"
-            class="w-full pt-3 pb-2 text-responsive"
-            [ariaLabel]="'CRD.PERMISSION.DESCRIPTION' | translate"
-            [pTooltip]="'CRD.PERMISSION.TOOLTIPS.DESCRIPTION' | translate"
-            tooltipPosition="top"
-            tooltipEvent="hover"
-          />
-          <label for="do_crd_detail_permission_description"> {{ 'CRD.PERMISSION.DESCRIPTION' | translate }}</label>
-        </p-float-label>
-      </div>
-    </div>
-  </p-tabPanel>
+    </p-tabpanel>
 
-  <p-tabPanel
-    [header]="'DIALOG.TABS.CHANGES' | translate"
-    *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
-  >
-    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
-  </p-tabPanel>
+    @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
+      <p-tabpanel value="1">
+        <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
+      </p-tabpanel>
+    }
 
-  <p-tabPanel [header]="'DIALOG.TABS.STATUS' | translate" *ngIf="permissionCrd?.status">
-    <app-status-tab [status]="permissionCrd?.status" />
-  </p-tabPanel>
+    @if (permissionCrd?.status) {
+      <p-tabpanel value="2">
+        <app-status-tab [status]="permissionCrd?.status" />
+      </p-tabpanel>
+    }
 
-  <p-tabPanel [header]="'DIALOG.TABS.PERMISSIONS' | translate">
-    <p-message
-      *ngIf="permissions.length === 0"
-      id="do_crd_detail_permission_message_not_exist"
-      severity="info"
-      [text]="'CRD.PERMISSION.PERMISSIONS.NOT_EXIST' | translate"
-    ></p-message>
-    <table style="border-spacing: 0px; width: 100%">
-      <thead>
-        <tr>
-          <th class="p-2 border-200 border-bottom-2 border-right-1">
-            {{ 'CRD.PERMISSION.PERMISSIONS.RESOURCE' | translate }}
-          </th>
-          <th class="p-2 border-200 border-bottom-2 border-right-1">
-            {{ 'CRD.PERMISSION.PERMISSIONS.ACTION' | translate }}
-          </th>
-          <th class="p-2 border-200 border-bottom-2">{{ 'CRD.PERMISSION.PERMISSIONS.DESCRIPTION' | translate }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (perm of permissions; track perm) {
+    <p-tabpanel value="3">
+      @if (permissions.length === 0) {
+        <p-message
+          id="do_crd_detail_permission_message_not_exist"
+          severity="info"
+          [text]="'CRD.PERMISSION.PERMISSIONS.NOT_EXIST' | translate"
+        ></p-message>
+      }
+      <table style="border-spacing: 0px; width: 100%">
+        <thead>
           <tr>
-            <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.resource }}</td>
-            <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.action }}</td>
-            <td class="p-2 border-200 border-bottom-1">{{ perm.description }}</td>
+            <th class="p-2 border-200 border-bottom-2 border-right-1">
+              {{ 'CRD.PERMISSION.PERMISSIONS.RESOURCE' | translate }}
+            </th>
+            <th class="p-2 border-200 border-bottom-2 border-right-1">
+              {{ 'CRD.PERMISSION.PERMISSIONS.ACTION' | translate }}
+            </th>
+            <th class="p-2 border-200 border-bottom-2">{{ 'CRD.PERMISSION.PERMISSIONS.DESCRIPTION' | translate }}</th>
           </tr>
-        }
-      </tbody>
-    </table>
-  </p-tabPanel>
-</p-tabView>
+        </thead>
+        <tbody>
+          @for (perm of permissions; track perm) {
+            <tr>
+              <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.resource }}</td>
+              <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.action }}</td>
+              <td class="p-2 border-200 border-bottom-1">{{ perm.description }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </p-tabpanel>
+  </p-tabpanels>
+</p-tabs>

@@ -19,8 +19,9 @@ describe('PermissionFormComponent', () => {
   }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [PermissionFormComponent],
+      declarations: [],
       imports: [
+        PermissionFormComponent,
         ReactiveFormsModule,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }

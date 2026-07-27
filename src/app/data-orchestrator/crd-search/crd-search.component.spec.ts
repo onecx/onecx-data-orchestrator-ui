@@ -56,8 +56,9 @@ describe('CrdSearchComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CrdSearchComponent],
+      declarations: [],
       imports: [
+        CrdSearchComponent,
         TranslateModule.forRoot({
           isolate: true,
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
@@ -262,7 +263,9 @@ describe('CrdSearchComponent', () => {
       component.ngOnInit()
 
       component.actions$?.subscribe((action) => {
-        action[0].actionCallback()
+        const showDiagramAction = action[0]
+        expect(showDiagramAction).toBeDefined()
+        showDiagramAction?.actionCallback?.()
       })
 
       expect(component.toggleChartVisibility).toHaveBeenCalled()
@@ -275,14 +278,18 @@ describe('CrdSearchComponent', () => {
       component.ngOnInit()
 
       component.actions$?.subscribe((action) => {
-        action[0].actionCallback()
+        const showDiagramAction = action[0]
+        expect(showDiagramAction).toBeDefined()
+        showDiagramAction?.actionCallback?.()
       })
 
       expect(component.toggleChartVisibility).toHaveBeenCalled()
       expect(component.chartVisible).toBeTrue()
 
       component.actions$?.subscribe((action) => {
-        action[0].actionCallback()
+        const showDiagramAction = action[0]
+        expect(showDiagramAction).toBeDefined()
+        showDiagramAction?.actionCallback?.()
       })
 
       expect(component.chartVisible).toBeFalse()
@@ -295,7 +302,8 @@ describe('CrdSearchComponent', () => {
       component.ngOnInit()
 
       const editAction = component.additionalActions.find((action) => action.id === 'edit')
-      editAction?.callback(null)
+      expect(editAction).toBeDefined()
+      editAction!.callback!(null)
 
       expect(component.onDetail).toHaveBeenCalled()
     })
@@ -307,7 +315,8 @@ describe('CrdSearchComponent', () => {
       component.ngOnInit()
 
       const viewAction = component.additionalActions.find((action) => action.id === 'view')
-      viewAction?.callback(null)
+      expect(viewAction).toBeDefined()
+      viewAction!.callback!(null)
 
       expect(component.onDetail).toHaveBeenCalled()
     })
@@ -319,7 +328,8 @@ describe('CrdSearchComponent', () => {
       component.ngOnInit()
 
       const touchAction = component.additionalActions.find((action) => action.id === 'touch')
-      touchAction?.callback(null)
+      expect(touchAction).toBeDefined()
+      touchAction!.callback!(null)
 
       expect(component.onTouch).toHaveBeenCalled()
     })

@@ -20,8 +20,9 @@ describe('SlotFormComponent', () => {
   }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [SlotFormComponent],
+      declarations: [],
       imports: [
+        SlotFormComponent,
         ReactiveFormsModule,
         CheckboxModule,
         TranslateModule.forRoot({

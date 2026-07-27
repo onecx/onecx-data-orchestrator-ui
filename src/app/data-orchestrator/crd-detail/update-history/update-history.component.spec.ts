@@ -18,8 +18,9 @@ describe('UpdateHistoryComponent', () => {
   }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [UpdateHistoryComponent],
+      declarations: [],
       imports: [
+        UpdateHistoryComponent,
         ReactiveFormsModule,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }

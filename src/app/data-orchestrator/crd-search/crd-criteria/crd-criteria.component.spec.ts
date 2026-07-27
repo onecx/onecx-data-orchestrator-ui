@@ -5,14 +5,13 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { FormControl, FormGroup } from '@angular/forms'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { SelectItem } from 'primeng/api'
-import { throwError } from 'rxjs'
+import { firstValueFrom, of, throwError } from 'rxjs'
 
 import { UserService } from '@onecx/angular-integration-interface'
 import { createTranslateLoader } from '@onecx/angular-utils'
 
 import { ContextKind, DataAPIService } from 'src/app/shared/generated'
 import { CrdCriteriaComponent, CrdCriteriaForm } from '../crd-criteria/crd-criteria.component'
-import { firstValueFrom, of } from 'rxjs'
 
 const filledCriteria = new FormGroup<CrdCriteriaForm>({
   name: new FormControl<string | null>('test'),
@@ -53,8 +52,9 @@ describe('CrdCriteriaComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CrdCriteriaComponent],
+      declarations: [],
       imports: [
+        CrdCriteriaComponent,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })

@@ -19,8 +19,9 @@ describe('DatabaseFormComponent', () => {
   }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DatabaseFormComponent],
+      declarations: [],
       imports: [
+        DatabaseFormComponent,
         ReactiveFormsModule,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }

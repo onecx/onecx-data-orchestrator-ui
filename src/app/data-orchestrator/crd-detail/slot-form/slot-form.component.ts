@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { CheckboxModule } from 'primeng/checkbox'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
-import { TabViewModule } from 'primeng/tabview'
+import { TabsModule } from 'primeng/tabs'
 import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourceSlot } from 'src/app/shared/generated'
@@ -16,7 +16,7 @@ import { UpdateHistoryComponent } from '../update-history/update-history.compone
   selector: 'app-slot-form',
   imports: [
     TranslateModule,
-    TabViewModule,
+    TabsModule,
     UpdateHistoryComponent,
     StatusTabComponent,
     TooltipModule,
