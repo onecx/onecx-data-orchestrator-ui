@@ -7,7 +7,7 @@
     "types": ["jasmine", "node"],
     "useDefineForClassFields": false
   },
-  "files": ["src/test.ts", "src/polyfills.ts"],
+  "files": ["src/test-setup.ts", "src/polyfills.ts"],
   "exclude": ["src/app/shared/generated/**/*", "node_modules"],
   "include": ["**/*.spec.ts"]
 }
