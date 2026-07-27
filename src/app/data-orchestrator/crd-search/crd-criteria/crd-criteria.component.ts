@@ -5,6 +5,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { Observable, map, of } from 'rxjs'
 import { SelectItem } from 'primeng/api'
 import { FloatLabelModule } from 'primeng/floatlabel'
+import { InputTextModule } from 'primeng/inputtext'
 import { MultiSelectModule } from 'primeng/multiselect'
 import { TooltipModule } from 'primeng/tooltip'
 
@@ -32,7 +33,8 @@ export interface CrdCriteriaForm {
     ReactiveFormsModule,
     CommonModule,
     MultiSelectModule,
-    FloatLabelModule
+    FloatLabelModule,
+    InputTextModule
   ],
   templateUrl: './crd-criteria.component.html',
   styleUrls: ['./crd-criteria.component.scss']
@@ -91,7 +93,6 @@ export class CrdCriteriaComponent {
             .sort((a, b) => a.label.localeCompare(b.label))
         })
       )
-      this.crdCriteria.get('type')?.markAsDirty()
     })
   }
 }

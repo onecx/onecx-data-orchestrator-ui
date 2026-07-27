@@ -1,12 +1,12 @@
 import { Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { FloatLabelModule } from 'primeng/floatlabel'
+import { InputTextModule } from 'primeng/inputtext'
 import { TabViewModule } from 'primeng/tabview'
 import { TextareaModule } from 'primeng/textarea'
 import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourceData } from 'src/app/shared/generated'
-
 import { Update } from '../crd-detail.component'
 import { ChangeMode } from '../../crd-search/crd-search.component'
 import { StatusTabComponent } from '../status-tab/status-tab.component'
@@ -23,7 +23,8 @@ import { UpdateHistoryComponent } from '../update-history/update-history.compone
     TooltipModule,
     TextareaModule,
     ReactiveFormsModule,
-    FloatLabelModule
+    FloatLabelModule,
+    InputTextModule
   ],
   templateUrl: './data-form.component.html'
 })

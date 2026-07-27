@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
 import { CheckboxModule } from 'primeng/checkbox'
 import { FloatLabelModule } from 'primeng/floatlabel'
+import { InputTextModule } from 'primeng/inputtext'
 import { TabViewModule } from 'primeng/tabview'
 import { TooltipModule } from 'primeng/tooltip'
 
@@ -21,7 +22,9 @@ import { UpdateHistoryComponent } from '../update-history/update-history.compone
     TooltipModule,
     ReactiveFormsModule,
     CheckboxModule,
-    FloatLabelModule
+    FloatLabelModule,
+    InputTextModule,
+    CheckboxModule
   ],
   templateUrl: './slot-form.component.html',
   styleUrls: ['./slot-form.component.scss']

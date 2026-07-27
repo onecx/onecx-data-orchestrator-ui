@@ -2,6 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
 import { FloatLabelModule } from 'primeng/floatlabel'
+import { InputTextModule } from 'primeng/inputtext'
 import { TabViewModule } from 'primeng/tabview'
 import { TooltipModule } from 'primeng/tooltip'
 
@@ -19,7 +20,8 @@ import { UpdateHistoryComponent } from '../update-history/update-history.compone
     UpdateHistoryComponent,
     TooltipModule,
     ReactiveFormsModule,
-    FloatLabelModule
+    FloatLabelModule,
+    InputTextModule
   ],
   templateUrl: './microservice-form.component.html'
 })
