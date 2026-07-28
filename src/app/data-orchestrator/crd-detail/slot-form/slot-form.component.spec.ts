@@ -4,9 +4,12 @@ import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { BehaviorSubject } from 'rxjs'
 import { CheckboxModule } from 'primeng/checkbox'
+
 import { createTranslateLoader } from '@onecx/angular-utils'
 import { UserService } from '@onecx/angular-integration-interface'
+
 import { CustomResourceSlot } from 'src/app/shared/generated'
 import { SlotFormComponent } from './slot-form.component'
 
@@ -14,9 +17,7 @@ describe('SlotFormComponent', () => {
   let component: SlotFormComponent
   let fixture: ComponentFixture<SlotFormComponent>
   const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
+    lang$: new BehaviorSubject<string>('de')
   }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

@@ -4,8 +4,11 @@ import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { BehaviorSubject } from 'rxjs'
+
 import { createTranslateLoader } from '@onecx/angular-utils'
 import { UserService } from '@onecx/angular-integration-interface'
+
 import { CustomResourceDatabase, StatusStatusEnum } from 'src/app/shared/generated'
 import { DatabaseFormComponent } from './database-form.component'
 
@@ -13,9 +16,7 @@ describe('DatabaseFormComponent', () => {
   let component: DatabaseFormComponent
   let fixture: ComponentFixture<DatabaseFormComponent>
   const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
+    lang$: new BehaviorSubject<string>('de')
   }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

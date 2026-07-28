@@ -131,16 +131,21 @@ export class CrdDetailComponent implements OnChanges {
         .getCrdByTypeAndName({ type: this.crdType as ContextKind, name: this.crdName })
         .pipe(
           map((response) => {
-            const obj = response.crd
+            const obj = response.crd ?? {}
             this.updateHistory = this.prepareHistory(obj).reverse()
-            return obj ?? {}
+            this.loading = false
+            return obj
           }),
           catchError((err) => {
             this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRD'
+            this.loading = false
             console.error('getCrdByTypeAndName', err)
             return of({} as any)
           }),
-          finalize(() => (this.loading = false))
+          finalize(() => {
+            this.loading = false
+            this.exceptionKey = this.exceptionKey ?? undefined
+          })
         )
     }
   }

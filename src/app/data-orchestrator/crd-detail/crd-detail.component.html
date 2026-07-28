@@ -24,11 +24,11 @@
       >
         <div
           class="mr-2 pi pi-circle-on"
-          [class.text-red-600]="crd.status.status === 'ERROR'"
-          [class.text-yellow-600]="crd.status.status === 'UNDEFINED'"
-          [class.text-green-600]="crd.status.status === 'UPDATED' || crd.status.status === 'CREATED'"
-          [attr.aria-label]="'ENUMS.CRD_STATUS.' + crd.status.status | translate"
-          [pTooltip]="'ENUMS.CRD_STATUS.' + crd.status.status | translate"
+          [class.text-red-600]="crd?.status?.status === 'ERROR'"
+          [class.text-yellow-600]="crd?.status?.status === 'UNDEFINED'"
+          [class.text-green-600]="crd?.status?.status === 'UPDATED' || crd?.status?.status === 'CREATED'"
+          [attr.aria-label]="'ENUMS.CRD_STATUS.' + (crd?.status?.status || '') | translate"
+          [pTooltip]="'ENUMS.CRD_STATUS.' + (crd?.status?.status || '') | translate"
           tooltipPosition="top"
           tooltipEvent="hover"
         ></div>

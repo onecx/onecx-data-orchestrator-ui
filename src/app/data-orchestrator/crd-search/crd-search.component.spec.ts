@@ -1,13 +1,15 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core'
-import { HttpClient, provideHttpClient } from '@angular/common/http'
-import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { provideRouter } from '@angular/router'
+import { TranslateTestingModule } from 'ngx-translate-testing'
 import { BehaviorSubject, of, throwError } from 'rxjs'
 
 import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
 import { RowListGridData } from '@onecx/angular-accelerator'
-import { createTranslateLoader } from '@onecx/angular-utils'
+import { PermissionService } from '@onecx/angular-utils'
 
 import { ContextKind, DataAPIService, GenericCrdStatusEnum } from 'src/app/shared/generated'
 import { CrdSearchComponent } from '../crd-search/crd-search.component'
@@ -49,25 +51,35 @@ describe('CrdSearchComponent', () => {
   const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['get'])
 
   const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
+    lang$: new BehaviorSubject<string>('de'),
+    getPermissions: jasmine
+      .createSpy('getPermissions')
+      .and.returnValue(of(['CRD#SEARCH', 'CRD#VIEW', 'CRD#EDIT', 'CRD#TOUCH'])),
+    hasPermission: jasmine.createSpy('hasPermission').and.returnValue(Promise.resolve(true))
+  }
+
+  const permissionServiceMock = {
+    hasPermission: jasmine.createSpy().and.returnValue(of(true)),
+    isPermitted: jasmine.createSpy().and.returnValue(of(true))
   }
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
+        NoopAnimationsModule,
         CrdSearchComponent,
-        TranslateModule.forRoot({
-          isolate: true,
-          loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
-        })
+        TranslateTestingModule.withTranslations({
+          en: require('src/assets/i18n/en.json'),
+          de: require('src/assets/i18n/de.json')
+        }).withDefaultLanguage('en')
       ],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
+        provideRouter([]),
         provideHttpClient(),
         provideHttpClientTesting(),
+        { provide: PermissionService, useValue: permissionServiceMock },
         { provide: PortalMessageService, useValue: msgServiceSpy },
         { provide: DataAPIService, useValue: apiServiceSpy },
         { provide: UserService, useValue: mockUserService }
@@ -79,12 +91,27 @@ describe('CrdSearchComponent', () => {
     apiServiceSpy.getCustomResourcesByCriteria.calls.reset()
     apiServiceSpy.touchCrdByNameAndType.calls.reset()
     translateServiceSpy.get.calls.reset()
-    mockUserService.lang$.getValue.and.returnValue('de')
+    mockUserService.lang$.next('de')
   }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CrdSearchComponent)
     component = fixture.componentInstance
+    Object.defineProperty(component as any, 'dataOrchestratorApi', {
+      value: apiServiceSpy,
+      writable: true,
+      configurable: true
+    })
+    Object.defineProperty(component as any, 'msgService', {
+      value: msgServiceSpy,
+      writable: true,
+      configurable: true
+    })
+    Object.defineProperty(component as any, 'user', {
+      value: mockUserService,
+      writable: true,
+      configurable: true
+    })
     fixture.detectChanges()
   })
 
@@ -113,6 +140,8 @@ describe('CrdSearchComponent', () => {
 
       component.onSearch({ crdSearchCriteria: { type: [ContextKind.Data] } })
 
+      expect(component.crds$).toBeDefined()
+
       component.crds$.subscribe({
         next: (data) => {
           expect(data.length).toBe(2)
@@ -120,7 +149,7 @@ describe('CrdSearchComponent', () => {
           expect(data[1]).toEqual(crdData[0])
           done()
         },
-        error: done.fail
+        error: (err) => done.fail(err)
       })
     })
   })
@@ -136,7 +165,7 @@ describe('CrdSearchComponent', () => {
         expect(data[0]).toEqual(crdData[0])
         done()
       },
-      error: done.fail
+      error: (err) => done.fail(err)
     })
   })
 
@@ -157,17 +186,14 @@ describe('CrdSearchComponent', () => {
     component.crds$.subscribe({
       next: (data) => {
         expect(data.length).toBe(0)
-        done()
-      },
-      error: () => {
         expect(component.exceptionKey).toEqual('EXCEPTIONS.HTTP_STATUS_' + errorResponse.status + '.CRDS')
         expect(msgServiceSpy.error).toHaveBeenCalledWith({
-          summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED',
-          detailKey: component.exceptionKey
+          summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED'
         })
         expect(console.error).toHaveBeenCalledWith('getCustomResourcesByCriteria', errorResponse)
-        done.fail
-      }
+        done()
+      },
+      error: (err) => done.fail(err)
     })
   })
 
@@ -240,10 +266,12 @@ describe('CrdSearchComponent', () => {
     })
 
     it('should touch a crd', () => {
+      const item = { kind: 'Data', name: 'onecx-help-ui' } as any
       apiServiceSpy.touchCrdByNameAndType.and.returnValue(of({}))
 
-      component.onTouch(crdData[0])
+      component.onTouch(item)
 
+      expect(apiServiceSpy.touchCrdByNameAndType).toHaveBeenCalledWith({ name: 'onecx-help-ui', type: 'Data' })
       expect(msgServiceSpy.success).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.TOUCH.MESSAGE.OK' })
     })
 
@@ -344,7 +372,7 @@ describe('CrdSearchComponent', () => {
     })
 
     it('should set default date format', () => {
-      mockUserService.lang$.getValue.and.returnValue('en')
+      mockUserService.lang$.next('en')
       fixture = TestBed.createComponent(CrdSearchComponent)
       component = fixture.componentInstance
       fixture.detectChanges()

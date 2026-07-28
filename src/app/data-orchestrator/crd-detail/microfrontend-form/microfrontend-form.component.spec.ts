@@ -5,19 +5,18 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { CheckboxModule } from 'primeng/checkbox'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { BehaviorSubject } from 'rxjs'
+
 import { createTranslateLoader } from '@onecx/angular-utils'
 import { UserService } from '@onecx/angular-integration-interface'
+
 import { CustomResourceMicrofrontend, StatusStatusEnum } from 'src/app/shared/generated'
 import { MicrofrontendFormComponent } from './microfrontend-form.component'
 
 describe('MicrofrontendFormComponent', () => {
   let component: MicrofrontendFormComponent
   let fixture: ComponentFixture<MicrofrontendFormComponent>
-  const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
-  }
+  const mockUserService = { lang$: new BehaviorSubject<string>('de') }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],

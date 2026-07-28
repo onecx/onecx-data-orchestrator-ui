@@ -4,18 +4,17 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { BehaviorSubject } from 'rxjs'
+
 import { createTranslateLoader } from '@onecx/angular-utils'
 import { UserService } from '@onecx/angular-integration-interface'
+
 import { UpdateHistoryComponent } from './update-history.component'
 
 describe('UpdateHistoryComponent', () => {
   let component: UpdateHistoryComponent
   let fixture: ComponentFixture<UpdateHistoryComponent>
-  const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
-  }
+  const mockUserService = { lang$: new BehaviorSubject<string>('de') }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],

@@ -2,25 +2,26 @@ import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { BehaviorSubject } from 'rxjs'
+
 import { createTranslateLoader } from '@onecx/angular-utils'
 import { UserService } from '@onecx/angular-integration-interface'
+
 import { CustomResourcePermission, StatusStatusEnum } from 'src/app/shared/generated'
 import { PermissionFormComponent } from './permission-form.component'
 
 describe('PermissionFormComponent', () => {
   let component: PermissionFormComponent
   let fixture: ComponentFixture<PermissionFormComponent>
-  const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
-  }
+  const mockUserService = { lang$: new BehaviorSubject<string>('de') }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
+        NoopAnimationsModule,
         PermissionFormComponent,
         ReactiveFormsModule,
         TranslateModule.forRoot({
