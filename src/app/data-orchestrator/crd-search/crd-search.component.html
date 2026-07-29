@@ -6,7 +6,7 @@
   ></app-crd-criteria>
 
   @if (crds$ | async; as crds) {
-    <ocx-content-container layout="horizontal" styleClass="px-3 pb-2">
+    <ocx-content>
       @if (loading) {
         <p-message
           id="do_crd_search_message_loading"
@@ -80,7 +80,7 @@
           }
         </ocx-content>
       }
-    </ocx-content-container>
+    </ocx-content>
   }
 </ocx-portal-page>
 
