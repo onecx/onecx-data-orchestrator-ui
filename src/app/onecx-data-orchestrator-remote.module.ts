@@ -5,13 +5,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule, Routes, Router } from '@angular/router'
 import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core'
 
+import { AngularAcceleratorModule, AngularAcceleratorMissingTranslationHandler } from '@onecx/angular-accelerator'
 import { AngularAuthModule } from '@onecx/angular-auth'
-import { createTranslateLoader, provideThemeConfig, provideTranslationPathFromMeta } from '@onecx/angular-utils'
-import { createAppEntrypoint, initializeRouter, startsWith } from '@onecx/angular-webcomponents'
 import { AppStateService, ConfigurationService } from '@onecx/angular-integration-interface'
-import { AngularAcceleratorMissingTranslationHandler } from '@onecx/angular-accelerator'
-import { AngularAcceleratorModule } from '@onecx/angular-accelerator'
-import { PortalApiConfiguration } from '@onecx/angular-utils'
+import {
+  createTranslateLoader,
+  provideThemeConfig,
+  provideTranslationPathFromMeta,
+  PortalApiConfiguration
+} from '@onecx/angular-utils'
+import { createAppEntrypoint, initializeRouter, startsWith } from '@onecx/angular-webcomponents'
 
 import { Configuration } from './shared/generated'
 import { environment } from 'src/environments/environment'

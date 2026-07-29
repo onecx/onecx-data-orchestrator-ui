@@ -153,7 +153,7 @@ describe('CrdCriteriaComponent', () => {
 
     // Verify the type$ observable
     const data: SelectItem[] = await firstValueFrom(freshComponent.type$)
-    expect(data.length).toBe(0)
+    expect(data).toHaveSize(0)
   })
 
   it('should fall back to an empty array if the API returns an error', async () => {
@@ -166,6 +166,6 @@ describe('CrdCriteriaComponent', () => {
 
     // Verify the type$ observable falls back to empty array
     const data: SelectItem[] = await firstValueFrom(freshComponent.type$)
-    expect(data.length).toBe(0)
+    expect(data).toHaveSize(0)
   })
 })

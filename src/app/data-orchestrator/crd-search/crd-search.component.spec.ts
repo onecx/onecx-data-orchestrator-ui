@@ -127,7 +127,7 @@ describe('CrdSearchComponent', () => {
       component.ngOnInit()
 
       component.filteredData$.subscribe((filteredData) => {
-        expect(filteredData.length).toEqual(1)
+        expect(filteredData).toHaveSize(1)
       })
     })
   })
@@ -142,7 +142,7 @@ describe('CrdSearchComponent', () => {
 
       component.crds$.subscribe({
         next: (data) => {
-          expect(data.length).toBe(2)
+          expect(data).toHaveSize(2)
           expect(data[0]).toEqual(crdData[1])
           expect(data[1]).toEqual(crdData[0])
           done()
@@ -159,7 +159,7 @@ describe('CrdSearchComponent', () => {
 
     component.crds$.subscribe({
       next: (data) => {
-        expect(data.length).toBe(1)
+        expect(data).toHaveSize(1)
         expect(data[0]).toEqual(crdData[0])
         done()
       },
@@ -183,7 +183,7 @@ describe('CrdSearchComponent', () => {
 
     component.crds$.subscribe({
       next: (data) => {
-        expect(data.length).toBe(0)
+        expect(data).toHaveSize(0)
         expect(component.exceptionKey).toEqual('EXCEPTIONS.HTTP_STATUS_' + errorResponse.status + '.CRDS')
         expect(msgServiceSpy.error).toHaveBeenCalledWith({
           summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED'
