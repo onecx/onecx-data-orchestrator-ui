@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA, QueryList } from '@angular/core'
+import { QueryList } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
@@ -43,7 +43,6 @@ describe('CrdDetailComponent', () => {
           de: require('src/assets/i18n/de.json')
         }).withDefaultLanguage('en')
       ],
-      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),

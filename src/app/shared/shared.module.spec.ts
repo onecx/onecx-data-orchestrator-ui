@@ -1,4 +1,3 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { TestBed } from '@angular/core/testing'
 import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
@@ -13,7 +12,6 @@ describe('SharedModule', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
       providers: [provideHttpClient(), provideHttpClientTesting()]
     })
 

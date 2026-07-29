@@ -1,4 +1,3 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { TestBed } from '@angular/core/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
@@ -18,8 +17,7 @@ describe('AppComponent', () => {
           de: require('src/assets/i18n/de.json')
         }).withDefaultLanguage('en')
       ],
-      providers: [MessageService, provideHttpClient(), provideHttpClientTesting()],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [MessageService, provideHttpClient(), provideHttpClientTesting()]
     }).compileComponents()
   })
 

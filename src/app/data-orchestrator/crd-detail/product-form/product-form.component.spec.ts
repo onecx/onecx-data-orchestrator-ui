@@ -1,4 +1,3 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
@@ -24,8 +23,7 @@ describe('ProductFormComponent', () => {
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })
       ],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [provideHttpClient(), provideHttpClientTesting()]
     }).compileComponents()
   }))
 
