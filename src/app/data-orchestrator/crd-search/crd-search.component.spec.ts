@@ -8,7 +8,7 @@ import { BehaviorSubject, of, throwError } from 'rxjs'
 
 import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
 import { RowListGridData } from '@onecx/angular-accelerator'
-import { PermissionService } from '@onecx/angular-utils'
+import { providePermissionService } from '@onecx/angular-utils'
 
 import { ContextKind, DataAPIService, GenericCrdStatusEnum } from 'src/app/shared/generated'
 import { CrdSearchComponent } from '../crd-search/crd-search.component'
@@ -53,13 +53,7 @@ describe('CrdSearchComponent', () => {
     lang$: new BehaviorSubject<string>('de'),
     getPermissions: jasmine
       .createSpy('getPermissions')
-      .and.returnValue(of(['CRD#SEARCH', 'CRD#VIEW', 'CRD#EDIT', 'CRD#TOUCH'])),
-    hasPermission: jasmine.createSpy('hasPermission').and.returnValue(Promise.resolve(true))
-  }
-
-  const permissionServiceMock = {
-    hasPermission: jasmine.createSpy().and.returnValue(of(true)),
-    isPermitted: jasmine.createSpy().and.returnValue(of(true))
+      .and.returnValue(of(['CRD#SEARCH', 'CRD#VIEW', 'CRD#EDIT', 'CRD#TOUCH']))
   }
 
   beforeEach(waitForAsync(() => {
@@ -77,7 +71,7 @@ describe('CrdSearchComponent', () => {
         provideRouter([]),
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: PermissionService, useValue: permissionServiceMock },
+        providePermissionService(),
         { provide: PortalMessageService, useValue: msgServiceSpy },
         { provide: DataAPIService, useValue: apiServiceSpy },
         { provide: UserService, useValue: mockUserService }
