@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, QueryList, ViewChild
 import { CommonModule } from '@angular/common'
 import { TranslateModule } from '@ngx-translate/core'
 import { catchError, finalize, map, Observable, of } from 'rxjs'
+import { ButtonModule } from 'primeng/button'
 import { TooltipModule } from 'primeng/tooltip'
 import { MessageModule } from 'primeng/message'
 import { DialogModule } from 'primeng/dialog'
@@ -55,6 +56,7 @@ export interface Update {
     CommonModule,
     TranslateModule,
     TooltipModule,
+    ButtonModule,
     SlotFormComponent,
     ProductFormComponent,
     PermissionFormComponent,
