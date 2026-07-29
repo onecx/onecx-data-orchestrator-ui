@@ -1,3 +1,4 @@
-@import '/src/app/_do-mixins.scss';
+@use '/src/app/_do-mixins.scss' as *;
 
 @include correct-search-criteria;
+@include ocx-required-label;

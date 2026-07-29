@@ -1,35 +1,33 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { HttpClient, provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { CheckboxModule } from 'primeng/checkbox'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { BehaviorSubject } from 'rxjs'
+
 import { createTranslateLoader } from '@onecx/angular-utils'
 import { UserService } from '@onecx/angular-integration-interface'
+
 import { CustomResourceMicrofrontend, StatusStatusEnum } from 'src/app/shared/generated'
 import { MicrofrontendFormComponent } from './microfrontend-form.component'
 
 describe('MicrofrontendFormComponent', () => {
   let component: MicrofrontendFormComponent
   let fixture: ComponentFixture<MicrofrontendFormComponent>
-  const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
-  }
+  const mockUserService = { lang$: new BehaviorSubject<string>('de') }
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MicrofrontendFormComponent],
+      declarations: [],
       imports: [
+        MicrofrontendFormComponent,
         ReactiveFormsModule,
         CheckboxModule,
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
         })
       ],
-      providers: [provideHttpClient(), provideHttpClientTesting(), { provide: UserService, useValue: mockUserService }],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [provideHttpClient(), provideHttpClientTesting(), { provide: UserService, useValue: mockUserService }]
     }).compileComponents()
   }))
 

@@ -1,5 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, Output, QueryList, ViewChildren } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { TranslateModule } from '@ngx-translate/core'
 import { catchError, finalize, map, Observable, of } from 'rxjs'
+import { ButtonModule } from 'primeng/button'
+import { TooltipModule } from 'primeng/tooltip'
+import { MessageModule } from 'primeng/message'
+import { DialogModule } from 'primeng/dialog'
 
 import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
 import {
@@ -25,9 +31,8 @@ import { KeycloakFormComponent } from './keycloak-form/keycloak-form.component'
 import { SlotFormComponent } from './slot-form/slot-form.component'
 import { MicrofrontendFormComponent } from './microfrontend-form/microfrontend-form.component'
 import { MicroserviceFormComponent } from './microservice-form/microservice-form.component'
-
-import { ChangeMode } from '../crd-search/crd-search.component'
 import { ParameterFormComponent } from './parameter-form/parameter-form.component'
+import { ChangeMode } from '../crd-search/crd-search.component'
 
 interface ManagedField {
   apiVersion: string
@@ -47,6 +52,23 @@ export interface Update {
 
 @Component({
   selector: 'app-crd-detail',
+  imports: [
+    CommonModule,
+    TranslateModule,
+    TooltipModule,
+    ButtonModule,
+    SlotFormComponent,
+    ProductFormComponent,
+    PermissionFormComponent,
+    ParameterFormComponent,
+    MicrofrontendFormComponent,
+    MicroserviceFormComponent,
+    KeycloakFormComponent,
+    DatabaseFormComponent,
+    DataFormComponent,
+    MessageModule,
+    DialogModule
+  ],
   templateUrl: './crd-detail.component.html',
   styleUrls: ['./crd-detail.component.scss']
 })
@@ -58,8 +80,7 @@ export class CrdDetailComponent implements OnChanges {
   @Output() public hideDialogAndChanged = new EventEmitter<boolean>()
 
   @ViewChildren(DataFormComponent, { read: DataFormComponent }) dataFormComponent:
-    | QueryList<DataFormComponent>
-    | undefined
+    QueryList<DataFormComponent> | undefined
   @ViewChildren(DatabaseFormComponent, { read: DatabaseFormComponent })
   databaseFormComponent!: QueryList<DatabaseFormComponent>
   @ViewChildren(ParameterFormComponent, { read: ParameterFormComponent })
@@ -112,16 +133,21 @@ export class CrdDetailComponent implements OnChanges {
         .getCrdByTypeAndName({ type: this.crdType as ContextKind, name: this.crdName })
         .pipe(
           map((response) => {
-            const obj = response.crd
+            const obj = response.crd ?? {}
             this.updateHistory = this.prepareHistory(obj).reverse()
-            return obj ?? {}
+            this.loading = false
+            return obj
           }),
           catchError((err) => {
             this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRD'
+            this.loading = false
             console.error('getCrdByTypeAndName', err)
             return of({} as any)
           }),
-          finalize(() => (this.loading = false))
+          finalize(() => {
+            this.loading = false
+            this.exceptionKey = this.exceptionKey ?? undefined
+          })
         )
     }
   }

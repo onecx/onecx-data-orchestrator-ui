@@ -1,8 +1,12 @@
 import { Component, Input } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { BadgeModule } from 'primeng/badge'
+
 import { Update } from '../crd-detail.component'
 
 @Component({
   selector: 'app-update-history',
+  imports: [BadgeModule, CommonModule],
   templateUrl: './update-history.component.html'
 })
 export class UpdateHistoryComponent {

@@ -1,12 +1,33 @@
 import { Component, Input, OnChanges } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { TranslateModule } from '@ngx-translate/core'
+import { FloatLabelModule } from 'primeng/floatlabel'
+import { InputTextModule } from 'primeng/inputtext'
+import { MessageModule } from 'primeng/message'
+import { TabsModule } from 'primeng/tabs'
+import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourceParameter } from 'src/app/shared/generated'
-
 import { Update } from '../crd-detail.component'
+import { StatusTabComponent } from '../status-tab/status-tab.component'
+import { UpdateHistoryComponent } from '../update-history/update-history.component'
 
 type Parameter = { name: string; displayName: string | undefined; value: string; description: string | undefined }
-@Component({ selector: 'app-parameter-form', templateUrl: './parameter-form.component.html' })
+@Component({
+  selector: 'app-parameter-form',
+  imports: [
+    TranslateModule,
+    MessageModule,
+    TabsModule,
+    StatusTabComponent,
+    UpdateHistoryComponent,
+    TooltipModule,
+    ReactiveFormsModule,
+    FloatLabelModule,
+    InputTextModule
+  ],
+  templateUrl: './parameter-form.component.html'
+})
 export class ParameterFormComponent implements OnChanges {
   @Input() public changeMode = 'VIEW'
   @Input() public parameterCrd: CustomResourceParameter | undefined

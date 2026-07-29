@@ -236,7 +236,8 @@
         "PROTOCOL": "Protokoll",
         "PUBLIC_CLIENT": "Öffentlicher Client",
         "SERVICE_ACCOUNTS_ENABLED": "Service Konten aktiviert?",
-        "STANDARD_FLOW_ENABLED": "Standardfluss aktiviert?"
+        "STANDARD_FLOW_ENABLED": "Standardfluss aktiviert?",
+        "NAME": "Name"
       }
     },
     "MICROFRONTEND": {

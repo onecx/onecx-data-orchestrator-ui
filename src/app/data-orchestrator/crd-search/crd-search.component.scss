@@ -1,4 +1,4 @@
-@import '/src/app/_do-mixins.scss';
+@use '/src/app/_do-mixins.scss' as *;
 
 @include danger-action;
 @include table-inline-buttons;
@@ -8,7 +8,7 @@
 
 :host ::ng-deep {
   .adjust-card-padding .card {
-    padding: 0.5rem 1rem;
+    padding: 0 !important;
   }
 
   .p-datatable .p-datatable-thead > tr > th {

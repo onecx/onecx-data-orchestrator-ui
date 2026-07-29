@@ -1,12 +1,12 @@
-import { NO_ERRORS_SCHEMA, QueryList } from '@angular/core'
+import { QueryList } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { HttpClient, provideHttpClient } from '@angular/common/http'
+import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
-import { of, throwError } from 'rxjs'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { TranslateTestingModule } from 'ngx-translate-testing'
+import { BehaviorSubject, of, take, throwError } from 'rxjs'
 
 import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
-import { createTranslateLoader } from '@onecx/angular-utils'
 
 import { ContextKind, DataAPIService } from 'src/app/shared/generated'
 import { DataFormComponent } from './data-form/data-form.component'
@@ -19,11 +19,12 @@ import { SlotFormComponent } from './slot-form/slot-form.component'
 import { KeycloakFormComponent } from './keycloak-form/keycloak-form.component'
 import { CrdDetailComponent, Update } from '../crd-detail/crd-detail.component'
 import { ParameterFormComponent } from './parameter-form/parameter-form.component'
+import { UpdateHistoryComponent } from './update-history/update-history.component'
 
 describe('CrdDetailComponent', () => {
   let component: CrdDetailComponent
   let fixture: ComponentFixture<CrdDetailComponent>
-  const mockUserService = { lang$: { getValue: jasmine.createSpy('getValue') } }
+  const mockUserService = { lang$: new BehaviorSubject<string>('de') }
   const msgServiceSpy = jasmine.createSpyObj<PortalMessageService>('PortalMessageService', ['success', 'error'])
   const doApiSpy = {
     getCrdByTypeAndName: jasmine.createSpy('getCrdByTypeAndName').and.returnValue(of({})),
@@ -32,13 +33,16 @@ describe('CrdDetailComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CrdDetailComponent],
+      declarations: [],
       imports: [
-        TranslateModule.forRoot({
-          loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
-        })
+        UpdateHistoryComponent,
+        NoopAnimationsModule,
+        CrdDetailComponent,
+        TranslateTestingModule.withTranslations({
+          en: require('src/assets/i18n/en.json'),
+          de: require('src/assets/i18n/de.json')
+        }).withDefaultLanguage('en')
       ],
-      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -52,13 +56,18 @@ describe('CrdDetailComponent', () => {
     msgServiceSpy.error.calls.reset()
     doApiSpy.getCrdByTypeAndName.calls.reset()
     doApiSpy.editCrd.calls.reset()
-    mockUserService.lang$.getValue.and.returnValue('de')
+    mockUserService.lang$.next('de')
     doApiSpy.getCrdByTypeAndName.and.returnValue(of({}))
   }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CrdDetailComponent)
     component = fixture.componentInstance
+    Object.assign(component, {
+      dataOrchestratorApi: doApiSpy,
+      msgService: msgServiceSpy,
+      user: mockUserService
+    })
     fixture.detectChanges()
   })
 
@@ -68,7 +77,7 @@ describe('CrdDetailComponent', () => {
     })
 
     it('should set german date format', () => {
-      mockUserService.lang$.getValue.and.returnValue('de')
+      mockUserService.lang$.next('de')
       fixture = TestBed.createComponent(CrdDetailComponent)
       component = fixture.componentInstance
 
@@ -78,7 +87,7 @@ describe('CrdDetailComponent', () => {
     })
 
     it('should set english date format', () => {
-      mockUserService.lang$.getValue.and.returnValue('en')
+      mockUserService.lang$.next('en')
       fixture = TestBed.createComponent(CrdDetailComponent)
       component = fixture.componentInstance
 
@@ -100,24 +109,24 @@ describe('CrdDetailComponent', () => {
 
     it('should load crd data and update updateHistory', (done) => {
       component.displayDetailDialog = true
-      const mockCrd: any = { crd: { name: 'testCrd' } }
+
+      const mockCrd = { crd: { name: 'testCrd' } }
       const mockUpdateHistory = [{ date: '2023-01-01', fields: {} }] as Update[]
+
       doApiSpy.getCrdByTypeAndName.and.returnValue(of(mockCrd))
       spyOn(component, 'prepareHistory').and.returnValue(mockUpdateHistory)
+
       component.crdName = 'testCrd'
       component.crdType = ContextKind.Data
 
       component.ngOnChanges()
 
-      component.crd$.subscribe({
-        next: (data) => {
-          expect(data).toEqual(mockCrd.crd)
-          expect(component.updateHistory).toEqual(mockUpdateHistory)
-          done()
-        },
-        error: done.fail
+      component.crd$.pipe(take(1)).subscribe((value) => {
+        expect(value).toEqual(mockCrd.crd)
+        expect(component.updateHistory).toEqual(mockUpdateHistory)
+        expect(component.loading).toBeFalse()
+        done()
       })
-      expect(component.loading).toBeFalse()
     })
 
     it('should load crd data, with missing crd tag', (done) => {
@@ -129,37 +138,35 @@ describe('CrdDetailComponent', () => {
       component.crdType = ContextKind.Data
 
       component.ngOnChanges()
+      fixture.detectChanges()
 
-      component.crd$.subscribe({
-        next: (data) => {
-          expect(data).toEqual({})
-          expect(component.updateHistory).toEqual([])
-          done()
-        },
-        error: done.fail
+      component.crd$.pipe(take(1)).subscribe((value) => {
+        expect(value).toEqual({})
+        expect(component.updateHistory).toEqual([])
+        expect(component.loading).toBeFalse()
+        done()
       })
-      expect(component.loading).toBeFalse()
     })
 
     it('should load crd data, data empty', (done) => {
       component.displayDetailDialog = true
-      const mockCrd = {}
+      const mockCrd = {
+        name: 'testCrd'
+      }
       doApiSpy.getCrdByTypeAndName.and.returnValue(of(mockCrd))
       spyOn(component, 'prepareHistory').and.returnValue([])
       component.crdName = 'testCrd'
       component.crdType = ContextKind.Data
 
       component.ngOnChanges()
+      fixture.detectChanges()
 
-      component.crd$.subscribe({
-        next: (data) => {
-          expect(data).toEqual({})
-          expect(component.updateHistory).toEqual([])
-          done()
-        },
-        error: done.fail
+      component.crd$.pipe(take(1)).subscribe((value) => {
+        expect(value).toEqual({})
+        expect(component.updateHistory).toEqual([])
+        expect(component.loading).toBeFalse()
+        done()
       })
-      expect(component.loading).toBeFalse()
     })
 
     it('should show error when getCrd fails', (done) => {
@@ -167,62 +174,84 @@ describe('CrdDetailComponent', () => {
       doApiSpy.getCrdByTypeAndName.and.returnValue(throwError(() => errorResponse))
       component.displayDetailDialog = true
       component.crdName = 'testCrd'
-      component.crdType = 'Data'
+      component.crdType = ContextKind.Data
       spyOn(console, 'error')
 
       component.ngOnChanges()
+      fixture.detectChanges()
 
-      component.crd$.subscribe({
-        next: (data) => {
-          expect(data).toEqual({})
-          expect(component.exceptionKey).toBe('EXCEPTIONS.HTTP_STATUS_' + errorResponse.status + '.CRD')
-          expect(console.error).toHaveBeenCalledWith('getCrdByTypeAndName', errorResponse)
-          done()
-        }
+      component.crd$.pipe(take(1)).subscribe((value) => {
+        expect(value).toEqual({})
+        expect(component.exceptionKey).toBe('EXCEPTIONS.HTTP_STATUS_' + errorResponse.status + '.CRD')
+        expect(console.error).toHaveBeenCalledWith('getCrdByTypeAndName', errorResponse)
+        expect(component.loading).toBeFalse()
+        done()
       })
-      expect(component.loading).toBeFalse()
     })
   })
 
   describe('Saving', () => {
-    it('should save crd data and emit hideDialogAndChanged with true when onSave is called', () => {
+    it('should save crd data and emit hideDialogAndChanged with true when onSave is called', (done) => {
       const mockFormValues = { name: 'testCrd' }
-      const mockEditResourceRequest = { CrdData: mockFormValues }
-      const mockCrd = {}
+
+      const mockEditResourceRequest = {
+        CrdData: mockFormValues
+      }
+
       spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
       spyOn<any>(component, 'prepareUpdateData').and.returnValue(mockEditResourceRequest)
 
-      component.crd$ = of(mockCrd)
-      doApiSpy.editCrd.and.returnValue(of({}))
+      component.crd$ = of({ name: 'testCrd' })
+
       const emitSpy = spyOn(component.hideDialogAndChanged, 'emit')
 
       component.changeMode = 'EDIT'
       component.crdName = 'testCrd'
-      component.crdType = 'Data'
+      component.crdType = ContextKind.Data
+
       component.onSave()
 
-      expect(doApiSpy.editCrd).toHaveBeenCalledWith({ editResourceRequest: mockEditResourceRequest })
-      expect(emitSpy).toHaveBeenCalledWith(true)
+      setTimeout(() => {
+        expect(doApiSpy.editCrd).toHaveBeenCalledWith({
+          editResourceRequest: mockEditResourceRequest
+        })
+        expect(emitSpy).toHaveBeenCalledWith(true)
+        done()
+      })
     })
 
-    it('should show error message when onSave fails', () => {
+    it('should show error message when onSave fails', (done) => {
       const mockFormValues = { name: 'testCrd' }
-      const mockEditResourceRequest = { CrdData: mockFormValues }
-      const mockCrd = {}
+
       spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
-      spyOn<any>(component, 'prepareUpdateData').and.returnValue(mockEditResourceRequest)
-      const errorResponse = { status: 400, statusText: 'Cannot save' }
+      spyOn<any>(component, 'prepareUpdateData').and.returnValue({
+        CrdData: mockFormValues
+      })
+
+      const errorResponse = {
+        status: 400,
+        statusText: 'Cannot save'
+      }
+
       doApiSpy.editCrd.and.returnValue(throwError(() => errorResponse))
-      component.crd$ = of(mockCrd)
+
+      component.crd$ = of({ name: 'testCrd' })
+
       spyOn(console, 'error')
 
       component.changeMode = 'EDIT'
       component.crdName = 'testCrd'
-      component.crdType = 'Data'
+      component.crdType = ContextKind.Data
+
       component.onSave()
 
-      expect(console.error).toHaveBeenCalledWith('editCrd', errorResponse)
-      expect(msgServiceSpy.error).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
+      setTimeout(() => {
+        expect(console.error).toHaveBeenCalledWith('editCrd', errorResponse)
+        expect(msgServiceSpy.error).toHaveBeenCalledWith({
+          summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK'
+        })
+        done()
+      })
     })
   })
 
@@ -232,7 +261,7 @@ describe('CrdDetailComponent', () => {
     component.dataFormComponent = new QueryList<DataFormComponent>()
     component.dataFormComponent.reset([{ formGroup: mockFormGroup } as DataFormComponent])
 
-    component.crdType = 'Data'
+    component.crdType = ContextKind.Data
     let formValues = (component as any).getFormValuesOfActiveChild()
 
     expect(formValues).toEqual(mockFormGroup.value)

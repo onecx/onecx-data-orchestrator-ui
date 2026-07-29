@@ -1,18 +1,17 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { HttpClient, provideHttpClient } from '@angular/common/http'
+import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { FormControl, FormGroup } from '@angular/forms'
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import { provideRouter } from '@angular/router'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { TranslateTestingModule } from 'ngx-translate-testing'
 import { SelectItem } from 'primeng/api'
-import { throwError } from 'rxjs'
+import { BehaviorSubject, firstValueFrom, of, throwError } from 'rxjs'
 
 import { UserService } from '@onecx/angular-integration-interface'
-import { createTranslateLoader } from '@onecx/angular-utils'
 
 import { ContextKind, DataAPIService } from 'src/app/shared/generated'
 import { CrdCriteriaComponent, CrdCriteriaForm } from '../crd-criteria/crd-criteria.component'
-import { firstValueFrom, of } from 'rxjs'
 
 const filledCriteria = new FormGroup<CrdCriteriaForm>({
   name: new FormControl<string | null>('test'),
@@ -28,11 +27,7 @@ describe('CrdCriteriaComponent', () => {
   let component: CrdCriteriaComponent
   let fixture: ComponentFixture<CrdCriteriaComponent>
 
-  const mockUserService = {
-    lang$: {
-      getValue: jasmine.createSpy('getValue')
-    }
-  }
+  const mockUserService = { lang$: new BehaviorSubject('de') }
 
   const getKindMock = {
     kinds: [
@@ -53,19 +48,32 @@ describe('CrdCriteriaComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CrdCriteriaComponent],
+      declarations: [],
       imports: [
-        TranslateModule.forRoot({
-          loader: { provide: TranslateLoader, useFactory: createTranslateLoader, deps: [HttpClient] }
-        })
+        NoopAnimationsModule,
+        CrdCriteriaComponent,
+        TranslateTestingModule.withTranslations({
+          en: require('src/assets/i18n/en.json'),
+          de: require('src/assets/i18n/de.json')
+        }).withDefaultLanguage('en')
       ],
-      schemas: [NO_ERRORS_SCHEMA],
       providers: [
+        provideRouter([]),
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: UserService, useValue: mockUserService },
         { provide: DataAPIService, useValue: apiServiceSpy }
       ]
+    })
+    TestBed.overrideComponent(CrdCriteriaComponent, {
+      set: {
+        providers: [
+          {
+            provide: DataAPIService,
+            useValue: apiServiceSpy
+          }
+        ]
+      }
     }).compileComponents()
   }))
 
@@ -73,7 +81,7 @@ describe('CrdCriteriaComponent', () => {
     fixture = TestBed.createComponent(CrdCriteriaComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
-    mockUserService.lang$.getValue.and.returnValue('de')
+    mockUserService.lang$.next('de')
   })
 
   it('should create', () => {
@@ -122,10 +130,16 @@ describe('CrdCriteriaComponent', () => {
    */
 
   it('should load dropdown lists with translations', async () => {
-    apiServiceSpy.getActiveCrdKinds.and.returnValue(of(getKindMock))
-    let data2: SelectItem[] = []
-    data2 = await firstValueFrom(component.type$)
-    expect(data2.length).toBeGreaterThanOrEqual(8)
+    const freshFixture = TestBed.createComponent(CrdCriteriaComponent)
+    const freshComponent = freshFixture.componentInstance
+
+    freshFixture.detectChanges()
+
+    expect(apiServiceSpy.getActiveCrdKinds).toHaveBeenCalled()
+
+    const data = await firstValueFrom(freshComponent.type$)
+
+    expect(data.length).toBeGreaterThanOrEqual(8)
   })
 
   it('should have no kinds if api returns nothing', async () => {
@@ -139,7 +153,7 @@ describe('CrdCriteriaComponent', () => {
 
     // Verify the type$ observable
     const data: SelectItem[] = await firstValueFrom(freshComponent.type$)
-    expect(data.length).toBe(0)
+    expect(data).toHaveSize(0)
   })
 
   it('should fall back to an empty array if the API returns an error', async () => {
@@ -152,6 +166,6 @@ describe('CrdCriteriaComponent', () => {
 
     // Verify the type$ observable falls back to empty array
     const data: SelectItem[] = await firstValueFrom(freshComponent.type$)
-    expect(data.length).toBe(0)
+    expect(data).toHaveSize(0)
   })
 })

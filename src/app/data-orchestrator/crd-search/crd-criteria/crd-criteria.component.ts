@@ -1,11 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { TranslateService } from '@ngx-translate/core'
+import { CommonModule } from '@angular/common'
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { Observable, map, of } from 'rxjs'
 import { SelectItem } from 'primeng/api'
+import { FloatLabelModule } from 'primeng/floatlabel'
+import { InputTextModule } from 'primeng/inputtext'
+import { MultiSelectModule } from 'primeng/multiselect'
+import { TooltipModule } from 'primeng/tooltip'
 
 import { UserService } from '@onecx/angular-integration-interface'
-import { Action } from '@onecx/angular-accelerator'
+import { Action, AngularAcceleratorModule } from '@onecx/angular-accelerator'
 
 import {
   ContextKind,
@@ -21,6 +26,16 @@ export interface CrdCriteriaForm {
 
 @Component({
   selector: 'app-crd-criteria',
+  imports: [
+    TranslateModule,
+    TooltipModule,
+    AngularAcceleratorModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MultiSelectModule,
+    FloatLabelModule,
+    InputTextModule
+  ],
   templateUrl: './crd-criteria.component.html',
   styleUrls: ['./crd-criteria.component.scss']
 })
@@ -78,7 +93,6 @@ export class CrdCriteriaComponent {
             .sort((a, b) => a.label.localeCompare(b.label))
         })
       )
-      this.crdCriteria.get('type')?.markAsDirty()
     })
   }
 }
