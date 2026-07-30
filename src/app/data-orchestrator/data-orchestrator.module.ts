@@ -8,7 +8,6 @@ import { TooltipModule } from 'primeng/tooltip'
 import { AngularAcceleratorModule } from '@onecx/angular-accelerator'
 import { providePermissionService } from '@onecx/angular-utils'
 
-import { SharedModule } from '../shared/shared.module'
 import { CrdSearchComponent } from './crd-search/crd-search.component'
 import { CrdCriteriaComponent } from './crd-search/crd-criteria/crd-criteria.component'
 import { CrdDetailComponent } from './crd-detail/crd-detail.component'
@@ -32,7 +31,6 @@ const routes: Routes = [{ path: '', component: CrdSearchComponent, pathMatch: 'f
     FormsModule,
     AngularAcceleratorModule,
     [RouterModule.forChild(routes)],
-    SharedModule,
     CrdSearchComponent,
     CrdCriteriaComponent,
     CrdDetailComponent,
