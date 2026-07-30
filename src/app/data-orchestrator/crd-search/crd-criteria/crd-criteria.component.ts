@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common'
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { Observable, map, of } from 'rxjs'
@@ -26,6 +26,7 @@ export interface CrdCriteriaForm {
 
 @Component({
   selector: 'app-crd-criteria',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe,
     TranslateModule,

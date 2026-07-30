@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
 import { FloatLabelModule } from 'primeng/floatlabel'
@@ -19,6 +19,7 @@ type Permission = {
 }
 @Component({
   selector: 'app-permission-form',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     TranslateModule,
     MessageModule,

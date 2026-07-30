@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common'
-import { Component, OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs'
@@ -35,6 +35,7 @@ type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
 
 @Component({
   selector: 'app-crd-search',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './crd-search.component.html',
   imports: [
     AsyncPipe,

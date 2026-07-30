@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
@@ -15,6 +15,7 @@ import { UpdateHistoryComponent } from '../update-history/update-history.compone
 
 @Component({
   selector: 'app-data-form',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     StatusTabComponent,
     TranslateModule,

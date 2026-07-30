@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common'
-import { Component, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import { BadgeModule } from 'primeng/badge'
 
 import { Update } from '../crd-detail.component'
 
 @Component({
   selector: 'app-update-history',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [BadgeModule, DatePipe],
   templateUrl: './update-history.component.html'
 })
