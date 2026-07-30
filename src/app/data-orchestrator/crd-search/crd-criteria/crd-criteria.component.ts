@@ -1,5 +1,5 @@
+import { AsyncPipe } from '@angular/common'
 import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { Observable, map, of } from 'rxjs'
@@ -27,11 +27,11 @@ export interface CrdCriteriaForm {
 @Component({
   selector: 'app-crd-criteria',
   imports: [
+    AsyncPipe,
     TranslateModule,
     TooltipModule,
     AngularAcceleratorModule,
     ReactiveFormsModule,
-    CommonModule,
     MultiSelectModule,
     FloatLabelModule,
     InputTextModule

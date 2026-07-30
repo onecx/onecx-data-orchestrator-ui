@@ -1,6 +1,5 @@
 import { DoBootstrap, inject, Injector, NgModule, provideAppInitializer } from '@angular/core'
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
-import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule, Routes, Router } from '@angular/router'
 import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core'
@@ -36,7 +35,6 @@ const routes: Routes = [
   imports: [
     AppEntrypointComponent,
     AngularAuthModule,
-    BrowserModule,
     BrowserAnimationsModule,
     AngularAcceleratorModule,
     RouterModule.forRoot(routes),

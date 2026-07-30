@@ -1,5 +1,5 @@
+import { AsyncPipe } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs'
@@ -37,7 +37,7 @@ type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
   selector: 'app-crd-search',
   templateUrl: './crd-search.component.html',
   imports: [
-    CommonModule,
+    AsyncPipe,
     FormsModule,
     TranslateModule,
     TooltipModule,
