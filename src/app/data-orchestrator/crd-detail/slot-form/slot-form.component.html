@@ -1,139 +1,151 @@
-<p-tabView>
-  <p-tabPanel [header]="'DIALOG.TABS.DETAILS' | translate">
-    <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
-      <!-- row 1 -->
-      <div class="flex flex-row flex-wrap justify-content-between gap-4">
-        <div class="flex-grow-1">
-          <span class="p-float-label">
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_slot_name"
-              formControlName="metadataName"
-              class="w-full pt-3 pb-2 text-responsive"
-              [attr.aria-label]="'CRD.COMMON.NAME' | translate"
-              [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_slot_name"> {{ 'CRD.COMMON.NAME' | translate }}</label>
-          </span>
+<p-tabs value="0">
+  <p-tablist>
+    <p-tab value="0">{{ 'DIALOG.TABS.DETAILS' | translate }}</p-tab>
+    @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
+      <p-tab value="1">{{ 'DIALOG.TABS.CHANGES' | translate }}</p-tab>
+    }
+    @if (slotCrd?.status) {
+      <p-tab value="2">{{ 'DIALOG.TABS.STATUS' | translate }}</p-tab>
+    }
+  </p-tablist>
+  <p-tabpanels>
+    <p-tabpanel value="0">
+      <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
+        <!-- row 1 -->
+        <div class="flex flex-row flex-wrap justify-content-between gap-4">
+          <div class="flex-grow-1">
+            <p-float-label variant="on">
+              <input
+                pInputText
+                type="text"
+                id="do_crd_detail_slot_name"
+                formControlName="metadataName"
+                class="w-full pt-3 pb-2 text-responsive"
+                [ariaLabel]="'CRD.COMMON.NAME' | translate"
+                [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              />
+              <label for="do_crd_detail_slot_name"> {{ 'CRD.COMMON.NAME' | translate }}</label>
+            </p-float-label>
+          </div>
+          <div class="flex-grow-1">
+            <p-float-label variant="on">
+              <input
+                pInputText
+                type="text"
+                id="do_crd_detail_slot_kind"
+                formControlName="kind"
+                class="w-full pt-3 pb-2 text-responsive"
+                [ariaLabel]="'CRD.COMMON.KIND' | translate"
+                [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              />
+              <label for="do_crd_detail_slot_kind"> {{ 'CRD.COMMON.KIND' | translate }}</label>
+            </p-float-label>
+          </div>
         </div>
-        <div class="flex-grow-1">
-          <span class="p-float-label">
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_slot_kind"
-              formControlName="kind"
-              class="w-full pt-3 pb-2 text-responsive"
-              [attr.aria-label]="'CRD.COMMON.KIND' | translate"
-              [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_slot_kind"> {{ 'CRD.COMMON.KIND' | translate }}</label>
-          </span>
+        <!-- row 2 -->
+        <div class="flex flex-row flex-wrap justify-content-between gap-4">
+          <div class="flex-grow-1">
+            <p-float-label variant="on" controlErrorAnchor>
+              <input
+                pInputText
+                type="text"
+                id="do_crd_detail_slot_productName"
+                formControlName="productName"
+                class="w-full pt-3 pb-2 text-responsive"
+                [ariaLabel]="'CRD.COMMON.PRODUCT_NAME' | translate"
+                [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              />
+              <label for="do_crd_detail_slot_productName"> {{ 'CRD.COMMON.PRODUCT_NAME' | translate }}</label>
+            </p-float-label>
+          </div>
+          <div class="flex-grow-1">
+            <p-float-label variant="on" controlErrorAnchor>
+              <input
+                pInputText
+                type="text"
+                id="do_crd_detail_slot_appId"
+                formControlName="appId"
+                class="w-full pt-3 pb-2 text-responsive"
+                [ariaLabel]="'CRD.COMMON.APP_ID' | translate"
+                [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              />
+              <label for="do_crd_detail_slot_appId"> {{ 'CRD.COMMON.APP_ID' | translate }}</label>
+            </p-float-label>
+          </div>
+        </div>
+        <!-- row 3 -->
+        <div class="flex flex-row flex-wrap justify-content-between gap-4">
+          <div class="flex-grow-1">
+            <p-float-label variant="on" controlErrorAnchor>
+              <input
+                pInputText
+                type="text"
+                id="do_crd_detail_slot_slot_name"
+                formControlName="specName"
+                class="w-full pt-3 pb-2 text-responsive"
+                [ariaLabel]="'CRD.SLOT.SLOT_NAME' | translate"
+                [pTooltip]="'CRD.SLOT.TOOLTIPS.SLOT_NAME' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              />
+              <label for="do_crd_detail_slot_slot_name"> {{ 'CRD.SLOT.SLOT_NAME' | translate }}</label>
+            </p-float-label>
+          </div>
+        </div>
+        <!-- row 4 -->
+        <div class="flex flex-row flex-wrap justify-content-between gap-4">
+          <div class="flex-grow-1">
+            <p-float-label variant="on" controlErrorAnchor>
+              <input
+                pInputText
+                type="text"
+                id="do_crd_detail_slot_description"
+                formControlName="description"
+                class="w-full pt-3 pb-2 text-responsive"
+                [ariaLabel]="'CRD.SLOT.DESCRIPTION' | translate"
+                [pTooltip]="'CRD.SLOT.TOOLTIPS.DESCRIPTION' | translate"
+                tooltipPosition="top"
+                tooltipEvent="hover"
+              />
+              <label for="do_crd_detail_slot_description"> {{ 'CRD.SLOT.DESCRIPTION' | translate }}</label>
+            </p-float-label>
+          </div>
+        </div>
+        <!-- row 5 -->
+        <div class="px-3 flex flex-row flex-wrap justify-content-between gap-4">
+          <p-checkbox
+            type="text"
+            [binary]="true"
+            id="do_crd_detail_slot_deprecated"
+            styleClass="cursor-auto shadow-none"
+            formControlName="deprecated"
+            [ariaLabel]="'CRD.SLOT.DEPRECATED' | translate"
+            [pTooltip]="'CRD.SLOT.TOOLTIPS.DEPRECATED' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+          ></p-checkbox>
         </div>
       </div>
-      <!-- row 2 -->
-      <div class="flex flex-row flex-wrap justify-content-between gap-4">
-        <div class="flex-grow-1">
-          <span class="p-float-label" controlErrorAnchor>
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_slot_productName"
-              formControlName="productName"
-              class="w-full pt-3 pb-2 text-responsive"
-              [attr.aria-label]="'CRD.COMMON.PRODUCT_NAME' | translate"
-              [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_slot_productName"> {{ 'CRD.COMMON.PRODUCT_NAME' | translate }}</label>
-          </span>
-        </div>
-        <div class="flex-grow-1">
-          <span class="p-float-label" controlErrorAnchor>
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_slot_appId"
-              formControlName="appId"
-              class="w-full pt-3 pb-2 text-responsive"
-              [attr.aria-label]="'CRD.COMMON.APP_ID' | translate"
-              [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_slot_appId"> {{ 'CRD.COMMON.APP_ID' | translate }}</label>
-          </span>
-        </div>
-      </div>
-      <!-- row 3 -->
-      <div class="flex flex-row flex-wrap justify-content-between gap-4">
-        <div class="flex-grow-1">
-          <span class="p-float-label" controlErrorAnchor>
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_slot_slot_name"
-              formControlName="specName"
-              class="w-full pt-3 pb-2 text-responsive"
-              [attr.aria-label]="'CRD.SLOT.SLOT_NAME' | translate"
-              [pTooltip]="'CRD.SLOT.TOOLTIPS.SLOT_NAME' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_slot_slot_name"> {{ 'CRD.SLOT.SLOT_NAME' | translate }}</label>
-          </span>
-        </div>
-      </div>
-      <!-- row 4 -->
-      <div class="flex flex-row flex-wrap justify-content-between gap-4">
-        <div class="flex-grow-1">
-          <span class="p-float-label" controlErrorAnchor>
-            <input
-              pInputText
-              type="text"
-              inputId="do_crd_detail_slot_description"
-              formControlName="description"
-              class="w-full pt-3 pb-2 text-responsive"
-              [attr.aria-label]="'CRD.SLOT.DESCRIPTION' | translate"
-              [pTooltip]="'CRD.SLOT.TOOLTIPS.DESCRIPTION' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_slot_description"> {{ 'CRD.SLOT.DESCRIPTION' | translate }}</label>
-          </span>
-        </div>
-      </div>
-      <!-- row 5 -->
-      <div class="px-3 flex flex-row flex-wrap justify-content-between gap-4">
-        <p-checkbox
-          type="text"
-          [binary]="true"
-          inputId="do_crd_detail_slot_deprecated"
-          styleClass="cursor-auto shadow-none"
-          formControlName="deprecated"
-          [label]="'CRD.SLOT.DEPRECATED' | translate"
-          [pTooltip]="'CRD.SLOT.TOOLTIPS.DEPRECATED' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-checkbox>
-      </div>
-    </div>
-  </p-tabPanel>
+    </p-tabpanel>
 
-  <p-tabPanel
-    [header]="'DIALOG.TABS.CHANGES' | translate"
-    *ngIf="updateHistory && updateHistory.length > 0 && changeMode === 'VIEW'"
-  >
-    <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
-  </p-tabPanel>
+    @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
+      <p-tabpanel value="1">
+        <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
+      </p-tabpanel>
+    }
 
-  <p-tabPanel [header]="'DIALOG.TABS.STATUS' | translate" *ngIf="slotCrd?.status">
-    <app-status-tab [status]="slotCrd?.status" />
-  </p-tabPanel>
-</p-tabView>
+    @if (slotCrd?.status) {
+      <p-tabpanel value="2">
+        <app-status-tab [status]="slotCrd?.status" />
+      </p-tabpanel>
+    }
+  </p-tabpanels>
+</p-tabs>

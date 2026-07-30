@@ -1,9 +1,16 @@
 import { Component, Input, OnChanges } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { TranslateModule } from '@ngx-translate/core'
+import { FloatLabelModule } from 'primeng/floatlabel'
+import { InputTextModule } from 'primeng/inputtext'
+import { MessageModule } from 'primeng/message'
+import { TabsModule } from 'primeng/tabs'
+import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourcePermission } from 'src/app/shared/generated'
-
 import { Update } from '../crd-detail.component'
+import { StatusTabComponent } from '../status-tab/status-tab.component'
+import { UpdateHistoryComponent } from '../update-history/update-history.component'
 
 type Permission = {
   resource: string
@@ -12,6 +19,17 @@ type Permission = {
 }
 @Component({
   selector: 'app-permission-form',
+  imports: [
+    TranslateModule,
+    MessageModule,
+    TabsModule,
+    StatusTabComponent,
+    UpdateHistoryComponent,
+    TooltipModule,
+    ReactiveFormsModule,
+    FloatLabelModule,
+    InputTextModule
+  ],
   templateUrl: './permission-form.component.html'
 })
 export class PermissionFormComponent implements OnChanges {

@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core'
+import { TranslateModule } from '@ngx-translate/core'
+import { TagModule } from 'primeng/tag'
 
 import { Status, StatusStatusEnum } from 'src/app/shared/generated'
 
@@ -6,6 +8,7 @@ type Severity = 'success' | 'warning' | 'danger'
 
 @Component({
   selector: 'app-status-tab',
+  imports: [TagModule, TranslateModule],
   templateUrl: './status-tab.component.html',
   styleUrls: ['./status-tab.component.scss']
 })

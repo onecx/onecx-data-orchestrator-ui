@@ -1,12 +1,31 @@
 import { Component, Input, OnChanges } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { TranslateModule } from '@ngx-translate/core'
+import { CheckboxModule } from 'primeng/checkbox'
+import { FloatLabelModule } from 'primeng/floatlabel'
+import { InputTextModule } from 'primeng/inputtext'
+import { TabsModule } from 'primeng/tabs'
+import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourceSlot } from 'src/app/shared/generated'
-
 import { Update } from '../crd-detail.component'
+import { StatusTabComponent } from '../status-tab/status-tab.component'
+import { UpdateHistoryComponent } from '../update-history/update-history.component'
 
 @Component({
   selector: 'app-slot-form',
+  imports: [
+    TranslateModule,
+    TabsModule,
+    UpdateHistoryComponent,
+    StatusTabComponent,
+    TooltipModule,
+    ReactiveFormsModule,
+    CheckboxModule,
+    FloatLabelModule,
+    InputTextModule,
+    CheckboxModule
+  ],
   templateUrl: './slot-form.component.html',
   styleUrls: ['./slot-form.component.scss']
 })

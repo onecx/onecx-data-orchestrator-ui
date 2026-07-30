@@ -1,4 +1,4 @@
-@import '/src/app/_do-mixins.scss';
+@use '/src/app/_do-mixins.scss' as *;
 
 @include text-badges;
 @include readable-disabled-form-controls;
