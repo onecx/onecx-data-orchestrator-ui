@@ -6,7 +6,7 @@
     "declarationMap": false,
     "inlineSources": true
   },
-  "files": ["src/main.ts", "src/polyfills.ts", "src/app/onecx-data-orchestrator-remote.module.ts"],
+  "files": ["src/main.ts", "src/polyfills.ts", "src/app/onecx-data-orchestrator.remote.module.ts"],
   "include": ["src/**/*.ts"],
   "exclude": ["src/test-setup.ts", "src/**/*.spec.ts"]
 }
