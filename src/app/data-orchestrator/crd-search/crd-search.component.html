@@ -6,7 +6,7 @@
   ></app-crd-criteria>
 
   @if (crds$ | async; as crds) {
-    <ocx-content>
+    <ocx-content class="w-full adjust-card-padding">
       @if (loading) {
         <p-message
           id="do_crd_search_message_loading"
@@ -24,50 +24,48 @@
         ></p-message>
       }
 
-      <ocx-content class="w-full adjust-card-padding">
-        @if (!loading && !exceptionKey) {
-          <ocx-interactive-data-view
-            #crdTable
-            id="do_crd_search_table"
-            [data]="(filteredData$ | async) ?? []"
-            [columns]="columns"
-            [emptyResultsMessage]="'ACTIONS.SEARCH.NO_DATA' | translate"
-            [supportedViewLayouts]="['table']"
-            [additionalActions]="additionalActions"
-            [actionColumnPosition]="'left'"
-            [defaultGroupKey]="'ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT'"
-          >
-            <ng-template pTemplate="statusIdCell" let-item="rowObject">
+      @if (!loading && !exceptionKey) {
+        <ocx-interactive-data-view
+          #crdTable
+          id="do_crd_search_table"
+          [data]="(filteredData$ | async) ?? []"
+          [columns]="columns"
+          [emptyResultsMessage]="'ACTIONS.SEARCH.NO_DATA' | translate"
+          [supportedViewLayouts]="['table']"
+          [additionalActions]="additionalActions"
+          [actionColumnPosition]="'left'"
+          [defaultGroupKey]="'ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT'"
+        >
+          <ng-template pTemplate="statusIdCell" let-item="rowObject">
+            <span
+              class="pi pi-circle-on"
+              [class.text-red-600]="item.status === 'ERROR'"
+              [class.text-yellow-600]="item.status === 'UNDEFINED'"
+              [class.text-green-600]="item.status === 'UPDATED' || item.status === 'CREATED'"
+              [attr.aria-label]="'ENUMS.CRD_STATUS.' + item.status | translate"
+              [pTooltip]="'ENUMS.CRD_STATUS.' + item.status | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            ></span>
+          </ng-template>
+          <ng-template pTemplate="statusIdTableFilterCell" let-rowObject="rowObject">
+            <ng-container>
               <span
                 class="pi pi-circle-on"
-                [class.text-red-600]="item.status === 'ERROR'"
-                [class.text-yellow-600]="item.status === 'UNDEFINED'"
-                [class.text-green-600]="item.status === 'UPDATED' || item.status === 'CREATED'"
-                [attr.aria-label]="'ENUMS.CRD_STATUS.' + item.status | translate"
-                [pTooltip]="'ENUMS.CRD_STATUS.' + item.status | translate"
+                [class.text-red-600]="rowObject.status === 'ERROR'"
+                [class.text-yellow-600]="rowObject.status === 'UNDEFINED'"
+                [class.text-green-600]="rowObject.status === 'UPDATED' || rowObject.status === 'CREATED'"
+                [attr.aria-label]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
+                [pTooltip]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
                 tooltipPosition="top"
                 tooltipEvent="hover"
-              ></span>
-            </ng-template>
-            <ng-template pTemplate="statusIdTableFilterCell" let-rowObject="rowObject">
-              <ng-container>
-                <span
-                  class="pi pi-circle-on"
-                  [class.text-red-600]="rowObject.status === 'ERROR'"
-                  [class.text-yellow-600]="rowObject.status === 'UNDEFINED'"
-                  [class.text-green-600]="rowObject.status === 'UPDATED' || rowObject.status === 'CREATED'"
-                  [attr.aria-label]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
-                  [pTooltip]="'ENUMS.CRD_STATUS.' + rowObject.status | translate"
-                  tooltipPosition="top"
-                  tooltipEvent="hover"
-                >
-                </span>
-                <p>&nbsp; {{ 'ENUMS.CRD_STATUS.' + rowObject.status | translate }}</p>
-              </ng-container>
-            </ng-template>
-          </ocx-interactive-data-view>
-        }
-      </ocx-content>
+              >
+              </span>
+              <p>&nbsp; {{ 'ENUMS.CRD_STATUS.' + rowObject.status | translate }}</p>
+            </ng-container>
+          </ng-template>
+        </ocx-interactive-data-view>
+      }
 
       @if (crds.length > 0 && chartVisible && diagramColumn !== undefined) {
         <ocx-content class="w-full lg:w-3">
