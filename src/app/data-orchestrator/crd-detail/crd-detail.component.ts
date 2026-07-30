@@ -1,5 +1,14 @@
-import { Component, EventEmitter, Input, OnChanges, Output, QueryList, ViewChildren } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { AsyncPipe } from '@angular/common'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  QueryList,
+  ViewChildren
+} from '@angular/core'
 import { TranslateModule } from '@ngx-translate/core'
 import { catchError, finalize, map, Observable, of } from 'rxjs'
 import { ButtonModule } from 'primeng/button'
@@ -52,8 +61,9 @@ export interface Update {
 
 @Component({
   selector: 'app-crd-detail',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
+    AsyncPipe,
     TranslateModule,
     TooltipModule,
     ButtonModule,

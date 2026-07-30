@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
 import { TranslateModule } from '@ngx-translate/core'
@@ -8,7 +7,6 @@ import { TooltipModule } from 'primeng/tooltip'
 import { AngularAcceleratorModule } from '@onecx/angular-accelerator'
 import { providePermissionService } from '@onecx/angular-utils'
 
-import { SharedModule } from '../shared/shared.module'
 import { CrdSearchComponent } from './crd-search/crd-search.component'
 import { CrdCriteriaComponent } from './crd-search/crd-criteria/crd-criteria.component'
 import { CrdDetailComponent } from './crd-detail/crd-detail.component'
@@ -28,11 +26,9 @@ const routes: Routes = [{ path: '', component: CrdSearchComponent, pathMatch: 'f
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     FormsModule,
     AngularAcceleratorModule,
     [RouterModule.forChild(routes)],
-    SharedModule,
     CrdSearchComponent,
     CrdCriteriaComponent,
     CrdDetailComponent,

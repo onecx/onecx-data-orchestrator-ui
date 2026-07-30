@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import { TranslateModule } from '@ngx-translate/core'
 import { TagModule } from 'primeng/tag'
 
@@ -8,6 +8,7 @@ type Severity = 'success' | 'warning' | 'danger'
 
 @Component({
   selector: 'app-status-tab',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TagModule, TranslateModule],
   templateUrl: './status-tab.component.html',
   styleUrls: ['./status-tab.component.scss']

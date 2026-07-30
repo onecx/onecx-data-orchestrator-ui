@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
 import { CheckboxModule } from 'primeng/checkbox'
@@ -14,6 +14,7 @@ import { UpdateHistoryComponent } from '../update-history/update-history.compone
 
 @Component({
   selector: 'app-microfrontend-form',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     StatusTabComponent,
     TranslateModule,

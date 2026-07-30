@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { RouterModule, Routes } from '@angular/router'
-import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { TranslateLoader, TranslateModule, MissingTranslationHandler } from '@ngx-translate/core'
 
@@ -25,8 +23,6 @@ const routes: Routes = [
   declarations: [],
   imports: [
     AppComponent,
-    CommonModule,
-    BrowserModule,
     BrowserAnimationsModule,
     AngularAuthModule,
     AngularAcceleratorModule,

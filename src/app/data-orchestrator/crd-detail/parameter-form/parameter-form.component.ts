@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
 import { FloatLabelModule } from 'primeng/floatlabel'
@@ -15,6 +15,7 @@ import { UpdateHistoryComponent } from '../update-history/update-history.compone
 type Parameter = { name: string; displayName: string | undefined; value: string; description: string | undefined }
 @Component({
   selector: 'app-parameter-form',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     TranslateModule,
     MessageModule,

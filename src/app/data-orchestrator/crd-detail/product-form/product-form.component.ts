@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
 import { FloatLabelModule } from 'primeng/floatlabel'
@@ -14,6 +14,7 @@ import { StatusTabComponent } from '../status-tab/status-tab.component'
 
 @Component({
   selector: 'app-product-form',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     TranslateModule,
     TabsModule,
