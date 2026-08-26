@@ -28,7 +28,7 @@ const routes: Routes = [
     AngularAcceleratorModule,
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabledBlocking',
-      enableTracing: true
+      enableTracing: false
     }),
     TranslateModule.forRoot({
       isolate: true,
