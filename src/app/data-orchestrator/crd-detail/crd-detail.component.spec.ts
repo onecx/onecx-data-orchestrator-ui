@@ -4,7 +4,7 @@ import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { TranslateTestingModule } from 'ngx-translate-testing'
-import { BehaviorSubject, of, take, throwError } from 'rxjs'
+import { BehaviorSubject, of, Subject, take, throwError } from 'rxjs'
 
 import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
 
@@ -218,6 +218,29 @@ describe('CrdDetailComponent', () => {
         expect(emitSpy).toHaveBeenCalledWith(true)
         done()
       })
+    })
+
+    it('should not trigger a second save when save is already in progress', () => {
+      const mockFormValues = { name: 'testCrd' }
+      const editCrdSubject = new Subject<unknown>()
+
+      spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
+      spyOn<any>(component, 'prepareUpdateData').and.returnValue({
+        CrdData: mockFormValues
+      })
+
+      doApiSpy.editCrd.and.returnValue(editCrdSubject.asObservable())
+      component.crd$ = of({ name: 'testCrd' })
+      component.changeMode = 'EDIT'
+      component.crdName = 'testCrd'
+      component.crdType = ContextKind.Data
+
+      component.onSave()
+      component.onSave()
+
+      expect(doApiSpy.editCrd).toHaveBeenCalledTimes(1)
+
+      editCrdSubject.complete()
     })
 
     it('should show error message when onSave fails', (done) => {

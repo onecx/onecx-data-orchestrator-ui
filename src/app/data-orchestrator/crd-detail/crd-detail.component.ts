@@ -10,7 +10,7 @@ import {
   ViewChildren
 } from '@angular/core'
 import { TranslateModule } from '@ngx-translate/core'
-import { catchError, finalize, map, Observable, of } from 'rxjs'
+import { catchError, finalize, map, Observable, of, switchMap, tap } from 'rxjs'
 import { ButtonModule } from 'primeng/button'
 import { TooltipModule } from 'primeng/tooltip'
 import { MessageModule } from 'primeng/message'
@@ -199,24 +199,31 @@ export class CrdDetailComponent implements OnChanges {
    * SAVING
    */
   public onSave(): void {
-    if (this.changeMode === 'EDIT' && this.crdName && this.crdType) {
-      const formValuesOfChild = this.getFormValuesOfActiveChild()
-
-      this.submitFormValues(formValuesOfChild).subscribe((crd) => {
-        const editResourceRequest: EditResourceRequest = this.prepareUpdateData(this.crdType!, crd)
-
-        this.dataOrchestratorApi.editCrd({ editResourceRequest }).subscribe({
-          next: () => {
-            this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
-            this.hideDialogAndChanged.emit(true)
-          },
-          error: (err) => {
-            this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
-            console.error('editCrd', err)
-          }
-        })
-      })
+    if (this.loading || this.changeMode !== 'EDIT' || !this.crdName || !this.crdType) {
+      return
     }
+
+    const formValuesOfChild = this.getFormValuesOfActiveChild()
+
+    this.loading = true
+    this.submitFormValues(formValuesOfChild)
+      .pipe(
+        map((crd) => this.prepareUpdateData(this.crdType!, crd)),
+        switchMap((editResourceRequest) => this.dataOrchestratorApi.editCrd({ editResourceRequest })),
+        tap(() => {
+          this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
+          this.hideDialogAndChanged.emit(true)
+        }),
+        catchError((err) => {
+          this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
+          console.error('editCrd', err)
+          return of(undefined)
+        }),
+        finalize(() => {
+          this.loading = false
+        })
+      )
+      .subscribe()
   }
 
   private submitFormValues(formValues: any): Observable<any> {
