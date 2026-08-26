@@ -49,7 +49,5 @@ const routes: Routes = [
   ]
 })
 export class AppModule {
-  constructor() {
-    console.info('OneCX Data Orchestrator Module constructor')
-  }
+  constructor() {}
 }

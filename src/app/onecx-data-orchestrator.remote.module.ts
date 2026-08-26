@@ -60,9 +60,7 @@ const routes: Routes = [
   ]
 })
 export class OneCXDataOrchestratorModule implements DoBootstrap {
-  constructor(private readonly injector: Injector) {
-    console.info('OneCX Data Orchestrator Module constructor')
-  }
+  constructor(private readonly injector: Injector) {}
 
   ngDoBootstrap(): void {
     createAppEntrypoint(AppEntrypointComponent, 'ocx-data-orchestrator-component', this.injector)
