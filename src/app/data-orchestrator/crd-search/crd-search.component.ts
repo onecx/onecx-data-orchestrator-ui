@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common'
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormsModule } from '@angular/forms'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs'
@@ -51,6 +52,8 @@ type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
   styleUrls: ['./crd-search.component.scss']
 })
 export class CrdSearchComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef)
+
   // dialog
   public loading = false
   public exceptionKey: string | undefined = undefined
@@ -136,6 +139,7 @@ export class CrdSearchComponent implements OnInit {
   private initFilter() {
     this.resultData$
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         map((array) => {
           if (this.filterData.trim()) {
             const lowerCaseFilter = this.filterData.toLowerCase()
