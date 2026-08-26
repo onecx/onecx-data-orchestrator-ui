@@ -46,11 +46,17 @@ import { ChangeMode } from '../crd-search/crd-search.component'
 interface ManagedField {
   apiVersion: string
   fieldsType: string
-  fieldsV1: Record<string, any>
+  fieldsV1: Record<string, unknown>
   manager: string
   operation: string
   time: string
   subresource?: string
+}
+
+interface HistorySource {
+  metadata?: {
+    managedFields?: ManagedField[]
+  }
 }
 
 export interface Update {
@@ -166,33 +172,38 @@ export class CrdDetailComponent implements OnChanges {
    * This method extracts all past updates from the managedFields sub-object and groups them by date on top-level
    * and all updated fields by its parent-object name underneath.
    */
-  public prepareHistory(item: any): Update[] {
-    if (Object.keys(item).length === 0 || !item.metadata?.managedFields) return []
+  private prepareHistory(item: HistorySource): Update[] {
+    const managedFields = item.metadata?.managedFields
+    if (!managedFields?.length) return []
 
-    const managedFields: ManagedField[] = item.metadata.managedFields
     const history: Update[] = managedFields.map((field) => {
       const fields: Record<string, string[]> = {}
 
-      function extractFields(obj: Record<string, any>, prefix: string = '') {
-        for (const key in obj) {
-          if (key === '.') continue
-          const newKey = prefix ? `${prefix}.${key}` : key
-          if (Object.keys(obj[key]).length === 0) {
-            const topLevelKey = newKey.split('.')[0].replaceAll('f:', '')
-            const fieldKey = newKey.split('.').slice(1).join('.').replaceAll('f:', '')
-            if (!fields[topLevelKey]) {
-              fields[topLevelKey] = []
-            }
-            fields[topLevelKey].push(fieldKey)
-          } else {
-            extractFields(obj[key], newKey)
-          }
-        }
-      }
-      extractFields(field.fieldsV1)
+      this.extractFields(field.fieldsV1, fields)
       return { date: field.time, fields: fields, operation: field.operation }
     })
     return history
+  }
+
+  private extractFields(obj: Record<string, unknown>, fields: Record<string, string[]>, prefix: string = ''): void {
+    for (const key in obj) {
+      if (key === '.') continue
+
+      const newKey = prefix ? `${prefix}.${key}` : key
+      const child = obj[key] as Record<string, unknown> | null | undefined
+      if (!child || typeof child !== 'object') continue
+
+      if (Object.keys(child).length === 0) {
+        const topLevelKey = newKey.split('.')[0].replaceAll('f:', '')
+        const fieldKey = newKey.split('.').slice(1).join('.').replaceAll('f:', '')
+        if (!fields[topLevelKey]) {
+          fields[topLevelKey] = []
+        }
+        fields[topLevelKey].push(fieldKey)
+      } else {
+        this.extractFields(child, fields, newKey)
+      }
+    }
   }
 
   /**
