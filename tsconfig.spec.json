@@ -3,7 +3,7 @@
   "compilerOptions": {
     "types": ["jasmine", "node", "zone.js"]
   },
-  "files": ["test-setup.ts", "src/polyfills.ts"],
+  "files": ["src/test-setup.ts", "src/polyfills.ts"],
   "include": ["src/app/**/*.spec.ts", "src/**/*.d.ts"],
   "exclude": ["src/app/shared/generated/**/*"]
 }
