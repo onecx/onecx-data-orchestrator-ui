@@ -15,6 +15,4 @@ export class UpdateHistoryComponent {
   @Input() public dateFormat: string | undefined
 
   public objectKeys = Object.keys
-
-  constructor() {}
 }

@@ -16,8 +16,6 @@ type Severity = 'success' | 'warning' | 'danger'
 export class StatusTabComponent {
   @Input() public status: Status | undefined
 
-  constructor() {}
-
   public getSeverity(status: StatusStatusEnum | undefined): Severity {
     if (!status) return 'warning'
     switch (status) {

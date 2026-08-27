@@ -10,7 +10,7 @@ import {
   ViewChildren
 } from '@angular/core'
 import { TranslateModule } from '@ngx-translate/core'
-import { catchError, finalize, map, Observable, of } from 'rxjs'
+import { catchError, finalize, map, Observable, of, switchMap, tap } from 'rxjs'
 import { ButtonModule } from 'primeng/button'
 import { TooltipModule } from 'primeng/tooltip'
 import { MessageModule } from 'primeng/message'
@@ -46,11 +46,17 @@ import { ChangeMode } from '../crd-search/crd-search.component'
 interface ManagedField {
   apiVersion: string
   fieldsType: string
-  fieldsV1: Record<string, any>
+  fieldsV1: Record<string, unknown>
   manager: string
   operation: string
   time: string
   subresource?: string
+}
+
+interface HistorySource {
+  metadata?: {
+    managedFields?: ManagedField[]
+  }
 }
 
 export interface Update {
@@ -166,57 +172,69 @@ export class CrdDetailComponent implements OnChanges {
    * This method extracts all past updates from the managedFields sub-object and groups them by date on top-level
    * and all updated fields by its parent-object name underneath.
    */
-  public prepareHistory(item: any): Update[] {
-    if (Object.keys(item).length === 0 || !item.metadata?.managedFields) return []
+  private prepareHistory(item: HistorySource): Update[] {
+    const managedFields = item.metadata?.managedFields
+    if (!managedFields?.length) return []
 
-    const managedFields: ManagedField[] = item.metadata.managedFields
     const history: Update[] = managedFields.map((field) => {
       const fields: Record<string, string[]> = {}
 
-      function extractFields(obj: Record<string, any>, prefix: string = '') {
-        for (const key in obj) {
-          if (key === '.') continue
-          const newKey = prefix ? `${prefix}.${key}` : key
-          if (Object.keys(obj[key]).length === 0) {
-            const topLevelKey = newKey.split('.')[0].replaceAll('f:', '')
-            const fieldKey = newKey.split('.').slice(1).join('.').replaceAll('f:', '')
-            if (!fields[topLevelKey]) {
-              fields[topLevelKey] = []
-            }
-            fields[topLevelKey].push(fieldKey)
-          } else {
-            extractFields(obj[key], newKey)
-          }
-        }
-      }
-      extractFields(field.fieldsV1)
+      this.extractFields(field.fieldsV1, fields)
       return { date: field.time, fields: fields, operation: field.operation }
     })
     return history
+  }
+
+  private extractFields(obj: Record<string, unknown>, fields: Record<string, string[]>, prefix: string = ''): void {
+    for (const key in obj) {
+      if (key === '.') continue
+
+      const newKey = prefix ? `${prefix}.${key}` : key
+      const child = obj[key] as Record<string, unknown> | null | undefined
+      if (!child || typeof child !== 'object') continue
+
+      if (Object.keys(child).length === 0) {
+        const topLevelKey = newKey.split('.')[0].replaceAll('f:', '')
+        const fieldKey = newKey.split('.').slice(1).join('.').replaceAll('f:', '')
+        if (!fields[topLevelKey]) {
+          fields[topLevelKey] = []
+        }
+        fields[topLevelKey].push(fieldKey)
+      } else {
+        this.extractFields(child, fields, newKey)
+      }
+    }
   }
 
   /**
    * SAVING
    */
   public onSave(): void {
-    if (this.changeMode === 'EDIT' && this.crdName && this.crdType) {
-      const formValuesOfChild = this.getFormValuesOfActiveChild()
-
-      this.submitFormValues(formValuesOfChild).subscribe((crd) => {
-        const editResourceRequest: EditResourceRequest = this.prepareUpdateData(this.crdType!, crd)
-
-        this.dataOrchestratorApi.editCrd({ editResourceRequest }).subscribe({
-          next: () => {
-            this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
-            this.hideDialogAndChanged.emit(true)
-          },
-          error: (err) => {
-            this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
-            console.error('editCrd', err)
-          }
-        })
-      })
+    if (this.loading || this.changeMode !== 'EDIT' || !this.crdName || !this.crdType) {
+      return
     }
+
+    const formValuesOfChild = this.getFormValuesOfActiveChild()
+
+    this.loading = true
+    this.submitFormValues(formValuesOfChild)
+      .pipe(
+        map((crd) => this.prepareUpdateData(this.crdType!, crd)),
+        switchMap((editResourceRequest) => this.dataOrchestratorApi.editCrd({ editResourceRequest })),
+        tap(() => {
+          this.msgService.success({ summaryKey: 'ACTIONS.EDIT.MESSAGE.OK' })
+          this.hideDialogAndChanged.emit(true)
+        }),
+        catchError((err) => {
+          this.msgService.error({ summaryKey: 'ACTIONS.EDIT.MESSAGE.NOK' })
+          console.error('editCrd', err)
+          return of(undefined)
+        }),
+        finalize(() => {
+          this.loading = false
+        })
+      )
+      .subscribe()
   }
 
   private submitFormValues(formValues: any): Observable<any> {

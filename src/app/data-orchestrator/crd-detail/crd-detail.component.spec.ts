@@ -4,7 +4,7 @@ import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { TranslateTestingModule } from 'ngx-translate-testing'
-import { BehaviorSubject, of, take, throwError } from 'rxjs'
+import { BehaviorSubject, of, Subject, take, throwError } from 'rxjs'
 
 import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
 
@@ -110,11 +110,17 @@ describe('CrdDetailComponent', () => {
     it('should load crd data and update updateHistory', (done) => {
       component.displayDetailDialog = true
 
-      const mockCrd = { crd: { name: 'testCrd' } }
-      const mockUpdateHistory = [{ date: '2023-01-01', fields: {} }] as Update[]
+      const mockCrd = {
+        crd: {
+          name: 'testCrd',
+          metadata: {
+            managedFields: [{ time: '2023-01-01', fieldsV1: { 'f:spec': { 'f:name': {} } }, operation: 'Update' }]
+          }
+        }
+      }
+      const mockUpdateHistory = [{ date: '2023-01-01', fields: { spec: ['name'] }, operation: 'Update' }] as Update[]
 
       doApiSpy.getCrdByTypeAndName.and.returnValue(of(mockCrd))
-      spyOn(component, 'prepareHistory').and.returnValue(mockUpdateHistory)
 
       component.crdName = 'testCrd'
       component.crdType = ContextKind.Data
@@ -133,7 +139,6 @@ describe('CrdDetailComponent', () => {
       component.displayDetailDialog = true
       const mockCrd = { crd: {} }
       doApiSpy.getCrdByTypeAndName.and.returnValue(of(mockCrd))
-      spyOn(component, 'prepareHistory').and.returnValue([])
       component.crdName = 'testCrd'
       component.crdType = ContextKind.Data
 
@@ -154,7 +159,6 @@ describe('CrdDetailComponent', () => {
         name: 'testCrd'
       }
       doApiSpy.getCrdByTypeAndName.and.returnValue(of(mockCrd))
-      spyOn(component, 'prepareHistory').and.returnValue([])
       component.crdName = 'testCrd'
       component.crdType = ContextKind.Data
 
@@ -218,6 +222,29 @@ describe('CrdDetailComponent', () => {
         expect(emitSpy).toHaveBeenCalledWith(true)
         done()
       })
+    })
+
+    it('should not trigger a second save when save is already in progress', () => {
+      const mockFormValues = { name: 'testCrd' }
+      const editCrdSubject = new Subject<unknown>()
+
+      spyOn<any>(component, 'getFormValuesOfActiveChild').and.returnValue(mockFormValues)
+      spyOn<any>(component, 'prepareUpdateData').and.returnValue({
+        CrdData: mockFormValues
+      })
+
+      doApiSpy.editCrd.and.returnValue(editCrdSubject.asObservable())
+      component.crd$ = of({ name: 'testCrd' })
+      component.changeMode = 'EDIT'
+      component.crdName = 'testCrd'
+      component.crdType = ContextKind.Data
+
+      component.onSave()
+      component.onSave()
+
+      expect(doApiSpy.editCrd).toHaveBeenCalledTimes(1)
+
+      editCrdSubject.complete()
     })
 
     it('should show error message when onSave fails', (done) => {
@@ -425,17 +452,21 @@ describe('CrdDetailComponent', () => {
   })
 
   describe('history', () => {
-    it('should provide empty history if given object is empty', () => {
-      let history = component.prepareHistory({})
+    it('should keep history empty when CRD has no managedFields', (done) => {
+      doApiSpy.getCrdByTypeAndName.and.returnValue(of({ crd: { metadata: {} } }))
+      component.displayDetailDialog = true
+      component.crdName = 'testCrd'
+      component.crdType = ContextKind.Data
 
-      expect(history).toEqual([])
+      component.ngOnChanges()
 
-      history = component.prepareHistory({ metadata: {} })
-
-      expect(history).toEqual([])
+      component.crd$.pipe(take(1)).subscribe(() => {
+        expect(component.updateHistory).toEqual([])
+        done()
+      })
     })
 
-    it('should prepare history from managedFields and skip keys with "."', () => {
+    it('should prepare history from managedFields and skip keys with "."', (done) => {
       const mockManagedFields = [
         { time: '2023-01-02T00:00:00Z', fieldsV1: { 'f:spec': { 'f:version': {} } }, operation: 'Update' },
         {
@@ -444,6 +475,8 @@ describe('CrdDetailComponent', () => {
             'f:spec': {
               'f:name': {},
               'f:description': {},
+              'f:ignoredString': 'not-an-object',
+              'f:ignoredNumber': 123,
               '.': {} // This key should be skipped
             },
             'f:metadata': { 'f:labels': {} }
@@ -451,24 +484,26 @@ describe('CrdDetailComponent', () => {
           operation: 'Update'
         }
       ]
-      component.crd$ = of({ metadata: { managedFields: mockManagedFields } })
+      doApiSpy.getCrdByTypeAndName.and.returnValue(of({ crd: { metadata: { managedFields: mockManagedFields } } }))
+      component.displayDetailDialog = true
+      component.crdName = 'testCrd'
+      component.crdType = ContextKind.Data
+
       const expectedHistory: Update[] = [
-        { date: '2023-01-02T00:00:00Z', fields: { spec: ['version'] }, operation: 'Update' },
         {
           date: '2023-01-01T00:00:00Z',
           fields: { spec: ['name', 'description'], metadata: ['labels'] },
           operation: 'Update'
-        }
+        },
+        { date: '2023-01-02T00:00:00Z', fields: { spec: ['version'] }, operation: 'Update' }
       ]
 
-      // Mock the crd$ observable and get the value synchronously
-      let crdValue: any
-      component.crd$.subscribe((crd) => (crdValue = crd))
+      component.ngOnChanges()
 
-      // Call the prepareHistory method with the mocked value
-      const history = component.prepareHistory(crdValue)
-
-      expect(history).toEqual(expectedHistory)
+      component.crd$.pipe(take(1)).subscribe(() => {
+        expect(component.updateHistory).toEqual(expectedHistory)
+        done()
+      })
     })
   })
 

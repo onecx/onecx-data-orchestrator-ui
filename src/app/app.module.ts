@@ -28,7 +28,7 @@ const routes: Routes = [
     AngularAcceleratorModule,
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabledBlocking',
-      enableTracing: true
+      enableTracing: false
     }),
     TranslateModule.forRoot({
       isolate: true,
@@ -48,8 +48,4 @@ const routes: Routes = [
     provideHttpClient(withInterceptorsFromDi())
   ]
 })
-export class AppModule {
-  constructor() {
-    console.info('OneCX Data Orchestrator Module constructor')
-  }
-}
+export class AppModule {}

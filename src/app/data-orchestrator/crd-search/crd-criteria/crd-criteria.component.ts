@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common'
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
-import { Observable, map, of } from 'rxjs'
+import { catchError, map, Observable, of, switchMap } from 'rxjs'
 import { SelectItem } from 'primeng/api'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
@@ -82,18 +82,25 @@ export class CrdCriteriaComponent {
   }
 
   private fillTypes(): void {
-    this.dataOrchestratorApi.getActiveCrdKinds().subscribe((response: GetContextKindsResponse) => {
-      const kinds = response.kinds ?? []
-      this.type$ = this.translate.get(kinds.map((kind) => 'ENUMS.CRD_TYPE.' + kind)).pipe(
-        map((data) => {
-          return kinds
-            .map((kind) => ({
-              label: data['ENUMS.CRD_TYPE.' + kind],
-              value: kind
-            }))
-            .sort((a, b) => a.label.localeCompare(b.label))
-        })
-      )
-    })
+    this.type$ = this.dataOrchestratorApi.getActiveCrdKinds().pipe(
+      map((response: GetContextKindsResponse) => response.kinds ?? []),
+      switchMap((kinds) => {
+        if (kinds.length === 0) {
+          return of([])
+        }
+
+        return this.translate.get(kinds.map((kind) => 'ENUMS.CRD_TYPE.' + kind)).pipe(
+          map((data) => {
+            return kinds
+              .map((kind) => ({
+                label: data['ENUMS.CRD_TYPE.' + kind],
+                value: kind
+              }))
+              .sort((a, b) => a.label.localeCompare(b.label))
+          })
+        )
+      }),
+      catchError(() => of([]))
+    )
   }
 }
