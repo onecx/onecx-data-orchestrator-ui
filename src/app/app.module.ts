@@ -48,6 +48,4 @@ const routes: Routes = [
     provideHttpClient(withInterceptorsFromDi())
   ]
 })
-export class AppModule {
-  constructor() {}
-}
+export class AppModule {}
