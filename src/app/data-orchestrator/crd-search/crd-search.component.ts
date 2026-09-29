@@ -2,6 +2,7 @@ import { AsyncPipe } from '@angular/common'
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormsModule } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs'
 import { PrimeIcons, SelectItem } from 'primeng/api'
@@ -59,6 +60,7 @@ export class CrdSearchComponent implements OnInit {
   public exceptionKey: string | undefined = undefined
   public changeMode: ChangeMode = 'VIEW'
   public actions$: Observable<Action[]> | undefined
+  public criteria: GetCustomResourcesByCriteriaRequestParams = {}
   public additionalActions!: DataAction[]
   public displayDeleteDialog = false
   public displayDetailDialog = false
@@ -126,7 +128,9 @@ export class CrdSearchComponent implements OnInit {
     private readonly user: UserService,
     private readonly dataOrchestratorApi: DataAPIService,
     private readonly msgService: PortalMessageService,
-    private readonly translate: TranslateService
+    private readonly translate: TranslateService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {
     this.dateFormat = this.user.lang$.getValue() === 'de' ? 'dd.MM.yyyy HH:mm:ss' : 'M/d/yy, h:mm:ss a'
   }
@@ -134,6 +138,8 @@ export class CrdSearchComponent implements OnInit {
   ngOnInit(): void {
     this.prepareActionButtons()
     this.initFilter()
+    const restored = this.restoreStateFromQueryParams()
+    if (!restored) this.onSearch({})
   }
 
   private initFilter() {
@@ -208,9 +214,11 @@ export class CrdSearchComponent implements OnInit {
    *  SEARCH CRDs
    */
   public onSearch(criteria: GetCustomResourcesByCriteriaRequestParams, reuseCriteria = false): void {
+    this.criteria = criteria
     if (!reuseCriteria) {
       if (criteria?.crdSearchCriteria?.name === '') criteria.crdSearchCriteria.name = undefined
     }
+    this.updateSearchParamsFromState()
     this.loading = true
     this.exceptionKey = undefined
     this.crds$ = this.dataOrchestratorApi.getCustomResourcesByCriteria(criteria).pipe(
@@ -250,6 +258,7 @@ export class CrdSearchComponent implements OnInit {
 
   public onCriteriaReset(): void {
     this.exceptionKey = undefined
+    this.onSearch({})
   }
 
   //   public onColumnsChange(activeIds: string[]) {
@@ -283,5 +292,40 @@ export class CrdSearchComponent implements OnInit {
         error: () => this.msgService.error({ summaryKey: 'ACTIONS.TOUCH.MESSAGE.NOK' })
       })
     }
+  }
+
+  private updateSearchParamsFromState(): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        name: this.criteria.crdSearchCriteria?.name,
+        type: this.criteria.crdSearchCriteria?.type
+      },
+      replaceUrl: true,
+      queryParamsHandling: 'merge'
+    })
+  }
+
+  private restoreStateFromQueryParams(): boolean {
+    const queryParams = this.route.snapshot.queryParams
+
+    if (!Object.keys(queryParams).length) {
+      return false
+    }
+
+    const criteria: GetCustomResourcesByCriteriaRequestParams = {
+      crdSearchCriteria: {
+        name: queryParams['name'] ?? undefined,
+        type: queryParams['type']
+          ? Array.isArray(queryParams['type'])
+            ? queryParams['type']
+            : [queryParams['type']]
+          : undefined
+      }
+    }
+
+    this.criteria = criteria
+    this.onSearch(criteria, true)
+    return true
   }
 }
