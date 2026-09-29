@@ -372,4 +372,62 @@ describe('CrdSearchComponent', () => {
       expect(component.dateFormat).toEqual('M/d/yy, h:mm:ss a')
     })
   })
+
+  describe('restoreStateFromQueryParams', () => {
+    it('should restore criteria with name and string type from query params', () => {
+      spyOn(component, 'onSearch')
+      ;(component as any).route.snapshot.queryParams = {
+        name: 'test-name',
+        type: ContextKind.Data
+      }
+
+      const result = (component as any).restoreStateFromQueryParams()
+
+      expect(result).toBeTrue()
+      expect(component.criteria).toEqual({
+        crdSearchCriteria: {
+          name: 'test-name',
+          type: [ContextKind.Data]
+        }
+      })
+      expect(component.onSearch).toHaveBeenCalledWith(component.criteria, true)
+    })
+
+    it('should restore criteria with type array from query params', () => {
+      spyOn(component, 'onSearch')
+      ;(component as any).route.snapshot.queryParams = {
+        name: 'test-name',
+        type: [ContextKind.Data, ContextKind.Database]
+      }
+
+      const result = (component as any).restoreStateFromQueryParams()
+
+      expect(result).toBeTrue()
+      expect(component.criteria).toEqual({
+        crdSearchCriteria: {
+          name: 'test-name',
+          type: [ContextKind.Data, ContextKind.Database]
+        }
+      })
+      expect(component.onSearch).toHaveBeenCalledWith(component.criteria, true)
+    })
+
+    it('should restore criteria with undefined name and type', () => {
+      spyOn(component, 'onSearch')
+      ;(component as any).route.snapshot.queryParams = {
+        name: null
+      }
+
+      const result = (component as any).restoreStateFromQueryParams()
+
+      expect(result).toBeTrue()
+      expect(component.criteria).toEqual({
+        crdSearchCriteria: {
+          name: undefined,
+          type: undefined
+        }
+      })
+      expect(component.onSearch).toHaveBeenCalledWith(component.criteria, true)
+    })
+  })
 })
