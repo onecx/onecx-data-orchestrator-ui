@@ -2,6 +2,7 @@ import { FormGroup, FormControl } from '@angular/forms'
 import { SelectItem } from 'primeng/api'
 
 import {
+  asArray,
   limitText,
   convertLineBreaks,
   copyToClipboard,
@@ -116,6 +117,16 @@ describe('util functions', () => {
     })
     it('should return empty string if input is undefined', () => {
       expect(convertLineBreaks(undefined)).toEqual('')
+    })
+  })
+
+  describe('asArray', () => {
+    it('should return undefined when value is undefined', () => {
+      expect(asArray(undefined)).toBeUndefined()
+    })
+
+    it('should wrap a single string in an array', () => {
+      expect(asArray('value')).toEqual(['value'])
     })
   })
 })

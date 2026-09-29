@@ -29,6 +29,7 @@ import {
   GenericCrdStatusEnum,
   GetCustomResourcesByCriteriaRequestParams
 } from 'src/app/shared/generated'
+import { asArray } from 'src/app/shared/utils'
 import { CrdDetailComponent } from '../crd-detail/crd-detail.component'
 import { CrdCriteriaComponent } from './crd-criteria/crd-criteria.component'
 
@@ -316,11 +317,7 @@ export class CrdSearchComponent implements OnInit {
     const criteria: GetCustomResourcesByCriteriaRequestParams = {
       crdSearchCriteria: {
         name: queryParams['name'] ?? undefined,
-        type: queryParams['type']
-          ? Array.isArray(queryParams['type'])
-            ? queryParams['type']
-            : [queryParams['type']]
-          : undefined
+        type: asArray(queryParams['type']) as ContextKind[] | undefined
       }
     }
 

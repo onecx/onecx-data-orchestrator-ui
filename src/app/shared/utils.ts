@@ -52,3 +52,11 @@ export function sortByLocale(a: string, b: string): number {
 export function convertLineBreaks(text?: string) {
   return text?.replaceAll(/(?:\r\n|\r|\n)/g, '<br/>') ?? ''
 }
+
+export function asArray(value: string | string[] | null | undefined): string[] | undefined {
+  if (value == null || value === '') {
+    return undefined
+  }
+
+  return Array.isArray(value) ? value : [value]
+}
