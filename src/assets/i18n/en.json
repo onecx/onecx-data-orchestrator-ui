@@ -85,6 +85,12 @@
       "PARAMETERS": "Parameters"
     }
   },
+  "OCX_SEARCH_HEADER": {
+    "RESET_BUTTON_SEARCH_AND_RESULTS": {
+      "ARIA_LABEL": "Reset search criteria and results",
+      "DETAIL": "Reset search criteria and results"
+    }
+  },
   "CRD": {
     "ID": "ID",
     "NAME": "Name",
