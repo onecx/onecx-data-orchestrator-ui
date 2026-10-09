@@ -1,5 +1,13 @@
 import { AsyncPipe } from '@angular/common'
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges
+} from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { catchError, map, Observable, of, switchMap } from 'rxjs'
@@ -40,8 +48,9 @@ export interface CrdCriteriaForm {
   templateUrl: './crd-criteria.component.html',
   styleUrls: ['./crd-criteria.component.scss']
 })
-export class CrdCriteriaComponent {
+export class CrdCriteriaComponent implements OnChanges {
   @Input() public actions: Action[] = []
+  @Input() public criteria: GetCustomResourcesByCriteriaRequestParams = {}
   @Output() public criteriaEmitter = new EventEmitter<GetCustomResourcesByCriteriaRequestParams>()
   @Output() public resetSearchEmitter = new EventEmitter<boolean>()
 
@@ -64,6 +73,22 @@ export class CrdCriteriaComponent {
       type: new FormControl<ContextKind[] | null>({ value: null, disabled: false }, { validators: Validators.required })
     })
     this.fillTypes()
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['criteria']) {
+      this.applyCriteriaToForm()
+    }
+  }
+
+  private applyCriteriaToForm(): void {
+    this.crdCriteria.patchValue(
+      {
+        name: this.criteria.crdSearchCriteria?.name ?? null,
+        type: this.criteria.crdSearchCriteria?.type ?? null
+      },
+      { emitEvent: false }
+    )
   }
 
   public submitCriteria(): void {
