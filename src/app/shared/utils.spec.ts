@@ -2,6 +2,7 @@ import { FormGroup, FormControl } from '@angular/forms'
 import { SelectItem } from 'primeng/api'
 
 import {
+  asArray,
   limitText,
   convertLineBreaks,
   copyToClipboard,
@@ -37,13 +38,31 @@ describe('util functions', () => {
     let writeTextSpy: jasmine.Spy
 
     beforeEach(() => {
-      writeTextSpy = spyOn(navigator.clipboard, 'writeText')
+      writeTextSpy = jasmine.createSpy('writeText').and.resolveTo(undefined)
+      Object.defineProperty(navigator, 'clipboard', {
+        value: { writeText: writeTextSpy },
+        configurable: true
+      })
     })
 
     it('should copy text to clipboard', () => {
       copyToClipboard('text')
 
       expect(writeTextSpy).toHaveBeenCalledWith('text')
+    })
+
+    it('should log error when clipboard write fails', async () => {
+      const error = new Error('Clipboard error')
+      writeTextSpy.and.returnValue(Promise.reject(error))
+
+      const consoleErrorSpy = spyOn(console, 'error')
+
+      copyToClipboard('text')
+
+      await Promise.resolve()
+
+      expect(writeTextSpy).toHaveBeenCalledWith('text')
+      expect(consoleErrorSpy).toHaveBeenCalledWith(error)
     })
   })
 
@@ -81,7 +100,7 @@ describe('util functions', () => {
 
       const sortedItems = items.sort(dropDownSortItemsByLabel)
 
-      expect(sortedItems[0].label).toEqual(undefined)
+      expect(sortedItems[0].label).toBeUndefined()
     })
   })
 
@@ -116,6 +135,16 @@ describe('util functions', () => {
     })
     it('should return empty string if input is undefined', () => {
       expect(convertLineBreaks(undefined)).toEqual('')
+    })
+  })
+
+  describe('asArray', () => {
+    it('should return undefined when value is undefined', () => {
+      expect(asArray(undefined)).toBeUndefined()
+    })
+
+    it('should wrap a single string in an array', () => {
+      expect(asArray('value')).toEqual(['value'])
     })
   })
 })
