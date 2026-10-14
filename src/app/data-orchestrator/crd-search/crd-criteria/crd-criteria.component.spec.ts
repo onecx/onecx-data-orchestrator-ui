@@ -125,6 +125,21 @@ describe('CrdCriteriaComponent', () => {
     })
   })
 
+  it('should restore criteria in form when input criteria changes', () => {
+    const restoredCriteria: { crdSearchCriteria: { name: string; type: ContextKind[] } } = {
+      crdSearchCriteria: {
+        name: 'my-crd',
+        type: [ContextKind.Data, ContextKind.Product]
+      }
+    }
+
+    fixture.componentRef.setInput('criteria', restoredCriteria)
+    fixture.detectChanges()
+
+    expect(component.crdCriteria.get('name')?.value).toBe('my-crd')
+    expect(component.crdCriteria.get('type')?.value).toEqual([ContextKind.Data, ContextKind.Product])
+  })
+
   /**
    * Translations
    */

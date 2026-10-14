@@ -30,7 +30,11 @@
       "OF": "von",
       "DIAGRAM_SUM": "Total",
       "SHOW_DIAGRAM": "Übersicht anzeigen",
-      "PREDEFINED_GROUP": { "DEFAULT": "Default", "ALL": "Alle" }
+      "PREDEFINED_GROUP": { "DEFAULT": "Default", "ALL": "Alle" },
+      "RESET_BUTTON": {
+        "ARIA_LABEL": "Suchkriterien und Ergebnisse zurücksetzen",
+        "TOOLTIP": "Suchkriterien und Ergebnisse zurücksetzen"
+      }
     },
     "TOUCH": {
       "CRD": "Aktualisieren",

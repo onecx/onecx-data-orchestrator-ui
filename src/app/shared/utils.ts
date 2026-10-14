@@ -10,7 +10,7 @@ export function limitText(text: string | undefined, limit: number): string {
 }
 
 export function copyToClipboard(text?: string): void {
-  if (text) navigator.clipboard.writeText(text)
+  if (text) navigator.clipboard.writeText(text).catch((err) => console.error(err))
 }
 
 /**
@@ -51,4 +51,12 @@ export function sortByLocale(a: string, b: string): number {
 // display simple formatted text
 export function convertLineBreaks(text?: string) {
   return text?.replaceAll(/(?:\r\n|\r|\n)/g, '<br/>') ?? ''
+}
+
+export function asArray(value: string | string[] | null | undefined): string[] | undefined {
+  if (value == null || value === '') {
+    return undefined
+  }
+
+  return Array.isArray(value) ? value : [value]
 }

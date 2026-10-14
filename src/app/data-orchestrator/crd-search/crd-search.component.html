@@ -1,6 +1,7 @@
 <ocx-portal-page helpArticleId="PAGE_CRD_SEARCH" permission="CRD#SEARCH">
   <app-crd-criteria
     [actions]="(actions$ | async) ?? []"
+    [criteria]="criteria"
     (criteriaEmitter)="onSearch($event)"
     (resetSearchEmitter)="onCriteriaReset()"
   ></app-crd-criteria>
