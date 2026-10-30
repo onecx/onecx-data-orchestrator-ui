@@ -48,14 +48,14 @@
       border-bottom-right-radius: 0;
     }
     .input-field-correction .p-inputtext {
-      padding-top: 1rem !important;
-      padding-bottom: 0.5rem !important;
+      padding-top: 1rem;
+      padding-bottom: 0.5rem;
     }
     .pseudo-button:hover {
-      background: var(--button-hover-bg) !important;
+      background: var(--button-hover-bg);
       cursor: pointer;
       * {
-        background: var(--button-hover-bg) !important;
+        background: var(--button-hover-bg);
       }
     }
   }
@@ -102,7 +102,7 @@
         color: var(--primary-color-text);
         background: var(--button-hover-bg);
         cursor: pointer;
-        padding: 5px !important;
+        padding: 5px;
       }
     }
   }
@@ -182,7 +182,7 @@
       }
       &.p-inputtext:hover,
       &.p-dropdown:hover {
-        border-color: rgb(0 0 0 / 30%) !important;
+        border-color: rgb(0 0 0 / 30%);
       }
     }
   }
@@ -194,7 +194,7 @@
     .p-fileupload {
       .p-fileupload-buttonbar,
       .p-fileupload-content {
-        background-color: var(--surface-100) !important;
+        background-color: var(--surface-100);
       }
       .p-fileupload-content {
         padding: 0.5rem;
@@ -285,7 +285,7 @@
   :host ::ng-deep {
     .filter-selectbutton {
       .p-selectbutton .p-button {
-        opacity: 0.9 !important;
+        opacity: 0.9;
         border: var(--toggle-button-border);
         &.p-highlight {
           background: var(--toggle-button-active-bg);
@@ -328,7 +328,7 @@
     ocx-interactive-data-view > div {
       padding: 0 0 0.5rem 0 !important;
       &.surface-border {
-        border-bottom: var(--table-header-border) !important;
+        border-bottom: var(--table-header-border);
       }
     }
   }
@@ -378,7 +378,7 @@
       button[icon='pi pi-angle-double-right'],
       button:nth-child(2),
       button:nth-child(4) {
-        display: none !important;
+        display: none;
       }
     }
   }
@@ -428,7 +428,7 @@
 }
 @mixin tabview-fix-color-selected-tab {
   :host ::ng-deep {
-    --tabview-header-active-bg: rgb(from var(--primary-color) r g b / 0.12) !important;
+    --tabview-header-active-bg: rgb(from var(--primary-color) r g b / 0.12);
   }
 }
 
@@ -442,13 +442,13 @@
     td button.p-button {
       &.p-button-icon-only {
         padding: 0.5rem;
-        width: unset !important;
+        width: unset;
       }
       &.p-button-rounded {
-        height: unset !important;
+        height: unset;
       }
       &:disabled {
-        opacity: 0.38 !important;
+        opacity: 0.38;
       }
     }
   }
@@ -458,22 +458,22 @@
     // responsive table result view
     @media screen and (min-width: 576px) {
       .sm\:table-cell {
-        display: table-cell !important;
+        display: table-cell;
       }
     }
     @media screen and (min-width: 768px) {
       .md\:table-cell {
-        display: table-cell !important;
+        display: table-cell;
       }
     }
     @media screen and (min-width: 992px) {
       .lg\:table-cell {
-        display: table-cell !important;
+        display: table-cell;
       }
     }
     @media screen and (min-width: 1200px) {
       .xl\:table-cell {
-        display: table-cell !important;
+        display: table-cell;
       }
     }
   }
