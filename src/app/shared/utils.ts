@@ -20,7 +20,9 @@ export function forceFormValidation(form: AbstractControl): void {
   if (form instanceof FormGroup || form instanceof FormArray) {
     for (const inner in form.controls) {
       const control = form.get(inner)
-      control && forceFormValidation(control)
+      if (control) {
+        forceFormValidation(control)
+      }
     }
   } else {
     form.markAsDirty()
@@ -32,7 +34,6 @@ export function forceFormValidation(form: AbstractControl): void {
 /**
  *  DROPDOWN
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type DropDownChangeEvent = MouseEvent & { value: any }
 
 export function dropDownSortItemsByLabel(a: SelectItem, b: SelectItem): number {
