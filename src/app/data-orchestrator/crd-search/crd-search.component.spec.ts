@@ -381,9 +381,8 @@ describe('CrdSearchComponent', () => {
         type: ContextKind.Data
       }
 
-      const result = (component as any).restoreStateFromQueryParams()
+      ;(component as any).restoreStateFromQueryParams()
 
-      expect(result).toBeTrue()
       expect(component.criteria).toEqual({
         crdSearchCriteria: {
           name: 'test-name',
@@ -400,9 +399,8 @@ describe('CrdSearchComponent', () => {
         type: [ContextKind.Data, ContextKind.Database]
       }
 
-      const result = (component as any).restoreStateFromQueryParams()
+      ;(component as any).restoreStateFromQueryParams()
 
-      expect(result).toBeTrue()
       expect(component.criteria).toEqual({
         crdSearchCriteria: {
           name: 'test-name',
@@ -418,9 +416,8 @@ describe('CrdSearchComponent', () => {
         name: null
       }
 
-      const result = (component as any).restoreStateFromQueryParams()
+      ;(component as any).restoreStateFromQueryParams()
 
-      expect(result).toBeTrue()
       expect(component.criteria).toEqual({
         crdSearchCriteria: {
           name: undefined,
@@ -428,6 +425,15 @@ describe('CrdSearchComponent', () => {
         }
       })
       expect(component.onSearch).toHaveBeenCalledWith(component.criteria, true)
+    })
+
+    it('should not search when there are no query params', () => {
+      spyOn(component, 'onSearch')
+      ;(component as any).route.snapshot.queryParams = {}
+
+      ;(component as any).restoreStateFromQueryParams()
+
+      expect(component.onSearch).not.toHaveBeenCalled()
     })
   })
 })
