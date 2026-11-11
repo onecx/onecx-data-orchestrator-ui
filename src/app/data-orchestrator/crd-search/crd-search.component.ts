@@ -139,7 +139,7 @@ export class CrdSearchComponent implements OnInit {
   ngOnInit(): void {
     this.prepareActionButtons()
     this.initFilter()
-    const restored = this.restoreStateFromQueryParams()
+    this.restoreStateFromQueryParams()
   }
 
   private initFilter() {
@@ -306,11 +306,11 @@ export class CrdSearchComponent implements OnInit {
     })
   }
 
-  private restoreStateFromQueryParams(): boolean {
+  private restoreStateFromQueryParams(): void {
     const queryParams = this.route.snapshot.queryParams
 
     if (!Object.keys(queryParams).length) {
-      return false
+      return
     }
 
     const criteria: GetCustomResourcesByCriteriaRequestParams = {
@@ -322,6 +322,5 @@ export class CrdSearchComponent implements OnInit {
 
     this.criteria = criteria
     this.onSearch(criteria, true)
-    return true
   }
 }
