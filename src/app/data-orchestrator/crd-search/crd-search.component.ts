@@ -140,7 +140,6 @@ export class CrdSearchComponent implements OnInit {
     this.prepareActionButtons()
     this.initFilter()
     const restored = this.restoreStateFromQueryParams()
-    if (!restored) this.onSearch({})
   }
 
   private initFilter() {
