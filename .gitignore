@@ -35,6 +35,7 @@ typings
 *.sh
 *.js
 !proxy.conf.js
+!data-orchestrator-mock-server.js
 
 # System Files
 .DS_Store

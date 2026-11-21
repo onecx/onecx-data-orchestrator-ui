@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
 import { TranslateModule } from '@ngx-translate/core'
+
 import { TooltipModule } from 'primeng/tooltip'
 
 import { AngularAcceleratorModule } from '@onecx/angular-accelerator'
@@ -48,8 +49,4 @@ const routes: Routes = [{ path: '', component: CrdSearchComponent, pathMatch: 'f
   ],
   providers: [...providePermissionService()]
 })
-export class DataOrchestratorModule {
-  constructor() {
-    console.info('Data Orchestrator Module constructor')
-  }
-}
+export class DataOrchestratorModule {}

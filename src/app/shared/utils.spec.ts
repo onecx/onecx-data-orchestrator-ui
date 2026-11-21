@@ -1,34 +1,38 @@
 import { FormGroup, FormControl } from '@angular/forms'
 import { SelectItem } from 'primeng/api'
 
-import {
-  asArray,
-  limitText,
-  convertLineBreaks,
-  copyToClipboard,
-  forceFormValidation,
-  dropDownSortItemsByLabel,
-  dropDownGetLabelByValue,
-  sortByLocale
-} from './utils'
+import { Utils } from './utils'
 
 describe('util functions', () => {
+  describe('mapping_error_status', () => {
+    it('should map known status', () => {
+      const status = Utils.mapping_error_status(404)
+
+      expect(status).toEqual(404)
+    })
+    it('should map unknown status', () => {
+      const status = Utils.mapping_error_status(405)
+
+      expect(status).toEqual(0)
+    })
+  })
+
   describe('limitText', () => {
     it('should truncate text that exceeds the specified limit', () => {
-      const result = limitText('hello', 4)
+      const result = Utils.limitText('hello', 4)
 
       expect(result).toEqual('hell...')
     })
 
     it('should return the original text if it does not exceed the limit', () => {
-      const result = limitText('hello', 6)
+      const result = Utils.limitText('hello', 6)
 
       expect(result).toEqual('hello')
     })
 
     it('should return an empty string for undefined input', () => {
       const str: any = undefined
-      const result = limitText(str, 5)
+      const result = Utils.limitText(str, 5)
 
       expect(result).toEqual('')
     })
@@ -46,7 +50,7 @@ describe('util functions', () => {
     })
 
     it('should copy text to clipboard', () => {
-      copyToClipboard('text')
+      Utils.copyToClipboard('text')
 
       expect(writeTextSpy).toHaveBeenCalledWith('text')
     })
@@ -57,7 +61,7 @@ describe('util functions', () => {
 
       const consoleErrorSpy = spyOn(console, 'error')
 
-      copyToClipboard('text')
+      Utils.copyToClipboard('text')
 
       await Promise.resolve()
 
@@ -73,7 +77,7 @@ describe('util functions', () => {
         control2: new FormControl('')
       })
 
-      forceFormValidation(group)
+      Utils.forceFormValidation(group)
 
       expect(group.dirty).toBeTrue()
       expect(group.touched).toBeTrue()
@@ -87,7 +91,7 @@ describe('util functions', () => {
         { label: 'label1', value: 1 }
       ]
 
-      const sortedItems = items.sort(dropDownSortItemsByLabel)
+      const sortedItems = items.sort(Utils.dropDownSortItemsByLabel)
 
       expect(sortedItems[0].label).toEqual('label1')
     })
@@ -98,7 +102,7 @@ describe('util functions', () => {
         { label: 'label1', value: 2 }
       ]
 
-      const sortedItems = items.sort(dropDownSortItemsByLabel)
+      const sortedItems = items.sort(Utils.dropDownSortItemsByLabel)
 
       expect(sortedItems[0].label).toBeUndefined()
     })
@@ -111,7 +115,7 @@ describe('util functions', () => {
         { label: 'label1', value: 1 }
       ]
 
-      const result = dropDownGetLabelByValue(items, '1')
+      const result = Utils.dropDownGetLabelByValue(items, '1')
 
       expect(result).toEqual('label1')
     })
@@ -121,7 +125,7 @@ describe('util functions', () => {
     it('should sort strings based on locale', () => {
       const strings: string[] = ['str2', 'str1']
 
-      const sortedStrings = strings.sort(sortByLocale)
+      const sortedStrings = strings.sort(Utils.sortByLocale)
 
       expect(sortedStrings[0]).toEqual('str1')
     })
@@ -131,20 +135,20 @@ describe('util functions', () => {
     it('should convert line breaks to br', () => {
       const text = '123\r456'
 
-      expect(convertLineBreaks(text)).toEqual('123<br/>456')
+      expect(Utils.convertLineBreaks(text)).toEqual('123<br/>456')
     })
     it('should return empty string if input is undefined', () => {
-      expect(convertLineBreaks(undefined)).toEqual('')
+      expect(Utils.convertLineBreaks(undefined)).toEqual('')
     })
   })
 
   describe('asArray', () => {
     it('should return undefined when value is undefined', () => {
-      expect(asArray(undefined)).toBeUndefined()
+      expect(Utils.asArray(undefined)).toBeUndefined()
     })
 
     it('should wrap a single string in an array', () => {
-      expect(asArray('value')).toEqual(['value'])
+      expect(Utils.asArray('value')).toEqual(['value'])
     })
   })
 })

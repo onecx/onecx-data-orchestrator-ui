@@ -349,6 +349,10 @@
     "HTTP_STATUS_500": {
       "CRD": "Unknown server problem retrieving K8s Custom Resources - please try again.",
       "CRDS": "Unknown server problem retrieving K8s Custom Resources - please try again."
+    },
+    "HTTP_STATUS_504": {
+      "CRD": "Server not responding (Gateway Timeout) - please try again.",
+      "CRDS": "Server not responding (Gateway Timeout) - please try again."
     }
   }
 }

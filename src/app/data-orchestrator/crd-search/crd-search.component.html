@@ -4,18 +4,12 @@
     [criteria]="criteria"
     (criteriaEmitter)="onSearch($event)"
     (resetSearchEmitter)="onCriteriaReset()"
+    [loading]="loading"
   ></app-crd-criteria>
 
   @if (crds$ | async; as crds) {
     <ocx-content class="w-full adjust-card-padding">
-      @if (loading) {
-        <p-message
-          id="do_crd_search_message_loading"
-          severity="info"
-          styleClass="w-fit"
-          [text]="'ACTIONS.LOADING' | translate"
-        ></p-message>
-      } @else if (exceptionKey) {
+      @if (exceptionKey) {
         <p-message
           id="do_crd_search_message_error"
           severity="error"

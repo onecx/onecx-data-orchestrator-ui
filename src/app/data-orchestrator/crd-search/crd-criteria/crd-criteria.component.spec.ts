@@ -140,6 +140,20 @@ describe('CrdCriteriaComponent', () => {
     expect(component.crdCriteria.get('type')?.value).toEqual([ContextKind.Data, ContextKind.Product])
   })
 
+  it('should default type to null in the form when input criteria has no type', () => {
+    const restoredCriteria: { crdSearchCriteria: { name: string } } = {
+      crdSearchCriteria: {
+        name: 'my-crd'
+      }
+    }
+
+    fixture.componentRef.setInput('criteria', restoredCriteria)
+    fixture.detectChanges()
+
+    expect(component.crdCriteria.get('name')?.value).toBe('my-crd')
+    expect(component.crdCriteria.get('type')?.value).toBeNull()
+  })
+
   /**
    * Translations
    */

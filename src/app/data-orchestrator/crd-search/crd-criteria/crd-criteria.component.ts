@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common'
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,9 +7,11 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core'
+import { AsyncPipe } from '@angular/common'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { catchError, map, Observable, of, switchMap } from 'rxjs'
+
 import { SelectItem } from 'primeng/api'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
@@ -51,6 +52,8 @@ export interface CrdCriteriaForm {
 export class CrdCriteriaComponent implements OnChanges {
   @Input() public actions: Action[] = []
   @Input() public criteria: GetCustomResourcesByCriteriaRequestParams = {}
+  @Input() public loading = false
+
   @Output() public criteriaEmitter = new EventEmitter<GetCustomResourcesByCriteriaRequestParams>()
   @Output() public resetSearchEmitter = new EventEmitter<boolean>()
 

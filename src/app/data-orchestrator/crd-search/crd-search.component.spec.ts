@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { provideRouter } from '@angular/router'
+import { NavigationExtras, provideRouter, Router } from '@angular/router'
 import { TranslateTestingModule } from 'ngx-translate-testing'
 import { BehaviorSubject, of, throwError } from 'rxjs'
 
@@ -427,13 +427,64 @@ describe('CrdSearchComponent', () => {
       expect(component.onSearch).toHaveBeenCalledWith(component.criteria, true)
     })
 
-    it('should not search when there are no query params', () => {
+    it('should search with default criteria when there are no query params', () => {
       spyOn(component, 'onSearch')
       ;(component as any).route.snapshot.queryParams = {}
 
       ;(component as any).restoreStateFromQueryParams()
 
-      expect(component.onSearch).not.toHaveBeenCalled()
+      expect(component.onSearch).toHaveBeenCalledWith(
+        {
+          crdSearchCriteria: {
+            name: undefined,
+            type: [ContextKind.Data]
+          }
+        },
+        true
+      )
+    })
+  })
+
+  describe('updateSearchParamsFromState', () => {
+    let router: Router
+
+    beforeEach(() => {
+      router = TestBed.inject(Router)
+    })
+
+    it('should merge name and type of the current criteria into the query params', () => {
+      const navigateSpy = spyOn(router, 'navigate')
+
+      component.criteria = { crdSearchCriteria: { name: 'test-name', type: [ContextKind.Data] } }
+      ;(component as any).updateSearchParamsFromState()
+
+      const [url, options] = navigateSpy.calls.mostRecent().args as [any, NavigationExtras]
+      expect(url).toEqual([])
+      expect(options.queryParams).toEqual({ name: 'test-name', type: [ContextKind.Data] })
+      expect(options.replaceUrl).toBeTrue()
+      expect(options.queryParamsHandling).toEqual('merge')
+    })
+
+    it('should navigate with undefined criteria if crdSearchCriteria is not set', () => {
+      const navigateSpy = spyOn(router, 'navigate')
+
+      component.criteria = {}
+      ;(component as any).updateSearchParamsFromState()
+
+      const [, options] = navigateSpy.calls.mostRecent().args as [any, NavigationExtras]
+      expect(options.queryParams).toEqual({ name: undefined, type: undefined })
+    })
+
+    it('should be called by onSearch and onCriteriaReset', () => {
+      const navigateSpy = spyOn(router, 'navigate')
+
+      component.onSearch({ crdSearchCriteria: {} })
+      expect(navigateSpy).toHaveBeenCalled()
+
+      navigateSpy.calls.reset()
+
+      component.onCriteriaReset()
+      expect(navigateSpy).toHaveBeenCalled()
     })
   })
 })

@@ -1,10 +1,11 @@
-import { AsyncPipe } from '@angular/common'
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { AsyncPipe } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, catchError, finalize, map, Observable, of } from 'rxjs'
+
 import { PrimeIcons, SelectItem } from 'primeng/api'
 import { TooltipModule } from 'primeng/tooltip'
 import { MessageModule } from 'primeng/message'
@@ -29,7 +30,7 @@ import {
   GenericCrdStatusEnum,
   GetCustomResourcesByCriteriaRequestParams
 } from 'src/app/shared/generated'
-import { asArray } from 'src/app/shared/utils'
+import { Utils } from 'src/app/shared/utils'
 import { CrdDetailComponent } from '../crd-detail/crd-detail.component'
 import { CrdCriteriaComponent } from './crd-criteria/crd-criteria.component'
 
@@ -38,8 +39,6 @@ type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
 
 @Component({
   selector: 'app-crd-search',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './crd-search.component.html',
   imports: [
     AsyncPipe,
     FormsModule,
@@ -51,6 +50,8 @@ type allCriteriaLists = { products: SelectItem[]; workspaces: SelectItem[] }
     MessageModule,
     PortalPageComponent
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './crd-search.component.html',
   styleUrls: ['./crd-search.component.scss']
 })
 export class CrdSearchComponent implements OnInit {
@@ -248,7 +249,7 @@ export class CrdSearchComponent implements OnInit {
       }),
       catchError((err) => {
         this.msgService.error({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
-        this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRDS'
+        this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + Utils.mapping_error_status(err.status) + '.CRDS'
         console.error('getCustomResourcesByCriteria', err)
         return of([])
       }),
@@ -258,12 +259,12 @@ export class CrdSearchComponent implements OnInit {
 
   public onCriteriaReset(): void {
     this.exceptionKey = undefined
-    this.onSearch({})
+    this.resultData$.next([])
+    this.filteredData$.next([])
+    this.criteria = { crdSearchCriteria: {} }
+    this.updateSearchParamsFromState()
   }
 
-  //   public onColumnsChange(activeIds: string[]) {
-  //     this.filteredColumns = activeIds.map((id) => this.columns.find((col) => col.field === id)) as Column[]
-  //   }
   public onFilterChange(filter: string): void {
     this.filterData = filter
     this.resultData$.next(this.resultData$.value)
@@ -309,17 +310,26 @@ export class CrdSearchComponent implements OnInit {
   private restoreStateFromQueryParams(): void {
     const queryParams = this.route.snapshot.queryParams
 
+    // If there are no query parameters, initialize the search with default criteria.
     if (!Object.keys(queryParams).length) {
+      this.onSearch(
+        {
+          crdSearchCriteria: {
+            name: undefined,
+            type: [ContextKind.Data]
+          }
+        } as GetCustomResourcesByCriteriaRequestParams,
+        true
+      )
       return
     }
-
+    // restore state from query parameters
     const criteria: GetCustomResourcesByCriteriaRequestParams = {
       crdSearchCriteria: {
         name: queryParams['name'] ?? undefined,
-        type: asArray(queryParams['type']) as ContextKind[] | undefined
+        type: Utils.asArray(queryParams['type']) as ContextKind[] | undefined
       }
     }
-
     this.criteria = criteria
     this.onSearch(criteria, true)
   }
