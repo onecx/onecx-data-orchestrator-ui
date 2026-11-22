@@ -1,10 +1,5 @@
 @use '/src/app/_do-mixins.scss' as *;
 
-/*
-@include danger-action;
-@include table-responsive-columns;
-@include dialog-footer-buttons;
-*/
 @include table-inline-buttons;
 @include ocx-interactive-data-view-fixes;
 
@@ -23,13 +18,12 @@
   --onecx-data-orchestrator-onecx-data-orchestrator-ui-card-shadow:
     rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 
-  .p-datatable .p-datatable-thead > tr > th {
-    border-bottom-width: 2px;
-  }
-
   --onecx-data-orchestrator-onecx-data-orchestrator-ui-datatable-body-cell-padding: 0.5rem 1rem;
 
   .p-datatable {
+    .p-datatable-thead > tr > th {
+      border-bottom-width: 2px;
+    }
     .p-datatable-thead > tr > th,
     .p-datatable-tbody > tr > td {
       &:first-child {
@@ -59,8 +53,8 @@
     align-items: center !important;
     justify-content: flex-start !important;
     flex-wrap: wrap;
-  }
-  .table-header-wrapper span:first-child {
-    margin-right: 10px;
+    span:first-child {
+      margin-right: 10px;
+    }
   }
 }

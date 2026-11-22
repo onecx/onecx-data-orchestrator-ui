@@ -1,3 +1,4 @@
+@let type = type$ | async;
 <ocx-search-header
   [ocxLoadingIndicator]="loading"
   [header]="'DIALOG.SEARCH.HEADER' | translate"
@@ -6,6 +7,8 @@
   [resetButtonTooltip]="'ACTIONS.SEARCH.RESET_BUTTON.TOOLTIP' | translate"
   (searched)="submitCriteria()"
   (resetted)="resetCriteria()"
+  [searchButtonDisabled]="!type || crdCriteria.invalid"
+  [resetButtonDisabled]="!type || crdCriteria.invalid"
   [manualBreadcrumbs]="false"
   [actions]="actions"
 >
@@ -26,7 +29,7 @@
     <p-floatlabel variant="on">
       <p-multiSelect
         id="do_crd_search_criteria_type"
-        [options]="(type$ | async) ?? []"
+        [options]="type ?? []"
         formControlName="type"
         appendTo="body"
         [filter]="false"

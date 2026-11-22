@@ -61,7 +61,7 @@ export class CrdCriteriaComponent implements OnChanges {
   public crdCriteria!: FormGroup<CrdCriteriaForm>
   public dateFormatForRange: string
   public filteredTitles = []
-  public type$: Observable<SelectItem[]> = of([])
+  public type$: Observable<SelectItem[] | undefined> = of(undefined)
   public statusOptions$: Observable<SelectItem[]> = of([])
   public priorityType$: Observable<SelectItem[]> = of([])
 
@@ -72,8 +72,8 @@ export class CrdCriteriaComponent implements OnChanges {
   ) {
     this.dateFormatForRange = this.user.lang$.getValue() === 'de' ? 'dd.mm.yy' : 'm/d/yy'
     this.crdCriteria = new FormGroup<CrdCriteriaForm>({
-      name: new FormControl<string | null>(null),
-      type: new FormControl<ContextKind[] | null>({ value: null, disabled: false }, { validators: Validators.required })
+      name: new FormControl<string | null>({ value: null, disabled: true }),
+      type: new FormControl<ContextKind[] | null>({ value: null, disabled: true }, { validators: Validators.required })
     })
     this.fillTypes()
   }
@@ -119,6 +119,9 @@ export class CrdCriteriaComponent implements OnChanges {
 
         return this.translate.get(kinds.map((kind) => 'ENUMS.CRD_TYPE.' + kind)).pipe(
           map((data) => {
+            if (data) {
+              this.crdCriteria.enable()
+            }
             return kinds
               .map((kind) => ({
                 label: data['ENUMS.CRD_TYPE.' + kind],
@@ -128,7 +131,7 @@ export class CrdCriteriaComponent implements OnChanges {
           })
         )
       }),
-      catchError(() => of([]))
+      catchError(() => of(undefined))
     )
   }
 }

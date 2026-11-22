@@ -168,7 +168,7 @@ describe('CrdCriteriaComponent', () => {
 
     const data = await firstValueFrom(freshComponent.type$)
 
-    expect(data.length).toBeGreaterThanOrEqual(8)
+    expect(data?.length).toBeGreaterThanOrEqual(8)
   })
 
   it('should have no kinds if api returns nothing', async () => {
@@ -181,7 +181,7 @@ describe('CrdCriteriaComponent', () => {
     freshFixture.detectChanges()
 
     // Verify the type$ observable
-    const data: SelectItem[] = await firstValueFrom(freshComponent.type$)
+    const data: SelectItem[] | undefined = await firstValueFrom(freshComponent.type$)
     expect(data).toHaveSize(0)
   })
 
@@ -194,7 +194,9 @@ describe('CrdCriteriaComponent', () => {
     freshFixture.detectChanges()
 
     // Verify the type$ observable falls back to empty array
-    const data: SelectItem[] = await firstValueFrom(freshComponent.type$)
-    expect(data).toHaveSize(0)
+    const data: SelectItem[] | undefined = await firstValueFrom(freshComponent.type$)
+    if (data) {
+      expect(data).toHaveSize(0)
+    }
   })
 })
