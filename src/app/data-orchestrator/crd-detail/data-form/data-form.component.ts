@@ -14,6 +14,7 @@ import { Update } from '../crd-detail.component'
 import { ChangeMode } from '../../crd-search/crd-search.component'
 import { StatusTabComponent } from '../status-tab/status-tab.component'
 import { UpdateHistoryComponent } from '../update-history/update-history.component'
+import { Dialog } from 'primeng/dialog'
 
 @Component({
   selector: 'app-data-form',
@@ -37,6 +38,7 @@ export class DataFormComponent implements OnChanges {
   @Input() public dataCrd: CustomResourceData | undefined
   @Input() public dateFormat: string | undefined
   @Input() public updateHistory: Update[] | undefined
+  @Input() public dialog: Dialog | undefined
 
   public formGroup: FormGroup
 

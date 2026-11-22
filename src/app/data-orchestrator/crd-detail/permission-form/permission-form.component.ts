@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
+
+import { Dialog } from 'primeng/dialog'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
 import { MessageModule } from 'primeng/message'
@@ -38,6 +40,7 @@ export class PermissionFormComponent implements OnChanges {
   @Input() public permissionCrd: CustomResourcePermission | undefined
   @Input() public dateFormat: string | undefined
   @Input() public updateHistory: Update[] | undefined
+  @Input() public dialog: Dialog | undefined
 
   public formGroup: FormGroup
   public permissions: Permission[] = []

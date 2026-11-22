@@ -1,4 +1,4 @@
-<p-tabs value="0">
+<p-tabs value="0" (valueChange)="dialog?.focus()">
   <p-tablist>
     <p-tab value="0">{{ 'DIALOG.TABS.DETAILS' | translate }}</p-tab>
     <p-tab value="1">{{ 'DIALOG.TABS.DATA' | translate }}</p-tab>

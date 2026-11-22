@@ -527,7 +527,7 @@ app.get(`/crd/Microfrontend/onecx-product-store-ui-main`, (req, res) => {
             "kind": "Microfrontend",
             "metadata": {
                 "annotations": {
-                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"onecx.tkit.org/v1\",\"kind\":\"Microfrontend\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"onecx-product-store-ui\",\"app.kubernetes.io/instance\":\"onecx-product-store-dev\",\"app.kubernetes.io/managed-by\":\"Helm\",\"app.kubernetes.io/name\":\"onecx-product-store-ui\",\"helm.sh/chart\":\"app-0.20.0\",\"version\":\"1.8.0\"},\"name\":\"onecx-product-store-ui-main\",\"namespace\":\"dev\"},\"spec\":{\"appId\":\"onecx-product-store-ui\",\"appName\":\"onecx-product-store-ui\",\"appVersion\":\"1.8.0\",\"classifications\":[],\"contact\":\"onecx@1000kit.org\",\"deprecated\":false,\"description\":\"OneCX Product Store UI\",\"endpoints\":[{\"name\":\"product-detail\",\"path\":\"/{product-name}\"},{\"name\":\"apps\",\"path\":\"/apps\"},{\"name\":\"endpoints\",\"path\":\"/endpoints\"},{\"name\":\"slots\",\"path\":\"/slots\"}],\"exposedModule\":\"./OneCXProductStoreModule\",\"iconName\":null,\"note\":\"OneCX Product Store UI module auto import via MF operator\",\"productName\":\"onecx-product-store\",\"remoteBaseUrl\":\"/mfe/product-store/\",\"remoteEntry\":\"/mfe/product-store/remoteEntry.js\",\"remoteName\":\"onecx-product-store\",\"tagName\":\"ocx-product-store-component\",\"technology\":\"WEBCOMPONENTMODULE\",\"type\":\"MODULE\"}}\n"
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"onecx.tkit.org/v1\",\"kind\":\"Microfrontend\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"onecx-product-store-ui\",\"app.kubernetes.io/instance\":\"onecx-product-store-dev\",\"app.kubernetes.io/managed-by\":\"Helm\",\"app.kubernetes.io/name\":\"onecx-product-store-ui\",\"helm.sh/chart\":\"app-0.20.0\",\"version\":\"1.8.0\"},\"name\":\"onecx-product-store-ui-main\",\"namespace\":\"dev\"},\"spec\":{\"appId\":\"onecx-product-store-ui\",\"appName\":\"onecx-product-store-ui\",\"appVersion\":\"1.8.0\",\"classifications\":[],\"contact\":\"onecx@1000kit.org\",\"deprecated\":true,\"description\":\"OneCX Product Store UI\",\"endpoints\":[{\"name\":\"product-detail\",\"path\":\"/{product-name}\"},{\"name\":\"apps\",\"path\":\"/apps\"},{\"name\":\"endpoints\",\"path\":\"/endpoints\"},{\"name\":\"slots\",\"path\":\"/slots\"}],\"exposedModule\":\"./OneCXProductStoreModule\",\"iconName\":null,\"note\":\"OneCX Product Store UI module auto import via MF operator\",\"productName\":\"onecx-product-store\",\"remoteBaseUrl\":\"/mfe/product-store/\",\"remoteEntry\":\"/mfe/product-store/remoteEntry.js\",\"remoteName\":\"onecx-product-store\",\"tagName\":\"ocx-product-store-component\",\"technology\":\"WEBCOMPONENTMODULE\",\"type\":\"MODULE\"}}\n"
                 },
                 "creationTimestamp": "2024-05-02T10:02:01Z",
                 "generation": 96,
@@ -614,9 +614,9 @@ app.get(`/crd/Microfrontend/onecx-product-store-ui-main`, (req, res) => {
                 "appId": "onecx-product-store-ui",
                 "appName": "onecx-product-store-ui",
                 "appVersion": "1.8.0",
-                "classifications": [],
+                "classifications": ['UI'],
                 "contact": "onecx@1000kit.org",
-                "deprecated": false,
+                "deprecated": true,
                 "description": "OneCX Product Store UI",
                 "endpoints": [
                     {
@@ -666,7 +666,7 @@ app.get(`/crd/Microfrontend/onecx-product-store-ui-product-infos`, (req, res) =>
             "kind": "Microfrontend",
             "metadata": {
                 "annotations": {
-                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"onecx.tkit.org/v1\",\"kind\":\"Microfrontend\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"onecx-product-store-ui\",\"app.kubernetes.io/instance\":\"onecx-product-store-dev\",\"app.kubernetes.io/managed-by\":\"Helm\",\"app.kubernetes.io/name\":\"onecx-product-store-ui\",\"helm.sh/chart\":\"app-0.20.0\",\"version\":\"1.8.0\"},\"name\":\"onecx-product-store-ui-product-infos\",\"namespace\":\"dev\"},\"spec\":{\"appId\":\"onecx-product-store-ui\",\"appName\":\"onecx-product-store-ui\",\"appVersion\":\"1.8.0\",\"classifications\":[],\"contact\":\"onecx@1000kit.org\",\"deprecated\":false,\"description\":\"Provide Product informations\",\"exposedModule\":\"./OneCXProductInfosComponent\",\"iconName\":null,\"note\":null,\"productName\":\"onecx-product-store\",\"remoteBaseUrl\":\"/mfe/product-store/\",\"remoteEntry\":\"/mfe/product-store/remoteEntry.js\",\"remoteName\":\"onecx-product-store\",\"tagName\":\"ocx-product-infos-component\",\"technology\":\"WEBCOMPONENTMODULE\",\"type\":\"COMPONENT\"}}\n"
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"onecx.tkit.org/v1\",\"kind\":\"Microfrontend\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"onecx-product-store-ui\",\"app.kubernetes.io/instance\":\"onecx-product-store-dev\",\"app.kubernetes.io/managed-by\":\"Helm\",\"app.kubernetes.io/name\":\"onecx-product-store-ui\",\"helm.sh/chart\":\"app-0.20.0\",\"version\":\"1.8.0\"},\"name\":\"onecx-product-store-ui-product-infos\",\"namespace\":\"dev\"},\"spec\":{\"appId\":\"onecx-product-store-ui\",\"appName\":\"onecx-product-store-ui\",\"appVersion\":\"1.8.0\",\"classifications\":[],\"contact\":\"onecx@1000kit.org\",\"deprecated\":true,\"description\":\"Provide Product informations\",\"exposedModule\":\"./OneCXProductInfosComponent\",\"iconName\":null,\"note\":null,\"productName\":\"onecx-product-store\",\"remoteBaseUrl\":\"/mfe/product-store/\",\"remoteEntry\":\"/mfe/product-store/remoteEntry.js\",\"remoteName\":\"onecx-product-store\",\"tagName\":\"ocx-product-infos-component\",\"technology\":\"WEBCOMPONENTMODULE\",\"type\":\"COMPONENT\"}}\n"
                 },
                 "creationTimestamp": "2025-03-28T04:58:06Z",
                 "generation": 10,
@@ -753,7 +753,7 @@ app.get(`/crd/Microfrontend/onecx-product-store-ui-product-infos`, (req, res) =>
                 "appVersion": "1.8.0",
                 "classifications": [],
                 "contact": "onecx@1000kit.org",
-                "deprecated": false,
+                "deprecated": true,
                 "description": "Provide Product informations",
                 "exposedModule": "./OneCXProductInfosComponent",
                 "productName": "onecx-product-store",

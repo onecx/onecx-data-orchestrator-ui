@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
+
 import { CheckboxModule } from 'primeng/checkbox'
+import { Dialog } from 'primeng/dialog'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
 import { TabsModule } from 'primeng/tabs'
@@ -35,6 +37,7 @@ export class SlotFormComponent implements OnChanges {
   @Input() public slotCrd: CustomResourceSlot | undefined
   @Input() public dateFormat: string | undefined
   @Input() public updateHistory: Update[] | undefined
+  @Input() public dialog: Dialog | undefined
 
   public formGroup: FormGroup
 
