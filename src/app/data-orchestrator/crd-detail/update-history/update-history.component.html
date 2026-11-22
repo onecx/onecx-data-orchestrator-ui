@@ -1,12 +1,11 @@
-<div class="mt-2 flex flex-column row-gap-2">
+<div class="flex flex-column row-gap-4">
   @for (update of updateHistory; track update) {
-    <div class="card relative p-3 pb-2 surface-100">
+    <div class="relative p-3 pb-2 border-1 border-200 border-round">
       <p-badge
         severity="warn"
-        [value]="update.operation + ':  ' + (update.date | date: dateFormat)"
         class="z-1 text-badge-right"
         styleClass="text-base font-normal"
-        [style]="{ 'padding-left': '0.75rem', 'padding-right': '0.75rem' }"
+        [value]="update.operation + ':  ' + (update.date | date: dateFormat)"
       />
       @for (key of objectKeys(update.fields); track key) {
         <div class="grid">

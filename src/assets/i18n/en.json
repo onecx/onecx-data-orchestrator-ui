@@ -6,7 +6,7 @@
       "NO.TOOLTIP": "Cancel the action",
       "YES.TOOLTIP": "Proceed with the action"
     },
-    "DELETE": { "CRD": "Löschen", "INFO": "Diese Aktion kann nicht rückgängig gemacht werden!" },
+    "DELETE": { "CRD": "Delete", "INFO": "This action cannot be undone!" },
     "EDIT": {
       "CRD": "Edit",
       "CRD.TOOLTIP": "Edit the custom resource properties",
@@ -15,7 +15,6 @@
         "NOK": "An error has occurred. The Custom Resource was not saved."
       }
     },
-    "NEW": { "CRD": "New", "CRD.TOOLTIP": "Create a custom resource" },
     "SEARCH": {
       "ACTIONS": "Actions",
       "LABEL": "Search",
@@ -83,6 +82,7 @@
     "SEARCH.SUBHEADER": "Searching and managing of K8s Custom Resources",
     "TABS": {
       "DETAILS": "Details",
+      "DATA": "Data",
       "CHANGES": "Changes",
       "STATUS": "Status",
       "PERMISSIONS": "Permissions",
@@ -177,7 +177,7 @@
       "DESCRIPTION": "Description",
       "PRODUCT_NAME": "Product Name",
       "SLOT_NAME": "Slot name",
-      "DEPRECATED": "Deprecated?",
+      "DEPRECATED": "Deprecated",
       "TOOLTIPS": {
         "NAME": "Name",
         "API_VERSION": "API version",
@@ -186,7 +186,7 @@
         "DESCRIPTION": "Description",
         "PRODUCT_NAME": "Product Name",
         "SLOT_NAME": "Slot Name",
-        "DEPRECATED": "Deprecated?"
+        "DEPRECATED": "Deprecated"
       }
     },
     "PERMISSION": {
@@ -349,6 +349,10 @@
     "HTTP_STATUS_500": {
       "CRD": "Unknown server problem retrieving K8s Custom Resources - please try again.",
       "CRDS": "Unknown server problem retrieving K8s Custom Resources - please try again."
+    },
+    "HTTP_STATUS_504": {
+      "CRD": "Server not responding (Gateway Timeout) - please try again.",
+      "CRDS": "Server not responding (Gateway Timeout) - please try again."
     }
   }
 }

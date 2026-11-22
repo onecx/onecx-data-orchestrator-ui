@@ -15,7 +15,6 @@
         "NOK": "Ein Fehler ist aufgetreten. Die K8s Ressource wurde nicht gespeichert."
       }
     },
-    "NEW": { "CRD": "New", "CRD.TOOLTIP": "Create a custom resource" },
     "SEARCH": {
       "ACTIONS": "Aktionen",
       "LABEL": "Suchen",
@@ -83,9 +82,10 @@
     "SEARCH.SUBHEADER": "Suchen und Verwalten von K8s Custom Ressourcen",
     "TABS": {
       "DETAILS": "Details",
+      "DATA": "Daten",
       "CHANGES": "Änderungen",
       "STATUS": "Status",
-      "PERMISSIONS": "Permissions",
+      "PERMISSIONS": "Berechtigungen",
       "PARAMETERS": "Parameter"
     }
   },
@@ -177,7 +177,7 @@
       "DESCRIPTION": "Beschreibung",
       "PRODUCT_NAME": "Produktname",
       "SLOT_NAME": "Slot Name",
-      "DEPRECATED": "Veraltet?",
+      "DEPRECATED": "Veraltet",
       "TOOLTIPS": {
         "NAME": "Name der K8s Custom Ressource",
         "API_VERSION": "API Version",
@@ -186,7 +186,7 @@
         "DESCRIPTION": "Beschreibung",
         "PRODUCT_NAME": "Produktname",
         "SLOT_NAME": "Slot Name",
-        "DEPRECATED": "Veraltet?"
+        "DEPRECATED": "Veraltet"
       }
     },
     "PERMISSION": {
@@ -354,6 +354,10 @@
     "HTTP_STATUS_500": {
       "CRD": "Unbekanntes Server-Problem beim Abrufen der K8s Custom Ressource - bitte versuchen Sie es noch einmal.",
       "CRDS": "Unbekanntes Server-Problem beim Abrufen von K8s Custom Ressourcen - bitte versuchen Sie es noch einmal."
+    },
+    "HTTP_STATUS_504": {
+      "CRD": "Server antwortet nicht (Gateway Timeout) - bitte versuchen Sie es noch einmal.",
+      "CRDS": "Server antwortet nicht (Gateway Timeout) - bitte versuchen Sie es noch einmal."
     }
   }
 }

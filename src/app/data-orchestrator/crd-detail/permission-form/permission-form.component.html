@@ -1,4 +1,4 @@
-<p-tabs value="0">
+<p-tabs value="0" (valueChange)="dialog?.focus()">
   <p-tablist>
     <p-tab value="0">{{ 'DIALOG.TABS.DETAILS' | translate }}</p-tab>
     @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
@@ -11,7 +11,7 @@
   </p-tablist>
   <p-tabpanels>
     <p-tabpanel value="0">
-      <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
+      <div class="flex flex-column row-gap-4" [formGroup]="formGroup">
         <!-- row 1 -->
         <div class="flex flex-row flex-wrap justify-content-between gap-4">
           <div class="flex-grow-1">
@@ -21,7 +21,7 @@
                 type="text"
                 id="do_crd_detail_permission_name"
                 formControlName="metadataName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.NAME' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
                 tooltipPosition="top"
@@ -37,7 +37,7 @@
                 type="text"
                 id="do_crd_detail_permission_kind"
                 formControlName="kind"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.KIND' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
                 tooltipPosition="top"
@@ -56,7 +56,7 @@
                 id="do_crd_detail_permission_product_name"
                 type="text"
                 formControlName="productName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.PRODUCT_NAME' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
                 tooltipPosition="top"
@@ -72,7 +72,7 @@
                 type="text"
                 id="do_crd_detail_permission_app_id"
                 formControlName="appId"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.APP_ID' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
                 tooltipPosition="top"
@@ -90,7 +90,7 @@
               type="text"
               id="do_crd_detail_permission_description"
               formControlName="description"
-              class="w-full pt-3 pb-2 text-responsive"
+              class="w-full text-responsive"
               [ariaLabel]="'CRD.PERMISSION.DESCRIPTION' | translate"
               [pTooltip]="'CRD.PERMISSION.TOOLTIPS.DESCRIPTION' | translate"
               tooltipPosition="top"
@@ -102,17 +102,12 @@
       </div>
     </p-tabpanel>
 
-    @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
-      <p-tabpanel value="1">
-        <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
-      </p-tabpanel>
-    }
-
-    @if (permissionCrd?.status) {
-      <p-tabpanel value="2">
-        <app-status-tab [status]="permissionCrd?.status" />
-      </p-tabpanel>
-    }
+    <p-tabpanel value="1">
+      <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
+    </p-tabpanel>
+    <p-tabpanel value="2">
+      <app-status-tab [status]="permissionCrd?.status" />
+    </p-tabpanel>
 
     <p-tabpanel value="3">
       @if (permissions.length === 0) {
@@ -121,29 +116,30 @@
           severity="info"
           [text]="'CRD.PERMISSION.PERMISSIONS.NOT_EXIST' | translate"
         ></p-message>
-      }
-      <table style="border-spacing: 0px; width: 100%">
-        <thead>
-          <tr>
-            <th class="p-2 border-200 border-bottom-2 border-right-1">
-              {{ 'CRD.PERMISSION.PERMISSIONS.RESOURCE' | translate }}
-            </th>
-            <th class="p-2 border-200 border-bottom-2 border-right-1">
-              {{ 'CRD.PERMISSION.PERMISSIONS.ACTION' | translate }}
-            </th>
-            <th class="p-2 border-200 border-bottom-2">{{ 'CRD.PERMISSION.PERMISSIONS.DESCRIPTION' | translate }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (perm of permissions; track perm) {
+      } @else {
+        <table style="border-spacing: 0px; width: 100%">
+          <thead>
             <tr>
-              <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.resource }}</td>
-              <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.action }}</td>
-              <td class="p-2 border-200 border-bottom-1">{{ perm.description }}</td>
+              <th class="p-2 border-200 border-bottom-2 border-right-1">
+                {{ 'CRD.PERMISSION.PERMISSIONS.RESOURCE' | translate }}
+              </th>
+              <th class="p-2 border-200 border-bottom-2 border-right-1">
+                {{ 'CRD.PERMISSION.PERMISSIONS.ACTION' | translate }}
+              </th>
+              <th class="p-2 border-200 border-bottom-2">{{ 'CRD.PERMISSION.PERMISSIONS.DESCRIPTION' | translate }}</th>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @for (perm of permissions; track perm) {
+              <tr>
+                <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.resource }}</td>
+                <td class="p-2 border-200 border-bottom-1 border-right-1">{{ perm.action }}</td>
+                <td class="p-2 border-200 border-bottom-1">{{ perm.description }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
     </p-tabpanel>
   </p-tabpanels>
 </p-tabs>

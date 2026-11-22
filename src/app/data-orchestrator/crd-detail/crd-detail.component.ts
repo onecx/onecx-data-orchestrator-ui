@@ -17,6 +17,8 @@ import { MessageModule } from 'primeng/message'
 import { DialogModule } from 'primeng/dialog'
 
 import { PortalMessageService, UserService } from '@onecx/angular-integration-interface'
+
+import { Utils } from 'src/app/shared/utils'
 import {
   ContextKind,
   CustomResourceData,
@@ -32,6 +34,7 @@ import {
   EditResourceRequest
 } from 'src/app/shared/generated'
 
+import { ChangeMode } from '../crd-search/crd-search.component'
 import { DataFormComponent } from './data-form/data-form.component'
 import { DatabaseFormComponent } from './database-form/database-form.component'
 import { ProductFormComponent } from './product-form/product-form.component'
@@ -41,7 +44,6 @@ import { SlotFormComponent } from './slot-form/slot-form.component'
 import { MicrofrontendFormComponent } from './microfrontend-form/microfrontend-form.component'
 import { MicroserviceFormComponent } from './microservice-form/microservice-form.component'
 import { ParameterFormComponent } from './parameter-form/parameter-form.component'
-import { ChangeMode } from '../crd-search/crd-search.component'
 
 interface ManagedField {
   apiVersion: string
@@ -155,14 +157,10 @@ export class CrdDetailComponent implements OnChanges {
             return obj
           }),
           catchError((err) => {
-            this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + err.status + '.CRD'
+            this.exceptionKey = 'EXCEPTIONS.HTTP_STATUS_' + Utils.mapping_error_status(err.status) + '.CRD'
             this.loading = false
             console.error('getCrdByTypeAndName', err)
-            return of({} as any)
-          }),
-          finalize(() => {
-            this.loading = false
-            this.exceptionKey = this.exceptionKey ?? undefined
+            return of({})
           })
         )
     }

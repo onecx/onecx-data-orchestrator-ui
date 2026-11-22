@@ -1,4 +1,4 @@
-<p-tabs value="0">
+<p-tabs value="0" (valueChange)="dialog?.focus()">
   <p-tablist>
     <p-tab value="0">{{ 'DIALOG.TABS.DETAILS' | translate }}</p-tab>
     @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
@@ -12,7 +12,7 @@
 
   <p-tabpanels>
     <p-tabpanel value="0">
-      <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
+      <div class="flex flex-column row-gap-4" [formGroup]="formGroup">
         <!-- row 1 -->
         <div class="flex flex-row flex-wrap justify-content-between gap-4">
           <div class="flex-grow-1">
@@ -22,7 +22,7 @@
                 type="text"
                 id="do_crd_detail_parameter_name"
                 formControlName="name"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.NAME' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
                 tooltipPosition="top"
@@ -38,7 +38,7 @@
                 type="text"
                 id="do_crd_detail_parameter_kind"
                 formControlName="kind"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.KIND' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
                 tooltipPosition="top"
@@ -57,7 +57,7 @@
                 id="do_crd_detail_parameter_product_name"
                 type="text"
                 formControlName="productName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.PRODUCT_NAME' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
                 tooltipPosition="top"
@@ -73,7 +73,7 @@
                 type="text"
                 id="do_crd_detail_parameter_app_id"
                 formControlName="applicationId"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.APP_ID' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
                 tooltipPosition="top"
@@ -92,7 +92,7 @@
                 type="text"
                 id="do_crd_detail_parameter_key"
                 formControlName="key"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.PARAMETER.KEY' | translate"
                 [pTooltip]="'CRD.PARAMETER.TOOLTIPS.KEY' | translate"
                 tooltipPosition="top"
@@ -108,7 +108,7 @@
                 type="text"
                 id="do_crd_detail_parameter_orgId"
                 formControlName="orgId"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.PARAMETER.ORGID' | translate"
                 [pTooltip]="'CRD.PARAMETER.TOOLTIPS.ORGID' | translate"
                 tooltipPosition="top"
@@ -121,17 +121,12 @@
       </div>
     </p-tabpanel>
 
-    @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
-      <p-tabpanel value="1">
-        <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
-      </p-tabpanel>
-    }
-
-    @if (parameterCrd?.status) {
-      <p-tabpanel value="2">
-        <app-status-tab [status]="parameterCrd?.status" />
-      </p-tabpanel>
-    }
+    <p-tabpanel value="1">
+      <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
+    </p-tabpanel>
+    <p-tabpanel value="2">
+      <app-status-tab [status]="parameterCrd?.status" />
+    </p-tabpanel>
 
     <p-tabpanel value="3">
       @if (parameters.length === 0) {
@@ -140,22 +135,22 @@
           severity="info"
           [text]="'CRD.PARAMETER.PARAMETERS.NOT_EXIST' | translate"
         ></p-message>
+      } @else {
+        <div class="flex flex-column gap-3">
+          @for (param of parameters; track param) {
+            <div class="border-1 border-200 p-3 border-round surface-50">
+              <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.NAME' | translate }}</div>
+              <div class="font-medium mb-2">{{ param.name }}</div>
+              <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.VALUE' | translate }}</div>
+              <div class="mb-2 text-pre-wrap break-word">{{ param.value }}</div>
+              <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.DISPLAY_NAME' | translate }}</div>
+              <div class="mb-2">{{ param.displayName }}</div>
+              <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.DESCRIPTION' | translate }}</div>
+              <div class="mb-2 text-pre-wrap break-word">{{ param.description }}</div>
+            </div>
+          }
+        </div>
       }
-
-      <div class="flex flex-column gap-3">
-        @for (param of parameters; track param) {
-          <div class="border-1 border-200 p-3 border-round surface-50">
-            <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.NAME' | translate }}</div>
-            <div class="font-medium mb-2">{{ param.name }}</div>
-            <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.VALUE' | translate }}</div>
-            <div class="mb-2 text-pre-wrap break-word">{{ param.value }}</div>
-            <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.DISPLAY_NAME' | translate }}</div>
-            <div class="mb-2">{{ param.displayName }}</div>
-            <div class="text-sm text-500 mb-2">{{ 'CRD.PARAMETER.PARAMETERS.DESCRIPTION' | translate }}</div>
-            <div class="mb-2 text-pre-wrap break-word">{{ param.description }}</div>
-          </div>
-        }
-      </div>
     </p-tabpanel>
   </p-tabpanels>
 </p-tabs>

@@ -1,141 +1,146 @@
-<p-tabs value="0">
+<p-tabs value="0" (valueChange)="dialog?.focus()">
   <p-tablist>
     <p-tab value="0">{{ 'DIALOG.TABS.DETAILS' | translate }}</p-tab>
+    <p-tab value="1">{{ 'DIALOG.TABS.DATA' | translate }}</p-tab>
     @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
-      <p-tab value="1">{{ 'DIALOG.TABS.CHANGES' | translate }}</p-tab>
+      <p-tab value="2">{{ 'DIALOG.TABS.CHANGES' | translate }}</p-tab>
     }
     @if (dataCrd?.status) {
-      <p-tab value="2">{{ 'DIALOG.TABS.STATUS' | translate }}</p-tab>
+      <p-tab value="3">{{ 'DIALOG.TABS.STATUS' | translate }}</p-tab>
     }
   </p-tablist>
   <p-tabpanels>
-    <p-tabpanel value="0">
-      <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
-        <!-- row 1 -->
-        <div class="flex flex-row flex-wrap justify-content-between gap-4">
-          <div class="flex-grow-1">
+    <form [formGroup]="formGroup">
+      <p-tabpanel value="0">
+        <div class="flex flex-column row-gap-4">
+          <!-- row 1 -->
+          <div class="flex flex-row flex-wrap justify-content-between gap-4">
+            <div class="flex-grow-1">
+              <p-floatlabel variant="on">
+                <input
+                  pInputText
+                  type="text"
+                  id="do_crd_detail_data_name"
+                  formControlName="name"
+                  class="w-full text-responsive"
+                  [ariaLabel]="'CRD.COMMON.NAME' | translate"
+                  [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
+                  tooltipPosition="top"
+                  tooltipEvent="hover"
+                />
+                <label for="do_crd_detail_data_name"> {{ 'CRD.COMMON.NAME' | translate }}</label>
+              </p-floatlabel>
+            </div>
+            <div class="flex-grow-1">
+              <p-floatlabel variant="on">
+                <input
+                  pInputText
+                  type="text"
+                  id="do_crd_detail_data_kind"
+                  formControlName="kind"
+                  class="w-full text-responsive"
+                  [ariaLabel]="'CRD.COMMON.KIND' | translate"
+                  [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
+                  tooltipPosition="top"
+                  tooltipEvent="hover"
+                />
+                <label for="do_crd_detail_data_kind"> {{ 'CRD.COMMON.KIND' | translate }}</label>
+              </p-floatlabel>
+            </div>
+          </div>
+          <!-- row 2 -->
+          <div class="flex flex-row flex-wrap justify-content-between gap-4">
+            <div class="flex-grow-1">
+              <p-floatlabel variant="on">
+                <input
+                  pInputText
+                  id="do_crd_detail_data_product_name"
+                  type="text"
+                  formControlName="productName"
+                  class="w-full text-responsive"
+                  [ariaLabel]="'CRD.COMMON.PRODUCT_NAME' | translate"
+                  [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
+                  tooltipPosition="top"
+                  tooltipEvent="hover"
+                />
+                <label for="do_crd_detail_data_product_name"> {{ 'CRD.COMMON.PRODUCT_NAME' | translate }}</label>
+              </p-floatlabel>
+            </div>
+            <div class="flex-grow-1">
+              <p-floatlabel variant="on">
+                <input
+                  pInputText
+                  type="text"
+                  id="do_crd_detail_data_app_id"
+                  formControlName="appId"
+                  class="w-full text-responsive"
+                  [ariaLabel]="'CRD.COMMON.APP_ID' | translate"
+                  [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
+                  tooltipPosition="top"
+                  tooltipEvent="hover"
+                />
+                <label for="do_crd_detail_data_app_id"> {{ 'CRD.COMMON.APP_ID' | translate }}</label>
+              </p-floatlabel>
+            </div>
+          </div>
+          <!-- row 3 -->
+          <div class="flex flex-row flex-wrap justify-content-between gap-4">
+            <div class="flex-grow-1">
+              <p-floatlabel variant="on">
+                <input
+                  pInputText
+                  type="text"
+                  id="do_crd_detail_data_key"
+                  formControlName="key"
+                  class="w-full text-responsive"
+                  [ariaLabel]="'CRD.DATA.KEY' | translate"
+                  [pTooltip]="'CRD.DATA.TOOLTIPS.KEY' | translate"
+                  tooltipPosition="top"
+                  tooltipEvent="hover"
+                />
+                <label for="do_crd_detail_data_key"> {{ 'CRD.DATA.KEY' | translate }}</label>
+              </p-floatlabel>
+            </div>
+            <div class="flex-grow-1">
+              <p-floatlabel variant="on">
+                <input
+                  pInputText
+                  id="do_crd_detail_data_org_id"
+                  type="text"
+                  formControlName="orgId"
+                  class="w-full text-responsive"
+                  [ariaLabel]="'CRD.DATA.ORG_ID' | translate"
+                  [pTooltip]="'CRD.DATA.TOOLTIPS.ORG_ID' | translate"
+                  tooltipPosition="top"
+                  tooltipEvent="hover"
+                />
+                <label for="do_crd_detail_data_org_id"> {{ 'CRD.DATA.ORG_ID' | translate }}</label>
+              </p-floatlabel>
+            </div>
+          </div>
+          <!-- row 4 -->
+          <div class="w-12">
             <p-floatlabel variant="on">
               <input
                 pInputText
                 type="text"
-                id="do_crd_detail_data_name"
-                formControlName="name"
-                class="w-full pt-3 pb-2 text-responsive"
-                [ariaLabel]="'CRD.COMMON.NAME' | translate"
-                [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
+                id="do_crd_detail_data_description"
+                formControlName="description"
+                class="w-full text-responsive"
+                [ariaLabel]="'CRD.DATA.NAME' | translate"
+                [pTooltip]="'CRD.DATA.TOOLTIPS.DESCRIPTION' | translate"
                 tooltipPosition="top"
                 tooltipEvent="hover"
               />
-              <label for="do_crd_detail_data_name"> {{ 'CRD.COMMON.NAME' | translate }}</label>
-            </p-floatlabel>
-          </div>
-          <div class="flex-grow-1">
-            <p-floatlabel variant="on">
-              <input
-                pInputText
-                type="text"
-                id="do_crd_detail_data_kind"
-                formControlName="kind"
-                class="w-full pt-3 pb-2 text-responsive"
-                [ariaLabel]="'CRD.COMMON.KIND' | translate"
-                [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
-                tooltipPosition="top"
-                tooltipEvent="hover"
-              />
-              <label for="do_crd_detail_data_kind"> {{ 'CRD.COMMON.KIND' | translate }}</label>
+              <label for="do_crd_detail_data_description"> {{ 'CRD.DATA.DESCRIPTION' | translate }}</label>
             </p-floatlabel>
           </div>
         </div>
-        <!-- row 2 -->
-        <div class="flex flex-row flex-wrap justify-content-between gap-4">
-          <div class="flex-grow-1">
-            <p-floatlabel variant="on" controlErrorAnchor>
-              <input
-                pInputText
-                id="do_crd_detail_data_product_name"
-                type="text"
-                formControlName="productName"
-                class="w-full pt-3 pb-2 text-responsive"
-                [ariaLabel]="'CRD.COMMON.PRODUCT_NAME' | translate"
-                [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
-                tooltipPosition="top"
-                tooltipEvent="hover"
-              />
-              <label for="do_crd_detail_data_product_name"> {{ 'CRD.COMMON.PRODUCT_NAME' | translate }}</label>
-            </p-floatlabel>
-          </div>
-          <div class="flex-grow-1">
-            <p-floatlabel variant="on" controlErrorAnchor>
-              <input
-                pInputText
-                type="text"
-                id="do_crd_detail_data_app_id"
-                formControlName="appId"
-                class="w-full pt-3 pb-2 text-responsive"
-                [ariaLabel]="'CRD.COMMON.APP_ID' | translate"
-                [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
-                tooltipPosition="top"
-                tooltipEvent="hover"
-              />
-              <label for="do_crd_detail_data_app_id"> {{ 'CRD.COMMON.APP_ID' | translate }}</label>
-            </p-floatlabel>
-          </div>
-        </div>
-        <!-- row 3 -->
-        <div class="flex flex-row flex-wrap justify-content-between gap-4">
-          <div class="flex-grow-1">
-            <p-floatlabel variant="on" controlErrorAnchor>
-              <input
-                pInputText
-                type="text"
-                id="do_crd_detail_data_key"
-                formControlName="key"
-                class="w-full pt-3 pb-2 text-responsive"
-                [ariaLabel]="'CRD.DATA.KEY' | translate"
-                [pTooltip]="'CRD.DATA.TOOLTIPS.KEY' | translate"
-                tooltipPosition="top"
-                tooltipEvent="hover"
-              />
-              <label for="do_crd_detail_data_key"> {{ 'CRD.DATA.KEY' | translate }}</label>
-            </p-floatlabel>
-          </div>
-          <div class="flex-grow-1">
-            <p-floatlabel variant="on" controlErrorAnchor>
-              <input
-                pInputText
-                id="do_crd_detail_data_org_id"
-                type="text"
-                formControlName="orgId"
-                class="w-full pt-3 pb-2 text-responsive"
-                [ariaLabel]="'CRD.DATA.ORG_ID' | translate"
-                [pTooltip]="'CRD.DATA.TOOLTIPS.ORG_ID' | translate"
-                tooltipPosition="top"
-                tooltipEvent="hover"
-              />
-              <label for="do_crd_detail_data_org_id"> {{ 'CRD.DATA.ORG_ID' | translate }}</label>
-            </p-floatlabel>
-          </div>
-        </div>
-        <!-- row 4 -->
-        <div class="w-12">
-          <p-floatlabel variant="on" controlErrorAnchor>
-            <input
-              pInputText
-              type="text"
-              id="do_crd_detail_data_description"
-              formControlName="description"
-              class="w-full pt-3 pb-2 text-responsive"
-              [ariaLabel]="'CRD.DATA.NAME' | translate"
-              [pTooltip]="'CRD.DATA.TOOLTIPS.DESCRIPTION' | translate"
-              tooltipPosition="top"
-              tooltipEvent="hover"
-            />
-            <label for="do_crd_detail_data_description"> {{ 'CRD.DATA.DESCRIPTION' | translate }}</label>
-          </p-floatlabel>
-        </div>
-        <!-- row 5 -->
-        <div class="w-12">
-          <p-floatlabel variant="on" controlErrorAnchor>
+      </p-tabpanel>
+
+      <p-tabpanel value="1">
+        <div class="flex flex-column row-gap-4">
+          <p-floatlabel variant="on">
             <textarea
               pInputTextarea
               type="text"
@@ -154,19 +159,14 @@
             <label for="do_crd_detail_data_data"> {{ 'CRD.DATA.DATA' | translate }} </label>
           </p-floatlabel>
         </div>
-      </div>
-    </p-tabpanel>
+      </p-tabpanel>
 
-    @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
-      <p-tabpanel value="1">
+      <p-tabpanel value="2">
         <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
       </p-tabpanel>
-    }
-
-    @if (dataCrd?.status) {
-      <p-tabpanel value="2">
+      <p-tabpanel value="3">
         <app-status-tab [status]="dataCrd?.status" />
       </p-tabpanel>
-    }
+    </form>
   </p-tabpanels>
 </p-tabs>

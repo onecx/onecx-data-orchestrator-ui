@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { TranslateModule } from '@ngx-translate/core'
+
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
 import { TabsModule } from 'primeng/tabs'
@@ -7,26 +9,28 @@ import { TextareaModule } from 'primeng/textarea'
 import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourceData } from 'src/app/shared/generated'
+
 import { Update } from '../crd-detail.component'
 import { ChangeMode } from '../../crd-search/crd-search.component'
 import { StatusTabComponent } from '../status-tab/status-tab.component'
-import { TranslateModule } from '@ngx-translate/core'
 import { UpdateHistoryComponent } from '../update-history/update-history.component'
+import { Dialog } from 'primeng/dialog'
 
 @Component({
   selector: 'app-data-form',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    StatusTabComponent,
-    TranslateModule,
-    TabsModule,
-    UpdateHistoryComponent,
-    TooltipModule,
-    TextareaModule,
-    ReactiveFormsModule,
     FloatLabelModule,
-    InputTextModule
+    InputTextModule,
+    ReactiveFormsModule,
+    TabsModule,
+    TextareaModule,
+    TooltipModule,
+    TranslateModule,
+    // components
+    StatusTabComponent,
+    UpdateHistoryComponent
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './data-form.component.html'
 })
 export class DataFormComponent implements OnChanges {
@@ -34,6 +38,7 @@ export class DataFormComponent implements OnChanges {
   @Input() public dataCrd: CustomResourceData | undefined
   @Input() public dateFormat: string | undefined
   @Input() public updateHistory: Update[] | undefined
+  @Input() public dialog: Dialog | undefined
 
   public formGroup: FormGroup
 

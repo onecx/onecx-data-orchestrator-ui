@@ -1,4 +1,4 @@
-<p-tabs value="0">
+<p-tabs value="0" (valueChange)="dialog?.focus()">
   <p-tablist>
     <p-tab value="0">{{ 'DIALOG.TABS.DETAILS' | translate }}</p-tab>
     @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
@@ -10,7 +10,7 @@
   </p-tablist>
   <p-tabpanels>
     <p-tabpanel value="0">
-      <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
+      <div class="flex flex-column row-gap-4" [formGroup]="formGroup">
         <!-- row 1 -->
         <div class="flex flex-row flex-wrap justify-content-between gap-4">
           <div class="flex-grow-1">
@@ -20,7 +20,7 @@
                 type="text"
                 id="do_crd_detail_slot_name"
                 formControlName="metadataName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.NAME' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
                 tooltipPosition="top"
@@ -36,7 +36,7 @@
                 type="text"
                 id="do_crd_detail_slot_kind"
                 formControlName="kind"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.KIND' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
                 tooltipPosition="top"
@@ -55,7 +55,7 @@
                 type="text"
                 id="do_crd_detail_slot_productName"
                 formControlName="productName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.PRODUCT_NAME' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
                 tooltipPosition="top"
@@ -71,7 +71,7 @@
                 type="text"
                 id="do_crd_detail_slot_appId"
                 formControlName="appId"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.APP_ID' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
                 tooltipPosition="top"
@@ -90,7 +90,7 @@
                 type="text"
                 id="do_crd_detail_slot_slot_name"
                 formControlName="specName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.SLOT.SLOT_NAME' | translate"
                 [pTooltip]="'CRD.SLOT.TOOLTIPS.SLOT_NAME' | translate"
                 tooltipPosition="top"
@@ -109,7 +109,7 @@
                 type="text"
                 id="do_crd_detail_slot_description"
                 formControlName="description"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.SLOT.DESCRIPTION' | translate"
                 [pTooltip]="'CRD.SLOT.TOOLTIPS.DESCRIPTION' | translate"
                 tooltipPosition="top"
@@ -121,31 +121,30 @@
         </div>
         <!-- row 5 -->
         <div class="px-3 flex flex-row flex-wrap justify-content-between gap-4">
-          <p-checkbox
-            type="text"
-            [binary]="true"
-            id="do_crd_detail_slot_deprecated"
-            styleClass="cursor-auto shadow-none"
-            formControlName="deprecated"
-            [ariaLabel]="'CRD.SLOT.DEPRECATED' | translate"
-            [pTooltip]="'CRD.SLOT.TOOLTIPS.DEPRECATED' | translate"
-            tooltipPosition="top"
-            tooltipEvent="hover"
-          ></p-checkbox>
+          <div class="flex flex-row flex-nowrap align-items-center gap-2" style="min-width: 10rem">
+            <p-checkbox
+              type="text"
+              [binary]="true"
+              id="do_crd_detail_slot_deprecated"
+              styleClass="cursor-auto shadow-none"
+              formControlName="deprecated"
+              [ariaLabel]="'CRD.SLOT.DEPRECATED' | translate"
+              [pTooltip]="'CRD.SLOT.TOOLTIPS.DEPRECATED' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            ></p-checkbox>
+            <label for="do_crd_detail_slot_deprecated"> {{ 'CRD.SLOT.DEPRECATED' | translate }}</label>
+          </div>
         </div>
       </div>
     </p-tabpanel>
 
-    @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
-      <p-tabpanel value="1">
-        <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
-      </p-tabpanel>
-    }
+    <p-tabpanel value="1">
+      <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
+    </p-tabpanel>
 
-    @if (slotCrd?.status) {
-      <p-tabpanel value="2">
-        <app-status-tab [status]="slotCrd?.status" />
-      </p-tabpanel>
-    }
+    <p-tabpanel value="2">
+      <app-status-tab [status]="slotCrd?.status" />
+    </p-tabpanel>
   </p-tabpanels>
 </p-tabs>

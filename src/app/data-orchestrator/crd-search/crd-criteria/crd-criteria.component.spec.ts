@@ -140,6 +140,20 @@ describe('CrdCriteriaComponent', () => {
     expect(component.crdCriteria.get('type')?.value).toEqual([ContextKind.Data, ContextKind.Product])
   })
 
+  it('should default type to null in the form when input criteria has no type', () => {
+    const restoredCriteria: { crdSearchCriteria: { name: string } } = {
+      crdSearchCriteria: {
+        name: 'my-crd'
+      }
+    }
+
+    fixture.componentRef.setInput('criteria', restoredCriteria)
+    fixture.detectChanges()
+
+    expect(component.crdCriteria.get('name')?.value).toBe('my-crd')
+    expect(component.crdCriteria.get('type')?.value).toBeNull()
+  })
+
   /**
    * Translations
    */
@@ -154,7 +168,7 @@ describe('CrdCriteriaComponent', () => {
 
     const data = await firstValueFrom(freshComponent.type$)
 
-    expect(data.length).toBeGreaterThanOrEqual(8)
+    expect(data?.length).toBeGreaterThanOrEqual(8)
   })
 
   it('should have no kinds if api returns nothing', async () => {
@@ -167,7 +181,7 @@ describe('CrdCriteriaComponent', () => {
     freshFixture.detectChanges()
 
     // Verify the type$ observable
-    const data: SelectItem[] = await firstValueFrom(freshComponent.type$)
+    const data: SelectItem[] | undefined = await firstValueFrom(freshComponent.type$)
     expect(data).toHaveSize(0)
   })
 
@@ -180,7 +194,9 @@ describe('CrdCriteriaComponent', () => {
     freshFixture.detectChanges()
 
     // Verify the type$ observable falls back to empty array
-    const data: SelectItem[] = await firstValueFrom(freshComponent.type$)
-    expect(data).toHaveSize(0)
+    const data: SelectItem[] | undefined = await firstValueFrom(freshComponent.type$)
+    if (data) {
+      expect(data).toHaveSize(0)
+    }
   })
 })

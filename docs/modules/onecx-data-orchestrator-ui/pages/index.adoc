@@ -1,4 +1,1 @@
-
-== onecx-data-orchestrator-ui
-
 include::onecx-data-orchestrator-ui-docs.adoc[opts=optional]
