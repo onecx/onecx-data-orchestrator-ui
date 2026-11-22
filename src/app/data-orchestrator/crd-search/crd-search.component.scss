@@ -1,16 +1,29 @@
 @use '/src/app/_do-mixins.scss' as *;
 
+/*
 @include danger-action;
 @include table-inline-buttons;
 @include table-responsive-columns;
 @include dialog-footer-buttons;
-@include correct-ocx-interactive-data-view;
+*/
+@include ocx-interactive-data-view-fixes;
 
 :host ::ng-deep {
-  .adjust-card-padding .card {
-    padding: 0;
+  .ocx-content .ocx-card {
+    margin-bottom: 0;
+    padding: 0 0.5rem;
+    box-shadow:
+      rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+      rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   }
 
+  /* fixes for p-card */
+  --onecx-data-orchestrator-onecx-data-orchestrator-ui-card-body-padding: 0.5rem;
+  --onecx-data-orchestrator-onecx-data-orchestrator-ui-card-border-radius: 4px;
+  --onecx-data-orchestrator-onecx-data-orchestrator-ui-card-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+  /*
   .p-datatable .p-datatable-thead > tr > th {
     border-bottom-width: 2px;
   }
@@ -26,6 +39,7 @@
       justify-content: center !important;
     }
   }
+*/
 
   /* correct header layouting by lib */
   .table-header-wrapper {

@@ -7,8 +7,9 @@
     [loading]="loading"
   ></app-crd-criteria>
 
-  @if (crds$ | async; as crds) {
-    <ocx-content class="w-full adjust-card-padding">
+  @let crds = crds$ | async;
+  @if (crds) {
+    <ocx-content class="ocx-content">
       @if (exceptionKey) {
         <p-message
           id="do_crd_search_message_error"
@@ -60,7 +61,7 @@
       }
 
       @if (crds.length > 0 && chartVisible && diagramColumn !== undefined) {
-        <ocx-content class="w-full lg:w-3">
+        <ocx-content class="w-full lg:w-3 hidden">
           @if (diagramColumn) {
             <ocx-group-by-count-diagram
               [data]="crds"

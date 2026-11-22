@@ -1,54 +1,58 @@
-<p-dialog
-  [header]="'ACTIONS.' + this.changeMode + '.CRD' | translate"
-  [(visible)]="displayDetailDialog"
-  (onHide)="onDialogHide()"
-  [modal]="true"
-  [closable]="true"
-  [draggable]="true"
-  [resizable]="true"
-  [style]="exceptionKey === undefined ? { width: '600px', height: '500px' } : {}"
-  [breakpoints]="{
-    '992px': '75vw',
-    '768px': '90vw',
-    '630px': '100vw'
-  }"
->
-  @if (crd$ | async; as crd) {
-    <ng-container>
-      <!-- display crd type on dialog header -->
-      <div
-        class="absolute sm:dialog-header-right-slot"
-        [pTooltip]="'CRD.COMMON.KIND' | translate"
-        tooltipPosition="top"
-        tooltipEvent="hover"
-      >
-        <div
-          class="mr-2 pi pi-circle-on"
-          [class.text-red-600]="crd?.status?.status === 'ERROR'"
-          [class.text-yellow-600]="crd?.status?.status === 'UNDEFINED'"
-          [class.text-green-600]="crd?.status?.status === 'UPDATED' || crd?.status?.status === 'CREATED'"
-          [attr.aria-label]="'ENUMS.CRD_STATUS.' + (crd?.status?.status || '') | translate"
-          [pTooltip]="'ENUMS.CRD_STATUS.' + (crd?.status?.status || '') | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></div>
-        {{ crdType }}
-      </div>
-
+@if (displayDetailDialog) {
+  <p-dialog
+    [header]="'ACTIONS.' + this.changeMode + '.CRD' | translate"
+    [visible]="true"
+    (visibleChange)="onDialogHide()"
+    [modal]="true"
+    [closable]="true"
+    [draggable]="true"
+    [resizable]="true"
+    [style]="{ width: '650px', 'min-height': '200px' }"
+    [breakpoints]="{
+      '992px': '75vw',
+      '768px': '90vw',
+      '630px': '100vw'
+    }"
+  >
+    @if (crd$ | async; as crd) {
       @if (loading) {
         <p-message
           id="do_crd_detail_message_loading"
+          styleClass="m-1 w-fit"
           severity="info"
           [text]="'ACTIONS.LOADING' | translate"
         ></p-message>
-      }
-      @if (exceptionKey) {
-        <p-message id="do_crd_search_message_error" severity="error" [text]="exceptionKey! | translate"></p-message>
-      }
+      } @else if (exceptionKey) {
+        <p-message
+          id="do_crd_search_message_error"
+          styleClass="m-1 w-fit"
+          severity="error"
+          [text]="exceptionKey! | translate"
+        ></p-message>
+      } @else if (crdType) {
+        @let type = crdType.toString();
+        <!-- display crd type on dialog header -->
+        <div
+          class="absolute sm:dialog-header-right-slot"
+          [pTooltip]="'CRD.COMMON.KIND' | translate"
+          tooltipPosition="top"
+          tooltipEvent="hover"
+        >
+          <div
+            class="mr-2 pi pi-circle-on"
+            [class.text-red-600]="crd?.status?.status === 'ERROR'"
+            [class.text-yellow-600]="crd?.status?.status === 'UNDEFINED'"
+            [class.text-green-600]="crd?.status?.status === 'UPDATED' || crd?.status?.status === 'CREATED'"
+            [attr.aria-label]="'ENUMS.CRD_STATUS.' + (crd?.status?.status || '') | translate"
+            [pTooltip]="'ENUMS.CRD_STATUS.' + (crd?.status?.status || '') | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+          ></div>
+          {{ type }}
+        </div>
 
-      @if (!loading && !exceptionKey && crdType) {
-        <ng-container>
-          @if (crdType.toString() === 'Data') {
+        @switch (type) {
+          @case ('Data') {
             <app-data-form
               [changeMode]="changeMode"
               [dataCrd]="crd"
@@ -56,7 +60,7 @@
               [updateHistory]="updateHistory"
             />
           }
-          @if (crdType.toString() === 'Database') {
+          @case ('Database') {
             <app-database-form
               [changeMode]="changeMode"
               [databaseCrd]="crd"
@@ -64,7 +68,7 @@
               [updateHistory]="updateHistory"
             />
           }
-          @if (crdType.toString() === 'KeycloakClient') {
+          @case ('KeycloakClient') {
             <app-keycloak-form
               [changeMode]="changeMode"
               [keycloakClientCrd]="crd"
@@ -72,7 +76,7 @@
               [updateHistory]="updateHistory"
             />
           }
-          @if (crdType.toString() === 'Microfrontend') {
+          @case ('Microfrontend') {
             <app-microfrontend-form
               [changeMode]="changeMode"
               [microfrontendCrd]="crd"
@@ -80,7 +84,7 @@
               [updateHistory]="updateHistory"
             />
           }
-          @if (crdType.toString() === 'Microservice') {
+          @case ('Microservice') {
             <app-microservice-form
               [changeMode]="changeMode"
               [microserviceCrd]="crd"
@@ -88,7 +92,7 @@
               [updateHistory]="updateHistory"
             />
           }
-          @if (crdType.toString() === 'Parameter') {
+          @case ('Parameter') {
             <app-parameter-form
               [changeMode]="changeMode"
               [parameterCrd]="crd"
@@ -96,7 +100,7 @@
               [updateHistory]="updateHistory"
             />
           }
-          @if (crdType.toString() === 'Permission') {
+          @case ('Permission') {
             <app-permission-form
               [changeMode]="changeMode"
               [permissionCrd]="crd"
@@ -104,7 +108,7 @@
               [updateHistory]="updateHistory"
             />
           }
-          @if (crdType.toString() === 'Product') {
+          @case ('Product') {
             <app-product-form
               [changeMode]="changeMode"
               [productCrd]="crd"
@@ -112,7 +116,7 @@
               [updateHistory]="updateHistory"
             />
           }
-          @if (crdType.toString() === 'Slot') {
+          @case ('Slot') {
             <app-slot-form
               [changeMode]="changeMode"
               [slotCrd]="crd"
@@ -120,47 +124,46 @@
               [updateHistory]="updateHistory"
             />
           }
-        </ng-container>
+        }
       }
-    </ng-container>
-  }
+    }
 
-  <ng-template pTemplate="footer">
-    <div class="flex flex-wrap justify-content-end gap-2 mb-1">
-      @if (changeMode === 'VIEW') {
-        <p-button
-          id="do_crd_detail_action_close"
-          icon="pi pi-times"
-          (onClick)="onDialogHide()"
-          [label]="'ACTIONS.CLOSE' | translate"
-          [ariaLabel]="'ACTIONS.CLOSE' | translate"
-          [pTooltip]="'ACTIONS.TOOLTIPS.CLOSE' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-button>
-      }
-      @if (changeMode !== 'VIEW') {
-        <p-button
-          id="do_crd_detail_action_cancel"
-          icon="pi pi-times"
-          (onClick)="onDialogHide()"
-          [label]="'ACTIONS.CANCEL' | translate"
-          [ariaLabel]="'ACTIONS.CANCEL' | translate"
-          [pTooltip]="'ACTIONS.TOOLTIPS.CANCEL_AND_CLOSE' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-button>
-        <p-button
-          id="do_crd_detail_action_save"
-          icon="pi pi-save"
-          (onClick)="onSave()"
-          [label]="'ACTIONS.SAVE' | translate"
-          [ariaLabel]="'ACTIONS.SAVE' | translate"
-          [pTooltip]="'ACTIONS.TOOLTIPS.SAVE' | translate"
-          tooltipPosition="top"
-          tooltipEvent="hover"
-        ></p-button>
-      }
-    </div>
-  </ng-template>
-</p-dialog>
+    <ng-template pTemplate="footer">
+      <div class="flex flex-wrap justify-content-end gap-2 mb-1">
+        @if (changeMode === 'VIEW') {
+          <p-button
+            id="do_crd_detail_action_close"
+            icon="pi pi-times"
+            (onClick)="onDialogHide()"
+            [label]="'ACTIONS.CLOSE' | translate"
+            [ariaLabel]="'ACTIONS.CLOSE' | translate"
+            [pTooltip]="'ACTIONS.TOOLTIPS.CLOSE' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+          ></p-button>
+        } @else {
+          <p-button
+            id="do_crd_detail_action_cancel"
+            icon="pi pi-times"
+            (onClick)="onDialogHide()"
+            [label]="'ACTIONS.CANCEL' | translate"
+            [ariaLabel]="'ACTIONS.CANCEL' | translate"
+            [pTooltip]="'ACTIONS.TOOLTIPS.CANCEL_AND_CLOSE' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+          ></p-button>
+          <p-button
+            id="do_crd_detail_action_save"
+            icon="pi pi-save"
+            (onClick)="onSave()"
+            [label]="'ACTIONS.SAVE' | translate"
+            [ariaLabel]="'ACTIONS.SAVE' | translate"
+            [pTooltip]="'ACTIONS.TOOLTIPS.SAVE' | translate"
+            tooltipPosition="top"
+            tooltipEvent="hover"
+          ></p-button>
+        }
+      </div>
+    </ng-template>
+  </p-dialog>
+}

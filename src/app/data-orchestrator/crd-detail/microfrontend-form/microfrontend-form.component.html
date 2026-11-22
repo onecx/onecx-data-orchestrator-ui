@@ -10,7 +10,7 @@
   </p-tablist>
   <p-tabpanels>
     <p-tabpanel value="0">
-      <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
+      <div class="flex flex-column row-gap-4" [formGroup]="formGroup">
         <!-- row 1 -->
         <div class="flex flex-row flex-wrap justify-content-between gap-4">
           <div class="flex-grow-1">
@@ -20,7 +20,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_name"
                 formControlName="name"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.NAME' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
                 tooltipPosition="top"
@@ -36,7 +36,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_kind"
                 formControlName="kind"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.KIND' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
                 tooltipPosition="top"
@@ -55,7 +55,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_product_name"
                 formControlName="productName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.PRODUCT_NAME' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
                 tooltipPosition="top"
@@ -73,7 +73,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_app_id"
                 formControlName="appId"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.APP_ID' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
                 tooltipPosition="top"
@@ -92,7 +92,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_app_name"
                 formControlName="appName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.APP_NAME' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.APP_NAME' | translate"
                 tooltipPosition="top"
@@ -108,7 +108,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_app_version"
                 formControlName="appVersion"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.APP_VERSION' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.APP_VERSION' | translate"
                 tooltipPosition="top"
@@ -129,7 +129,7 @@
                 id="do_crd_detail_microfrontend_note"
                 type="text"
                 formControlName="note"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.NOTE' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.NOTE' | translate"
                 tooltipPosition="top"
@@ -138,7 +138,7 @@
               <label for="do_crd_detail_microfrontend_note"> {{ 'CRD.MICROFRONTEND.NOTE' | translate }} </label>
             </p-floatlabel>
           </div>
-          <div class="sm:text-center" style="min-width: 10rem">
+          <div class="flex flex-row flex-nowrap align-items-center gap-2" style="min-width: 10rem">
             <p-checkbox
               type="text"
               [binary]="true"
@@ -150,6 +150,7 @@
               tooltipPosition="top"
               tooltipEvent="hover"
             ></p-checkbox>
+            <label for="do_crd_detail_microfrontend_deprecated">{{ 'CRD.MICROFRONTEND.DEPRECATED' | translate }}</label>
           </div>
         </div>
         <!-- row 5 -->
@@ -161,7 +162,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_description"
                 formControlName="description"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.DESCRIPTION' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.DESCRIPTION' | translate"
                 tooltipPosition="top"
@@ -179,7 +180,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_contact"
                 formControlName="contact"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.CONTACT' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.CONTACT' | translate"
                 tooltipPosition="top"
@@ -198,7 +199,7 @@
                 id="do_crd_detail_microfrontend_exposed_module"
                 type="text"
                 formControlName="exposedModule"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.EXPOSED_MODULE' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.EXPOSED_MODULE' | translate"
                 tooltipPosition="top"
@@ -216,7 +217,7 @@
                 id="do_crd_detail_microfrontend_icon_name"
                 type="text"
                 formControlName="iconName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.ICON_NAME' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.ICON_NAME' | translate"
                 tooltipPosition="top"
@@ -237,7 +238,7 @@
                 id="do_crd_detail_microfrontend_remote_base_url"
                 type="text"
                 formControlName="remoteBaseUrl"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.REMOTE_BASE_URL' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.REMOTE_BASE_URL' | translate"
                 tooltipPosition="top"
@@ -255,7 +256,7 @@
                 id="do_crd_detail_microfrontend_remote_entry"
                 type="text"
                 formControlName="remoteEntry"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.REMOTE_ENTRY' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.REMOTE_ENTRY' | translate"
                 tooltipPosition="top"
@@ -276,7 +277,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_remote_name"
                 formControlName="remoteName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.REMOTE_NAME' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.REMOTE_NAME' | translate"
                 tooltipPosition="top"
@@ -294,7 +295,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_tag_name"
                 formControlName="tagName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.TAG_NAME' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.TAG_NAME' | translate"
                 tooltipPosition="top"
@@ -313,7 +314,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_technology"
                 formControlName="technology"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.TECHNOLOGY' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.TECHNOLOGY' | translate"
                 tooltipPosition="top"
@@ -330,7 +331,7 @@
                 type="text"
                 id="do_crd_detail_microfrontend_type"
                 formControlName="type"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROFRONTEND.TYPE' | translate"
                 [pTooltip]="'CRD.MICROFRONTEND.TOOLTIPS.TYPE' | translate"
                 tooltipPosition="top"
@@ -342,16 +343,11 @@
       </div>
     </p-tabpanel>
 
-    @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
-      <p-tabpanel value="1">
-        <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
-      </p-tabpanel>
-    }
-
-    @if (microfrontendCrd?.status) {
-      <p-tabpanel value="2">
-        <app-status-tab [status]="microfrontendCrd?.status" />
-      </p-tabpanel>
-    }
+    <p-tabpanel value="1">
+      <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
+    </p-tabpanel>
+    <p-tabpanel value="2">
+      <app-status-tab [status]="microfrontendCrd?.status" />
+    </p-tabpanel>
   </p-tabpanels>
 </p-tabs>

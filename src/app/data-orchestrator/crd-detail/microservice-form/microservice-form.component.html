@@ -10,7 +10,7 @@
   </p-tablist>
   <p-tabpanels>
     <p-tabpanel value="0">
-      <div class="mt-2 flex flex-column row-gap-4" [formGroup]="formGroup" errorTailor>
+      <div class="flex flex-column row-gap-4" [formGroup]="formGroup">
         <!-- row 1 -->
         <div class="flex flex-row flex-wrap justify-content-between gap-4">
           <div class="flex-grow-1">
@@ -20,7 +20,7 @@
                 type="text"
                 id="do_crd_detail_microservice_name"
                 formControlName="metadataName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.NAME' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.NAME' | translate"
                 tooltipPosition="top"
@@ -36,7 +36,7 @@
                 type="text"
                 id="do_crd_detail_microservice_kind"
                 formControlName="kind"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.KIND' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.KIND' | translate"
                 tooltipPosition="top"
@@ -55,7 +55,7 @@
                 type="text"
                 id="do_crd_detail_microservice_spec_name"
                 formControlName="specName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROSERVICE.NAME' | translate"
                 [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.NAME' | translate"
                 tooltipPosition="top"
@@ -71,7 +71,7 @@
                 type="text"
                 id="do_crd_detail_microservice_type"
                 formControlName="type"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROSERVICE.TYPE' | translate"
                 [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.TYPE' | translate"
                 tooltipPosition="top"
@@ -90,7 +90,7 @@
                 type="text"
                 id="do_crd_detail_microservice_product_name"
                 formControlName="productName"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.PRODUCT_NAME' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.PRODUCT_NAME' | translate"
                 tooltipPosition="top"
@@ -106,7 +106,7 @@
                 type="text"
                 id="do_crd_detail_microservice_appId"
                 formControlName="appId"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.COMMON.APP_ID' | translate"
                 [pTooltip]="'CRD.COMMON.TOOLTIPS.APP_ID' | translate"
                 tooltipPosition="top"
@@ -125,7 +125,7 @@
                 type="text"
                 id="do_crd_detail_microservice_version"
                 formControlName="version"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROSERVICE.VERSION' | translate"
                 [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.VERSION' | translate"
                 tooltipPosition="top"
@@ -141,7 +141,7 @@
                 type="text"
                 id="do_crd_detail_microservice_description"
                 formControlName="description"
-                class="w-full pt-3 pb-2 text-responsive"
+                class="w-full text-responsive"
                 [ariaLabel]="'CRD.MICROSERVICE.DESCRIPTION' | translate"
                 [pTooltip]="'CRD.MICROSERVICE.TOOLTIPS.DESCRIPTION' | translate"
                 tooltipPosition="top"
@@ -156,16 +156,11 @@
       </div>
     </p-tabpanel>
 
-    @if (updateHistory && updateHistory.length > 0 && changeMode === 'VIEW') {
-      <p-tabpanel value="1">
-        <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
-      </p-tabpanel>
-    }
-
-    @if (microserviceCrd?.status) {
-      <p-tabpanel value="2">
-        <app-status-tab [status]="microserviceCrd?.status" />
-      </p-tabpanel>
-    }
+    <p-tabpanel value="1">
+      <app-update-history [updateHistory]="updateHistory" [dateFormat]="dateFormat" />
+    </p-tabpanel>
+    <p-tabpanel value="2">
+      <app-status-tab [status]="microserviceCrd?.status" />
+    </p-tabpanel>
   </p-tabpanels>
 </p-tabs>

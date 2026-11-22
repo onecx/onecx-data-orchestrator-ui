@@ -1,9 +1,10 @@
-// const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 app.use(express.json());
 
-// data-orchestrator mock endpoints
+/** 
+ * Data Orchestrator Mock Endpoints
+ */
 app.post("/crd-empty", (req, res) => {
     res.status(200).send({});
 });
@@ -17,15 +18,15 @@ app.post("/crd-no-data", (req, res) => {
 app.get("/crd/kinds", (req, res) => {
     res.status(200).send({
     "kinds": [
-        "Parameter",
-        "Microservice",
-        "Product",
-        "Permission",
+        "Data",
         "Database",
         "KeycloakClient",
-        "Data",
         "Slot",
-        "Microfrontend"
+        "Microservice",
+        "Microfrontend",
+        "Parameter",
+        "Product",
+        "Permission"
     ]
   });
 });
@@ -1189,7 +1190,5 @@ app.get(`/crd/Product/onecx-workspace`, (req, res) => {
     });
 });
 
-
-//end new
-
-app.listen(3000, () => console.log("Data orchestrator mockserver is listening on port 3000."));
+// end new
+app.listen(3000, () => console.log("Data Orchestrator mock server is listening on port 3000."));

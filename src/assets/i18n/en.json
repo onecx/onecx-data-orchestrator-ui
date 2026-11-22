@@ -6,7 +6,7 @@
       "NO.TOOLTIP": "Cancel the action",
       "YES.TOOLTIP": "Proceed with the action"
     },
-    "DELETE": { "CRD": "Löschen", "INFO": "Diese Aktion kann nicht rückgängig gemacht werden!" },
+    "DELETE": { "CRD": "Delete", "INFO": "This action cannot be undone!" },
     "EDIT": {
       "CRD": "Edit",
       "CRD.TOOLTIP": "Edit the custom resource properties",
@@ -15,7 +15,6 @@
         "NOK": "An error has occurred. The Custom Resource was not saved."
       }
     },
-    "NEW": { "CRD": "New", "CRD.TOOLTIP": "Create a custom resource" },
     "SEARCH": {
       "ACTIONS": "Actions",
       "LABEL": "Search",
@@ -83,6 +82,7 @@
     "SEARCH.SUBHEADER": "Searching and managing of K8s Custom Resources",
     "TABS": {
       "DETAILS": "Details",
+      "DATA": "Data",
       "CHANGES": "Changes",
       "STATUS": "Status",
       "PERMISSIONS": "Permissions",

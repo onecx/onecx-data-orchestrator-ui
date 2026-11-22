@@ -15,7 +15,6 @@
         "NOK": "Ein Fehler ist aufgetreten. Die K8s Ressource wurde nicht gespeichert."
       }
     },
-    "NEW": { "CRD": "New", "CRD.TOOLTIP": "Create a custom resource" },
     "SEARCH": {
       "ACTIONS": "Aktionen",
       "LABEL": "Suchen",
@@ -83,9 +82,10 @@
     "SEARCH.SUBHEADER": "Suchen und Verwalten von K8s Custom Ressourcen",
     "TABS": {
       "DETAILS": "Details",
+      "DATA": "Daten",
       "CHANGES": "Änderungen",
       "STATUS": "Status",
-      "PERMISSIONS": "Permissions",
+      "PERMISSIONS": "Berechtigungen",
       "PARAMETERS": "Parameter"
     }
   },

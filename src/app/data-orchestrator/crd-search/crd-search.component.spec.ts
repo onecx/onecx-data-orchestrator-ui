@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
-import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { NavigationExtras, provideRouter, Router } from '@angular/router'
 import { TranslateTestingModule } from 'ngx-translate-testing'
 import { BehaviorSubject, of, throwError } from 'rxjs'
@@ -60,7 +60,6 @@ describe('CrdSearchComponent', () => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
-        NoopAnimationsModule,
         CrdSearchComponent,
         TranslateTestingModule.withTranslations({
           en: require('src/assets/i18n/en.json'),
@@ -70,6 +69,7 @@ describe('CrdSearchComponent', () => {
       providers: [
         provideRouter([]),
         provideHttpClient(),
+        provideNoopAnimations(),
         provideHttpClientTesting(),
         providePermissionService(),
         { provide: PortalMessageService, useValue: msgServiceSpy },
@@ -179,9 +179,7 @@ describe('CrdSearchComponent', () => {
       next: (data) => {
         expect(data).toHaveSize(0)
         expect(component.exceptionKey).toEqual('EXCEPTIONS.HTTP_STATUS_' + errorResponse.status + '.CRDS')
-        expect(msgServiceSpy.error).toHaveBeenCalledWith({
-          summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED'
-        })
+        expect(msgServiceSpy.error).toHaveBeenCalledWith({ summaryKey: 'ACTIONS.SEARCH.SEARCH_FAILED' })
         expect(console.error).toHaveBeenCalledWith('getCustomResourcesByCriteria', errorResponse)
         done()
       },

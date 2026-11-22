@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
+
 import { CheckboxModule } from 'primeng/checkbox'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { InputTextModule } from 'primeng/inputtext'
@@ -8,24 +9,26 @@ import { TabsModule } from 'primeng/tabs'
 import { TooltipModule } from 'primeng/tooltip'
 
 import { CustomResourceKeycloakClient } from 'src/app/shared/generated'
+
 import { Update } from '../crd-detail.component'
 import { StatusTabComponent } from '../status-tab/status-tab.component'
 import { UpdateHistoryComponent } from '../update-history/update-history.component'
 
 @Component({
   selector: 'app-keycloak-form',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    StatusTabComponent,
-    TranslateModule,
-    TabsModule,
-    UpdateHistoryComponent,
-    TooltipModule,
     CheckboxModule,
-    ReactiveFormsModule,
     FloatLabelModule,
-    InputTextModule
+    InputTextModule,
+    ReactiveFormsModule,
+    TabsModule,
+    TooltipModule,
+    TranslateModule,
+    // components
+    StatusTabComponent,
+    UpdateHistoryComponent
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './keycloak-form.component.html'
 })
 export class KeycloakFormComponent implements OnChanges {
