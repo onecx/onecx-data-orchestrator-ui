@@ -184,7 +184,9 @@ export class CrdSearchComponent implements OnInit {
             label: data['ACTIONS.SEARCH.SHOW_DIAGRAM'],
             actionCallback: () => this.toggleChartVisibility(),
             icon: PrimeIcons.EYE,
-            show: 'asOverflow'
+            show: 'asOverflow',
+            conditional: true,
+            showCondition: false
           }
         ]
       })

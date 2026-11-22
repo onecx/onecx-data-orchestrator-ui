@@ -14,21 +14,21 @@ import { UpdateHistoryComponent } from '../update-history/update-history.compone
 
 @Component({
   selector: 'app-slot-form',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    TranslateModule,
-    TabsModule,
-    UpdateHistoryComponent,
-    StatusTabComponent,
-    TooltipModule,
-    ReactiveFormsModule,
     CheckboxModule,
     FloatLabelModule,
     InputTextModule,
-    CheckboxModule
+    ReactiveFormsModule,
+    TabsModule,
+    TooltipModule,
+    TranslateModule,
+    UpdateHistoryComponent,
+    // components
+    StatusTabComponent,
+    UpdateHistoryComponent
   ],
-  templateUrl: './slot-form.component.html',
-  styleUrls: ['./slot-form.component.scss']
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './slot-form.component.html'
 })
 export class SlotFormComponent implements OnChanges {
   @Input() public changeMode = 'VIEW'
