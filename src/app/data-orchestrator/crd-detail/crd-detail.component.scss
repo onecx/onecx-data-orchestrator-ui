@@ -1,15 +1,6 @@
 @use '/src/app/_do-mixins.scss' as *;
 
 @include text-badges;
-/*
-@include readable-disabled-form-controls;
-@include displaying-text-responsive;
-@include dialog-footer-buttons;
-@include dialog-non-full-size-modal;
-@include tabview-reduce-padding;
-@include tabview-fix-color-selected-tab;
-*/
-
 @include danger-action;
 @include ocx-text-responsive;
 @include ocx-required-label;
@@ -19,6 +10,7 @@
 :host ::ng-deep {
   --onecx-data-orchestrator-onecx-data-orchestrator-ui-tabs-tabpanel-padding: 0.75rem 0.25rem;
   --onecx-data-orchestrator-onecx-data-orchestrator-ui-dialog-content-padding: 0 1rem;
+  --onecx-data-orchestrator-onecx-data-orchestrator-ui-textarea-disabled-color: var(--text-color);
 
   @media screen and (min-width: 576px) {
     .sm\:dialog-header-right-slot {
@@ -29,15 +21,3 @@
     }
   }
 }
-
-/*
-:host ::ng-deep {
-  .error-tailor-has-error ~ control-error {
-    text-align: left;
-  }
-  .p-inputtextarea-resizable {
-    resize: vertical;
-  }
-
-}
-*/

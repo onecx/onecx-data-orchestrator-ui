@@ -177,7 +177,7 @@
       "DESCRIPTION": "Beschreibung",
       "PRODUCT_NAME": "Produktname",
       "SLOT_NAME": "Slot Name",
-      "DEPRECATED": "Veraltet?",
+      "DEPRECATED": "Veraltet",
       "TOOLTIPS": {
         "NAME": "Name der K8s Custom Ressource",
         "API_VERSION": "API Version",
@@ -186,7 +186,7 @@
         "DESCRIPTION": "Beschreibung",
         "PRODUCT_NAME": "Produktname",
         "SLOT_NAME": "Slot Name",
-        "DEPRECATED": "Veraltet?"
+        "DEPRECATED": "Veraltet"
       }
     },
     "PERMISSION": {

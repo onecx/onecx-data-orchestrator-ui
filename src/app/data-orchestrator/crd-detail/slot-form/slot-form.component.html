@@ -121,17 +121,20 @@
         </div>
         <!-- row 5 -->
         <div class="px-3 flex flex-row flex-wrap justify-content-between gap-4">
-          <p-checkbox
-            type="text"
-            [binary]="true"
-            id="do_crd_detail_slot_deprecated"
-            styleClass="cursor-auto shadow-none"
-            formControlName="deprecated"
-            [ariaLabel]="'CRD.SLOT.DEPRECATED' | translate"
-            [pTooltip]="'CRD.SLOT.TOOLTIPS.DEPRECATED' | translate"
-            tooltipPosition="top"
-            tooltipEvent="hover"
-          ></p-checkbox>
+          <div class="flex flex-row flex-nowrap align-items-center gap-2" style="min-width: 10rem">
+            <p-checkbox
+              type="text"
+              [binary]="true"
+              id="do_crd_detail_slot_deprecated"
+              styleClass="cursor-auto shadow-none"
+              formControlName="deprecated"
+              [ariaLabel]="'CRD.SLOT.DEPRECATED' | translate"
+              [pTooltip]="'CRD.SLOT.TOOLTIPS.DEPRECATED' | translate"
+              tooltipPosition="top"
+              tooltipEvent="hover"
+            ></p-checkbox>
+            <label for="do_crd_detail_slot_deprecated"> {{ 'CRD.SLOT.DEPRECATED' | translate }}</label>
+          </div>
         </div>
       </div>
     </p-tabpanel>

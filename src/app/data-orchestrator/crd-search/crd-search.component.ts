@@ -83,6 +83,7 @@ export class CrdSearchComponent implements OnInit {
     {
       id: 'status',
       nameKey: 'CRD.STATUS',
+      tooltipKey: 'CRD.TOOLTIPS.STATUS',
       columnType: ColumnType.STRING,
       predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
       sortable: true,
@@ -91,13 +92,16 @@ export class CrdSearchComponent implements OnInit {
     {
       id: 'name',
       nameKey: 'CRD.NAME',
+      tooltipKey: 'CRD.TOOLTIPS.NAME',
       columnType: ColumnType.STRING,
       predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
-      sortable: true
+      sortable: true,
+      filterable: true
     },
     {
       id: 'kind',
       nameKey: 'CRD.TYPE',
+      tooltipKey: 'CRD.TOOLTIPS.TYPE',
       columnType: ColumnType.STRING,
       predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
       sortable: true,
@@ -106,13 +110,16 @@ export class CrdSearchComponent implements OnInit {
     {
       id: 'version',
       nameKey: 'CRD.VERSION',
+      tooltipKey: 'CRD.TOOLTIPS.VERSION',
       columnType: ColumnType.STRING,
       predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
-      sortable: true
+      sortable: true,
+      filterable: true
     },
     {
       id: 'lastModified',
       nameKey: 'INTERNAL.MODIFICATION_DATE',
+      tooltipKey: 'INTERNAL.TOOLTIPS.MODIFICATION_DATE',
       columnType: ColumnType.DATE,
       predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.DEFAULT', 'ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
       sortable: true
@@ -120,6 +127,7 @@ export class CrdSearchComponent implements OnInit {
     {
       id: 'creationTimestamp',
       nameKey: 'INTERNAL.CREATION_DATE',
+      tooltipKey: 'INTERNAL.TOOLTIPS.CREATION_DATE',
       columnType: ColumnType.DATE,
       predefinedGroupKeys: ['ACTIONS.SEARCH.PREDEFINED_GROUP.ALL'],
       sortable: true

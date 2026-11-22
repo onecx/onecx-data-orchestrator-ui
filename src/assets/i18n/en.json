@@ -177,7 +177,7 @@
       "DESCRIPTION": "Description",
       "PRODUCT_NAME": "Product Name",
       "SLOT_NAME": "Slot name",
-      "DEPRECATED": "Deprecated?",
+      "DEPRECATED": "Deprecated",
       "TOOLTIPS": {
         "NAME": "Name",
         "API_VERSION": "API version",
@@ -186,7 +186,7 @@
         "DESCRIPTION": "Description",
         "PRODUCT_NAME": "Product Name",
         "SLOT_NAME": "Slot Name",
-        "DEPRECATED": "Deprecated?"
+        "DEPRECATED": "Deprecated"
       }
     },
     "PERMISSION": {
