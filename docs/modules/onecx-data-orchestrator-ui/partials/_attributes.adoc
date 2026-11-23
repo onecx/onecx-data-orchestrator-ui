@@ -2,19 +2,12 @@
 :idseparator: -
 :page-pagination:
 
-// Internal links to OneCX Docs module
-:onecx_docs_guide_ref:         xref:./index.adoc[OneCX Documentation Guide]
-:onecx_docs_guideline_ref:     xref:./guidelines.adoc[OneCX Docs: Guidelines]
-:onecx_docs_setup_ref:         xref:./setup.adoc[OneCX Docs: Local Setup]
-:onecx_docs_formatting_ref:    xref:./formatting.adoc[OneCX Docs: Formatting]
-:onecx_docs_writing_style_ref: xref:./writing_style.adoc[OneCX Docs: Writing Style]
-
 // External links to OneCX resources
-:onecx_local_env_docs_ref:     xref:documentation:onecx-local-env:index.adoc[OneCX Local Environment]
-:onecx_local_env_setup_ref:    xref:documentation:onecx-local-env:setup.adoc[Setup OneCX Local Environment]
+:onecx_local_env_docs_ref:            xref:documentation:onecx-local-env:index.adoc[OneCX Local Environment]
+:onecx_local_env_setup_ref:           xref:documentation:onecx-local-env:setup.adoc[Setup OneCX Local Environment]
 
 // External links to general resources
-:onecx_docs_repo_link:         link:https://github.com/onecx/docs[OneCX Docs]
-:kiss_principle_link:          link:https://en.wikipedia.org/wiki/KISS_principle[KISS]
-:antora_doc_link:              link:https://docs.antora.org/antora/latest/[Antora]
-:asciidoc_doc_link:            link:https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc]
+:onecx_data_orchestrator_repo_link:   link:https://github.com/onecx/data-orchestrator[OneCX Data Orchestrator]
+:kiss_principle_link:                 link:https://en.wikipedia.org/wiki/KISS_principle[KISS]
+:antora_doc_link:                     link:https://docs.antora.org/antora/latest/[Antora]
+:asciidoc_doc_link:                   link:https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc]
