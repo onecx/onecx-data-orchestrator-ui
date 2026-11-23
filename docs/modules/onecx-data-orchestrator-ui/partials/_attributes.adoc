@@ -8,8 +8,11 @@
 :onecx_docs_setup_ref:         xref:./setup.adoc[OneCX Docs: Local Setup]
 :onecx_docs_formatting_ref:    xref:./formatting.adoc[OneCX Docs: Formatting]
 :onecx_docs_writing_style_ref: xref:./writing_style.adoc[OneCX Docs: Writing Style]
+
 // External links to OneCX resources
 :onecx_local_env_docs_ref:     xref:documentation:onecx-local-env:index.adoc[OneCX Local Environment]
+:onecx_local_env_setup_ref:    xref:documentation:onecx-local-env:setup.adoc[Setup OneCX Local Environment]
+
 // External links to general resources
 :onecx_docs_repo_link:         link:https://github.com/onecx/docs[OneCX Docs]
 :kiss_principle_link:          link:https://en.wikipedia.org/wiki/KISS_principle[KISS]

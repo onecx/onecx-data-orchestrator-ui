@@ -2,31 +2,37 @@ ifdef::env-site[]
 include::partial$_attributes.adoc[]
 endif::[]
 
-== OneCX Data Orchestrator UI
+= OneCX Data Orchestrator UI
 
-=== Overview
-OneCX Data Orchestrator is a lightweight solution for managing Kubernetes Custom Resources.
+OneCX Data Orchestrator is a lightweight solution for displaying Kubernetes Custom Resources.
 
 In this document we are only referring to the OneCX Data Orchestrator User Interface (UI).
 
 
-=== Getting Started
+== Getting Started Locally
 To start developing the OneCX Data Orchestrator User Interface, you need to set up your local development environment.
-Follow the instructions in {onecx_local_env_docs_ref}.
+Follow the instructions in {onecx_local_env_setup_ref}.
+
+Next steps:
+* Clone the repository
+* Install dependencies
+* Run the development server
+* Run the mock server
+* Start OneCX locally
+* Integrate the App into OneCX
+* Access OneCX in your browser
+* Navigate to the OneCX Data Orchestrator UI within OneCX
 
 
-==== Clone the Repository
+=== Clone the Repository
 
 Start by cloning the required repositories to your local machine using
 the following command:
 
 [source,bash]
 ----
-git clone https://github.com/onecx/onecx-announcement-ui.git
-git clone https://github.com/onecx/announcement-dev.git
+git clone https://github.com/onecx/onecx-data-orchestrator-ui.git
 ----
 
-The repository `onecx-data-orchestrator` contains the source code of
-the OneCX Data Orchestrator product. 
 The repository `onecx-data-orchestrator-ui` contains the source code of
 the OneCX Data Orchestrator user interface as part of the product. 
